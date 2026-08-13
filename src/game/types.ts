@@ -5,6 +5,13 @@ export interface Pokemon {
   name: string
   /** Human-readable name shown in the search bar */
   displayName: string
+  /**
+   * Variety id, used to fetch the reveal artwork. Unlike `id`, this is unique
+   * per form, so Mega Charizard X reveals its own art rather than Charizard's.
+   */
+  artId: number
+  /** Full image URL, for the few forms with no official artwork of their own */
+  art?: string
 }
 
 export interface Puzzle {
