@@ -1,4 +1,5 @@
 import data from '../data/pokemon.json'
+import { ARTWORK } from './artwork'
 import type { Pokemon } from './types'
 
 export const POKEMON: Pokemon[] = data as Pokemon[]
@@ -9,13 +10,24 @@ export function pokemonBySlug(slug: string): Pokemon | undefined {
   return bySlug.get(slug)
 }
 
-/** Official artwork for the end-of-game reveal, keyed by pokemon slug. */
+const ARTWORK_BASE =
+  'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork'
+
+/**
+ * Reveal image for a pokemon slug, or '' if the slug isn't in the list.
+ *
+ * Prefers the downloaded copy in src/resources/images/artwork; a slug with no
+ * local file (a polygon added before running scripts/fetch-artwork.mjs) falls
+ * back to the CDN rather than rendering broken.
+ *
+ * The remote URL is keyed by `artId` (the variety id), not `id` (the species
+ * id) — forms share a species id, so `id` would show base-species art for
+ * every Mega, regional, and Gigantamax form in the list.
+ */
 export function officialArtUrl(slug: string): string {
-  // PokeAPI's pokemon endpoint id == position in the pokemon list; we only
-  // stored species ids, so resolve art via the sprites CDN by slug lookup.
   const p = bySlug.get(slug)
-  const id = p?.id ?? 0
-  return `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${id}.png`
+  if (!p) return ''
+  return ARTWORK[slug] ?? p.art ?? `${ARTWORK_BASE}/${p.artId}.png`
 }
 
 /** Lowercase, strip accents/punctuation, collapse separators. */

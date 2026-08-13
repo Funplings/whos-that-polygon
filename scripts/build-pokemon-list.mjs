@@ -36,8 +36,42 @@ const BLOCKLIST = [
   /darmanitan-(standard|galar)-standard/, // handled by default-suffix map below
   /basculin-red-striped-starter/,
   /miraidon-glide-mode/,
-  /floette-eternal/, // never officially released
+  // Alt forms whose default counterpart already claims the base name via
+  // DEFAULT_SUFFIXES, so the pair would render as the same polygon.
+  /^toxtricity-low-key-gmax$/,
+  /^morpeko-hangry$/,
+  /^basculegion-female$/,
+  /^indeedee-female$/,
+  /^palafin-hero$/,
 ]
+
+// --- Slugs renamed to match the filename their art is filed under ----------
+// Applied before the species/form split, so both the emitted `name` and the
+// display label follow the new slug.
+const RENAMES = {
+  'jellicent-male': 'jellicent', // art is the female design, listed as plain Jellicent
+  'tatsugiri-curly-mega': 'tatsugiri-mega',
+}
+
+// --- Reveal-image overrides -----------------------------------------------
+const SPRITES = 'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon'
+
+// Entries that should reveal a different variety's artwork than their own.
+const ART_IDS = {
+  palafin: 10256, // Hero form — the recognizable one; palafin-hero isn't listed
+}
+
+// Forms with no official artwork at all (they aren't API varieties, only
+// pokemon-forms or gender sprites), so the reveal falls back to a sprite.
+const ART_URLS = {
+  cherrim: `${SPRITES}/421-sunshine.png`, // Sunshine form; 96px, no artwork exists
+  jellicent: `${SPRITES}/other/home/female/593.png`, // female design, 512px HOME render
+}
+
+// Varieties that exist but have no official-artwork file. Their 512px HOME
+// render is the closest match in quality. Verify with the sweep in the README
+// after regenerating — PokeAPI adds forms before it adds their artwork.
+const HOME_FALLBACK = new Set(['mimikyu-busted', 'tatsugiri-mega'])
 
 // --- Default varieties whose API name carries a suffix but which should be
 // displayed as just the species name --------------------------------------
@@ -138,6 +172,7 @@ const FORM_LABELS = {
   origin: 'Origin',
   therian: 'Therian',
   primal: 'Primal',
+  eternal: 'Eternal Flower', // Floette's only -eternal form
 }
 
 const titleCase = (s) =>
@@ -169,9 +204,14 @@ const entries = []
 for (const p of pokemon) {
   let slug = p.name
   if (BLOCKLIST.some((re) => re.test(slug))) continue
+  if (RENAMES[slug]) slug = RENAMES[slug]
   if (DEFAULT_SUFFIXES[slug]) slug = DEFAULT_SUFFIXES[slug] // display as base species
 
-  const id = Number(p.url.match(/\/(\d+)\/?$/)[1])
+  // The *variety* id, distinct from the species id: forms each get their own
+  // (Mega Charizard X is 10034), and it's what the official-artwork files are
+  // named after. Using the species id here would reveal the base species art
+  // for every form in the list.
+  const artId = Number(p.url.match(/\/(\d+)\/?$/)[1])
 
   if (speciesIds.has(slug)) {
     // Base species (or default variety mapped to it)
@@ -179,6 +219,7 @@ for (const p of pokemon) {
       id: speciesIds.get(slug),
       name: slug,
       displayName: speciesDisplay(slug),
+      artId,
     })
     continue
   }
@@ -197,8 +238,11 @@ for (const p of pokemon) {
       : `${speciesDisplay(base)} (${label})` // "Charizard (Mega X)", "Giratina (Origin)"
   entries.push({
     id: speciesIds.get(base),
-    name: p.name,
+    // `slug`, not `p.name` — otherwise a RENAMES entry would change the label
+    // but keep emitting the original API slug as the answer key.
+    name: slug,
     displayName: display,
+    artId,
   })
 }
 
@@ -211,6 +255,12 @@ const deduped = entries.filter((e) => {
 })
 
 deduped.sort((a, b) => a.id - b.id || a.name.localeCompare(b.name))
+
+for (const e of deduped) {
+  if (ART_IDS[e.name]) e.artId = ART_IDS[e.name]
+  if (HOME_FALLBACK.has(e.name)) e.art = `${SPRITES}/other/home/${e.artId}.png`
+  if (ART_URLS[e.name]) e.art = ART_URLS[e.name]
+}
 
 mkdirSync(dirname(OUT), { recursive: true })
 writeFileSync(OUT, JSON.stringify(deduped, null, 1))
