@@ -1,6 +1,12 @@
 import { useCallback, useMemo, useState } from 'react'
 import { isCorrectGuess } from './pokemon'
-import { overrideSlugFromUrl, puzzleForDate, puzzleForSlug, todayISO } from './puzzle'
+import {
+  overrideDateFromUrl,
+  overrideSlugFromUrl,
+  puzzleForDate,
+  puzzleForSlug,
+  todayISO,
+} from './puzzle'
 import { loadResult, saveResult } from '../lib/storage'
 import { MAX_GUESSES, type ClueStage, type GameStatus, type Puzzle } from './types'
 
@@ -15,6 +21,8 @@ export interface GameState {
   preview: boolean
   /** A preview slug from the URL that has no polygon, for a "not found" hint. */
   previewMiss: string | null
+  /** ISO date being previewed via a /MM-DD-YYYY URL, for checking the schedule. */
+  dateOverride: string | null
 }
 
 function deriveStatus(guesses: string[], answer: string): GameStatus {
@@ -24,8 +32,17 @@ function deriveStatus(guesses: string[], answer: string): GameStatus {
 }
 
 export function useGame(dateISO = todayISO()): GameState {
+  // A /MM-DD-YYYY URL plays that day's scheduled puzzle, for checking the
+  // schedule. Resolved before the slug override because both read the same path
+  // segment — a date-shaped path is a date, anything else is a pokemon name.
+  const dateOverride = useMemo(() => overrideDateFromUrl(), [])
+  const activeDate = dateOverride ?? dateISO
+
   // A /slug or ?pokemon=slug URL loads that Pokémon for manual testing.
-  const requested = useMemo(() => overrideSlugFromUrl(), [])
+  const requested = useMemo(
+    () => (dateOverride ? null : overrideSlugFromUrl()),
+    [dateOverride],
+  )
   const override = useMemo(
     () => (requested ? puzzleForSlug(requested) : null),
     [requested],
@@ -34,12 +51,14 @@ export function useGame(dateISO = todayISO()): GameState {
   const previewMiss = requested && !override ? requested : null
 
   const puzzle = useMemo(
-    () => override ?? puzzleForDate(dateISO),
-    [override, dateISO],
+    () => override ?? puzzleForDate(activeDate),
+    [override, activeDate],
   )
+  // Neither a slug preview nor a date probe touches storage: they'd otherwise
+  // read and write real results for days the player hasn't actually played.
+  const unpersisted = preview || dateOverride !== null
   const [guesses, setGuesses] = useState<string[]>(
-    // Preview games never read persisted state — every reload starts fresh.
-    () => (preview ? [] : (loadResult(dateISO)?.guesses ?? [])),
+    () => (unpersisted ? [] : (loadResult(activeDate)?.guesses ?? [])),
   )
 
   const status = deriveStatus(guesses, puzzle.answer)
@@ -55,9 +74,9 @@ export function useGame(dateISO = todayISO()): GameState {
         if (deriveStatus(prev, puzzle.answer) !== 'playing') return prev
         if (prev.includes(slug)) return prev // no wasting guesses on repeats
         const next = [...prev, slug]
-        if (!preview) {
+        if (!unpersisted) {
           saveResult({
-            date: dateISO,
+            date: activeDate,
             puzzleNumber: puzzle.number,
             guesses: next,
             status: deriveStatus(next, puzzle.answer),
@@ -66,7 +85,7 @@ export function useGame(dateISO = todayISO()): GameState {
         return next
       })
     },
-    [dateISO, puzzle, preview],
+    [activeDate, puzzle, unpersisted],
   )
 
   return {
@@ -78,5 +97,6 @@ export function useGame(dateISO = todayISO()): GameState {
     submitGuess,
     preview,
     previewMiss,
+    dateOverride,
   }
 }

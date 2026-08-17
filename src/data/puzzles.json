@@ -1,4 +1,17 @@
 {
-  "startDate": "2026-07-21",
-  "order": ["pikachu", "marill", "heracross", "unown", "flareon"]
+  "startDate": "2026-08-17",
+  "order": [
+    "togepi",
+    "piplup",
+    "whimsicott",
+    "slowbro",
+    "kingambit",
+    "xerneas",
+    "metagross-mega",
+    "weezing-galar",
+    "inteleon-gmax",
+    "comfey",
+    "larvitar",
+    "metapod"
+  ]
 }

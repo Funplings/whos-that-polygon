@@ -15,7 +15,7 @@ export function GuessRow({ guesses, answer }: Props) {
           return (
             <div
               key={i}
-              className="flex h-11 items-center justify-center rounded-lg border-2 border-dashed border-slate-700 text-sm text-slate-600"
+              className="flex h-11 items-center justify-center rounded-lg border-2 border-dashed border-slate-400/50 bg-slate-950/35 text-sm text-slate-200"
             >
               Guess {i + 1}
             </div>
@@ -26,13 +26,17 @@ export function GuessRow({ guesses, answer }: Props) {
           <div
             key={i}
             className={`flex h-11 items-center justify-between rounded-lg px-4 text-sm font-semibold ${
+              // Solid dark backing, not a translucent tint: the wrong-guess row
+              // was red-on-red once the page turned into the eyecatch.
               correct
-                ? 'bg-emerald-500/20 text-emerald-300 ring-1 ring-emerald-500'
-                : 'bg-red-500/15 text-red-300 ring-1 ring-red-500/60'
+                ? 'bg-slate-950/85 text-emerald-300 ring-1 ring-emerald-400'
+                : 'bg-slate-950/85 text-red-300 ring-1 ring-red-400/70'
             }`}
           >
             <span>{pokemonBySlug(slug)?.displayName ?? slug}</span>
-            <span aria-hidden>{correct ? '🟩' : '🟥'}</span>
+            <span aria-hidden className="text-base leading-none font-bold">
+              {correct ? '✓' : '✕'}
+            </span>
           </div>
         )
       })}

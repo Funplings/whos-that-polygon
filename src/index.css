@@ -1,5 +1,100 @@
 @import 'tailwindcss';
 
+/* Bundled rather than relied on as an installed system font, so the header
+   renders the same for everyone and not just on machines with it installed. */
+@font-face {
+  font-family: 'Pokemon Solid';
+  src: url('./resources/fonts/pokemon-solid.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@theme {
+  /* Single 400 weight, so anything using font-display must stay at
+     font-normal — bolding it only triggers faux-bold smearing. */
+  --font-display: 'Pokemon Solid', 'Trebuchet MS', system-ui, sans-serif;
+}
+
+/* The "Who's That Pokémon?" eyecatch backdrop: two fields of concentration
+   lines (集中線 / shūchūsen), cyan converging on the puzzle and red sweeping
+   across behind it. Both are generated SVGs — see scripts/build-eyecatch.mjs.
+
+   Fixed attachment anchors the backdrop to the viewport rather than the page
+   box, so it stays put behind the puzzle instead of drifting as the page grows
+   with each guess. */
+.eyecatch {
+  /* Red lines. Their vanishing point is off-canvas past the SVG's bottom-left,
+     so anchoring that corner to the viewport's puts the convergence off-screen
+     and only the near-parallel middle of the cone is ever visible. */
+  background-color: #c4130b;
+  background-image: url('./resources/images/misc/burst-red.svg');
+  background-position: left bottom;
+  background-size: 165vmax 165vmax;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  /* Creates a stacking context so ::before (z-index:-1) lands above this
+     background but below the app content. Without it the pseudo-element drops
+     behind the whole element and disappears. */
+  isolation: isolate;
+}
+
+/* The cyan burst lives in PuzzleImage, anchored to the artwork rather than the
+   viewport, so it follows the puzzle when the page scrolls or zooms. */
+
+/* Two concentric outlines plus a drop shadow. -webkit-text-stroke only gives
+   one ring, so each is built from text-shadow copies offset around a circle —
+   blue listed first (earlier shadows paint on top, so it lands inside), white
+   at double the radius, drop shadow last so it falls behind both.
+   Radii are in em so the rings scale with the responsive font size. */
+/* Two concentric outlines plus a solid drop shadow, drawn with real strokes.
+   The obvious approach — stacking offset text-shadow copies around a circle —
+   renders each copy separately and anti-aliases each one on its own, so their
+   edges accumulate unevenly and the outline comes out visibly staircased. A
+   stroke is a single path, rasterised once, so the curve stays smooth.
+   -webkit-text-stroke only gives one ring, so the second comes from a copy of
+   the text layered on top via ::before.
+
+   Strokes are centred on the glyph outline, so half of each width falls inside
+   and gets covered by the fill — the visible ring is half the stated width.
+   paint-order is what puts the stroke under the fill; without it the stroke
+   eats into the letterform. */
+.title-outline {
+  position: relative;
+  -webkit-text-stroke: 0.23em #fff;
+  paint-order: stroke fill;
+  /* drop-shadow, not text-shadow. text-shadow casts from the glyph alone, so
+     the white stroke paints over most of it and only slivers escape past the
+     letterform. A filter casts from the element's finished rendering — both
+     strokes and the ::before layer included — giving one solid silhouette of
+     the whole outlined title, sitting beneath all of it. Zero blur keeps it
+     hard-edged. */
+  filter: drop-shadow(-0.14em 0.18em 0 #0b1120);
+}
+
+.title-outline::before {
+  content: attr(data-text);
+  position: absolute;
+  inset: 0;
+  color: inherit;
+  -webkit-text-stroke: 0.15em #2563eb;
+  paint-order: stroke fill;
+}
+
+/* Text sitting directly on the burst.
+
+   Two shadows doing different jobs. The first is the solid black drop shadow —
+   zero blur, offset down and to the left, matching the title's. The second is a
+   soft halo that carries legibility: the backdrop swings from near-white at the
+   centre to dark red at the rays, and a hard offset shadow only separates the
+   text on one side, leaving white-on-pale-cyan edges to wash out. Sized in em
+   so both scale with the text. */
+.on-burst {
+  text-shadow:
+    -0.055em 0.055em 0 #000,
+    0 0 0.4em rgb(0 0 0 / 0.5);
+}
+
 body {
-  font-family: 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Jost', 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
 }
