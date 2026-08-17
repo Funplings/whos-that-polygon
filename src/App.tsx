@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { Header } from './components/Header'
 import { PuzzleImage } from './components/PuzzleImage'
 import { SearchBar } from './components/SearchBar'
@@ -92,6 +93,7 @@ function App() {
       </main>
 
       <RulesModal open={rulesOpen} onClose={closeRules} />
+      <Analytics />
     </div>
   )
 }
