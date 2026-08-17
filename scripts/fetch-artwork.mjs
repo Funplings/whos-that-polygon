@@ -5,7 +5,7 @@
 // Run with: node scripts/fetch-artwork.mjs
 //
 // Only *answers* need artwork, and an answer has to have a polygon — so this
-// fetches one image per SVG in the polygons directory (~376), not one per
+// fetches one image per polygon in the polygons directory (~376), not one per
 // pokemon.json entry (~1,278). Files already present are skipped, so re-running
 // after adding a polygon downloads just the new one.
 //
@@ -34,7 +34,7 @@ const pokemon = JSON.parse(
 const bySlug = new Map(pokemon.map((p) => [p.name, p]))
 
 const slugs = readdirSync(POLYGONS)
-  .filter((f) => f.endsWith('.svg'))
+  .filter((f) => f.endsWith('.png'))
   .map((f) => f.slice(0, -4))
   .sort()
 
