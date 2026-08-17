@@ -163,6 +163,38 @@ today's puzzle with a "not found" hint.
 Like previews, these never touch storage — they neither read your real progress
 nor write results for days you haven't played.
 
+## Deployment
+
+Configured for Vercel in [`vercel.json`](vercel.json). Import the repo and it
+builds with no further setup — `npm run build` into `dist`.
+
+The part that isn't optional is the SPA rewrite:
+
+```json
+"rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
+```
+
+The app reads its own path for `/gengar` and `/08-17-2026`, but those paths
+don't exist on disk — without the rewrite the host returns 404 for every one,
+including any link someone shares. Vercel checks the filesystem before applying
+rewrites, so hashed assets are still served directly rather than swallowed by
+the catch-all.
+
+Assets get a one-year immutable cache header. That's safe because Vite
+content-hashes every filename, so a changed file is a new URL; `index.html`
+deliberately isn't covered, since it's what points at the current hashes.
+
+Two things worth knowing before going live:
+
+- **The build is ~39 MB** across ~750 files, nearly all of it the committed
+  polygon and reveal images. Fine for static hosting, but it's why deploys
+  aren't instant.
+- **Jost loads from Google Fonts at runtime** — the one remaining third-party
+  request. Self-hosting the woff2 the way Pokemon Solid is bundled removes it.
+
+Nothing is hardcoded to a domain: the share text builds its URL from
+`window.location.origin`, so it picks up the deployed address automatically.
+
 ## The Pokémon list
 
 `src/data/pokemon.json` is ~1,280 entries:
