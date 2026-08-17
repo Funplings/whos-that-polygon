@@ -116,6 +116,14 @@ Clue-stage filters go on the `<img>`, never a wrapper, or `brightness(0)` blacks
 out the backdrop too. Polygon PNGs **must** have transparent backgrounds for
 that silhouette stage to work.
 
+## Deployment
+
+Vercel, configured in `vercel.json`. The SPA rewrite there is load-bearing —
+`/gengar` and `/08-17-2026` are read from the path but don't exist on disk, so
+without it every such URL 404s in production while working fine in dev (Vite
+falls back to index.html on its own). Test path routes against `npm run preview`
+rather than `npm run dev` when touching anything routing-related.
+
 ## Fonts
 
 Pokemon Solid (the title) is bundled at `src/resources/fonts/` and declared with
