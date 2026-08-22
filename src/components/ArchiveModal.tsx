@@ -138,7 +138,7 @@ export function ArchiveModal({
                           <div
                             key={`no-puzzle-${day}`}
                             aria-hidden
-                            className="aspect-square min-w-0 border border-ink/15 bg-paper/60 p-1 text-center text-xs text-ink/30"
+                            className="aspect-square min-w-0 border border-ink/20 bg-ink/15 p-1 text-center text-xs text-ink/35"
                           >
                             <span className="block leading-none">{day}</span>
                           </div>
