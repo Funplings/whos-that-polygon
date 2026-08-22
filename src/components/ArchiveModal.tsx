@@ -91,7 +91,7 @@ export function ArchiveModal({
             aria-label="Close archive"
             className="flex h-8 w-8 items-center justify-center border-2 border-ink bg-paper text-lg leading-none text-ink hover:bg-ink hover:text-paper"
           >
-            ×
+            <span className="glyph-center">×</span>
           </button>
         </div>
 

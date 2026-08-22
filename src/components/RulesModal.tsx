@@ -24,7 +24,7 @@ export function RulesModal({ open, onClose }: Props) {
             aria-label="Close rules"
             className="px-2 py-1 text-ink/60 hover:bg-ink hover:text-paper"
           >
-            ✕
+            <span className="glyph-center">×</span>
           </button>
         </div>
 

@@ -45,6 +45,16 @@
   border-image-repeat: stretch;
 }
 
+/* Pokemon Classic draws its glyphs low-left of true centre: canvas metrics
+   show "?" and "×" sitting 0.125em left of their advance-width midpoint and
+   0.125em below the line-box midpoint (ascent 44 / descent 8 at a 32px em,
+   glyphs hugging the baseline). Flex centering can only centre the text box,
+   so icon-like single glyphs get nudged back by that measured offset. */
+.glyph-center {
+  display: inline-block;
+  transform: translate(0.125em, -0.125em);
+}
+
 /* Retro push-button: hard ink border with a solid offset shadow that the
    button collapses into when pressed. */
 .gb-btn {

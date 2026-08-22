@@ -44,7 +44,7 @@ export function Header({ onShowArchive, onShowRules }: Props) {
             aria-label="How to play"
             className="gb-btn flex h-7 w-7 items-center justify-center bg-amber-300 text-sm text-ink hover:bg-amber-200 lg:h-11 lg:w-11 lg:text-xl"
           >
-            ?
+            <span className="glyph-center">?</span>
           </button>
         </div>
       </div>
