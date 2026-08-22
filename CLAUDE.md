@@ -22,6 +22,12 @@ node scripts/fetch-artwork.mjs        # downloads missing reveal images
 node scripts/build-eyecatch.mjs       # regenerates the two backdrop SVGs
 ```
 
+Polygon exports usually arrive with uneven transparent padding, which shows up
+in-game as the puzzle sitting small and off-centre (object-contain centres the
+canvas, not the drawing). `python3 scripts/trim-polygons.py` crops every
+polygon PNG to its alpha bounding box in place; it is idempotent, so run it
+after dropping in new art.
+
 ## Generated files — do not hand-edit
 
 `src/data/pokemon.json` and `src/resources/images/misc/burst-{cyan,red}.svg` are
@@ -126,13 +132,14 @@ rather than `npm run dev` when touching anything routing-related.
 
 ## Fonts
 
-Pokemon Solid (the title) is bundled at `src/resources/fonts/` and declared with
-`@font-face` — it must not rely on a system install, or it renders correctly
-only on machines that happen to have it. Jost (body) currently loads from Google
-Fonts, which is the one remaining third-party runtime request.
+Pokemon Solid (the title) and Pokemon Classic (the body) are bundled at
+`src/resources/fonts/` and declared with `@font-face` — they must not rely on a
+system install, or they render correctly only on machines that happen to have
+them. Nothing loads from Google Fonts anymore; there are no third-party runtime
+requests.
 
-Pokemon Solid ships a single 400 weight; anything using `--font-display` must
-stay at `font-normal` or the browser fakes bold and smears it.
+Both fonts ship a single 400 weight; bolding either only triggers faux-bold
+smearing, so text using them must stay at `font-normal`.
 
 ## Assets are vendored deliberately
 

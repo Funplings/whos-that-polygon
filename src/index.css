@@ -10,10 +10,50 @@
   font-display: swap;
 }
 
+@font-face {
+  font-family: 'Pokemon Classic';
+  src: url('./resources/fonts/pokemon-classic.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* Single 400 weight, so anything using font-display must stay at
      font-normal — bolding it only triggers faux-bold smearing. */
   --font-display: 'Pokemon Solid', 'Trebuchet MS', system-ui, sans-serif;
+
+  /* Game Boy battle-box palette: warm paper panels, near-black ink. */
+  --color-paper: #f8f5e6;
+  --color-ink: #16161c;
+}
+
+/* The Game Boy battle-box frame: a double line with bolt corners, recreated
+   from the R/B dialog border. Drawn as a 24x24 pixel-grid SVG and applied via
+   border-image — slice 8 takes each 8px corner tile whole, and the edge tiles
+   are uniform along their axis so plain `stretch` keeps the lines clean at any
+   box size. Rects sit on integer coordinates, so the 2x upscale (8px slice →
+   16px border) stays crisp without image-rendering hacks.
+
+   The tiles are transparent between the lines. The element's own background
+   fills the frame band and the bolt interiors, so one frame works on paper
+   panels and amber buttons alike. */
+.gb-frame {
+  border: 16px solid transparent;
+  border-image-source: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'><defs><g id='c' fill='%2316161c'><rect x='2' y='0' width='4' height='1'/><rect x='1' y='1' width='1' height='1'/><rect x='6' y='1' width='1' height='1'/><rect x='0' y='2' width='1' height='4'/><rect x='7' y='2' width='1' height='4'/><rect x='2' y='2' width='1' height='1'/><rect x='5' y='2' width='1' height='1'/><rect x='3' y='3' width='2' height='2'/><rect x='2' y='5' width='1' height='1'/><rect x='5' y='5' width='1' height='1'/><rect x='1' y='6' width='1' height='1'/><rect x='6' y='6' width='1' height='1'/><rect x='2' y='7' width='4' height='1'/></g></defs><use href='%23c'/><use href='%23c' x='16'/><use href='%23c' y='16'/><use href='%23c' x='16' y='16'/><g fill='%2316161c'><rect x='7' y='1' width='10' height='1'/><rect x='8' y='3' width='8' height='1'/><rect x='7' y='22' width='10' height='1'/><rect x='8' y='20' width='8' height='1'/><rect x='1' y='7' width='1' height='10'/><rect x='3' y='8' width='1' height='8'/><rect x='22' y='7' width='1' height='10'/><rect x='20' y='8' width='1' height='8'/></g></svg>");
+  border-image-slice: 8;
+  border-image-repeat: stretch;
+}
+
+/* Retro push-button: hard ink border with a solid offset shadow that the
+   button collapses into when pressed. */
+.gb-btn {
+  border: 2px solid var(--color-ink);
+  box-shadow: 3px 3px 0 0 var(--color-ink);
+}
+.gb-btn:active {
+  translate: 3px 3px;
+  box-shadow: none;
 }
 
 /* The "Who's That Pokémon?" eyecatch backdrop: two fields of concentration
@@ -96,5 +136,5 @@
 }
 
 body {
-  font-family: 'Jost', 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
+  font-family: 'Pokemon Classic', 'Trebuchet MS', 'Segoe UI', system-ui, sans-serif;
 }

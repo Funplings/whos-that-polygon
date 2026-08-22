@@ -1,4 +1,4 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo, useState } from 'react'
 import { isCorrectGuess } from './pokemon'
 import {
   overrideDateFromUrl,
@@ -60,6 +60,10 @@ export function useGame(dateISO = todayISO()): GameState {
   const [guesses, setGuesses] = useState<string[]>(
     () => (unpersisted ? [] : (loadResult(activeDate)?.guesses ?? [])),
   )
+
+  useEffect(() => {
+    setGuesses(unpersisted ? [] : (loadResult(activeDate)?.guesses ?? []))
+  }, [activeDate, puzzle.answer, unpersisted])
 
   const status = deriveStatus(guesses, puzzle.answer)
 

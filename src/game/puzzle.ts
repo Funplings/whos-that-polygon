@@ -69,6 +69,16 @@ function daysBetween(fromISO: string, toISO: string): number {
   return Math.round((to.getTime() - from.getTime()) / 86_400_000)
 }
 
+function addDays(dateISO: string, days: number): string {
+  const [year, month, day] = dateISO.split('-').map(Number)
+  const date = new Date(year, month - 1, day + days)
+  return [
+    date.getFullYear(),
+    String(date.getMonth() + 1).padStart(2, '0'),
+    String(date.getDate()).padStart(2, '0'),
+  ].join('-')
+}
+
 /** Deterministic PRNG so the post-schedule "random" pick is stable per day. */
 function seededIndex(seed: number, length: number): number {
   let x = seed || 1
@@ -101,6 +111,13 @@ export function puzzleForDate(dateISO: string): Puzzle {
     image: POLYGONS[answer],
     answer,
   }
+}
+
+export function puzzlesThrough(dateISO: string): Puzzle[] {
+  const count = daysBetween(schedule.startDate, dateISO) + 1
+  return Array.from({ length: Math.max(0, count) }, (_, index) =>
+    puzzleForDate(addDays(schedule.startDate, index)),
+  )
 }
 
 /** The bare path segment, or the first matching query param. */

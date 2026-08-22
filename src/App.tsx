@@ -1,5 +1,4 @@
-import { useState } from 'react'
-import { Analytics } from '@vercel/analytics/react'
+import { useEffect, useMemo, useState } from 'react'
 import { Header } from './components/Header'
 import { PuzzleImage } from './components/PuzzleImage'
 import { SearchBar } from './components/SearchBar'
@@ -7,13 +6,30 @@ import { GuessRow } from './components/GuessRow'
 import { NextPuzzleCountdown } from './components/NextPuzzleCountdown'
 import { ResultReveal } from './components/ResultReveal'
 import { RulesModal } from './components/RulesModal'
+import { ClueProgression } from './components/ClueProgression'
+import { ArchiveModal } from './components/ArchiveModal'
 import { useGame } from './game/useGame'
+import { puzzlesThrough, todayISO } from './game/puzzle'
 import { hasSeenRules, markRulesSeen } from './lib/storage'
+import type { ClueStage } from './game/types'
 
 function App() {
-  const game = useGame()
+  const [today] = useState(() => todayISO())
+  const [selectedDate, setSelectedDate] = useState(today)
+  const game = useGame(selectedDate)
+  const archivePuzzles = useMemo(() => puzzlesThrough(today), [today])
+  const isTodayPuzzle =
+    !game.preview && !game.dateOverride && game.puzzle.date === today
   // Don't interrupt manual testing with the first-visit rules modal.
   const [rulesOpen, setRulesOpen] = useState(() => !game.preview && !hasSeenRules())
+  const [archiveOpen, setArchiveOpen] = useState(false)
+  const [selectedClueStage, setSelectedClueStage] = useState<ClueStage>(
+    game.clueStage,
+  )
+
+  useEffect(() => {
+    setSelectedClueStage(game.clueStage)
+  }, [game.clueStage, game.puzzle.answer])
 
   function closeRules() {
     markRulesSeen()
@@ -32,22 +48,25 @@ function App() {
     // scroll container, which would also force the other axis to auto and put a
     // scroll context around the fixed-position rules modal.
     <div className="eyecatch min-h-screen overflow-clip">
-      <Header onShowRules={() => setRulesOpen(true)} />
+      <Header
+        onShowArchive={() => setArchiveOpen(true)}
+        onShowRules={() => setRulesOpen(true)}
+      />
 
       <main className="mx-auto flex max-w-lg flex-col gap-5 px-4 py-6">
         {game.preview && (
-          <div className="rounded-lg border border-amber-400/60 bg-slate-950/80 px-3 py-2 text-center text-xs text-amber-300">
+          <div className="border-2 border-ink bg-amber-300 px-3 py-2 text-center text-xs text-ink">
             Preview mode · testing <strong>{game.puzzle.answer}</strong> · not saved
           </div>
         )}
         {game.dateOverride && (
-          <div className="rounded-lg border border-sky-400/60 bg-slate-950/80 px-3 py-2 text-center text-xs text-sky-300">
+          <div className="border-2 border-ink bg-sky-300 px-3 py-2 text-center text-xs text-ink">
             Testing <strong>{game.dateOverride}</strong> · puzzle #
             {game.puzzle.number} · not saved
           </div>
         )}
         {game.previewMiss && (
-          <div className="rounded-lg border border-red-400/60 bg-slate-950/80 px-3 py-2 text-center text-xs text-red-300">
+          <div className="border-2 border-ink bg-paper px-3 py-2 text-center text-xs text-red-700">
             No polygon found for “{game.previewMiss}” — showing today’s puzzle instead.
           </div>
         )}
@@ -55,8 +74,8 @@ function App() {
         {/* Preview games aren't scheduled, so a puzzle number and date would be
             meaningless — the amber banner above already labels them. */}
         {!game.preview && (
-          <div className="flex flex-col gap-1">
-            <p className="on-burst text-center text-xl font-semibold text-white">
+          <div className="gb-frame mx-auto flex w-full max-w-sm flex-col gap-1 bg-paper px-2 py-1">
+            <p className="text-center text-xl text-ink">
               {/* The puzzle's own date, which is the Eastern one it rolls over
                   on — not the viewer's local date. Those differ for most of the
                   world for part of each day, and showing the local one would
@@ -70,11 +89,17 @@ function App() {
                 year: 'numeric',
               })}
             </p>
-            <NextPuzzleCountdown />
+            {isTodayPuzzle && <NextPuzzleCountdown />}
           </div>
         )}
 
-        <PuzzleImage slug={game.puzzle.answer} clueStage={game.clueStage} />
+        <PuzzleImage slug={game.puzzle.answer} clueStage={selectedClueStage} />
+
+        <ClueProgression
+          unlockedStage={game.clueStage}
+          selectedStage={selectedClueStage}
+          onSelect={setSelectedClueStage}
+        />
 
         <SearchBar
           disabled={game.status !== 'playing'}
@@ -93,7 +118,13 @@ function App() {
       </main>
 
       <RulesModal open={rulesOpen} onClose={closeRules} />
-      <Analytics />
+      <ArchiveModal
+        open={archiveOpen}
+        puzzles={archivePuzzles}
+        currentDate={game.puzzle.date}
+        onSelect={setSelectedDate}
+        onClose={() => setArchiveOpen(false)}
+      />
     </div>
   )
 }

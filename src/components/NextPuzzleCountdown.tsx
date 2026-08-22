@@ -26,7 +26,7 @@ export function NextPuzzleCountdown() {
   }, [])
 
   return (
-    <p className="on-burst text-center text-sm font-semibold text-white/90">
+    <p className="text-center text-sm text-ink/70">
       Next polygon in{' '}
       {/* tabular-nums stops the line jittering as the digits tick over */}
       <span className="tabular-nums">{formatDuration(remaining)}</span>

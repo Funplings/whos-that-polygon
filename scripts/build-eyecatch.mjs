@@ -36,14 +36,15 @@ const round = (n) => Math.round(n * 10) / 10
 const lerpNum = (a, b, t) => a + (b - a) * t
 
 /**
- * One burst of concentration lines.
+ * One field of concentration lines. Returns `{ defs, group }` for composeSvg,
+ * so a single SVG can stack several fields (the cyan burst layers two).
  *
  * Each spike is a triangle: a short base at `innerR` widening from the focal
  * point, tapering to a single tip at a random outer radius. The tip angle is
  * jittered off the spike's own axis so edges aren't symmetrical — that slight
  * lean is what stops the field reading as a mechanical pinwheel.
  */
-function burst({
+function spikeField({
   seed,
   size,
   cx,
@@ -125,6 +126,13 @@ function burst({
     spikes.push(`<path d="${d}" fill="${fill}" opacity="${opacity}"/>`)
   }
 
+  // No fade requested: the field ends at its spike tips, hard-edged. The
+  // inner cyan layer wants exactly that — its pale spikes sit on the outer
+  // layer's solid body, so there is nothing to dissolve into.
+  if (fadeInner == null) {
+    return { defs: '', group: `<g>\n${spikes.join('\n')}\n</g>` }
+  }
+
   // Radial mask so the field dissolves outward instead of ending at a hard
   // edge. Baked in here rather than applied in CSS so the asset is complete.
   const maskId = `fade-${seed}`
@@ -143,17 +151,25 @@ function burst({
     fadeStops.push(`<stop offset="${offset}" stop-color="#${hex}${hex}${hex}"/>`)
   }
 
-  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
-<defs>
-  <radialGradient id="${maskId}" gradientUnits="userSpaceOnUse" cx="${cx}" cy="${cy}" r="${fadeR ?? size}">
+  const defs = `<radialGradient id="${maskId}" gradientUnits="userSpaceOnUse" cx="${cx}" cy="${cy}" r="${fadeR ?? size}">
     <stop offset="0" stop-color="#fff"/>
     ${fadeStops.join('\n    ')}
   </radialGradient>
-  <mask id="m-${seed}"><rect width="${size}" height="${size}" fill="url(#${maskId})"/></mask>
+  <mask id="m-${seed}"><rect width="${size}" height="${size}" fill="url(#${maskId})"/></mask>`
+
+  return {
+    defs,
+    group: `<g mask="url(#m-${seed})">\n${spikes.join('\n')}\n</g>`,
+  }
+}
+
+/** Wrap one or more spike fields in an SVG document, painted in order. */
+function composeSvg(size, fields) {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
+<defs>
+  ${fields.map((f) => f.defs).filter(Boolean).join('\n  ')}
 </defs>
-<g mask="url(#m-${seed})">
-${spikes.join('\n')}
-</g>
+${fields.map((f) => f.group).join('\n')}
 </svg>
 `
 }
@@ -161,36 +177,38 @@ ${spikes.join('\n')}
 const SIZE = 1000
 
 // Cyan burst: converges on the puzzle, so it radiates through a full circle.
-const cyan = burst({
+// Two stacked layers, colour-matched to the anime eyecatch card: a darker
+// cerulean field carrying the overall silhouette of the burst, with a smaller
+// near-white burst inside it haloing the artwork.
+const cyanOuter = spikeField({
   seed: 20260816,
   size: SIZE,
   cx: SIZE / 2,
   cy: SIZE / 2,
   fromDeg: 0,
   toDeg: 360,
-  count: 520,
+  count: 340,
   // Bases sit right on the centre, so they overlap into a solid core and there
   // is no hole to fill.
   innerR: 0,
   // A high lenMin relative to lenMax is what gives the burst body. When the
   // range is wide most spikes stay near the minimum and a few shoot far past
   // it, which reads as a small core with thin needles off it. Keeping the
-  // lengths bunched means the bulk of the 520 spikes all reach a similar
-  // radius and overlap into one solid mass out to there.
+  // lengths bunched means the bulk of the spikes all reach a similar radius
+  // and overlap into one solid mass out to there.
   lenMin: 118,
   lenMax: 182,
   // Wider too — thin spikes at this count read as fuzz rather than volume.
-  baseMin: 6,
-  baseMax: 22,
+  baseMin: 9,
+  baseMax: 28,
   tipJitterDeg: 1.4,
-  // One colour, one opacity — every spike identical. Depth still comes from
-  // overlap: alpha compositing accumulates where spikes cross, so two at 0.38
-  // read as 0.62 and a dozen read as solid. What's gone is per-spike variation,
-  // not the density. It has to stay below 1 though — at full opacity the
-  // crossings paint the same flat colour and the field becomes one silhouette.
-  colors: ['#4fd0f8'],
-  opacityMin: 0.38,
-  opacityMax: 0.38,
+  // One colour at full opacity: crossings paint the same flat colour, so the
+  // field reads as one solid flat-colour burst — the anime-eyecatch look —
+  // rather than the airbrushed depth translucent overlap used to give it.
+  // Fewer, wider spikes carry the volume instead of density.
+  colors: ['#2b95bd'],
+  opacityMin: 1,
+  opacityMax: 1,
   // fadeInner is the radius held at full opacity — raising it extends the solid
   // body outward before any falloff begins, which is the other half of making
   // the inner volume read bigger.
@@ -201,6 +219,30 @@ const cyan = burst({
   // showed up as a washed-out grey ring against the red.
   fadeInner: 0.14,
   fadeOuter: 0.23,
+})
+
+// The bright inner burst. Its solid mass ends well inside the outer layer's,
+// so the cerulean always shows as a ring around it, and its needle tips stay
+// on cerulean rather than escaping onto the red. No fade mask — hard spiky
+// edges against the outer body are the look, and a fade here would turn the
+// pale spikes translucent.
+const cyanInner = spikeField({
+  seed: 20260817,
+  size: SIZE,
+  cx: SIZE / 2,
+  cy: SIZE / 2,
+  fromDeg: 0,
+  toDeg: 360,
+  count: 230,
+  innerR: 0,
+  lenMin: 76,
+  lenMax: 118,
+  baseMin: 6,
+  baseMax: 18,
+  tipJitterDeg: 1.4,
+  colors: ['#cbe4ec'],
+  opacityMin: 1,
+  opacityMax: 1,
 })
 
 // Red field: constant-width lines, not tapering spikes, with their vanishing
@@ -217,7 +259,7 @@ const cyan = burst({
 //
 // The angular range is narrow for the same reason it's off-canvas: from that
 // far out, the entire visible box only subtends about 52deg.
-const red = burst({
+const red = spikeField({
   seed: 761104,
   size: SIZE,
   cx: -520,
@@ -236,8 +278,12 @@ const red = burst({
   // A narrow band around coral-red — enough to keep a hint of the pink and
   // orange without the lines reading as separate colours.
   colors: ['#ef6a50', '#e75440', '#e04a33', '#d93f2a'],
-  opacityMin: 0.45,
-  opacityMax: 0.95,
+  // Kept low and nearly flat: at the old 0.45–0.95 spread the bright lines
+  // fought the paper UI boxes for attention and the field read as noise. This
+  // keeps the lines clearly present but as a background texture, not a layer
+  // competing with the UI.
+  opacityMin: 0.18,
+  opacityMax: 0.3,
   // Because the origin sits past the bottom-left, distance from it runs up and
   // to the right — so this radial fade is what makes the lines dissolve in that
   // direction.
@@ -253,8 +299,8 @@ const red = burst({
 
 mkdirSync(OUT_DIR, { recursive: true })
 for (const [name, svg] of [
-  ['burst-cyan.svg', cyan],
-  ['burst-red.svg', red],
+  ['burst-cyan.svg', composeSvg(SIZE, [cyanOuter, cyanInner])],
+  ['burst-red.svg', composeSvg(SIZE, [red])],
 ]) {
   const path = join(OUT_DIR, name)
   writeFileSync(path, svg)

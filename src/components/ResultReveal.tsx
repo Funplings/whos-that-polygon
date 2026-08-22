@@ -59,9 +59,9 @@ export function ResultReveal({
   }
 
   return (
-    <div className="mx-auto w-full max-w-sm rounded-2xl bg-slate-800 p-5 text-center shadow-lg ring-1 ring-slate-700">
+    <div className="gb-frame mx-auto w-full max-w-sm bg-paper p-2 text-center text-ink">
       <p
-        className={`text-lg font-bold ${won ? 'text-emerald-300' : 'text-red-300'}`}
+        className={`text-base ${won ? 'text-emerald-700' : 'text-red-700'}`}
       >
         {won ? WIN_MESSAGES[Math.min(guessCount - 1, 2)] : 'Better luck tomorrow!'}
       </p>
@@ -72,12 +72,12 @@ export function ResultReveal({
           className="mx-auto my-3 h-40 w-40 object-contain"
         />
       )}
-      <p className="text-sm text-slate-400">The answer was</p>
-      <p className="text-xl font-bold text-slate-100">
+      <p className="text-sm text-ink/60">The answer was</p>
+      <p className="text-lg text-ink">
         {pokemon?.displayName ?? answer}
       </p>
       {won && (
-        <p className="mt-2 text-sm text-slate-400">
+        <p className="mt-2 text-sm text-ink/60">
           Answered in {guessCount} {guessCount === 1 ? 'guess' : 'guesses'}!
         </p>
       )}
@@ -86,11 +86,11 @@ export function ResultReveal({
         <>
           <button
             onClick={copyResults}
-            className="mt-4 w-full rounded-xl bg-amber-400 px-4 py-3 font-bold text-slate-900 transition-colors hover:bg-amber-300"
+            className="gb-btn mt-4 w-full bg-amber-300 px-4 py-3 text-ink transition-colors hover:bg-amber-200"
           >
-            {copied === 'ok' ? 'Copied!' : 'Share results'}
+            {copied === 'ok' ? 'Copied!' : '▶ Share results'}
           </button>
-          <p aria-live="polite" className="mt-2 min-h-4 text-xs text-slate-400">
+          <p aria-live="polite" className="mt-2 min-h-4 text-xs text-ink/60">
             {copied === 'ok' && 'Result copied — paste it anywhere.'}
             {copied === 'failed' && 'Couldn’t access the clipboard.'}
           </p>

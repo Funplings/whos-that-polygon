@@ -67,12 +67,12 @@ export function SearchBar({ disabled, onSubmit }: Props) {
         autoComplete="off"
         autoCorrect="off"
         spellCheck={false}
-        className="w-full rounded-xl border border-slate-600 bg-slate-800 px-4 py-3 text-slate-100 placeholder-slate-500 shadow-sm outline-none focus:border-amber-400 focus:ring-2 focus:ring-amber-400/40 disabled:cursor-not-allowed disabled:opacity-50"
+        className="gb-frame w-full bg-paper px-1 py-1 text-ink outline-none placeholder:text-ink/45 focus:bg-white disabled:cursor-not-allowed disabled:opacity-60"
       />
       {results.length > 0 && (
         <ul
           role="listbox"
-          className="absolute z-10 mt-1 max-h-64 w-full overflow-auto rounded-xl border border-slate-600 bg-slate-800 py-1 shadow-xl"
+          className="absolute z-10 mt-1 max-h-64 w-full overflow-auto border-2 border-ink bg-paper py-1 shadow-[4px_4px_0_0_var(--color-ink)]"
         >
           {results.map((p, i) => (
             <li
@@ -84,10 +84,15 @@ export function SearchBar({ disabled, onSubmit }: Props) {
                 e.preventDefault() // don't blur the input first
                 choose(p)
               }}
-              className={`cursor-pointer px-4 py-2 text-sm ${
-                i === highlighted ? 'bg-amber-400/20 text-amber-200' : 'text-slate-200'
+              className={`flex cursor-pointer items-center px-3 py-2 text-sm text-ink ${
+                i === highlighted ? 'bg-ink/5' : ''
               }`}
             >
+              {/* The menu cursor from the battle screen marks the highlight;
+                  the fixed-width slot keeps names aligned as it moves. */}
+              <span aria-hidden className="inline-block w-5 shrink-0">
+                {i === highlighted ? '▶' : ''}
+              </span>
               {p.displayName}
             </li>
           ))}
