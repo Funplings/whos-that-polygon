@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { POLYGONS } from '../game/polygons'
-import { officialArtUrl, pokemonBySlug } from '../game/pokemon'
+import { POKEMON, pokemonBySlug } from '../game/pokemon'
 import { loadResult } from '../lib/storage'
 import type { Puzzle } from '../game/types'
 import helpIcon from '../resources/images/assets/Help.svg'
@@ -10,7 +10,7 @@ import numberIcon from '../resources/images/assets/Number.svg'
 import hideIcon from '../resources/images/assets/Hide.svg'
 import showIcon from '../resources/images/assets/Show.svg'
 import exitIcon from '../resources/images/assets/Exit.svg'
-import boxUnsolved from '../resources/images/assets/Box Unsolved.svg'
+import logo from '../resources/images/assets/Logo.svg'
 
 export type PanelView = 'help' | 'dex'
 
@@ -121,8 +121,13 @@ export function SideTabs({ open, onOpen, puzzles, onSelectDate, notify }: Props)
 
 function HelpPanel({ onClose }: { onClose: () => void }) {
   return (
-    <div className="flex h-full flex-col overflow-y-auto bg-paper p-5 pt-14 text-ink">
-      <h2 className="text-lg">How to Play</h2>
+    <div className="flex h-full flex-col overflow-y-auto bg-paper p-5 pt-12 text-ink">
+      <img
+        src={logo}
+        alt="Who’s That Polygon?"
+        className="logo-outline mx-auto h-24 w-auto"
+      />
+      <h2 className="mt-4 text-lg">How to Play</h2>
       <div className="mt-4 space-y-4 text-sm leading-relaxed">
         <p>Who's that Pokemon? You have three tries to figure it out!</p>
         <p>
@@ -138,6 +143,27 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
       >
         ▶ Let’s go!
       </button>
+      {/* mt-auto pins the credits to the drawer's bottom edge. */}
+      <footer className="mt-auto pt-6 text-right text-[0.6rem] leading-relaxed text-ink/60">
+        inspired by{' '}
+        <a
+          href="https://www.youtube.com/watch?v=T-JPM3ieKv4"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-maroon underline hover:text-ink"
+        >
+          this video
+        </a>{' '}
+        and{' '}
+        <a
+          href="https://x.com/kishinates/status/2054958277788885329?s=20"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-maroon underline hover:text-ink"
+        >
+          this post
+        </a>
+      </footer>
     </div>
   )
 }
@@ -146,8 +172,8 @@ type DexView = 'calendar' | 'number'
 
 /**
  * The small always-on label along a Dex box's bottom edge: the box's date in
- * calendar view, the species' dex number in number view. Dark grey and tiny,
- * so it reads as a stamp on the box rather than competing with the art.
+ * calendar view, the species' dex number in number view. It sits below the
+ * box on the drawer background, so the art never shares space with it.
  */
 function CellLabel({
   kind,
@@ -161,10 +187,10 @@ function CellLabel({
       aria-hidden
       // Sized against the cell (a size container), as large as the content
       // fits the box width, capped at 0.7rem — the pixel font is too wide for
-      // one fixed size to survive every panel width without bleeding into the
-      // neighbouring boxes. Dates (up to 9 chars) need a tighter curve than
-      // dex numbers (up to 5).
-      className={`pointer-events-none absolute inset-x-0 bottom-1.5 text-center leading-none whitespace-nowrap text-ink/45 ${
+      // one fixed size to survive every panel width without colliding with
+      // the neighbouring columns. M/D/YY dates (up to 7 chars) need a tighter
+      // curve than dex numbers (up to 5).
+      className={`mt-1 block text-center leading-none whitespace-nowrap text-maroon ${
         kind === 'date'
           ? 'text-[min(0.7rem,10cqw)]'
           : 'text-[min(0.7rem,19cqw)]'
@@ -176,10 +202,16 @@ function CellLabel({
 }
 
 interface DexCell {
-  slug: string
+  /** null for a dex number with no polygon asset yet — a placeholder slot. */
+  slug: string | null
   /** The released puzzle for this slug, if any — unreleased cells have none. */
   puzzle: Puzzle | null
+  /** National Dex number, for the placeholder slots' captions and keys. */
+  id: number | null
 }
+
+/** Highest National Dex number in the data — the dex view runs 1..this. */
+const MAX_DEX_ID = POKEMON.reduce((max, p) => Math.max(max, p.id), 0)
 
 function DexPanel({
   puzzles,
@@ -207,28 +239,44 @@ function DexPanel({
     if (view === 'calendar') {
       // Released puzzles in schedule order — no unreleased tail, so the user
       // never scrolls through hundreds of empty boxes after today.
-      return puzzles.map((p) => ({ slug: p.answer, puzzle: p }))
+      return puzzles.map((p) => ({
+        slug: p.answer,
+        puzzle: p,
+        id: pokemonBySlug(p.answer)?.id ?? null,
+      }))
     }
-    // Dex-number view: every polygon in the pool, National Dex order.
-    // Unreleased ones show as dark boxes.
-    return Object.keys(POLYGONS)
-      .map((slug) => ({ slug, mon: pokemonBySlug(slug) }))
-      .sort(
-        (a, b) =>
-          (a.mon?.id ?? Number.MAX_SAFE_INTEGER) -
-            (b.mon?.id ?? Number.MAX_SAFE_INTEGER) ||
-          a.slug.localeCompare(b.slug),
-      )
-      .map(({ slug }) => ({ slug, puzzle: releasedBySlug.get(slug) ?? null }))
+    // Dex-number view: one slot per National Dex number, 1..MAX_DEX_ID.
+    // Numbers with polygon art get a box per form (a species can have several
+    // — megas, regionals); numbers with no asset yet get a blank placeholder.
+    const formsById = new Map<number, string[]>()
+    for (const slug of Object.keys(POLYGONS)) {
+      const id = pokemonBySlug(slug)?.id
+      if (!id) continue
+      formsById.set(id, [...(formsById.get(id) ?? []), slug])
+    }
+    const out: DexCell[] = []
+    for (let id = 1; id <= MAX_DEX_ID; id += 1) {
+      const forms = formsById.get(id)?.sort()
+      if (!forms) {
+        out.push({ slug: null, puzzle: null, id })
+        continue
+      }
+      for (const slug of forms) {
+        out.push({ slug, puzzle: releasedBySlug.get(slug) ?? null, id })
+      }
+    }
+    return out
   }, [view, puzzles, releasedBySlug])
 
   // Hiding empties is a dex-number-view concern only — the calendar list is
-  // short and chronological, so it always shows everything.
+  // short and chronological, so it always shows everything. "Empty" means
+  // never finished: both won and lost days count as filled.
   const shown =
     view === 'number' && hideEmpty
-      ? cells.filter(
-          (c) => c.puzzle && loadResult(c.puzzle.date)?.status === 'won',
-        )
+      ? cells.filter((c) => {
+          const status = c.puzzle && loadResult(c.puzzle.date)?.status
+          return status === 'won' || status === 'lost'
+        })
       : cells
 
   // Folder tabs rise slightly on hover and sit back down while pressed. Like
@@ -286,24 +334,36 @@ function DexPanel({
       {/* Own bg + z-10 so the toolbar tabs' hidden extensions sit underneath
           this area and emerge from it on hover. */}
       <div className="relative z-10 grid flex-1 grid-cols-4 content-start gap-2 overflow-y-auto bg-coral p-3">
-        {shown.map(({ slug, puzzle }) => {
+        {shown.map(({ slug, puzzle, id }) => {
           // Label content follows the sort: the box's calendar date in
           // calendar view, the species' National Dex number in dex view.
-          const dexLabel = `#${pokemonBySlug(slug)?.id ?? '?'}`
-          if (!puzzle) {
-            // Unreleased: dark and inert, but still stamped with its dex
-            // number (its position in the sorted grid implies it anyway).
+          const dexLabel = `#${id ?? '?'}`
+          if (!slug) {
+            // A dex number with no polygon asset yet: a faint empty well —
+            // present so the numbering has no gaps, but clearly hollow next
+            // to the filled and unreleased boxes.
             return (
-              <div
-                key={slug}
-                aria-hidden
-                className="@container relative aspect-[287/278] rounded-2xl bg-maroon shadow-[2px_2px_0_0_rgba(32,32,32,0.25)]"
-              >
+              <div key={`empty-${id}`} aria-hidden className="@container">
+                <div className="aspect-[287/278] rounded-2xl bg-black/10" />
                 <CellLabel kind="number">{dexLabel}</CellLabel>
               </div>
             )
           }
-          const solved = loadResult(puzzle.date)?.status === 'won'
+          if (!puzzle) {
+            // Unreleased: dark and inert, but still stamped with its dex
+            // number (its position in the sorted grid implies it anyway).
+            return (
+              <div key={slug} aria-hidden className="@container">
+                <div className="aspect-[287/278] rounded-2xl bg-maroon shadow-[2px_2px_0_0_rgba(32,32,32,0.25)]" />
+                <CellLabel kind="number">{dexLabel}</CellLabel>
+              </div>
+            )
+          }
+          const result = loadResult(puzzle.date)
+          // Completed either way — the answer was revealed, so the Dex shows
+          // it in colour; the corner mark records whether it was earned.
+          const won = result?.status === 'won'
+          const completed = won || result?.status === 'lost'
           const name = pokemonBySlug(slug)?.displayName ?? slug
           // The puzzle's own ET date, parsed to local midnight so it formats
           // as the intended day rather than slipping back one. Pinned to
@@ -322,35 +382,38 @@ function DexPanel({
               type="button"
               onClick={() => onSelectDate(puzzle.date)}
               aria-label={
-                solved
-                  ? `${name}, solved — play puzzle #${puzzle.number} (${dateLabel})`
+                completed
+                  ? `${name}, ${won ? 'solved' : 'missed'} — open puzzle #${puzzle.number} (${dateLabel})`
                   : `Unsolved puzzle #${puzzle.number} (${dateLabel})`
               }
-              // Slight drop shadow lifts every box off the drawer; hover
-              // feedback is a brightness pop rather than a size change.
-              className={`@container relative aspect-[287/278] rounded-2xl shadow-[2px_2px_0_0_rgba(32,32,32,0.25)] transition-[filter,transform] duration-100 hover:brightness-110 active:scale-95 ${
-                solved ? 'bg-paper p-1.5' : ''
-              }`}
-              style={
-                solved
-                  ? undefined
-                  : {
-                      // Quoted: the asset filename contains a space, which an
-                      // unquoted CSS url() treats as a syntax error.
-                      backgroundImage: `url("${boxUnsolved}")`,
-                      backgroundSize: '100% 100%',
-                    }
-              }
+              // Box + caption as one column, all inside the button so the
+              // caption is part of the tap target. Slight drop shadow lifts
+              // the box off the drawer; hover feedback is a brightness pop
+              // rather than a size change.
+              className="@container block w-full transition-[filter,transform] duration-100 hover:brightness-110 active:scale-95"
             >
-              {/* No text in the boxes — the art (or its absence) is the label. */}
-              {solved && (
+              <span className="relative block aspect-[287/278] rounded-2xl bg-paper p-1.5 shadow-[2px_2px_0_0_rgba(32,32,32,0.25)]">
+                {/* The polygon art is the box's content: full colour once
+                    completed, black silhouette (the same treatment as the
+                    game's first clue stage) while unsolved. */}
                 <img
-                  src={officialArtUrl(slug) ?? undefined}
+                  src={POLYGONS[slug]}
                   alt=""
                   loading="lazy"
+                  style={completed ? undefined : { filter: 'brightness(0)' }}
                   className="h-full w-full object-contain"
                 />
-              )}
+                {completed && (
+                  <span
+                    aria-hidden
+                    className={`absolute top-1 right-1.5 leading-none text-[min(0.8rem,15cqw)] ${
+                      won ? 'text-emerald-600' : 'text-poke-red'
+                    }`}
+                  >
+                    {won ? '✓' : '×'}
+                  </span>
+                )}
+              </span>
               <CellLabel kind={view === 'calendar' ? 'date' : 'number'}>
                 {view === 'calendar' ? dateLabel : dexLabel}
               </CellLabel>

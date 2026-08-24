@@ -79,27 +79,41 @@ function addDays(dateISO: string, days: number): string {
   ].join('-')
 }
 
-/** Deterministic PRNG so the post-schedule "random" pick is stable per day. */
-function seededIndex(seed: number, length: number): number {
-  let x = seed || 1
-  x ^= x << 13
-  x ^= x >> 17
-  x ^= x << 5
-  return Math.abs(x) % length
-}
-
 /** Hand-picked slugs that actually have a polygon, in the given order. */
 const handpicked = (schedule.order as string[]).filter((slug) => slug in POLYGONS)
 
 /**
+ * The rest of the schedule: every polygon that isn't in the hand-picked
+ * opening, in one deterministic random order (seeded Fisher–Yates, so every
+ * client computes the same schedule). Unlike the old per-day PRNG pick, a
+ * shuffle guarantees no repeats and no skipped Pokémon until the whole pool
+ * has run — after which the order cycles.
+ */
+const shuffledRest = (() => {
+  const rest = POLYGON_SLUGS.filter((slug) => !handpicked.includes(slug))
+  // mulberry32, fixed seed — changing the seed reshuffles every unreleased day.
+  let seed = 0x9e3779b9
+  const rng = () => {
+    seed |= 0
+    seed = (seed + 0x6d2b79f5) | 0
+    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
+    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
+    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
+  }
+  for (let i = rest.length - 1; i > 0; i -= 1) {
+    const j = Math.floor(rng() * (i + 1))
+    ;[rest[i], rest[j]] = [rest[j], rest[i]]
+  }
+  return rest
+})()
+
+/**
  * Resolve the answer slug for a given day: hand-picked order for the first
- * `handpicked.length` days, then a deterministic per-day pick from the full
- * pool (design doc: "hand-select the order for the first bunch but after that
- * it'll be random").
+ * `handpicked.length` days, then the shuffled remainder of the pool.
  */
 function slugForDay(dayIndex: number): string {
   if (dayIndex < handpicked.length) return handpicked[dayIndex]
-  return POLYGON_SLUGS[seededIndex(dayIndex * 2654435761, POLYGON_SLUGS.length)]
+  return shuffledRest[(dayIndex - handpicked.length) % shuffledRest.length]
 }
 
 export function puzzleForDate(dateISO: string): Puzzle {

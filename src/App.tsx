@@ -31,12 +31,29 @@ function App() {
   const [panel, setPanel] = useState<PanelView | null>(() =>
     !game.preview && !hasSeenRules() ? 'help' : null,
   )
-  const [selectedClueStage, setSelectedClueStage] = useState<ClueStage>(
-    game.clueStage,
-  )
+  // The selected clue stage and guesses/solution toggle are DERIVED from
+  // keyed picks rather than synced by effects: an effect-based reset painted
+  // one frame of the new puzzle with the previous puzzle's view before
+  // correcting itself, which re-ran the stage cross-fade on every Dex
+  // navigation. A pick only applies while its key matches; any change of
+  // puzzle (or newly unlocked stage) falls back to the default in the same
+  // render.
+  const puzzleKey = game.puzzle.date + game.puzzle.answer
+  const stageKey = puzzleKey + game.clueStage
+  const [stagePick, setStagePick] = useState<{
+    key: string
+    stage: ClueStage
+  } | null>(null)
+  const selectedClueStage =
+    stagePick?.key === stageKey ? stagePick.stage : game.clueStage
   // The finished game leads with the solution; the corner button swaps the
   // guess list back in (and vice versa).
-  const [showSolution, setShowSolution] = useState(true)
+  const [solutionPick, setSolutionPick] = useState<{
+    key: string
+    show: boolean
+  } | null>(null)
+  const showSolution =
+    solutionPick?.key === puzzleKey ? solutionPick.show : true
   // One shake+sparkle on the pokeball tab, a second after the puzzle resolves,
   // to say the result landed in the Dex. Delayed so the player reads the
   // solution first; only fires on a transition actually played this session.
@@ -48,14 +65,6 @@ function App() {
     key: game.puzzle.date + game.puzzle.answer,
     status: game.status,
   })
-
-  useEffect(() => {
-    setSelectedClueStage(game.clueStage)
-  }, [game.clueStage, game.puzzle.answer])
-
-  useEffect(() => {
-    setShowSolution(true)
-  }, [game.status, game.puzzle.answer])
 
   useEffect(() => {
     const key = game.puzzle.date + game.puzzle.answer
@@ -167,14 +176,14 @@ function App() {
           space but leaves the focus order), the guesses/solution views match
           at 8.5rem, and the input/share slot is fixed at h-16 — so the
           starburst above never resizes mid-game. */}
-      <div className="mx-auto flex w-full max-w-sm flex-col gap-2 px-4 pb-4">
+      <div className="mx-auto flex w-full max-w-sm flex-col gap-2 px-4 pb-6">
         {/* -mt-1/mb-1 net to zero total height but shift the toggle 4px up,
             clearing the swap button that pokes above the box below. */}
         <div className={`-mt-1 mb-1 ${showClueToggle ? '' : 'invisible'}`}>
           <ClueProgression
             unlockedStage={game.clueStage}
             selectedStage={selectedClueStage}
-            onSelect={setSelectedClueStage}
+            onSelect={(stage) => setStagePick({ key: stageKey, stage })}
           />
         </div>
 
@@ -183,14 +192,14 @@ function App() {
             status={game.status}
             answer={game.puzzle.answer}
             guessCount={game.guesses.length}
-            onSwap={() => setShowSolution(false)}
+            onSwap={() => setSolutionPick({ key: puzzleKey, show: false })}
           />
         ) : (
           <div className="relative">
             <GuessRow guesses={game.guesses} answer={game.puzzle.answer} />
             {ended && (
               <SwapButton
-                onClick={() => setShowSolution(true)}
+                onClick={() => setSolutionPick({ key: puzzleKey, show: true })}
                 label="Show the solution"
                 position="-top-2 -right-2"
               />
@@ -210,6 +219,29 @@ function App() {
           )}
         </div>
       </div>
+
+      {/* Credits, tucked into the bottom stack's pb-4 strip so they never
+          collide with the answer bar above. */}
+      <footer className="pointer-events-none absolute right-2 bottom-2 z-10 text-[0.6rem] leading-none text-white/75">
+        created by{' '}
+        <a
+          href="https://funplings.github.io/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pointer-events-auto text-gold underline hover:text-amber-200"
+        >
+          funplings
+        </a>{' '}
+        and{' '}
+        <a
+          href="https://bsky.app/profile/cryptanark.bsky.social"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="pointer-events-auto text-gold underline hover:text-amber-200"
+        >
+          cryptanark
+        </a>
+      </footer>
 
       <SideTabs
         open={panel}

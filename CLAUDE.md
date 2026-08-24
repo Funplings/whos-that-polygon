@@ -75,7 +75,8 @@ copy-paste one-liners under "Adding a puzzle" and "Checking the reveal images".
 - **`polygons.ts` / `artwork.ts`** — `import.meta.glob` over the two image
   directories. Dropping a file in is the whole registration step.
 - **`puzzle.ts`** — date → puzzle. Hand-picked `order` for the first N days,
-  then a seeded PRNG over the full art pool. Also owns the URL overrides.
+  then a seeded shuffle of the remaining art pool (no repeats or skips until
+  the pool runs out, then it cycles). Also owns the URL overrides.
 - **`useGame.ts`** — guess state, clue stage, persistence.
 - **`pokemon.ts`** — search, name normalisation, guess matching, reveal URLs.
 

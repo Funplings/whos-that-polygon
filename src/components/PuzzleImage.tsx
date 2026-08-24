@@ -45,6 +45,11 @@ export function PuzzleImage({ slug, clueStage }: Props) {
               // The filter goes on the image, not a wrapper, so the starburst
               // behind it stays unfiltered.
               <img
+                // Keyed by slug: switching puzzles remounts the img, so the
+                // new one appears instantly at its own stage instead of
+                // cross-fading from the previous puzzle's filter. The fade
+                // only plays for stage changes within one puzzle.
+                key={slug}
                 src={src}
                 alt=""
                 style={{ filter: STAGE_FILTERS[clueStage] }}
