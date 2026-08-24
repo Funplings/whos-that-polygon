@@ -35,12 +35,12 @@ export function ClueProgression({
             aria-pressed={selected}
             aria-label={`${label} view${unlocked ? '' : ' locked'}`}
             onClick={() => onSelect(stage)}
-            className={`min-w-0 px-2 text-[0.65rem] transition-colors sm:text-xs ${
+            className={`min-w-0 px-2 text-[0.65rem] transition-colors ${
               // Selected reads as Game Boy inverse video: ink box, paper text.
               selected
                 ? 'bg-ink text-paper'
                 : unlocked
-                  ? 'text-ink hover:bg-ink/10'
+                  ? 'text-ink hover:bg-ink/10 active:bg-ink/25'
                   : 'cursor-not-allowed text-ink/35'
             }`}
           >

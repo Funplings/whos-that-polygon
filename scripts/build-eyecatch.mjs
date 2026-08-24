@@ -1,5 +1,7 @@
-// Generates the two concentration-line bursts (集中線 / shūchūsen) that make up
-// the eyecatch backdrop, as SVG files committed under src/resources/images/misc.
+// Generates the red concentration-line field (集中線 / shūchūsen) behind the
+// page, as an SVG committed under src/resources/images/misc. The cyan puzzle
+// starburst is no longer generated — it was superseded by the hand-drawn
+// asset at src/resources/images/assets/Starburst.svg.
 //
 // Run with: node scripts/build-eyecatch.mjs
 //
@@ -133,14 +135,21 @@ function spikeField({
     return { defs: '', group: `<g>\n${spikes.join('\n')}\n</g>` }
   }
 
-  // Radial mask so the field dissolves outward instead of ending at a hard
-  // edge. Baked in here rather than applied in CSS so the asset is complete.
-  const maskId = `fade-${seed}`
+  return maskedField(spikes, { seed, size, cx, cy, fadeInner, fadeOuter, fadeR })
+}
 
-  // A plain two-stop fade ramps linearly and leaves a faint arc where it hits
-  // black — a Mach band the eye picks up as a hard edge. Stepping through a
-  // smoothstep curve instead flattens the ends of the ramp so the field
-  // dissolves without a visible terminus.
+/**
+ * Wrap a field's paths in the shared radial fade mask, so the field dissolves
+ * outward instead of ending at a hard edge. Baked into the SVG rather than
+ * applied in CSS so the asset is complete.
+ *
+ * A plain two-stop fade ramps linearly and leaves a faint arc where it hits
+ * black — a Mach band the eye picks up as a hard edge. Stepping through a
+ * smoothstep curve instead flattens the ends of the ramp so the field
+ * dissolves without a visible terminus.
+ */
+function maskedField(spikes, { seed, size, cx, cy, fadeInner, fadeOuter, fadeR }) {
+  const maskId = `fade-${seed}`
   const fadeStops = []
   const STEPS = 7
   for (let i = 0; i <= STEPS; i += 1) {
@@ -163,6 +172,79 @@ function spikeField({
   }
 }
 
+/**
+ * Strictly parallel stripes — the comparison variant to the near-parallel
+ * converging field. Every stripe runs at exactly `angleDeg`; only offset,
+ * width, and opacity vary. Stripes overshoot the canvas on both ends, so
+ * every one enters and leaves through the edges and the apparent length
+ * comes entirely from the fade mask.
+ */
+function parallelField({
+  seed,
+  size,
+  angleDeg,
+  count,
+  widthMin,
+  widthMax,
+  colors,
+  opacityMin,
+  opacityMax,
+  fadeCx,
+  fadeCy,
+  fadeInner,
+  fadeOuter,
+  fadeR,
+}) {
+  const rng = mulberry32(seed)
+  const rad = (angleDeg * Math.PI) / 180
+  const dx = Math.cos(rad)
+  const dy = Math.sin(rad)
+  // Unit perpendicular: the axis stripes are distributed along.
+  const px = -dy
+  const py = dx
+  const cx = size / 2
+  const cy = size / 2
+  // Offsets span the canvas diagonal, so the corners are covered too.
+  const half = size * 0.75
+  const overshoot = size * 1.5
+
+  const spikes = []
+  for (let i = 0; i < count; i += 1) {
+    // Same jittered-walk placement as the converging field: even-ish spacing
+    // that never settles into a rhythm.
+    const t = ((i + (rng() - 0.5) * 0.9) / (count - 1)) * 2 - 1
+    const off = t * half
+    const w = lerpNum(widthMin, widthMax, rng() ** 1.4)
+    const fill = colors[Math.floor(rng() * colors.length)]
+    const opacity = Number(lerpNum(opacityMin, opacityMax, rng()).toFixed(2))
+
+    const bx = cx + px * off
+    const by = cy + py * off
+    const hx = px * (w / 2)
+    const hy = py * (w / 2)
+    const x1 = bx - dx * overshoot
+    const y1 = by - dy * overshoot
+    const x2 = bx + dx * overshoot
+    const y2 = by + dy * overshoot
+    const d =
+      `M${round(x1 + hx)} ${round(y1 + hy)}` +
+      `L${round(x2 + hx)} ${round(y2 + hy)}` +
+      `L${round(x2 - hx)} ${round(y2 - hy)}` +
+      `L${round(x1 - hx)} ${round(y1 - hy)}Z`
+    spikes.push(`<path d="${d}" fill="${fill}" opacity="${opacity}"/>`)
+  }
+
+  return maskedField(spikes, {
+    seed,
+    size,
+    cx: fadeCx,
+    cy: fadeCy,
+    fadeInner,
+    fadeOuter,
+    fadeR,
+  })
+}
+
 /** Wrap one or more spike fields in an SVG document, painted in order. */
 function composeSvg(size, fields) {
   return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${size} ${size}" width="${size}" height="${size}">
@@ -175,75 +257,6 @@ ${fields.map((f) => f.group).join('\n')}
 }
 
 const SIZE = 1000
-
-// Cyan burst: converges on the puzzle, so it radiates through a full circle.
-// Two stacked layers, colour-matched to the anime eyecatch card: a darker
-// cerulean field carrying the overall silhouette of the burst, with a smaller
-// near-white burst inside it haloing the artwork.
-const cyanOuter = spikeField({
-  seed: 20260816,
-  size: SIZE,
-  cx: SIZE / 2,
-  cy: SIZE / 2,
-  fromDeg: 0,
-  toDeg: 360,
-  count: 340,
-  // Bases sit right on the centre, so they overlap into a solid core and there
-  // is no hole to fill.
-  innerR: 0,
-  // A high lenMin relative to lenMax is what gives the burst body. When the
-  // range is wide most spikes stay near the minimum and a few shoot far past
-  // it, which reads as a small core with thin needles off it. Keeping the
-  // lengths bunched means the bulk of the spikes all reach a similar radius
-  // and overlap into one solid mass out to there.
-  lenMin: 118,
-  lenMax: 182,
-  // Wider too — thin spikes at this count read as fuzz rather than volume.
-  baseMin: 9,
-  baseMax: 28,
-  tipJitterDeg: 1.4,
-  // One colour at full opacity: crossings paint the same flat colour, so the
-  // field reads as one solid flat-colour burst — the anime-eyecatch look —
-  // rather than the airbrushed depth translucent overlap used to give it.
-  // Fewer, wider spikes carry the volume instead of density.
-  colors: ['#2b95bd'],
-  opacityMin: 1,
-  opacityMax: 1,
-  // fadeInner is the radius held at full opacity — raising it extends the solid
-  // body outward before any falloff begins, which is the other half of making
-  // the inner volume read bigger.
-  //
-  // No separate core gradient: the spikes converging at innerR already
-  // over-subscribe that circumference many times over, so the centre reads
-  // solid on its own. A core disc drawn over the top sat outside the mask and
-  // showed up as a washed-out grey ring against the red.
-  fadeInner: 0.14,
-  fadeOuter: 0.23,
-})
-
-// The bright inner burst. Its solid mass ends well inside the outer layer's,
-// so the cerulean always shows as a ring around it, and its needle tips stay
-// on cerulean rather than escaping onto the red. No fade mask — hard spiky
-// edges against the outer body are the look, and a fade here would turn the
-// pale spikes translucent.
-const cyanInner = spikeField({
-  seed: 20260817,
-  size: SIZE,
-  cx: SIZE / 2,
-  cy: SIZE / 2,
-  fromDeg: 0,
-  toDeg: 360,
-  count: 230,
-  innerR: 0,
-  lenMin: 76,
-  lenMax: 118,
-  baseMin: 6,
-  baseMax: 18,
-  tipJitterDeg: 1.4,
-  colors: ['#cbe4ec'],
-  opacityMin: 1,
-  opacityMax: 1,
-})
 
 // Red field: constant-width lines, not tapering spikes, with their vanishing
 // point pushed outside the viewBox — past the bottom-left corner, at
@@ -297,10 +310,33 @@ const red = spikeField({
   fadeOuter: 0.56,
 })
 
+// The strictly-parallel comparison variant (?rays=parallel swaps it in).
+// Angle, density, widths, palette, and fade all match the converging field —
+// -45° is the average on-screen direction of its lines (from the off-canvas
+// origin toward the box centre), so only the convergence differs.
+const redParallel = parallelField({
+  seed: 761104,
+  size: SIZE,
+  angleDeg: -45,
+  count: 55,
+  widthMin: 3,
+  widthMax: 13,
+  colors: ['#ef6a50', '#e75440', '#e04a33', '#d93f2a'],
+  opacityMin: 0.18,
+  opacityMax: 0.3,
+  // Same fade geometry as the converging field, so brightness falls off
+  // toward the top-right identically in both versions.
+  fadeCx: -520,
+  fadeCy: 1520,
+  fadeR: 2600,
+  fadeInner: 0.28,
+  fadeOuter: 0.56,
+})
+
 mkdirSync(OUT_DIR, { recursive: true })
 for (const [name, svg] of [
-  ['burst-cyan.svg', composeSvg(SIZE, [cyanOuter, cyanInner])],
   ['burst-red.svg', composeSvg(SIZE, [red])],
+  ['burst-red-parallel.svg', composeSvg(SIZE, [redParallel])],
 ]) {
   const path = join(OUT_DIR, name)
   writeFileSync(path, svg)

@@ -7,6 +7,12 @@ interface Props {
   onSubmit: (slug: string) => void
 }
 
+/**
+ * The bottom answer bar. It pulls double duty as the game's title — the page
+ * has no separate wordmark — so the placeholder is the game name, with a
+ * blinking caret to signal that it takes typing. Locked to the bottom of the
+ * screen by the App layout; results open upward.
+ */
 export function SearchBar({ disabled, onSubmit }: Props) {
   const [query, setQuery] = useState('')
   const [highlighted, setHighlighted] = useState(0)
@@ -51,12 +57,12 @@ export function SearchBar({ disabled, onSubmit }: Props) {
   }
 
   return (
-    <div ref={containerRef} className="relative mx-auto w-full max-w-sm">
+    <div ref={containerRef} className="relative w-full">
       <input
         type="text"
         value={query}
         disabled={disabled}
-        placeholder={disabled ? 'Come back tomorrow!' : 'Who’s that Polygon?'}
+        placeholder=""
         onChange={(e) => {
           setQuery(e.target.value)
           setOpen(true)
@@ -64,15 +70,31 @@ export function SearchBar({ disabled, onSubmit }: Props) {
         onFocus={() => setOpen(true)}
         onKeyDown={onKeyDown}
         aria-label="Guess the Pokémon"
+        title="Who’s that Polygon?"
         autoComplete="off"
         autoCorrect="off"
         spellCheck={false}
-        className="gb-frame w-full bg-paper px-1 py-1 text-ink outline-none placeholder:text-ink/45 focus:bg-white disabled:cursor-not-allowed disabled:opacity-60"
+        className="gb-frame w-full bg-gold px-1 py-1 text-ink outline-none disabled:cursor-not-allowed disabled:opacity-60"
       />
+      {/* Custom placeholder (the game title doubles as the prompt). Padding
+          mirrors the input's frame border + padding. No decorative caret —
+          the input's real one appears on focus, and two was confusing. */}
+      {query === '' && (
+        <div
+          aria-hidden
+          className="pointer-events-none absolute inset-0 flex items-center pl-5 text-ink/60"
+        >
+          <span className="truncate">
+            {disabled ? 'Come back tomorrow!' : 'Who’s that Polygon?'}
+          </span>
+        </div>
+      )}
       {results.length > 0 && (
+        // bottom-full: the list grows upward from the bar, which stays put
+        // above the keyboard on mobile.
         <ul
           role="listbox"
-          className="absolute z-10 mt-1 max-h-64 w-full overflow-auto border-2 border-ink bg-paper py-1 shadow-[4px_4px_0_0_var(--color-ink)]"
+          className="absolute bottom-full z-10 mb-1 max-h-64 w-full overflow-auto border-2 border-ink bg-paper py-1 shadow-[4px_4px_0_0_var(--color-ink)]"
         >
           {results.map((p, i) => (
             <li
@@ -84,7 +106,7 @@ export function SearchBar({ disabled, onSubmit }: Props) {
                 e.preventDefault() // don't blur the input first
                 choose(p)
               }}
-              className={`flex cursor-pointer items-center px-3 py-2 text-sm text-ink ${
+              className={`flex cursor-pointer items-center px-3 py-2 text-sm text-ink active:bg-ink/15 ${
                 i === highlighted ? 'bg-ink/5' : ''
               }`}
             >

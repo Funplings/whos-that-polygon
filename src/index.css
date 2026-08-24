@@ -1,15 +1,7 @@
 @import 'tailwindcss';
 
-/* Bundled rather than relied on as an installed system font, so the header
+/* Bundled rather than relied on as an installed system font, so the game
    renders the same for everyone and not just on machines with it installed. */
-@font-face {
-  font-family: 'Pokemon Solid';
-  src: url('./resources/fonts/pokemon-solid.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 @font-face {
   font-family: 'Pokemon Classic';
   src: url('./resources/fonts/pokemon-classic.woff2') format('woff2');
@@ -19,13 +11,16 @@
 }
 
 @theme {
-  /* Single 400 weight, so anything using font-display must stay at
-     font-normal — bolding it only triggers faux-bold smearing. */
-  --font-display: 'Pokemon Solid', 'Trebuchet MS', system-ui, sans-serif;
-
-  /* Game Boy battle-box palette: warm paper panels, near-black ink. */
-  --color-paper: #f8f5e6;
-  --color-ink: #16161c;
+  /* The designer's palette, sampled from resources/images/assets — every
+     surface colour comes from here. paper doubles as the starburst fill so
+     the text boxes and the star read as one material. */
+  --color-paper: #e6e6e6;
+  --color-ink: #202020;
+  --color-poke-red: #d33b3b;
+  --color-coral: #f75d53;
+  --color-maroon: #753945;
+  --color-gold: #ffcf00;
+  --color-pattern: #d5d0d1;
 }
 
 /* The Game Boy battle-box frame: a double line with bolt corners, recreated
@@ -37,12 +32,17 @@
 
    The tiles are transparent between the lines. The element's own background
    fills the frame band and the bolt interiors, so one frame works on paper
-   panels and amber buttons alike. */
+   panels and gold buttons alike. */
 .gb-frame {
   border: 16px solid transparent;
-  border-image-source: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'><defs><g id='c' fill='%2316161c'><rect x='2' y='0' width='4' height='1'/><rect x='1' y='1' width='1' height='1'/><rect x='6' y='1' width='1' height='1'/><rect x='0' y='2' width='1' height='4'/><rect x='7' y='2' width='1' height='4'/><rect x='2' y='2' width='1' height='1'/><rect x='5' y='2' width='1' height='1'/><rect x='3' y='3' width='2' height='2'/><rect x='2' y='5' width='1' height='1'/><rect x='5' y='5' width='1' height='1'/><rect x='1' y='6' width='1' height='1'/><rect x='6' y='6' width='1' height='1'/><rect x='2' y='7' width='4' height='1'/></g></defs><use href='%23c'/><use href='%23c' x='16'/><use href='%23c' y='16'/><use href='%23c' x='16' y='16'/><g fill='%2316161c'><rect x='7' y='1' width='10' height='1'/><rect x='8' y='3' width='8' height='1'/><rect x='7' y='22' width='10' height='1'/><rect x='8' y='20' width='8' height='1'/><rect x='1' y='7' width='1' height='10'/><rect x='3' y='8' width='1' height='8'/><rect x='22' y='7' width='1' height='10'/><rect x='20' y='8' width='1' height='8'/></g></svg>");
+  border-image-source: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' shape-rendering='crispEdges'><defs><g id='c' fill='%23202020'><rect x='2' y='0' width='4' height='1'/><rect x='1' y='1' width='1' height='1'/><rect x='6' y='1' width='1' height='1'/><rect x='0' y='2' width='1' height='4'/><rect x='7' y='2' width='1' height='4'/><rect x='2' y='2' width='1' height='1'/><rect x='5' y='2' width='1' height='1'/><rect x='3' y='3' width='2' height='2'/><rect x='2' y='5' width='1' height='1'/><rect x='5' y='5' width='1' height='1'/><rect x='1' y='6' width='1' height='1'/><rect x='6' y='6' width='1' height='1'/><rect x='2' y='7' width='4' height='1'/></g></defs><use href='%23c'/><use href='%23c' x='16'/><use href='%23c' y='16'/><use href='%23c' x='16' y='16'/><g fill='%23202020'><rect x='7' y='1' width='10' height='1'/><rect x='8' y='3' width='8' height='1'/><rect x='7' y='22' width='10' height='1'/><rect x='8' y='20' width='8' height='1'/><rect x='1' y='7' width='1' height='10'/><rect x='3' y='8' width='1' height='8'/><rect x='22' y='7' width='1' height='10'/><rect x='20' y='8' width='1' height='8'/></g></svg>");
   border-image-slice: 8;
   border-image-repeat: stretch;
+}
+
+/* Compact variant for small chips like the date box. */
+.gb-frame-sm {
+  border-width: 10px;
 }
 
 /* Pokemon Classic draws its glyphs low-left of true centre: canvas metrics
@@ -55,94 +55,125 @@
   transform: translate(0.125em, -0.125em);
 }
 
+/* Tailwind v4's preflight leaves buttons on the default arrow cursor; every
+   enabled button here is genuinely clickable, so advertise it. */
+button:not(:disabled) {
+  cursor: pointer;
+}
+
 /* Retro push-button: hard ink border with a solid offset shadow that the
    button collapses into when pressed. */
 .gb-btn {
   border: 2px solid var(--color-ink);
   box-shadow: 3px 3px 0 0 var(--color-ink);
+  transition: translate 75ms ease, box-shadow 75ms ease;
+}
+.gb-btn:hover {
+  translate: -1px -1px;
+  box-shadow: 4px 4px 0 0 var(--color-ink);
 }
 .gb-btn:active {
   translate: 3px 3px;
   box-shadow: none;
 }
 
-/* The "Who's That Pokémon?" eyecatch backdrop: two fields of concentration
-   lines (集中線 / shūchūsen), cyan converging on the puzzle and red sweeping
-   across behind it. Both are generated SVGs — see scripts/build-eyecatch.mjs.
-
-   Fixed attachment anchors the backdrop to the viewport rather than the page
-   box, so it stays put behind the puzzle instead of drifting as the page grows
-   with each guess. */
+/* Page backdrop: the designer's muted red with the generated field of
+   near-parallel red rays (see scripts/build-eyecatch.mjs). Fixed attachment
+   anchors it to the viewport so it doesn't shift with layout changes. */
 .eyecatch {
-  /* Red lines. Their vanishing point is off-canvas past the SVG's bottom-left,
-     so anchoring that corner to the viewport's puts the convergence off-screen
-     and only the near-parallel middle of the cone is ever visible. */
-  background-color: #c4130b;
+  background-color: #d33b3b;
   background-image: url('./resources/images/misc/burst-red.svg');
   background-position: left bottom;
   background-size: 165vmax 165vmax;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  /* Creates a stacking context so ::before (z-index:-1) lands above this
-     background but below the app content. Without it the pseudo-element drops
-     behind the whole element and disappears. */
-  isolation: isolate;
 }
 
-/* The cyan burst lives in PuzzleImage, anchored to the artwork rather than the
-   viewport, so it follows the puzzle when the page scrolls or zooms. */
-
-/* Two concentric outlines plus a drop shadow. -webkit-text-stroke only gives
-   one ring, so each is built from text-shadow copies offset around a circle —
-   blue listed first (earlier shadows paint on top, so it lands inside), white
-   at double the radius, drop shadow last so it falls behind both.
-   Radii are in em so the rings scale with the responsive font size. */
-/* Two concentric outlines plus a solid drop shadow, drawn with real strokes.
-   The obvious approach — stacking offset text-shadow copies around a circle —
-   renders each copy separately and anti-aliases each one on its own, so their
-   edges accumulate unevenly and the outline comes out visibly staircased. A
-   stroke is a single path, rasterised once, so the curve stays smooth.
-   -webkit-text-stroke only gives one ring, so the second comes from a copy of
-   the text layered on top via ::before.
-
-   Strokes are centred on the glyph outline, so half of each width falls inside
-   and gets covered by the fill — the visible ring is half the stated width.
-   paint-order is what puts the stroke under the fill; without it the stroke
-   eats into the letterform. */
-.title-outline {
-  position: relative;
-  -webkit-text-stroke: 0.23em #fff;
-  paint-order: stroke fill;
-  /* drop-shadow, not text-shadow. text-shadow casts from the glyph alone, so
-     the white stroke paints over most of it and only slivers escape past the
-     letterform. A filter casts from the element's finished rendering — both
-     strokes and the ::before layer included — giving one solid silhouette of
-     the whole outlined title, sitting beneath all of it. Zero blur keeps it
-     hard-edged. */
-  filter: drop-shadow(-0.14em 0.18em 0 #0b1120);
+/* Comparison variant, swapped in by ?rays=parallel: same palette, density,
+   and fade, but the rays are strictly parallel instead of faintly converging. */
+.eyecatch-parallel {
+  background-image: url('./resources/images/misc/burst-red-parallel.svg');
 }
 
-.title-outline::before {
-  content: attr(data-text);
-  position: absolute;
-  inset: 0;
-  color: inherit;
-  -webkit-text-stroke: 0.15em #2563eb;
-  paint-order: stroke fill;
+/* The starburst asset ships as grey fill + ink stroke; the mockup adds a pure
+   white outer outline and a solid offset shadow. Both are drop-shadow passes:
+   the four directional white shadows compound into an outline ring (each pass
+   re-casts the accumulated result, so the diagonals fill in), and the final
+   ink-coloured pass throws that whole outlined silhouette down-right as one
+   solid shadow. */
+.starburst-fx {
+  filter: drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
+    drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
+    drop-shadow(9px 11px 0 var(--color-ink));
 }
 
-/* Text sitting directly on the burst.
+/* The logo's double outline, same drop-shadow technique as .starburst-fx:
+   four directional passes draw an ink ring tight around the artwork, four
+   more draw a white ring around that. */
+.logo-outline {
+  filter: drop-shadow(1.5px 0 0 var(--color-ink))
+    drop-shadow(-1.5px 0 0 var(--color-ink))
+    drop-shadow(0 1.5px 0 var(--color-ink))
+    drop-shadow(0 -1.5px 0 var(--color-ink)) drop-shadow(1.5px 0 0 #fff)
+    drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff)
+    drop-shadow(0 -1.5px 0 #fff);
+}
 
-   Two shadows doing different jobs. The first is the solid black drop shadow —
-   zero blur, offset down and to the left, matching the title's. The second is a
-   soft halo that carries legibility: the backdrop swings from near-white at the
-   centre to dark red at the rays, and a hard offset shadow only separates the
-   text on one side, leaving white-on-pale-cyan edges to wash out. Sized in em
-   so both scale with the text. */
-.on-burst {
-  text-shadow:
-    -0.055em 0.055em 0 #000,
-    0 0 0.4em rgb(0 0 0 / 0.5);
+/* Square-in-parent sizing for the starburst: the box takes the largest square
+   that fits the container on both axes, which is exactly the "shrinks in short
+   viewports, centres in tall ones" behaviour the design spec describes. */
+.fit-square-parent {
+  container-type: size;
+}
+.fit-square {
+  width: min(100cqw, 100cqh);
+  aspect-ratio: 1;
+}
+
+/* Dex-notification: the pokeball tab shakes once, a second after the puzzle
+   resolves, to say the result landed in the Dex. */
+@keyframes dex-shake {
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  20% {
+    transform: rotate(-14deg);
+  }
+  40% {
+    transform: rotate(11deg);
+  }
+  60% {
+    transform: rotate(-7deg);
+  }
+  80% {
+    transform: rotate(4deg);
+  }
+}
+.dex-shake {
+  animation: dex-shake 0.6s ease-in-out 1;
+}
+
+@keyframes sparkle-pop {
+  0% {
+    transform: scale(0) rotate(-20deg);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(1.25) rotate(8deg);
+    opacity: 1;
+  }
+  70% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.4) rotate(12deg);
+    opacity: 0;
+  }
+}
+.sparkle-pop {
+  animation: sparkle-pop 1.4s ease-out 1 both;
 }
 
 body {

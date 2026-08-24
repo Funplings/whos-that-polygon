@@ -1,17 +1,22 @@
-import { useEffect, useMemo, useState } from 'react'
-import { Header } from './components/Header'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { PuzzleImage } from './components/PuzzleImage'
 import { SearchBar } from './components/SearchBar'
 import { GuessRow } from './components/GuessRow'
-import { NextPuzzleCountdown } from './components/NextPuzzleCountdown'
-import { ResultReveal } from './components/ResultReveal'
-import { RulesModal } from './components/RulesModal'
+import { SolutionBox, SwapButton } from './components/SolutionBox'
+import { ShareBar } from './components/ShareBar'
+import { SideTabs, type PanelView } from './components/SideTabs'
 import { ClueProgression } from './components/ClueProgression'
-import { ArchiveModal } from './components/ArchiveModal'
 import { useGame } from './game/useGame'
-import { puzzlesThrough, todayISO } from './game/puzzle'
+import { msUntilNextPuzzle, puzzlesThrough, todayISO } from './game/puzzle'
 import { hasSeenRules, markRulesSeen } from './lib/storage'
+import { playLossBuzzer, playWinJingle } from './lib/sfx'
+import logo from './resources/images/assets/Logo.svg'
 import type { ClueStage } from './game/types'
+
+// ?rays=parallel swaps the backdrop for the strictly-parallel comparison
+// variant — a design A/B, not a player-facing switch.
+const PARALLEL_RAYS =
+  new URLSearchParams(window.location.search).get('rays') === 'parallel'
 
 function App() {
   const [today] = useState(() => todayISO())
@@ -20,110 +25,198 @@ function App() {
   const archivePuzzles = useMemo(() => puzzlesThrough(today), [today])
   const isTodayPuzzle =
     !game.preview && !game.dateOverride && game.puzzle.date === today
-  // Don't interrupt manual testing with the first-visit rules modal.
-  const [rulesOpen, setRulesOpen] = useState(() => !game.preview && !hasSeenRules())
-  const [archiveOpen, setArchiveOpen] = useState(false)
+  const ended = game.status !== 'playing'
+
+  // Don't interrupt manual testing with the first-visit rules panel.
+  const [panel, setPanel] = useState<PanelView | null>(() =>
+    !game.preview && !hasSeenRules() ? 'help' : null,
+  )
   const [selectedClueStage, setSelectedClueStage] = useState<ClueStage>(
     game.clueStage,
   )
+  // The finished game leads with the solution; the corner button swaps the
+  // guess list back in (and vice versa).
+  const [showSolution, setShowSolution] = useState(true)
+  // One shake+sparkle on the pokeball tab, a second after the puzzle resolves,
+  // to say the result landed in the Dex. Delayed so the player reads the
+  // solution first; only fires on a transition actually played this session.
+  const [dexNotify, setDexNotify] = useState(false)
+  // Status is tracked per puzzle: without the key, opening an already-finished
+  // day from the Dex reads as a playing→won "transition" and would ring the
+  // jingle and shake the pokeball just for browsing.
+  const prevResult = useRef({
+    key: game.puzzle.date + game.puzzle.answer,
+    status: game.status,
+  })
 
   useEffect(() => {
     setSelectedClueStage(game.clueStage)
   }, [game.clueStage, game.puzzle.answer])
 
-  function closeRules() {
-    markRulesSeen()
-    setRulesOpen(false)
+  useEffect(() => {
+    setShowSolution(true)
+  }, [game.status, game.puzzle.answer])
+
+  useEffect(() => {
+    const key = game.puzzle.date + game.puzzle.answer
+    const was = prevResult.current
+    prevResult.current = { key, status: game.status }
+    const resolvedThisSession =
+      ended && was.key === key && was.status === 'playing'
+    if (!resolvedThisSession) return
+
+    // The result jingle — square-wave chiptune, see lib/sfx. Previews get the
+    // sound too (it's feedback on the guess), but not the Dex notification.
+    if (game.status === 'won') playWinJingle()
+    else playLossBuzzer()
+
+    if (game.preview) return
+    const showTimer = setTimeout(() => setDexNotify(true), 1000)
+    const hideTimer = setTimeout(() => setDexNotify(false), 3500)
+    return () => {
+      clearTimeout(showTimer)
+      clearTimeout(hideTimer)
+    }
+  }, [ended, game.status, game.preview, game.puzzle.date, game.puzzle.answer])
+
+  // The puzzle is resolved once when the app mounts, so past midnight the page
+  // would keep serving yesterday's polygon — and save guesses against
+  // yesterday's date. Reloading swaps in the new one. Progress is persisted
+  // per date, so nothing in flight is lost. (The visible countdown is gone by
+  // design; the rollover behaviour stays.)
+  useEffect(() => {
+    if (!isTodayPuzzle) return
+    const id = setInterval(() => {
+      if (msUntilNextPuzzle() === 0) window.location.reload()
+    }, 1000)
+    return () => clearInterval(id)
+  }, [isTodayPuzzle])
+
+  function closePanel(next: PanelView | null) {
+    if (panel === 'help' && next === null) markRulesSeen()
+    setPanel(next)
   }
 
+  // The clue-stage toggle only appears once there is something to toggle —
+  // after the first guess unlocks a second view.
+  const showClueToggle = game.guesses.length > 0 || ended
+
   return (
-    // The burst behind the puzzle is far larger than this box, and overflow to
-    // the right or bottom extends the document's scrollable area — that showed
-    // up as sideways scroll and ~320px of dead space under the page. Clipped on
-    // both axes here.
-    //
-    // This doesn't stop the page scrolling: in-flow content makes this box
-    // taller rather than overflowing it, so only the absolutely-positioned
-    // burst is trimmed. `clip` over `hidden` because hidden establishes a
-    // scroll container, which would also force the other axis to auto and put a
-    // scroll context around the fixed-position rules modal.
-    <div className="eyecatch min-h-screen overflow-clip">
-      <Header
-        onShowArchive={() => setArchiveOpen(true)}
-        onShowRules={() => setRulesOpen(true)}
-      />
-
-      <main className="mx-auto flex max-w-lg flex-col gap-5 px-4 py-6">
-        {game.preview && (
-          <div className="border-2 border-ink bg-amber-300 px-3 py-2 text-center text-xs text-ink">
-            Preview mode · testing <strong>{game.puzzle.answer}</strong> · not saved
-          </div>
-        )}
-        {game.dateOverride && (
-          <div className="border-2 border-ink bg-sky-300 px-3 py-2 text-center text-xs text-ink">
-            Testing <strong>{game.dateOverride}</strong> · puzzle #
-            {game.puzzle.number} · not saved
-          </div>
-        )}
-        {game.previewMiss && (
-          <div className="border-2 border-ink bg-paper px-3 py-2 text-center text-xs text-red-700">
-            No polygon found for “{game.previewMiss}” — showing today’s puzzle instead.
-          </div>
-        )}
-
-        {/* Preview games aren't scheduled, so a puzzle number and date would be
-            meaningless — the amber banner above already labels them. */}
+    // One screen, no scrolling: top bar, starburst filling the middle, and the
+    // controls locked to the bottom. overflow-clip (not hidden) so no scroll
+    // container forms around the fixed-position drawer.
+    <div
+      className={`eyecatch flex h-dvh flex-col overflow-clip ${
+        PARALLEL_RAYS ? 'eyecatch-parallel' : ''
+      }`}
+    >
+      {/* The logo anchors the top-left corner; the edge tabs start 64px down,
+          so the corner is its alone. */}
+      <header className="flex items-start justify-between gap-3 px-3 pt-3">
+        <img
+          src={logo}
+          alt="Who’s That Polygon?"
+          className="logo-outline h-10 w-auto lg:h-12"
+        />
+        {/* The puzzle's own date, which is the Eastern one it rolls over on —
+            not the viewer's local date. Those differ for most of the world for
+            part of each day, and showing the local one would label the puzzle
+            with a date it doesn't belong to. Parsed without a Z so it lands on
+            local midnight and formats as the intended day. */}
         {!game.preview && (
-          <div className="gb-frame mx-auto flex w-full max-w-sm flex-col gap-1 bg-paper px-2 py-1">
-            <p className="text-center text-xl text-ink">
-              {/* The puzzle's own date, which is the Eastern one it rolls over
-                  on — not the viewer's local date. Those differ for most of the
-                  world for part of each day, and showing the local one would
-                  label the puzzle with a date it doesn't belong to. Parsed
-                  without a Z so it lands on local midnight and formats as the
-                  intended day rather than slipping back one. */}
-              #{game.puzzle.number} ·{' '}
-              {new Date(`${game.puzzle.date}T00:00:00`).toLocaleDateString(undefined, {
-                month: 'short',
-                day: 'numeric',
-                year: 'numeric',
-              })}
-            </p>
-            {isTodayPuzzle && <NextPuzzleCountdown />}
+          <div className="gb-frame gb-frame-sm bg-paper px-2 text-sm text-ink">
+            #{game.puzzle.number} ·{' '}
+            {new Date(`${game.puzzle.date}T00:00:00`).toLocaleDateString(
+              undefined,
+              { month: 'short', day: 'numeric', year: 'numeric' },
+            )}
           </div>
         )}
+      </header>
 
+      {/* Testing banners, floated so they never disturb the fixed layout. */}
+      {(game.preview || game.dateOverride || game.previewMiss) && (
+        <div className="absolute inset-x-4 top-16 z-30 flex flex-col items-center gap-1">
+          {game.preview && (
+            <div className="border-2 border-ink bg-gold px-3 py-1 text-center text-xs text-ink">
+              Preview mode · testing <strong>{game.puzzle.answer}</strong> · not
+              saved
+            </div>
+          )}
+          {game.dateOverride && (
+            <div className="border-2 border-ink bg-sky-300 px-3 py-1 text-center text-xs text-ink">
+              Testing <strong>{game.dateOverride}</strong> · puzzle #
+              {game.puzzle.number} · not saved
+            </div>
+          )}
+          {game.previewMiss && (
+            <div className="border-2 border-ink bg-paper px-3 py-1 text-center text-xs text-poke-red">
+              No polygon found for “{game.previewMiss}” — showing today’s puzzle
+              instead.
+            </div>
+          )}
+        </div>
+      )}
+
+      <main className="min-h-0 flex-1 px-2">
         <PuzzleImage slug={game.puzzle.answer} clueStage={selectedClueStage} />
-
-        <ClueProgression
-          unlockedStage={game.clueStage}
-          selectedStage={selectedClueStage}
-          onSelect={setSelectedClueStage}
-        />
-
-        <SearchBar
-          disabled={game.status !== 'playing'}
-          onSubmit={game.submitGuess}
-        />
-
-        <GuessRow guesses={game.guesses} answer={game.puzzle.answer} />
-
-        <ResultReveal
-          status={game.status}
-          answer={game.puzzle.answer}
-          guessCount={game.guesses.length}
-          puzzleNumber={game.puzzle.number}
-          preview={game.preview}
-        />
       </main>
 
-      <RulesModal open={rulesOpen} onClose={closeRules} />
-      <ArchiveModal
-        open={archiveOpen}
+      {/* The bottom stack never changes height: the clue toggle's slot is
+          reserved while hidden (visibility, not display, so it still takes
+          space but leaves the focus order), the guesses/solution views match
+          at 8.5rem, and the input/share slot is fixed at h-16 — so the
+          starburst above never resizes mid-game. */}
+      <div className="mx-auto flex w-full max-w-sm flex-col gap-2 px-4 pb-4">
+        {/* -mt-1/mb-1 net to zero total height but shift the toggle 4px up,
+            clearing the swap button that pokes above the box below. */}
+        <div className={`-mt-1 mb-1 ${showClueToggle ? '' : 'invisible'}`}>
+          <ClueProgression
+            unlockedStage={game.clueStage}
+            selectedStage={selectedClueStage}
+            onSelect={setSelectedClueStage}
+          />
+        </div>
+
+        {ended && showSolution ? (
+          <SolutionBox
+            status={game.status}
+            answer={game.puzzle.answer}
+            guessCount={game.guesses.length}
+            onSwap={() => setShowSolution(false)}
+          />
+        ) : (
+          <div className="relative">
+            <GuessRow guesses={game.guesses} answer={game.puzzle.answer} />
+            {ended && (
+              <SwapButton
+                onClick={() => setShowSolution(true)}
+                label="Show the solution"
+                position="-top-2 -right-2"
+              />
+            )}
+          </div>
+        )}
+
+        <div className="flex h-16 flex-col justify-center">
+          {ended && !game.preview ? (
+            <ShareBar
+              status={game.status}
+              guessCount={game.guesses.length}
+              puzzleNumber={game.puzzle.number}
+            />
+          ) : (
+            <SearchBar disabled={ended} onSubmit={game.submitGuess} />
+          )}
+        </div>
+      </div>
+
+      <SideTabs
+        open={panel}
+        onOpen={closePanel}
         puzzles={archivePuzzles}
-        currentDate={game.puzzle.date}
-        onSelect={setSelectedDate}
-        onClose={() => setArchiveOpen(false)}
+        onSelectDate={setSelectedDate}
+        notify={dexNotify}
       />
     </div>
   )
