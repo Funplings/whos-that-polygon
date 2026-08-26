@@ -1,4 +1,5 @@
 import { officialArtUrl, pokemonBySlug } from '../game/pokemon'
+import { LOSS_MESSAGE, WIN_MESSAGES } from '../lib/messages'
 import type { GameStatus } from '../game/types'
 
 interface Props {
@@ -9,7 +10,6 @@ interface Props {
   onSwap: () => void
 }
 
-const WIN_MESSAGES = ['Incredible!', 'Great job!', 'Phew, got it!']
 
 /**
  * Compact end-of-game card that takes the guess rows' slot: reveal art on the
@@ -34,7 +34,7 @@ export function SolutionBox({ status, answer, guessCount, onSwap }: Props) {
       )}
       <div className="min-w-0 flex-1 text-center text-sm">
         <p className={won ? 'text-emerald-700' : 'text-poke-red'}>
-          {won ? WIN_MESSAGES[Math.min(guessCount - 1, 2)] : 'Better luck tomorrow!'}
+          {won ? WIN_MESSAGES[Math.min(guessCount - 1, 2)] : LOSS_MESSAGE}
         </p>
         <p className="mt-1 text-xs text-ink/60">The answer was</p>
         <p className="text-base text-ink">{pokemon?.displayName ?? answer}</p>

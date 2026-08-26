@@ -5,6 +5,8 @@ import type { Pokemon } from '../game/types'
 interface Props {
   disabled: boolean
   onSubmit: (slug: string) => void
+  /** Lets the guess rows focus the field — tapping them starts typing. */
+  inputRef?: React.Ref<HTMLInputElement>
 }
 
 /**
@@ -13,7 +15,7 @@ interface Props {
  * blinking caret to signal that it takes typing. Locked to the bottom of the
  * screen by the App layout; results open upward.
  */
-export function SearchBar({ disabled, onSubmit }: Props) {
+export function SearchBar({ disabled, onSubmit, inputRef }: Props) {
   const [query, setQuery] = useState('')
   const [highlighted, setHighlighted] = useState(0)
   const [open, setOpen] = useState(false)
@@ -59,6 +61,7 @@ export function SearchBar({ disabled, onSubmit }: Props) {
   return (
     <div ref={containerRef} className="relative w-full">
       <input
+        ref={inputRef}
         type="text"
         value={query}
         disabled={disabled}

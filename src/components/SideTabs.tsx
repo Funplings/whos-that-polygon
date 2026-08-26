@@ -1,16 +1,15 @@
 import { useMemo, useState } from 'react'
 import { POLYGONS } from '../game/polygons'
-import { POKEMON, pokemonBySlug } from '../game/pokemon'
+import { officialArtUrl, pokemonBySlug } from '../game/pokemon'
 import { loadResult } from '../lib/storage'
 import type { Puzzle } from '../game/types'
 import helpIcon from '../resources/images/assets/Help.svg'
 import dexIcon from '../resources/images/assets/Dex.svg'
 import calendarIcon from '../resources/images/assets/Calendar.svg'
 import numberIcon from '../resources/images/assets/Number.svg'
-import hideIcon from '../resources/images/assets/Hide.svg'
-import showIcon from '../resources/images/assets/Show.svg'
 import exitIcon from '../resources/images/assets/Exit.svg'
 import logo from '../resources/images/assets/Logo.svg'
+import threeShapes from '../resources/images/assets/Three Shapes.svg'
 
 export type PanelView = 'help' | 'dex'
 
@@ -129,12 +128,57 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
       />
       <h2 className="mt-4 text-lg">How to Play</h2>
       <div className="mt-4 space-y-4 text-sm leading-relaxed">
-        <p>Who's that Pokemon? You have three tries to figure it out!</p>
-        <p>
-          Every Pokemon is made with exactly three shapes. After every guess,
-          you’ll get more detail (silhouette, black-and-white, full color). Most
-          alternate forms are included! (Regional, Mega, Gigantamax, and more.)
-        </p>
+        <p>Guess the Pokemon! Every Pokemon is made with exactly three shapes.</p>
+        <img
+          src={threeShapes}
+          alt="Three shapes combining into a Pokémon"
+          className="mx-auto w-full max-w-56"
+        />
+        <p>You have three guesses. Each guess gives you more detail.</p>
+        {/* Puzzle #1's Togepi through the clue stages, ending on the reveal.
+            The stage filters mirror PuzzleImage's. */}
+        <div className="flex items-center justify-between gap-1">
+          <img
+            src={POLYGONS.togepi}
+            alt="Togepi as a silhouette"
+            style={{ filter: 'brightness(0) invert(0.125)' }}
+            className="h-14 min-w-0 flex-1 object-contain"
+          />
+          <img
+            src={POLYGONS.togepi}
+            alt="Togepi in black and white"
+            style={{ filter: 'grayscale(1)' }}
+            className="h-14 min-w-0 flex-1 object-contain"
+          />
+          <img
+            src={POLYGONS.togepi}
+            alt="Togepi in full color"
+            className="h-14 min-w-0 flex-1 object-contain"
+          />
+          <img
+            src={officialArtUrl('togepi') ?? undefined}
+            alt="Togepi, official art"
+            className="h-14 min-w-0 flex-1 object-contain"
+          />
+        </div>
+        <p>Most alternate forms are included!</p>
+        <div className="flex items-center justify-between gap-1">
+          <img
+            src={officialArtUrl('charizard-mega-y') ?? undefined}
+            alt="Mega Charizard Y"
+            className="h-16 min-w-0 flex-1 object-contain"
+          />
+          <img
+            src={officialArtUrl('raichu-alola') ?? undefined}
+            alt="Alolan Raichu"
+            className="h-16 min-w-0 flex-1 object-contain"
+          />
+          <img
+            src={officialArtUrl('floette-eternal') ?? undefined}
+            alt="Eternal Flower Floette"
+            className="h-16 min-w-0 flex-1 object-contain"
+          />
+        </div>
         <p>There is a new mystery Pokemon every day. Good luck and have fun!</p>
       </div>
       <button
@@ -202,16 +246,12 @@ function CellLabel({
 }
 
 interface DexCell {
-  /** null for a dex number with no polygon asset yet — a placeholder slot. */
-  slug: string | null
-  /** The released puzzle for this slug, if any — unreleased cells have none. */
-  puzzle: Puzzle | null
-  /** National Dex number, for the placeholder slots' captions and keys. */
+  slug: string
+  /** The released puzzle this slug appeared as. */
+  puzzle: Puzzle
+  /** National Dex number, for the number-view captions. */
   id: number | null
 }
-
-/** Highest National Dex number in the data — the dex view runs 1..this. */
-const MAX_DEX_ID = POKEMON.reduce((max, p) => Math.max(max, p.id), 0)
 
 function DexPanel({
   puzzles,
@@ -223,7 +263,6 @@ function DexPanel({
   onClose: () => void
 }) {
   const [view, setView] = useState<DexView>('calendar')
-  const [hideEmpty, setHideEmpty] = useState(false)
 
   // A slug can in principle recur in the schedule; the Dex box points at its
   // first appearance.
@@ -245,39 +284,25 @@ function DexPanel({
         id: pokemonBySlug(p.answer)?.id ?? null,
       }))
     }
-    // Dex-number view: one slot per National Dex number, 1..MAX_DEX_ID.
-    // Numbers with polygon art get a box per form (a species can have several
-    // — megas, regionals); numbers with no asset yet get a blank placeholder.
-    const formsById = new Map<number, string[]>()
-    for (const slug of Object.keys(POLYGONS)) {
-      const id = pokemonBySlug(slug)?.id
-      if (!id) continue
-      formsById.set(id, [...(formsById.get(id) ?? []), slug])
-    }
-    const out: DexCell[] = []
-    for (let id = 1; id <= MAX_DEX_ID; id += 1) {
-      const forms = formsById.get(id)?.sort()
-      if (!forms) {
-        out.push({ slug: null, puzzle: null, id })
-        continue
-      }
-      for (const slug of forms) {
-        out.push({ slug, puzzle: releasedBySlug.get(slug) ?? null, id })
-      }
-    }
-    return out
+    // Dex-number view: only the Pokémon the player has finished (won or
+    // lost — the answer was revealed either way), in National Dex order.
+    // It's the trophy shelf; the calendar view is where the backlog lives.
+    return [...releasedBySlug.values()]
+      .filter((p) => {
+        const status = loadResult(p.date)?.status
+        return status === 'won' || status === 'lost'
+      })
+      .map((p) => ({
+        slug: p.answer,
+        puzzle: p,
+        id: pokemonBySlug(p.answer)?.id ?? null,
+      }))
+      .sort(
+        (a, b) =>
+          (a.id ?? Number.MAX_SAFE_INTEGER) - (b.id ?? Number.MAX_SAFE_INTEGER) ||
+          a.slug.localeCompare(b.slug),
+      )
   }, [view, puzzles, releasedBySlug])
-
-  // Hiding empties is a dex-number-view concern only — the calendar list is
-  // short and chronological, so it always shows everything. "Empty" means
-  // never finished: both won and lost days count as filled.
-  const shown =
-    view === 'number' && hideEmpty
-      ? cells.filter((c) => {
-          const status = c.puzzle && loadResult(c.puzzle.date)?.status
-          return status === 'won' || status === 'lost'
-        })
-      : cells
 
   // Folder tabs rise slightly on hover and sit back down while pressed. Like
   // the edge tabs, their bottom 12px (h-14 with -mb-3) hides under the grid
@@ -334,31 +359,10 @@ function DexPanel({
       {/* Own bg + z-10 so the toolbar tabs' hidden extensions sit underneath
           this area and emerge from it on hover. */}
       <div className="relative z-10 grid flex-1 grid-cols-4 content-start gap-2 overflow-y-auto bg-coral p-3">
-        {shown.map(({ slug, puzzle, id }) => {
+        {cells.map(({ slug, puzzle, id }) => {
           // Label content follows the sort: the box's calendar date in
           // calendar view, the species' National Dex number in dex view.
           const dexLabel = `#${id ?? '?'}`
-          if (!slug) {
-            // A dex number with no polygon asset yet: a faint empty well —
-            // present so the numbering has no gaps, but clearly hollow next
-            // to the filled and unreleased boxes.
-            return (
-              <div key={`empty-${id}`} aria-hidden className="@container">
-                <div className="aspect-[287/278] rounded-2xl bg-black/10" />
-                <CellLabel kind="number">{dexLabel}</CellLabel>
-              </div>
-            )
-          }
-          if (!puzzle) {
-            // Unreleased: dark and inert, but still stamped with its dex
-            // number (its position in the sorted grid implies it anyway).
-            return (
-              <div key={slug} aria-hidden className="@container">
-                <div className="aspect-[287/278] rounded-2xl bg-maroon shadow-[2px_2px_0_0_rgba(32,32,32,0.25)]" />
-                <CellLabel kind="number">{dexLabel}</CellLabel>
-              </div>
-            )
-          }
           const result = loadResult(puzzle.date)
           // Completed either way — the answer was revealed, so the Dex shows
           // it in colour; the corner mark records whether it was earned.
@@ -400,7 +404,13 @@ function DexPanel({
                   src={POLYGONS[slug]}
                   alt=""
                   loading="lazy"
-                  style={completed ? undefined : { filter: 'brightness(0)' }}
+                  style={
+                    completed
+                      ? undefined
+                      : // Ink silhouette, not crushed black — invert(0.125)
+                        // lifts 0 to the palette's #202020.
+                        { filter: 'brightness(0) invert(0.125)' }
+                  }
                   className="h-full w-full object-contain"
                 />
                 {completed && (
@@ -421,21 +431,6 @@ function DexPanel({
           )
         })}
       </div>
-
-      {/* Hide/show-empties toggle: floats over the bottom of the drawer, and
-          only in dex-number view — that's the only view with empty boxes
-          worth hiding. z-20 keeps it above the grid layer. */}
-      {view === 'number' && (
-        <button
-          type="button"
-          onClick={() => setHideEmpty((h) => !h)}
-          aria-label={hideEmpty ? 'Show empty boxes' : 'Hide empty boxes'}
-          aria-pressed={hideEmpty}
-          className="absolute right-3 bottom-3 z-20 flex h-12 w-12 items-center justify-center rounded-2xl bg-paper shadow-[3px_3px_0_0_var(--color-ink)] transition-transform duration-100 hover:-translate-y-0.5 active:translate-y-0"
-        >
-          <img src={hideEmpty ? showIcon : hideIcon} alt="" className="h-5" />
-        </button>
-      )}
     </div>
   )
 }

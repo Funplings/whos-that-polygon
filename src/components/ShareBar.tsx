@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { LOSS_MESSAGE, WIN_MESSAGES } from '../lib/messages'
 import { MAX_GUESSES, type GameStatus } from '../game/types'
 
 interface Props {
@@ -9,10 +10,16 @@ interface Props {
 
 /**
  * Wordle-style share text. Deliberately spoiler-free — it carries the puzzle
- * number and the shape of the attempt, never the answer.
+ * number and the shape of the attempt, never the answer:
+ *
+ *   🟥⚪▶️ Who’s That Polygon? #6
+ *   Critical Catch!
+ *   1/3  ✅▫️▫️
+ *   https://…
  *
  * The pattern is derived rather than passed in: the game stops on a correct
  * guess, so a win is always (n-1) misses then a hit, and a loss is all misses.
+ * Unused guesses pad out as empty slots.
  */
 function buildShareText(
   puzzleNumber: number,
@@ -20,9 +27,14 @@ function buildShareText(
   guessCount: number,
 ): string {
   const won = status === 'won'
-  const marks = won ? '❌'.repeat(guessCount - 1) + '✅' : '❌'.repeat(guessCount)
+  const flavor = won
+    ? WIN_MESSAGES[Math.min(guessCount - 1, 2)]
+    : LOSS_MESSAGE
+  const marks = won
+    ? '❌'.repeat(guessCount - 1) + '✅' + '▫️'.repeat(MAX_GUESSES - guessCount)
+    : '❌'.repeat(guessCount)
   const score = won ? `${guessCount}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`
-  return `Who’s That Polygon? #${puzzleNumber} ${score}\n${marks}\n${window.location.origin}`
+  return `🟥⚪▶️ Who’s That Polygon? #${puzzleNumber}\n${flavor}\n${score}  ${marks}\n${window.location.origin}`
 }
 
 /** Takes the answer bar's slot at the bottom once the game is over. */

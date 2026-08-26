@@ -5,10 +5,12 @@ import type { ClueStage } from '../game/types'
 // Every stage uses the same filter functions in the same order, varying only
 // the values — CSS cannot interpolate between mismatched filter lists, so
 // brightness(0) → grayscale(1) used to snap instead of cross-fading.
+// invert(0.125) lifts the crushed black to the palette ink (#202020):
+// 0.125 × 255 ≈ 32 per channel.
 const STAGE_FILTERS: Record<ClueStage, string> = {
-  0: 'brightness(0) grayscale(1)', // silhouette
-  1: 'brightness(1) grayscale(1)', // grayscale
-  2: 'brightness(1) grayscale(0)', // full color
+  0: 'brightness(0) grayscale(1) invert(0.125)', // silhouette, in ink
+  1: 'brightness(1) grayscale(1) invert(0)', // grayscale
+  2: 'brightness(1) grayscale(0) invert(0)', // full color
 }
 
 interface Props {

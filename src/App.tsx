@@ -21,6 +21,8 @@ const PARALLEL_RAYS =
 function App() {
   const [today] = useState(() => todayISO())
   const [selectedDate, setSelectedDate] = useState(today)
+  // Tapping an empty guess slot focuses the answer bar (see GuessRow).
+  const searchInputRef = useRef<HTMLInputElement>(null)
   const game = useGame(selectedDate)
   const archivePuzzles = useMemo(() => puzzlesThrough(today), [today])
   const isTodayPuzzle =
@@ -176,7 +178,9 @@ function App() {
           space but leaves the focus order), the guesses/solution views match
           at 8.5rem, and the input/share slot is fixed at h-16 — so the
           starburst above never resizes mid-game. */}
-      <div className="mx-auto flex w-full max-w-sm flex-col gap-2 px-4 pb-6">
+      {/* pb reserves the footer strip: two disclaimer lines on phones, one
+          from sm up. */}
+      <div className="mx-auto flex w-full max-w-sm flex-col gap-2 px-4 pb-12 sm:pb-9">
         {/* -mt-1/mb-1 net to zero total height but shift the toggle 4px up,
             clearing the swap button that pokes above the box below. */}
         <div className={`-mt-1 mb-1 ${showClueToggle ? '' : 'invisible'}`}>
@@ -196,7 +200,13 @@ function App() {
           />
         ) : (
           <div className="relative">
-            <GuessRow guesses={game.guesses} answer={game.puzzle.answer} />
+            <GuessRow
+              guesses={game.guesses}
+              answer={game.puzzle.answer}
+              onEmptySlotClick={
+                ended ? undefined : () => searchInputRef.current?.focus()
+              }
+            />
             {ended && (
               <SwapButton
                 onClick={() => setSolutionPick({ key: puzzleKey, show: true })}
@@ -215,32 +225,42 @@ function App() {
               puzzleNumber={game.puzzle.number}
             />
           ) : (
-            <SearchBar disabled={ended} onSubmit={game.submitGuess} />
+            <SearchBar
+              disabled={ended}
+              onSubmit={game.submitGuess}
+              inputRef={searchInputRef}
+            />
           )}
         </div>
       </div>
 
-      {/* Credits, tucked into the bottom stack's pb-4 strip so they never
-          collide with the answer bar above. */}
-      <footer className="pointer-events-none absolute right-2 bottom-2 z-10 text-[0.6rem] leading-none text-white/75">
-        created by{' '}
-        <a
-          href="https://funplings.github.io/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pointer-events-auto text-gold underline hover:text-amber-200"
-        >
-          funplings
-        </a>{' '}
-        and{' '}
-        <a
-          href="https://bsky.app/profile/cryptanark.bsky.social"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="pointer-events-auto text-gold underline hover:text-amber-200"
-        >
-          cryptanark
-        </a>
+      {/* Credits + legal line, tucked into the bottom stack's padding strip
+          so they never collide with the answer bar above. */}
+      <footer className="pointer-events-none absolute right-2 bottom-2 left-2 z-10 text-right text-[0.6rem] leading-none text-white/75">
+        <p>
+          website by{' '}
+          <a
+            href="https://funplings.github.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pointer-events-auto text-gold underline hover:text-amber-200"
+          >
+            funplings
+          </a>
+          , puzzles by{' '}
+          <a
+            href="https://bsky.app/profile/cryptanark.bsky.social"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="pointer-events-auto text-gold underline hover:text-amber-200"
+          >
+            cryptanark
+          </a>
+        </p>
+        <p className="mt-1 text-[0.5rem] leading-tight text-white/55">
+          This project is an unofficial derivative work based on Pokémon.
+          Official sprites belong to © Nintendo/Creatures Inc./GAME FREAK Inc.
+        </p>
       </footer>
 
       <SideTabs
