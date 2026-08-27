@@ -120,21 +120,32 @@ export function SideTabs({ open, onOpen, puzzles, onSelectDate, notify }: Props)
 
 function HelpPanel({ onClose }: { onClose: () => void }) {
   return (
-    <div className="flex h-full flex-col overflow-y-auto bg-paper p-5 pt-12 text-ink">
-      <img
-        src={logo}
-        alt="Who’s That Polygon?"
-        className="logo-outline mx-auto h-24 w-auto"
-      />
-      <h2 className="mt-4 text-lg">How to Play</h2>
-      <div className="mt-4 space-y-4 text-sm leading-relaxed">
-        <p>Guess the Pokemon! Every Pokemon is made with exactly three shapes.</p>
+    // Sized (fonts, image heights, margins) so the whole panel fits a phone
+    // screen without scrolling — overflow-y-auto is the safety net for very
+    // short viewports, not the expected state.
+    <div className="flex h-full flex-col overflow-y-auto bg-paper p-5 pt-10 text-ink">
+      {/* Logo and heading share one header row to save a stack of height. */}
+      <div className="flex items-center justify-center gap-3">
+        <img
+          src={logo}
+          alt=""
+          aria-hidden
+          className="logo-outline h-11 w-auto"
+        />
+        <h2 className="text-lg">How to Play</h2>
+      </div>
+      <div className="mt-3 space-y-2.5 text-xs leading-relaxed">
+        <p>
+          Guess the Pokemon!
+          <br />
+          Every Pokemon is made with exactly three shapes.
+        </p>
         <img
           src={threeShapes}
           alt="Three shapes combining into a Pokémon"
-          className="mx-auto w-full max-w-56"
+          className="mx-auto w-full max-w-44"
         />
-        <p>You have three guesses. Each guess gives you more detail.</p>
+        <p>Each guess reveals more info.</p>
         {/* Puzzle #1's Togepi through the clue stages, ending on the reveal.
             The stage filters mirror PuzzleImage's. */}
         <div className="flex items-center justify-between gap-1">
@@ -142,53 +153,54 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
             src={POLYGONS.togepi}
             alt="Togepi as a silhouette"
             style={{ filter: 'brightness(0) invert(0.125)' }}
-            className="h-14 min-w-0 flex-1 object-contain"
+            className="h-12 min-w-0 flex-1 object-contain"
           />
           <img
             src={POLYGONS.togepi}
             alt="Togepi in black and white"
             style={{ filter: 'grayscale(1)' }}
-            className="h-14 min-w-0 flex-1 object-contain"
+            className="h-12 min-w-0 flex-1 object-contain"
           />
           <img
             src={POLYGONS.togepi}
             alt="Togepi in full color"
-            className="h-14 min-w-0 flex-1 object-contain"
+            className="h-12 min-w-0 flex-1 object-contain"
           />
           <img
             src={officialArtUrl('togepi') ?? undefined}
             alt="Togepi, official art"
-            className="h-14 min-w-0 flex-1 object-contain"
+            className="h-12 min-w-0 flex-1 object-contain"
           />
         </div>
-        <p>Most alternate forms are included!</p>
+        <p>Most alternate forms are included.</p>
         <div className="flex items-center justify-between gap-1">
           <img
             src={officialArtUrl('charizard-mega-y') ?? undefined}
             alt="Mega Charizard Y"
-            className="h-16 min-w-0 flex-1 object-contain"
+            className="h-14 min-w-0 flex-1 object-contain"
           />
           <img
             src={officialArtUrl('raichu-alola') ?? undefined}
             alt="Alolan Raichu"
-            className="h-16 min-w-0 flex-1 object-contain"
+            className="h-14 min-w-0 flex-1 object-contain"
           />
           <img
             src={officialArtUrl('floette-eternal') ?? undefined}
             alt="Eternal Flower Floette"
-            className="h-16 min-w-0 flex-1 object-contain"
+            className="h-14 min-w-0 flex-1 object-contain"
           />
         </div>
-        <p>There is a new mystery Pokemon every day. Good luck and have fun!</p>
+        <p>Come back for a new puzzle every day!</p>
       </div>
       <button
         onClick={onClose}
-        className="gb-btn mt-6 w-full bg-gold py-2.5 text-ink hover:bg-amber-300"
+        className="gb-btn mt-4 w-full bg-gold py-2 text-ink hover:bg-amber-300"
       >
         ▶ Let’s go!
       </button>
-      {/* mt-auto pins the credits to the drawer's bottom edge. */}
-      <footer className="mt-auto pt-6 text-right text-[0.6rem] leading-relaxed text-ink/60">
+      {/* mt-auto pins the credits to the drawer's bottom edge. The legal line
+          lives here rather than on the main game view. */}
+      <footer className="mt-auto pt-4 text-right text-[0.6rem] leading-relaxed text-ink/60">
         inspired by{' '}
         <a
           href="https://www.youtube.com/watch?v=T-JPM3ieKv4"
@@ -207,6 +219,11 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
         >
           this post
         </a>
+        <p className="mt-1 text-[0.5rem] leading-tight text-ink/45">
+          This project is an unofficial derivative work based on Pokémon.
+          Official sprites belong to <span className="glyph-pixel">©</span>{' '}
+          Nintendo/Creatures Inc./GAME FREAK Inc.
+        </p>
       </footer>
     </div>
   )

@@ -106,10 +106,12 @@ date-shaped path wins, anything else is a slug. Neither touches `localStorage`.
   one ending mid-screen shows as a hard cut.
 - **The starburst** — a hand-drawn designer asset
   (`src/resources/images/assets/Starburst.svg`), placed by `PuzzleImage`. The
-  white outline and solid offset shadow are the `.starburst-fx` drop-shadow
-  chain, not part of the SVG. It sizes itself as the largest square that fits
-  the space between top bar and bottom controls (`fit-square` container-query
-  units), which is what keeps the whole game on one screen at any height.
+  white outline and offset shadow are baked into the SVG — which also means
+  the grey face's centre is NOT the SVG's centre (the shadow pads the
+  bottom-right); the puzzle-art overlay carries a translate compensating for
+  that. It sizes itself as the largest square that fits the space between top
+  bar and bottom controls (`fit-square` container-query units), which is what
+  keeps the whole game on one screen at any height.
 
 Everything visual the design mockups reference (tab icons, Dex box states,
 logo, palette) lives in `src/resources/images/assets/` — designer-exported,
@@ -144,6 +146,11 @@ runtime requests.
 
 It ships a single 400 weight; bolding only triggers faux-bold smearing, so
 text must stay at `font-normal`.
+
+Pokemon Classic's © maps to an unrecognisable custom glyph, so `.glyph-pixel`
+renders that character in a bundled Press Start 2P subset out of
+`press-start-2p-copyright.woff2` — the whole file is just the © glyph
+(~2 KB); re-subset with `pyftsubset --unicodes=…` to add more.
 
 ## Assets are vendored deliberately
 

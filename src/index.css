@@ -10,6 +10,18 @@
   font-display: swap;
 }
 
+/* Press Start 2P (OFL), subset to just the © glyph (~2 KB) — Pokemon Classic
+   maps © to an unrecognisable custom mark, and this keeps the symbol a real,
+   copyable text character in a matching pixel style. Re-subset with
+   `pyftsubset --unicodes=U+00A9 --flavor=woff2` if more glyphs are needed. */
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('./resources/fonts/press-start-2p-copyright.woff2') format('woff2');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 @theme {
   /* The designer's palette, sampled from resources/images/assets — every
      surface colour comes from here. paper doubles as the starburst fill so
@@ -61,6 +73,15 @@ button:not(:disabled) {
   cursor: pointer;
 }
 
+/* For glyphs Pokemon Classic lacks or mangles (currently ©): the subset
+   Press Start 2P face, so the character stays real text in a pixel style.
+   Slightly reduced size — Press Start 2P glyphs fill their em box and read
+   a touch larger than Pokemon Classic at the same font-size. */
+.glyph-pixel {
+  font-family: 'Press Start 2P', 'Trebuchet MS', system-ui, sans-serif;
+  font-size: 0.85em;
+}
+
 /* Retro push-button: hard ink border with a solid offset shadow that the
    button collapses into when pressed. */
 .gb-btn {
@@ -95,21 +116,9 @@ button:not(:disabled) {
   background-image: url('./resources/images/misc/burst-red-parallel.svg');
 }
 
-/* The starburst asset ships as grey fill + ink stroke; the mockup adds a pure
-   white outer outline and a solid offset shadow. Both are drop-shadow passes:
-   the four directional white shadows compound into an outline ring (each pass
-   re-casts the accumulated result, so the diagonals fill in), and the final
-   ink-coloured pass throws that whole outlined silhouette down-right as one
-   solid shadow. */
-.starburst-fx {
-  filter: drop-shadow(3px 0 0 #fff) drop-shadow(-3px 0 0 #fff)
-    drop-shadow(0 3px 0 #fff) drop-shadow(0 -3px 0 #fff)
-    drop-shadow(9px 11px 0 var(--color-ink));
-}
-
-/* The logo's double outline, same drop-shadow technique as .starburst-fx:
-   four directional passes draw an ink ring tight around the artwork, four
-   more draw a white ring around that. */
+/* The logo's double outline: four directional drop-shadow passes draw an ink
+   ring tight around the artwork (each pass re-casts the accumulated result,
+   so the diagonals fill in), four more draw a white ring around that. */
 .logo-outline {
   filter: drop-shadow(1.5px 0 0 var(--color-ink))
     drop-shadow(-1.5px 0 0 var(--color-ink))

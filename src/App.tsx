@@ -178,9 +178,8 @@ function App() {
           space but leaves the focus order), the guesses/solution views match
           at 8.5rem, and the input/share slot is fixed at h-16 — so the
           starburst above never resizes mid-game. */}
-      {/* pb reserves the footer strip: two disclaimer lines on phones, one
-          from sm up. */}
-      <div className="mx-auto flex w-full max-w-sm flex-col gap-2 px-4 pb-12 sm:pb-9">
+      {/* pb reserves the one-line footer strip. */}
+      <div className="mx-auto flex w-full max-w-sm flex-col gap-2 px-4 pb-7">
         {/* -mt-1/mb-1 net to zero total height but shift the toggle 4px up,
             clearing the swap button that pokes above the box below. */}
         <div className={`-mt-1 mb-1 ${showClueToggle ? '' : 'invisible'}`}>
@@ -234,8 +233,9 @@ function App() {
         </div>
       </div>
 
-      {/* Credits + legal line, tucked into the bottom stack's padding strip
-          so they never collide with the answer bar above. */}
+      {/* Credits, tucked into the bottom stack's padding strip so they never
+          collide with the answer bar above. (The legal line lives in the
+          help drawer, off the game view.) */}
       <footer className="pointer-events-none absolute right-2 bottom-2 left-2 z-10 text-right text-[0.6rem] leading-none text-white/75">
         <p>
           website by{' '}
@@ -256,10 +256,6 @@ function App() {
           >
             cryptanark
           </a>
-        </p>
-        <p className="mt-1 text-[0.5rem] leading-tight text-white/55">
-          This project is an unofficial derivative work based on Pokémon.
-          Official sprites belong to © Nintendo/Creatures Inc./GAME FREAK Inc.
         </p>
       </footer>
 

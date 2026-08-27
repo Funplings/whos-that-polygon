@@ -27,18 +27,25 @@ export function PuzzleImage({ slug, clueStage }: Props) {
     // behaviour the design doc asks for.
     <div className="fit-square-parent flex h-full w-full items-center justify-center">
       <div className="fit-square relative flex items-center justify-center">
-        {/* The hand-drawn starburst asset; white outline and solid offset
-            shadow come from the .starburst-fx filter chain. */}
+        {/* The hand-drawn starburst asset — white outline and offset shadow
+            are baked into the SVG itself. */}
         <img
           src={starburst}
           alt=""
           aria-hidden
           draggable={false}
-          className="starburst-fx h-[92%] w-[92%]"
+          className="h-[92%] w-[92%]"
         />
-        {/* Square bounding box, centred in the star with margin all round so
-            the drawing never feels squashed against the spikes. */}
-        <div className="absolute inset-0 flex items-center justify-center">
+        {/* Square bounding box, centred on the grey star FACE with margin all
+            round so the drawing never feels squashed against the spikes. The
+            translate compensates for the baked shadow padding the SVG's
+            bottom-right: the face's centre sits at (753,753) in the 1562
+            viewBox, 1.79% up-left of the SVG centre — times the 92% render
+            scale = 1.64% of this overlay. */}
+        <div
+          className="absolute inset-0 flex items-center justify-center"
+          style={{ transform: 'translate(-1.64%, -1.64%)' }}
+        >
           <div className="aspect-square w-[46%]">
             {src ? (
               // Exports are trimmed to the drawing and vary in aspect ratio,
