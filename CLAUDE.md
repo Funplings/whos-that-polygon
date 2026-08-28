@@ -74,9 +74,10 @@ copy-paste one-liners under "Adding a puzzle" and "Checking the reveal images".
 
 - **`polygons.ts` / `artwork.ts`** — `import.meta.glob` over the two image
   directories. Dropping a file in is the whole registration step.
-- **`puzzle.ts`** — date → puzzle. Hand-picked `order` for the first N days,
-  then a seeded shuffle of the remaining art pool (no repeats or skips until
-  the pool runs out, then it cycles). Also owns the URL overrides.
+- **`puzzle.ts`** — date → puzzle: day N is `puzzles.json`'s `order[N]`, which
+  now spells out the whole schedule (hand-picked opening, then a one-off
+  seeded shuffle of the rest, written out by hand once). Cycles when it runs
+  out. Also owns the URL overrides.
 - **`useGame.ts`** — guess state, clue stage, persistence.
 - **`pokemon.ts`** — search, name normalisation, guess matching, reveal URLs.
 
@@ -97,6 +98,9 @@ regional, and Gigantamax form — about a third of the list.
 `/<slug>` or `?pokemon=` plays a specific Pokémon; `/MM-DD-YYYY` or `?date=`
 plays a specific day's scheduled puzzle. Both read the same path segment — a
 date-shaped path wins, anything else is a slug. Neither touches `localStorage`.
+Local-only (`import.meta.env.DEV` or a localhost hostname): on the deployed
+site these URLs load the day's normal puzzle, so players can't preview future
+answers.
 
 ### The backdrop and the starburst
 

@@ -428,7 +428,10 @@ function DexPanel({
                         // lifts 0 to the palette's #202020.
                         { filter: 'brightness(0) invert(0.125)' }
                   }
-                  className="h-full w-full object-contain"
+                  // pointer-events-none: the silhouette filter is cosmetic,
+                  // so no image context menu (open-in-new-tab showed the
+                  // answer in full colour).
+                  className="pointer-events-none h-full w-full object-contain select-none"
                 />
                 {completed && (
                   <span

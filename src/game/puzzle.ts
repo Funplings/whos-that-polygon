@@ -1,5 +1,5 @@
 import schedule from '../data/puzzles.json'
-import { POLYGONS, POLYGON_SLUGS } from './polygons'
+import { POLYGONS } from './polygons'
 import type { Puzzle } from './types'
 
 /**
@@ -79,41 +79,18 @@ function addDays(dateISO: string, days: number): string {
   ].join('-')
 }
 
-/** Hand-picked slugs that actually have a polygon, in the given order. */
-const handpicked = (schedule.order as string[]).filter((slug) => slug in POLYGONS)
-
 /**
- * The rest of the schedule: every polygon that isn't in the hand-picked
- * opening, in one deterministic random order (seeded Fisher–Yates, so every
- * client computes the same schedule). Unlike the old per-day PRNG pick, a
- * shuffle guarantees no repeats and no skipped Pokémon until the whole pool
- * has run — after which the order cycles.
+ * The full schedule, one slug per day, straight from puzzles.json — the
+ * opening days were hand-picked and the rest was written out by a one-off
+ * seeded shuffle of the remaining pool, so the file is the single, editable
+ * source of truth. Slugs without a polygon on disk are dropped defensively
+ * (which silently shifts every later day — check before editing). When the
+ * schedule runs out, it cycles from the top.
  */
-const shuffledRest = (() => {
-  const rest = POLYGON_SLUGS.filter((slug) => !handpicked.includes(slug))
-  // mulberry32, fixed seed — changing the seed reshuffles every unreleased day.
-  let seed = 0x9e3779b9
-  const rng = () => {
-    seed |= 0
-    seed = (seed + 0x6d2b79f5) | 0
-    let t = Math.imul(seed ^ (seed >>> 15), 1 | seed)
-    t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t
-    return ((t ^ (t >>> 14)) >>> 0) / 4294967296
-  }
-  for (let i = rest.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(rng() * (i + 1))
-    ;[rest[i], rest[j]] = [rest[j], rest[i]]
-  }
-  return rest
-})()
+const order = (schedule.order as string[]).filter((slug) => slug in POLYGONS)
 
-/**
- * Resolve the answer slug for a given day: hand-picked order for the first
- * `handpicked.length` days, then the shuffled remainder of the pool.
- */
 function slugForDay(dayIndex: number): string {
-  if (dayIndex < handpicked.length) return handpicked[dayIndex]
-  return shuffledRest[(dayIndex - handpicked.length) % shuffledRest.length]
+  return order[dayIndex % order.length]
 }
 
 export function puzzleForDate(dateISO: string): Puzzle {
@@ -134,9 +111,21 @@ export function puzzlesThrough(dateISO: string): Puzzle[] {
   )
 }
 
+/**
+ * The URL overrides are a testing tool, not a player feature — on the
+ * production deployment they'd let anyone preview future answers. Enabled in
+ * dev, and for local hosts so `npm run preview` (the production build served
+ * locally) can still exercise them; everywhere else the URL is ignored and
+ * the day's real puzzle loads.
+ */
+const OVERRIDES_ENABLED =
+  import.meta.env.DEV ||
+  (typeof window !== 'undefined' &&
+    ['localhost', '127.0.0.1'].includes(window.location.hostname))
+
 /** The bare path segment, or the first matching query param. */
 function urlToken(...params: string[]): string {
-  if (typeof window === 'undefined') return ''
+  if (!OVERRIDES_ENABLED || typeof window === 'undefined') return ''
   const search = new URLSearchParams(window.location.search)
   for (const name of params) {
     const value = search.get(name)

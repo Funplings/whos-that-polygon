@@ -62,7 +62,12 @@ export function PuzzleImage({ slug, clueStage }: Props) {
                 src={src}
                 alt=""
                 style={{ filter: STAGE_FILTERS[clueStage] }}
-                className="h-full w-full object-contain transition-[filter] duration-700"
+                // pointer-events-none: the clue filters are cosmetic — the
+                // fetched PNG is full colour — so the image must not offer
+                // its own context menu ("open image in a new tab" was a
+                // one-click answer reveal, long-press-save likewise on
+                // mobile). Right-clicks now hit the wrapper instead.
+                className="pointer-events-none h-full w-full object-contain transition-[filter] duration-700 select-none"
                 draggable={false}
               />
             ) : (
