@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
 import { PuzzleImage } from './components/PuzzleImage'
 import { SearchBar } from './components/SearchBar'
 import { GuessRow } from './components/GuessRow'
@@ -266,6 +267,10 @@ function App() {
         onSelectDate={setSelectedDate}
         notify={dexNotify}
       />
+
+      {/* Vercel Web Analytics — got dropped in the big App rewrite once
+          already; renders nothing. */}
+      <Analytics />
     </div>
   )
 }
