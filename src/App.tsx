@@ -4,12 +4,14 @@ import { PuzzleImage } from './components/PuzzleImage'
 import { SearchBar } from './components/SearchBar'
 import { GuessRow } from './components/GuessRow'
 import { SolutionBox, SwapButton } from './components/SolutionBox'
+import { StatsModal } from './components/StatsModal'
 import { ShareBar } from './components/ShareBar'
 import { SideTabs, type PanelView } from './components/SideTabs'
 import { ClueProgression } from './components/ClueProgression'
 import { useGame } from './game/useGame'
 import { msUntilNextPuzzle, puzzlesThrough, todayISO } from './game/puzzle'
-import { hasSeenRules, markRulesSeen } from './lib/storage'
+import { hasSeenRules, loadResult, markRulesSeen } from './lib/storage'
+import { useGlobalResults } from './lib/globalResults'
 import { playLossBuzzer, playWinJingle } from './lib/sfx'
 import logo from './resources/images/assets/Logo.svg'
 import type { ClueStage } from './game/types'
@@ -57,6 +59,31 @@ function App() {
   } | null>(null)
   const showSolution =
     solutionPick?.key === puzzleKey ? solutionPick.show : true
+  // The Stats popup, opened from beside the share button. Keyed like the
+  // picks above so switching days from the Dex never leaves it open.
+  const [statsFor, setStatsFor] = useState<string | null>(null)
+  const statsOpen = statsFor === puzzleKey
+
+  // Finished games report to the global tally and load it. Date probes
+  // (/MM-DD-YYYY) can look but don't submit — they're not real plays.
+  const finishedGame =
+    ended && !game.preview
+      ? { guesses: game.guesses.length, won: game.status === 'won' }
+      : null
+  const globalResults = useGlobalResults(
+    game.puzzle.date,
+    finishedGame,
+    !game.dateOverride,
+  )
+
+  // Pokémon the player has caught on earlier days, marked with a pokeball in
+  // the guess dropdown. Read fresh each render rather than memoised — it's a
+  // few dozen localStorage reads, and App only re-renders on game events, so
+  // a win always shows up on the next day's dropdown.
+  const caughtSlugs = new Set<string>()
+  for (const p of archivePuzzles) {
+    if (loadResult(p.date)?.status === 'won') caughtSlugs.add(p.answer)
+  }
   // One shake+sparkle on the pokeball tab, a second after the puzzle resolves,
   // to say the result landed in the Dex. Delayed so the player reads the
   // solution first; only fires on a transition actually played this session.
@@ -223,12 +250,14 @@ function App() {
               status={game.status}
               guessCount={game.guesses.length}
               puzzleNumber={game.puzzle.number}
+              onStats={() => setStatsFor(puzzleKey)}
             />
           ) : (
             <SearchBar
               disabled={ended}
               onSubmit={game.submitGuess}
               inputRef={searchInputRef}
+              caught={caughtSlugs}
             />
           )}
         </div>
@@ -259,6 +288,17 @@ function App() {
           </a>
         </p>
       </footer>
+
+      {statsOpen && ended && (
+        <StatsModal
+          results={globalResults}
+          mine={
+            game.status === 'won' ? (game.guesses.length as 1 | 2 | 3) : 'X'
+          }
+          puzzleNumber={game.puzzle.number}
+          onClose={() => setStatsFor(null)}
+        />
+      )}
 
       <SideTabs
         open={panel}

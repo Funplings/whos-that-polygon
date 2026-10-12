@@ -1,12 +1,15 @@
 import { useEffect, useRef, useState } from 'react'
 import { searchPokemon } from '../game/pokemon'
 import type { Pokemon } from '../game/types'
+import pokeball from '../resources/images/assets/Dex.svg'
 
 interface Props {
   disabled: boolean
   onSubmit: (slug: string) => void
   /** Lets the guess rows focus the field — tapping them starts typing. */
   inputRef?: React.Ref<HTMLInputElement>
+  /** Slugs the player has solved on earlier days, marked with a pokeball. */
+  caught?: ReadonlySet<string>
 }
 
 /**
@@ -15,7 +18,7 @@ interface Props {
  * blinking caret to signal that it takes typing. Locked to the bottom of the
  * screen by the App layout; results open upward.
  */
-export function SearchBar({ disabled, onSubmit, inputRef }: Props) {
+export function SearchBar({ disabled, onSubmit, inputRef, caught }: Props) {
   const [query, setQuery] = useState('')
   const [highlighted, setHighlighted] = useState(0)
   const [open, setOpen] = useState(false)
@@ -118,7 +121,17 @@ export function SearchBar({ disabled, onSubmit, inputRef }: Props) {
               <span aria-hidden className="inline-block w-5 shrink-0">
                 {i === highlighted ? '▶' : ''}
               </span>
-              {p.displayName}
+              <span className="min-w-0 flex-1">{p.displayName}</span>
+              {/* The "caught" pokeball from the games' battle screen:
+                  already solved on an earlier day. */}
+              {caught?.has(p.name) && (
+                <img
+                  src={pokeball}
+                  alt="Caught"
+                  title="Caught"
+                  className="ml-2 h-3.5 w-3.5 shrink-0"
+                />
+              )}
             </li>
           ))}
         </ul>

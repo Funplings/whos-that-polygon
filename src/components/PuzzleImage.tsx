@@ -1,5 +1,6 @@
 import starburst from '../resources/images/assets/Starburst.svg'
 import { POLYGONS } from '../game/polygons'
+import { genLabel, pokemonBySlug } from '../game/pokemon'
 import type { ClueStage } from '../game/types'
 
 // Every stage uses the same filter functions in the same order, varying only
@@ -20,12 +21,16 @@ interface Props {
 
 export function PuzzleImage({ slug, clueStage }: Props) {
   const src = POLYGONS[slug]
+  const gen = pokemonBySlug(slug)?.gen
   return (
     // fit-square-parent/fit-square size the starburst as the largest square
     // that fits the space left over by the top bar and bottom controls: in
     // short viewports it shrinks, in tall ones it centres — the responsive
     // behaviour the design doc asks for.
-    <div className="fit-square-parent flex h-full w-full items-center justify-center">
+    // pb-10 reserves room for the generation chip under the star: the square
+    // is sized against the content box, so the chip never pushes the bottom
+    // controls or overlaps them.
+    <div className="fit-square-parent flex h-full w-full items-center justify-center pb-10">
       <div className="fit-square relative flex items-center justify-center">
         {/* The hand-drawn starburst asset — white outline and offset shadow
             are baked into the SVG itself. */}
@@ -77,6 +82,20 @@ export function PuzzleImage({ slug, clueStage }: Props) {
             )}
           </div>
         </div>
+        {/* The generation, shown from the start as a standing hint, just
+            under the star. For forms it's the form's own debut (Mega Charizard
+            X is Gen VI), which pokemon.json bakes in. A plain white box, not
+            the pixel dialogue frame. left 48.4% centres it on the grey face
+            rather than the SVG, matching the art overlay's shadow
+            compensation. */}
+        {gen && (
+          <div
+            className="absolute top-full -translate-x-1/2 border-2 border-ink bg-white px-2 py-1 text-sm whitespace-nowrap text-ink"
+            style={{ left: '48.4%' }}
+          >
+            {genLabel(gen)}
+          </div>
+        )}
       </div>
     </div>
   )

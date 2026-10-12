@@ -10,7 +10,6 @@ interface Props {
   onSwap: () => void
 }
 
-
 /**
  * Compact end-of-game card that takes the guess rows' slot: reveal art on the
  * left, verdict on the right, and a corner button to flip back to the guesses.

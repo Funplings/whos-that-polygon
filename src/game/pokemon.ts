@@ -30,6 +30,13 @@ export function officialArtUrl(slug: string): string {
   return ARTWORK[slug] ?? p.art ?? `${ARTWORK_BASE}/${p.artId}.png`
 }
 
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
+
+/** "Gen IV" — the games' own Roman-numeral convention. */
+export function genLabel(gen: number): string {
+  return `Gen ${ROMAN[gen - 1] ?? gen}`
+}
+
 /** Lowercase, strip accents/punctuation, collapse separators. */
 export function normalizeName(input: string): string {
   return input

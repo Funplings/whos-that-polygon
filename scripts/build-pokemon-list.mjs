@@ -1,10 +1,11 @@
 // One-time data pipeline: fetches the full Pokémon list from PokeAPI,
 // curates out forms that don't make sense for the game (per design doc),
-// and writes src/data/pokemon.json as [{ id, name, displayName }].
+// and writes src/data/pokemon.json as [{ id, name, displayName, artId, gen }].
 //
 // Run with: node scripts/build-pokemon-list.mjs
 //
-// Only two HTTP requests are made (species list + pokemon list); the
+// Two list requests (species + pokemon), nine generation requests, and one
+// pair of lookups per alternate form for the generation it debuted in. The
 // result is committed as static data so the app has no runtime API dependency.
 
 import { writeFileSync, mkdirSync } from 'node:fs'
@@ -190,8 +191,54 @@ async function fetchList(endpoint) {
   return json.results
 }
 
+async function fetchJSON(url) {
+  for (let attempt = 1; ; attempt++) {
+    const res = await fetch(url)
+    if (res.ok) return res.json()
+    if (attempt >= 3) throw new Error(`${url} fetch failed: ${res.status}`)
+    await new Promise((r) => setTimeout(r, 500 * attempt))
+  }
+}
+
+/** Runs fn over items with bounded concurrency, preserving order. */
+async function mapPool(items, limit, fn) {
+  const out = new Array(items.length)
+  let next = 0
+  await Promise.all(
+    Array.from({ length: limit }, async () => {
+      while (next < items.length) {
+        const i = next++
+        out[i] = await fn(items[i])
+      }
+    }),
+  )
+  return out
+}
+
 const species = await fetchList('pokemon-species')
 const pokemon = await fetchList('pokemon')
+
+// --- Generations -------------------------------------------------------------
+// Each /generation/N lists the species it introduced and the version groups
+// (games) that belong to it. Species get their generation from the first map;
+// alternate forms from the second, via the version group the form debuted in —
+// Mega Charizard X is Gen 6 (X/Y), not Charizard's Gen 1.
+const generations = await fetchList('generation')
+const speciesGen = new Map()
+const versionGroupGen = new Map()
+for (const g of generations) {
+  const gen = Number(g.url.match(/\/(\d+)\/?$/)[1])
+  const detail = await fetchJSON(g.url)
+  for (const s of detail.pokemon_species) speciesGen.set(s.name, gen)
+  for (const v of detail.version_groups) versionGroupGen.set(v.name, gen)
+}
+
+/** Generation an API variety's form first appeared in, or null if unknown. */
+async function formGen(apiName) {
+  const variety = await fetchJSON(`https://pokeapi.co/api/v2/pokemon/${apiName}`)
+  const form = await fetchJSON(variety.forms[0].url)
+  return versionGroupGen.get(form.version_group.name) ?? null
+}
 
 // Species slugs sorted longest-first so prefix matching picks e.g.
 // "porygon-z" over "porygon" for "porygon-z".
@@ -220,6 +267,7 @@ for (const p of pokemon) {
       name: slug,
       displayName: speciesDisplay(slug),
       artId,
+      gen: speciesGen.get(slug),
     })
     continue
   }
@@ -243,6 +291,9 @@ for (const p of pokemon) {
     name: slug,
     displayName: display,
     artId,
+    gen: speciesGen.get(base),
+    // Resolved below; dropped before writing.
+    apiName: p.name,
   })
 }
 
@@ -260,6 +311,20 @@ for (const e of deduped) {
   if (ART_IDS[e.name]) e.artId = ART_IDS[e.name]
   if (HOME_FALLBACK.has(e.name)) e.art = `${SPRITES}/other/home/${e.artId}.png`
   if (ART_URLS[e.name]) e.art = ART_URLS[e.name]
+}
+
+// A form's generation is when *that form* was introduced. The form's own
+// version group can't predate its species, so the later of the two wins —
+// guarding against the odd form PokeAPI files under an earlier game.
+const forms = deduped.filter((e) => e.apiName)
+const formGens = await mapPool(forms, 8, (e) => formGen(e.apiName))
+forms.forEach((e, i) => {
+  if (formGens[i] == null) console.warn(`no form generation for ${e.apiName}`)
+  e.gen = Math.max(e.gen, formGens[i] ?? 0)
+  delete e.apiName
+})
+for (const e of deduped) {
+  if (!e.gen) throw new Error(`no generation for ${e.name}`)
 }
 
 mkdirSync(dirname(OUT), { recursive: true })

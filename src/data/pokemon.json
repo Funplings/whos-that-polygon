@@ -3,7672 +3,8950 @@
   "id": 1,
   "name": "bulbasaur",
   "displayName": "Bulbasaur",
-  "artId": 1
+  "artId": 1,
+  "gen": 1
  },
  {
   "id": 2,
   "name": "ivysaur",
   "displayName": "Ivysaur",
-  "artId": 2
+  "artId": 2,
+  "gen": 1
  },
  {
   "id": 3,
   "name": "venusaur",
   "displayName": "Venusaur",
-  "artId": 3
+  "artId": 3,
+  "gen": 1
  },
  {
   "id": 3,
   "name": "venusaur-gmax",
   "displayName": "Venusaur (Gigantamax)",
-  "artId": 10195
+  "artId": 10195,
+  "gen": 8
  },
  {
   "id": 3,
   "name": "venusaur-mega",
   "displayName": "Mega Venusaur",
-  "artId": 10033
+  "artId": 10033,
+  "gen": 6
  },
  {
   "id": 4,
   "name": "charmander",
   "displayName": "Charmander",
-  "artId": 4
+  "artId": 4,
+  "gen": 1
  },
  {
   "id": 5,
   "name": "charmeleon",
   "displayName": "Charmeleon",
-  "artId": 5
+  "artId": 5,
+  "gen": 1
  },
  {
   "id": 6,
   "name": "charizard",
   "displayName": "Charizard",
-  "artId": 6
+  "artId": 6,
+  "gen": 1
  },
  {
   "id": 6,
   "name": "charizard-gmax",
   "displayName": "Charizard (Gigantamax)",
-  "artId": 10196
+  "artId": 10196,
+  "gen": 8
  },
  {
   "id": 6,
   "name": "charizard-mega-x",
   "displayName": "Charizard (Mega X)",
-  "artId": 10034
+  "artId": 10034,
+  "gen": 6
  },
  {
   "id": 6,
   "name": "charizard-mega-y",
   "displayName": "Charizard (Mega Y)",
-  "artId": 10035
+  "artId": 10035,
+  "gen": 6
  },
  {
   "id": 7,
   "name": "squirtle",
   "displayName": "Squirtle",
-  "artId": 7
+  "artId": 7,
+  "gen": 1
  },
  {
   "id": 8,
   "name": "wartortle",
   "displayName": "Wartortle",
-  "artId": 8
+  "artId": 8,
+  "gen": 1
  },
  {
   "id": 9,
   "name": "blastoise",
   "displayName": "Blastoise",
-  "artId": 9
+  "artId": 9,
+  "gen": 1
  },
  {
   "id": 9,
   "name": "blastoise-gmax",
   "displayName": "Blastoise (Gigantamax)",
-  "artId": 10197
+  "artId": 10197,
+  "gen": 8
  },
  {
   "id": 9,
   "name": "blastoise-mega",
   "displayName": "Mega Blastoise",
-  "artId": 10036
+  "artId": 10036,
+  "gen": 6
  },
  {
   "id": 10,
   "name": "caterpie",
   "displayName": "Caterpie",
-  "artId": 10
+  "artId": 10,
+  "gen": 1
  },
  {
   "id": 11,
   "name": "metapod",
   "displayName": "Metapod",
-  "artId": 11
+  "artId": 11,
+  "gen": 1
  },
  {
   "id": 12,
   "name": "butterfree",
   "displayName": "Butterfree",
-  "artId": 12
+  "artId": 12,
+  "gen": 1
  },
  {
   "id": 12,
   "name": "butterfree-gmax",
   "displayName": "Butterfree (Gigantamax)",
-  "artId": 10198
+  "artId": 10198,
+  "gen": 8
  },
  {
   "id": 13,
   "name": "weedle",
   "displayName": "Weedle",
-  "artId": 13
+  "artId": 13,
+  "gen": 1
  },
  {
   "id": 14,
   "name": "kakuna",
   "displayName": "Kakuna",
-  "artId": 14
+  "artId": 14,
+  "gen": 1
  },
  {
   "id": 15,
   "name": "beedrill",
   "displayName": "Beedrill",
-  "artId": 15
+  "artId": 15,
+  "gen": 1
  },
  {
   "id": 15,
   "name": "beedrill-mega",
   "displayName": "Mega Beedrill",
-  "artId": 10090
+  "artId": 10090,
+  "gen": 6
  },
  {
   "id": 16,
   "name": "pidgey",
   "displayName": "Pidgey",
-  "artId": 16
+  "artId": 16,
+  "gen": 1
  },
  {
   "id": 17,
   "name": "pidgeotto",
   "displayName": "Pidgeotto",
-  "artId": 17
+  "artId": 17,
+  "gen": 1
  },
  {
   "id": 18,
   "name": "pidgeot",
   "displayName": "Pidgeot",
-  "artId": 18
+  "artId": 18,
+  "gen": 1
  },
  {
   "id": 18,
   "name": "pidgeot-mega",
   "displayName": "Mega Pidgeot",
-  "artId": 10073
+  "artId": 10073,
+  "gen": 6
  },
  {
   "id": 19,
   "name": "rattata",
   "displayName": "Rattata",
-  "artId": 19
+  "artId": 19,
+  "gen": 1
  },
  {
   "id": 19,
   "name": "rattata-alola",
   "displayName": "Alolan Rattata",
-  "artId": 10091
+  "artId": 10091,
+  "gen": 7
  },
  {
   "id": 20,
   "name": "raticate",
   "displayName": "Raticate",
-  "artId": 20
+  "artId": 20,
+  "gen": 1
  },
  {
   "id": 20,
   "name": "raticate-alola",
   "displayName": "Alolan Raticate",
-  "artId": 10092
+  "artId": 10092,
+  "gen": 7
  },
  {
   "id": 21,
   "name": "spearow",
   "displayName": "Spearow",
-  "artId": 21
+  "artId": 21,
+  "gen": 1
  },
  {
   "id": 22,
   "name": "fearow",
   "displayName": "Fearow",
-  "artId": 22
+  "artId": 22,
+  "gen": 1
  },
  {
   "id": 23,
   "name": "ekans",
   "displayName": "Ekans",
-  "artId": 23
+  "artId": 23,
+  "gen": 1
  },
  {
   "id": 24,
   "name": "arbok",
   "displayName": "Arbok",
-  "artId": 24
+  "artId": 24,
+  "gen": 1
  },
  {
   "id": 25,
   "name": "pikachu",
   "displayName": "Pikachu",
-  "artId": 25
+  "artId": 25,
+  "gen": 1
  },
  {
   "id": 25,
   "name": "pikachu-gmax",
   "displayName": "Pikachu (Gigantamax)",
-  "artId": 10199
+  "artId": 10199,
+  "gen": 8
  },
  {
   "id": 26,
   "name": "raichu",
   "displayName": "Raichu",
-  "artId": 26
+  "artId": 26,
+  "gen": 1
  },
  {
   "id": 26,
   "name": "raichu-alola",
   "displayName": "Alolan Raichu",
-  "artId": 10100
+  "artId": 10100,
+  "gen": 7
  },
  {
   "id": 26,
   "name": "raichu-mega-x",
   "displayName": "Raichu (Mega X)",
-  "artId": 10304
+  "artId": 10304,
+  "gen": 9
  },
  {
   "id": 26,
   "name": "raichu-mega-y",
   "displayName": "Raichu (Mega Y)",
-  "artId": 10305
+  "artId": 10305,
+  "gen": 9
  },
  {
   "id": 27,
   "name": "sandshrew",
   "displayName": "Sandshrew",
-  "artId": 27
+  "artId": 27,
+  "gen": 1
  },
  {
   "id": 27,
   "name": "sandshrew-alola",
   "displayName": "Alolan Sandshrew",
-  "artId": 10101
+  "artId": 10101,
+  "gen": 7
  },
  {
   "id": 28,
   "name": "sandslash",
   "displayName": "Sandslash",
-  "artId": 28
+  "artId": 28,
+  "gen": 1
  },
  {
   "id": 28,
   "name": "sandslash-alola",
   "displayName": "Alolan Sandslash",
-  "artId": 10102
+  "artId": 10102,
+  "gen": 7
  },
  {
   "id": 29,
   "name": "nidoran-f",
   "displayName": "Nidoran♀",
-  "artId": 29
+  "artId": 29,
+  "gen": 1
  },
  {
   "id": 30,
   "name": "nidorina",
   "displayName": "Nidorina",
-  "artId": 30
+  "artId": 30,
+  "gen": 1
  },
  {
   "id": 31,
   "name": "nidoqueen",
   "displayName": "Nidoqueen",
-  "artId": 31
+  "artId": 31,
+  "gen": 1
  },
  {
   "id": 32,
   "name": "nidoran-m",
   "displayName": "Nidoran♂",
-  "artId": 32
+  "artId": 32,
+  "gen": 1
  },
  {
   "id": 33,
   "name": "nidorino",
   "displayName": "Nidorino",
-  "artId": 33
+  "artId": 33,
+  "gen": 1
  },
  {
   "id": 34,
   "name": "nidoking",
   "displayName": "Nidoking",
-  "artId": 34
+  "artId": 34,
+  "gen": 1
  },
  {
   "id": 35,
   "name": "clefairy",
   "displayName": "Clefairy",
-  "artId": 35
+  "artId": 35,
+  "gen": 1
  },
  {
   "id": 36,
   "name": "clefable",
   "displayName": "Clefable",
-  "artId": 36
+  "artId": 36,
+  "gen": 1
  },
  {
   "id": 36,
   "name": "clefable-mega",
   "displayName": "Mega Clefable",
-  "artId": 10278
+  "artId": 10278,
+  "gen": 9
  },
  {
   "id": 37,
   "name": "vulpix",
   "displayName": "Vulpix",
-  "artId": 37
+  "artId": 37,
+  "gen": 1
  },
  {
   "id": 37,
   "name": "vulpix-alola",
   "displayName": "Alolan Vulpix",
-  "artId": 10103
+  "artId": 10103,
+  "gen": 7
  },
  {
   "id": 38,
   "name": "ninetales",
   "displayName": "Ninetales",
-  "artId": 38
+  "artId": 38,
+  "gen": 1
  },
  {
   "id": 38,
   "name": "ninetales-alola",
   "displayName": "Alolan Ninetales",
-  "artId": 10104
+  "artId": 10104,
+  "gen": 7
  },
  {
   "id": 39,
   "name": "jigglypuff",
   "displayName": "Jigglypuff",
-  "artId": 39
+  "artId": 39,
+  "gen": 1
  },
  {
   "id": 40,
   "name": "wigglytuff",
   "displayName": "Wigglytuff",
-  "artId": 40
+  "artId": 40,
+  "gen": 1
  },
  {
   "id": 41,
   "name": "zubat",
   "displayName": "Zubat",
-  "artId": 41
+  "artId": 41,
+  "gen": 1
  },
  {
   "id": 42,
   "name": "golbat",
   "displayName": "Golbat",
-  "artId": 42
+  "artId": 42,
+  "gen": 1
  },
  {
   "id": 43,
   "name": "oddish",
   "displayName": "Oddish",
-  "artId": 43
+  "artId": 43,
+  "gen": 1
  },
  {
   "id": 44,
   "name": "gloom",
   "displayName": "Gloom",
-  "artId": 44
+  "artId": 44,
+  "gen": 1
  },
  {
   "id": 45,
   "name": "vileplume",
   "displayName": "Vileplume",
-  "artId": 45
+  "artId": 45,
+  "gen": 1
  },
  {
   "id": 46,
   "name": "paras",
   "displayName": "Paras",
-  "artId": 46
+  "artId": 46,
+  "gen": 1
  },
  {
   "id": 47,
   "name": "parasect",
   "displayName": "Parasect",
-  "artId": 47
+  "artId": 47,
+  "gen": 1
  },
  {
   "id": 48,
   "name": "venonat",
   "displayName": "Venonat",
-  "artId": 48
+  "artId": 48,
+  "gen": 1
  },
  {
   "id": 49,
   "name": "venomoth",
   "displayName": "Venomoth",
-  "artId": 49
+  "artId": 49,
+  "gen": 1
  },
  {
   "id": 50,
   "name": "diglett",
   "displayName": "Diglett",
-  "artId": 50
+  "artId": 50,
+  "gen": 1
  },
  {
   "id": 50,
   "name": "diglett-alola",
   "displayName": "Alolan Diglett",
-  "artId": 10105
+  "artId": 10105,
+  "gen": 7
  },
  {
   "id": 51,
   "name": "dugtrio",
   "displayName": "Dugtrio",
-  "artId": 51
+  "artId": 51,
+  "gen": 1
  },
  {
   "id": 51,
   "name": "dugtrio-alola",
   "displayName": "Alolan Dugtrio",
-  "artId": 10106
+  "artId": 10106,
+  "gen": 7
  },
  {
   "id": 52,
   "name": "meowth",
   "displayName": "Meowth",
-  "artId": 52
+  "artId": 52,
+  "gen": 1
  },
  {
   "id": 52,
   "name": "meowth-alola",
   "displayName": "Alolan Meowth",
-  "artId": 10107
+  "artId": 10107,
+  "gen": 7
  },
  {
   "id": 52,
   "name": "meowth-galar",
   "displayName": "Galarian Meowth",
-  "artId": 10161
+  "artId": 10161,
+  "gen": 8
  },
  {
   "id": 52,
   "name": "meowth-gmax",
   "displayName": "Meowth (Gigantamax)",
-  "artId": 10200
+  "artId": 10200,
+  "gen": 8
  },
  {
   "id": 53,
   "name": "persian",
   "displayName": "Persian",
-  "artId": 53
+  "artId": 53,
+  "gen": 1
  },
  {
   "id": 53,
   "name": "persian-alola",
   "displayName": "Alolan Persian",
-  "artId": 10108
+  "artId": 10108,
+  "gen": 7
  },
  {
   "id": 54,
   "name": "psyduck",
   "displayName": "Psyduck",
-  "artId": 54
+  "artId": 54,
+  "gen": 1
  },
  {
   "id": 55,
   "name": "golduck",
   "displayName": "Golduck",
-  "artId": 55
+  "artId": 55,
+  "gen": 1
  },
  {
   "id": 56,
   "name": "mankey",
   "displayName": "Mankey",
-  "artId": 56
+  "artId": 56,
+  "gen": 1
  },
  {
   "id": 57,
   "name": "primeape",
   "displayName": "Primeape",
-  "artId": 57
+  "artId": 57,
+  "gen": 1
  },
  {
   "id": 58,
   "name": "growlithe",
   "displayName": "Growlithe",
-  "artId": 58
+  "artId": 58,
+  "gen": 1
  },
  {
   "id": 58,
   "name": "growlithe-hisui",
   "displayName": "Hisuian Growlithe",
-  "artId": 10229
+  "artId": 10229,
+  "gen": 8
  },
  {
   "id": 59,
   "name": "arcanine",
   "displayName": "Arcanine",
-  "artId": 59
+  "artId": 59,
+  "gen": 1
  },
  {
   "id": 59,
   "name": "arcanine-hisui",
   "displayName": "Hisuian Arcanine",
-  "artId": 10230
+  "artId": 10230,
+  "gen": 8
  },
  {
   "id": 60,
   "name": "poliwag",
   "displayName": "Poliwag",
-  "artId": 60
+  "artId": 60,
+  "gen": 1
  },
  {
   "id": 61,
   "name": "poliwhirl",
   "displayName": "Poliwhirl",
-  "artId": 61
+  "artId": 61,
+  "gen": 1
  },
  {
   "id": 62,
   "name": "poliwrath",
   "displayName": "Poliwrath",
-  "artId": 62
+  "artId": 62,
+  "gen": 1
  },
  {
   "id": 63,
   "name": "abra",
   "displayName": "Abra",
-  "artId": 63
+  "artId": 63,
+  "gen": 1
  },
  {
   "id": 64,
   "name": "kadabra",
   "displayName": "Kadabra",
-  "artId": 64
+  "artId": 64,
+  "gen": 1
  },
  {
   "id": 65,
   "name": "alakazam",
   "displayName": "Alakazam",
-  "artId": 65
+  "artId": 65,
+  "gen": 1
  },
  {
   "id": 65,
   "name": "alakazam-mega",
   "displayName": "Mega Alakazam",
-  "artId": 10037
+  "artId": 10037,
+  "gen": 6
  },
  {
   "id": 66,
   "name": "machop",
   "displayName": "Machop",
-  "artId": 66
+  "artId": 66,
+  "gen": 1
  },
  {
   "id": 67,
   "name": "machoke",
   "displayName": "Machoke",
-  "artId": 67
+  "artId": 67,
+  "gen": 1
  },
  {
   "id": 68,
   "name": "machamp",
   "displayName": "Machamp",
-  "artId": 68
+  "artId": 68,
+  "gen": 1
  },
  {
   "id": 68,
   "name": "machamp-gmax",
   "displayName": "Machamp (Gigantamax)",
-  "artId": 10201
+  "artId": 10201,
+  "gen": 8
  },
  {
   "id": 69,
   "name": "bellsprout",
   "displayName": "Bellsprout",
-  "artId": 69
+  "artId": 69,
+  "gen": 1
  },
  {
   "id": 70,
   "name": "weepinbell",
   "displayName": "Weepinbell",
-  "artId": 70
+  "artId": 70,
+  "gen": 1
  },
  {
   "id": 71,
   "name": "victreebel",
   "displayName": "Victreebel",
-  "artId": 71
+  "artId": 71,
+  "gen": 1
  },
  {
   "id": 71,
   "name": "victreebel-mega",
   "displayName": "Mega Victreebel",
-  "artId": 10279
+  "artId": 10279,
+  "gen": 9
  },
  {
   "id": 72,
   "name": "tentacool",
   "displayName": "Tentacool",
-  "artId": 72
+  "artId": 72,
+  "gen": 1
  },
  {
   "id": 73,
   "name": "tentacruel",
   "displayName": "Tentacruel",
-  "artId": 73
+  "artId": 73,
+  "gen": 1
  },
  {
   "id": 74,
   "name": "geodude",
   "displayName": "Geodude",
-  "artId": 74
+  "artId": 74,
+  "gen": 1
  },
  {
   "id": 74,
   "name": "geodude-alola",
   "displayName": "Alolan Geodude",
-  "artId": 10109
+  "artId": 10109,
+  "gen": 7
  },
  {
   "id": 75,
   "name": "graveler",
   "displayName": "Graveler",
-  "artId": 75
+  "artId": 75,
+  "gen": 1
  },
  {
   "id": 75,
   "name": "graveler-alola",
   "displayName": "Alolan Graveler",
-  "artId": 10110
+  "artId": 10110,
+  "gen": 7
  },
  {
   "id": 76,
   "name": "golem",
   "displayName": "Golem",
-  "artId": 76
+  "artId": 76,
+  "gen": 1
  },
  {
   "id": 76,
   "name": "golem-alola",
   "displayName": "Alolan Golem",
-  "artId": 10111
+  "artId": 10111,
+  "gen": 7
  },
  {
   "id": 77,
   "name": "ponyta",
   "displayName": "Ponyta",
-  "artId": 77
+  "artId": 77,
+  "gen": 1
  },
  {
   "id": 77,
   "name": "ponyta-galar",
   "displayName": "Galarian Ponyta",
-  "artId": 10162
+  "artId": 10162,
+  "gen": 8
  },
  {
   "id": 78,
   "name": "rapidash",
   "displayName": "Rapidash",
-  "artId": 78
+  "artId": 78,
+  "gen": 1
  },
  {
   "id": 78,
   "name": "rapidash-galar",
   "displayName": "Galarian Rapidash",
-  "artId": 10163
+  "artId": 10163,
+  "gen": 8
  },
  {
   "id": 79,
   "name": "slowpoke",
   "displayName": "Slowpoke",
-  "artId": 79
+  "artId": 79,
+  "gen": 1
  },
  {
   "id": 79,
   "name": "slowpoke-galar",
   "displayName": "Galarian Slowpoke",
-  "artId": 10164
+  "artId": 10164,
+  "gen": 8
  },
  {
   "id": 80,
   "name": "slowbro",
   "displayName": "Slowbro",
-  "artId": 80
+  "artId": 80,
+  "gen": 1
  },
  {
   "id": 80,
   "name": "slowbro-galar",
   "displayName": "Galarian Slowbro",
-  "artId": 10165
+  "artId": 10165,
+  "gen": 8
  },
  {
   "id": 80,
   "name": "slowbro-mega",
   "displayName": "Mega Slowbro",
-  "artId": 10071
+  "artId": 10071,
+  "gen": 6
  },
  {
   "id": 81,
   "name": "magnemite",
   "displayName": "Magnemite",
-  "artId": 81
+  "artId": 81,
+  "gen": 1
  },
  {
   "id": 82,
   "name": "magneton",
   "displayName": "Magneton",
-  "artId": 82
+  "artId": 82,
+  "gen": 1
  },
  {
   "id": 83,
   "name": "farfetchd",
   "displayName": "Farfetch'd",
-  "artId": 83
+  "artId": 83,
+  "gen": 1
  },
  {
   "id": 83,
   "name": "farfetchd-galar",
   "displayName": "Galarian Farfetch'd",
-  "artId": 10166
+  "artId": 10166,
+  "gen": 8
  },
  {
   "id": 84,
   "name": "doduo",
   "displayName": "Doduo",
-  "artId": 84
+  "artId": 84,
+  "gen": 1
  },
  {
   "id": 85,
   "name": "dodrio",
   "displayName": "Dodrio",
-  "artId": 85
+  "artId": 85,
+  "gen": 1
  },
  {
   "id": 86,
   "name": "seel",
   "displayName": "Seel",
-  "artId": 86
+  "artId": 86,
+  "gen": 1
  },
  {
   "id": 87,
   "name": "dewgong",
   "displayName": "Dewgong",
-  "artId": 87
+  "artId": 87,
+  "gen": 1
  },
  {
   "id": 88,
   "name": "grimer",
   "displayName": "Grimer",
-  "artId": 88
+  "artId": 88,
+  "gen": 1
  },
  {
   "id": 88,
   "name": "grimer-alola",
   "displayName": "Alolan Grimer",
-  "artId": 10112
+  "artId": 10112,
+  "gen": 7
  },
  {
   "id": 89,
   "name": "muk",
   "displayName": "Muk",
-  "artId": 89
+  "artId": 89,
+  "gen": 1
  },
  {
   "id": 89,
   "name": "muk-alola",
   "displayName": "Alolan Muk",
-  "artId": 10113
+  "artId": 10113,
+  "gen": 7
  },
  {
   "id": 90,
   "name": "shellder",
   "displayName": "Shellder",
-  "artId": 90
+  "artId": 90,
+  "gen": 1
  },
  {
   "id": 91,
   "name": "cloyster",
   "displayName": "Cloyster",
-  "artId": 91
+  "artId": 91,
+  "gen": 1
  },
  {
   "id": 92,
   "name": "gastly",
   "displayName": "Gastly",
-  "artId": 92
+  "artId": 92,
+  "gen": 1
  },
  {
   "id": 93,
   "name": "haunter",
   "displayName": "Haunter",
-  "artId": 93
+  "artId": 93,
+  "gen": 1
  },
  {
   "id": 94,
   "name": "gengar",
   "displayName": "Gengar",
-  "artId": 94
+  "artId": 94,
+  "gen": 1
  },
  {
   "id": 94,
   "name": "gengar-gmax",
   "displayName": "Gengar (Gigantamax)",
-  "artId": 10202
+  "artId": 10202,
+  "gen": 8
  },
  {
   "id": 94,
   "name": "gengar-mega",
   "displayName": "Mega Gengar",
-  "artId": 10038
+  "artId": 10038,
+  "gen": 6
  },
  {
   "id": 95,
   "name": "onix",
   "displayName": "Onix",
-  "artId": 95
+  "artId": 95,
+  "gen": 1
  },
  {
   "id": 96,
   "name": "drowzee",
   "displayName": "Drowzee",
-  "artId": 96
+  "artId": 96,
+  "gen": 1
  },
  {
   "id": 97,
   "name": "hypno",
   "displayName": "Hypno",
-  "artId": 97
+  "artId": 97,
+  "gen": 1
  },
  {
   "id": 98,
   "name": "krabby",
   "displayName": "Krabby",
-  "artId": 98
+  "artId": 98,
+  "gen": 1
  },
  {
   "id": 99,
   "name": "kingler",
   "displayName": "Kingler",
-  "artId": 99
+  "artId": 99,
+  "gen": 1
  },
  {
   "id": 99,
   "name": "kingler-gmax",
   "displayName": "Kingler (Gigantamax)",
-  "artId": 10203
+  "artId": 10203,
+  "gen": 8
  },
  {
   "id": 100,
   "name": "voltorb",
   "displayName": "Voltorb",
-  "artId": 100
+  "artId": 100,
+  "gen": 1
  },
  {
   "id": 100,
   "name": "voltorb-hisui",
   "displayName": "Hisuian Voltorb",
-  "artId": 10231
+  "artId": 10231,
+  "gen": 8
  },
  {
   "id": 101,
   "name": "electrode",
   "displayName": "Electrode",
-  "artId": 101
+  "artId": 101,
+  "gen": 1
  },
  {
   "id": 101,
   "name": "electrode-hisui",
   "displayName": "Hisuian Electrode",
-  "artId": 10232
+  "artId": 10232,
+  "gen": 8
  },
  {
   "id": 102,
   "name": "exeggcute",
   "displayName": "Exeggcute",
-  "artId": 102
+  "artId": 102,
+  "gen": 1
  },
  {
   "id": 103,
   "name": "exeggutor",
   "displayName": "Exeggutor",
-  "artId": 103
+  "artId": 103,
+  "gen": 1
  },
  {
   "id": 103,
   "name": "exeggutor-alola",
   "displayName": "Alolan Exeggutor",
-  "artId": 10114
+  "artId": 10114,
+  "gen": 7
  },
  {
   "id": 104,
   "name": "cubone",
   "displayName": "Cubone",
-  "artId": 104
+  "artId": 104,
+  "gen": 1
  },
  {
   "id": 105,
   "name": "marowak",
   "displayName": "Marowak",
-  "artId": 105
+  "artId": 105,
+  "gen": 1
  },
  {
   "id": 105,
   "name": "marowak-alola",
   "displayName": "Alolan Marowak",
-  "artId": 10115
+  "artId": 10115,
+  "gen": 7
  },
  {
   "id": 106,
   "name": "hitmonlee",
   "displayName": "Hitmonlee",
-  "artId": 106
+  "artId": 106,
+  "gen": 1
  },
  {
   "id": 107,
   "name": "hitmonchan",
   "displayName": "Hitmonchan",
-  "artId": 107
+  "artId": 107,
+  "gen": 1
  },
  {
   "id": 108,
   "name": "lickitung",
   "displayName": "Lickitung",
-  "artId": 108
+  "artId": 108,
+  "gen": 1
  },
  {
   "id": 109,
   "name": "koffing",
   "displayName": "Koffing",
-  "artId": 109
+  "artId": 109,
+  "gen": 1
  },
  {
   "id": 110,
   "name": "weezing",
   "displayName": "Weezing",
-  "artId": 110
+  "artId": 110,
+  "gen": 1
  },
  {
   "id": 110,
   "name": "weezing-galar",
   "displayName": "Galarian Weezing",
-  "artId": 10167
+  "artId": 10167,
+  "gen": 8
  },
  {
   "id": 111,
   "name": "rhyhorn",
   "displayName": "Rhyhorn",
-  "artId": 111
+  "artId": 111,
+  "gen": 1
  },
  {
   "id": 112,
   "name": "rhydon",
   "displayName": "Rhydon",
-  "artId": 112
+  "artId": 112,
+  "gen": 1
  },
  {
   "id": 113,
   "name": "chansey",
   "displayName": "Chansey",
-  "artId": 113
+  "artId": 113,
+  "gen": 1
  },
  {
   "id": 114,
   "name": "tangela",
   "displayName": "Tangela",
-  "artId": 114
+  "artId": 114,
+  "gen": 1
  },
  {
   "id": 115,
   "name": "kangaskhan",
   "displayName": "Kangaskhan",
-  "artId": 115
+  "artId": 115,
+  "gen": 1
  },
  {
   "id": 115,
   "name": "kangaskhan-mega",
   "displayName": "Mega Kangaskhan",
-  "artId": 10039
+  "artId": 10039,
+  "gen": 6
  },
  {
   "id": 116,
   "name": "horsea",
   "displayName": "Horsea",
-  "artId": 116
+  "artId": 116,
+  "gen": 1
  },
  {
   "id": 117,
   "name": "seadra",
   "displayName": "Seadra",
-  "artId": 117
+  "artId": 117,
+  "gen": 1
  },
  {
   "id": 118,
   "name": "goldeen",
   "displayName": "Goldeen",
-  "artId": 118
+  "artId": 118,
+  "gen": 1
  },
  {
   "id": 119,
   "name": "seaking",
   "displayName": "Seaking",
-  "artId": 119
+  "artId": 119,
+  "gen": 1
  },
  {
   "id": 120,
   "name": "staryu",
   "displayName": "Staryu",
-  "artId": 120
+  "artId": 120,
+  "gen": 1
  },
  {
   "id": 121,
   "name": "starmie",
   "displayName": "Starmie",
-  "artId": 121
+  "artId": 121,
+  "gen": 1
  },
  {
   "id": 121,
   "name": "starmie-mega",
   "displayName": "Mega Starmie",
-  "artId": 10280
+  "artId": 10280,
+  "gen": 9
  },
  {
   "id": 122,
   "name": "mr-mime",
   "displayName": "Mr. Mime",
-  "artId": 122
+  "artId": 122,
+  "gen": 1
  },
  {
   "id": 122,
   "name": "mr-mime-galar",
   "displayName": "Galarian Mr. Mime",
-  "artId": 10168
+  "artId": 10168,
+  "gen": 8
  },
  {
   "id": 123,
   "name": "scyther",
   "displayName": "Scyther",
-  "artId": 123
+  "artId": 123,
+  "gen": 1
  },
  {
   "id": 124,
   "name": "jynx",
   "displayName": "Jynx",
-  "artId": 124
+  "artId": 124,
+  "gen": 1
  },
  {
   "id": 125,
   "name": "electabuzz",
   "displayName": "Electabuzz",
-  "artId": 125
+  "artId": 125,
+  "gen": 1
  },
  {
   "id": 126,
   "name": "magmar",
   "displayName": "Magmar",
-  "artId": 126
+  "artId": 126,
+  "gen": 1
  },
  {
   "id": 127,
   "name": "pinsir",
   "displayName": "Pinsir",
-  "artId": 127
+  "artId": 127,
+  "gen": 1
  },
  {
   "id": 127,
   "name": "pinsir-mega",
   "displayName": "Mega Pinsir",
-  "artId": 10040
+  "artId": 10040,
+  "gen": 6
  },
  {
   "id": 128,
   "name": "tauros",
   "displayName": "Tauros",
-  "artId": 128
+  "artId": 128,
+  "gen": 1
  },
  {
   "id": 128,
   "name": "tauros-paldea-aqua-breed",
   "displayName": "Tauros (Paldea Aqua Breed)",
-  "artId": 10252
+  "artId": 10252,
+  "gen": 9
  },
  {
   "id": 128,
   "name": "tauros-paldea-blaze-breed",
   "displayName": "Tauros (Paldea Blaze Breed)",
-  "artId": 10251
+  "artId": 10251,
+  "gen": 9
  },
  {
   "id": 128,
   "name": "tauros-paldea-combat-breed",
   "displayName": "Tauros (Paldea Combat Breed)",
-  "artId": 10250
+  "artId": 10250,
+  "gen": 9
  },
  {
   "id": 129,
   "name": "magikarp",
   "displayName": "Magikarp",
-  "artId": 129
+  "artId": 129,
+  "gen": 1
  },
  {
   "id": 130,
   "name": "gyarados",
   "displayName": "Gyarados",
-  "artId": 130
+  "artId": 130,
+  "gen": 1
  },
  {
   "id": 130,
   "name": "gyarados-mega",
   "displayName": "Mega Gyarados",
-  "artId": 10041
+  "artId": 10041,
+  "gen": 6
  },
  {
   "id": 131,
   "name": "lapras",
   "displayName": "Lapras",
-  "artId": 131
+  "artId": 131,
+  "gen": 1
  },
  {
   "id": 131,
   "name": "lapras-gmax",
   "displayName": "Lapras (Gigantamax)",
-  "artId": 10204
+  "artId": 10204,
+  "gen": 8
  },
  {
   "id": 132,
   "name": "ditto",
   "displayName": "Ditto",
-  "artId": 132
+  "artId": 132,
+  "gen": 1
  },
  {
   "id": 133,
   "name": "eevee",
   "displayName": "Eevee",
-  "artId": 133
+  "artId": 133,
+  "gen": 1
  },
  {
   "id": 133,
   "name": "eevee-gmax",
   "displayName": "Eevee (Gigantamax)",
-  "artId": 10205
+  "artId": 10205,
+  "gen": 8
  },
  {
   "id": 134,
   "name": "vaporeon",
   "displayName": "Vaporeon",
-  "artId": 134
+  "artId": 134,
+  "gen": 1
  },
  {
   "id": 135,
   "name": "jolteon",
   "displayName": "Jolteon",
-  "artId": 135
+  "artId": 135,
+  "gen": 1
  },
  {
   "id": 136,
   "name": "flareon",
   "displayName": "Flareon",
-  "artId": 136
+  "artId": 136,
+  "gen": 1
  },
  {
   "id": 137,
   "name": "porygon",
   "displayName": "Porygon",
-  "artId": 137
+  "artId": 137,
+  "gen": 1
  },
  {
   "id": 138,
   "name": "omanyte",
   "displayName": "Omanyte",
-  "artId": 138
+  "artId": 138,
+  "gen": 1
  },
  {
   "id": 139,
   "name": "omastar",
   "displayName": "Omastar",
-  "artId": 139
+  "artId": 139,
+  "gen": 1
  },
  {
   "id": 140,
   "name": "kabuto",
   "displayName": "Kabuto",
-  "artId": 140
+  "artId": 140,
+  "gen": 1
  },
  {
   "id": 141,
   "name": "kabutops",
   "displayName": "Kabutops",
-  "artId": 141
+  "artId": 141,
+  "gen": 1
  },
  {
   "id": 142,
   "name": "aerodactyl",
   "displayName": "Aerodactyl",
-  "artId": 142
+  "artId": 142,
+  "gen": 1
  },
  {
   "id": 142,
   "name": "aerodactyl-mega",
   "displayName": "Mega Aerodactyl",
-  "artId": 10042
+  "artId": 10042,
+  "gen": 6
  },
  {
   "id": 143,
   "name": "snorlax",
   "displayName": "Snorlax",
-  "artId": 143
+  "artId": 143,
+  "gen": 1
  },
  {
   "id": 143,
   "name": "snorlax-gmax",
   "displayName": "Snorlax (Gigantamax)",
-  "artId": 10206
+  "artId": 10206,
+  "gen": 8
  },
  {
   "id": 144,
   "name": "articuno",
   "displayName": "Articuno",
-  "artId": 144
+  "artId": 144,
+  "gen": 1
  },
  {
   "id": 144,
   "name": "articuno-galar",
   "displayName": "Galarian Articuno",
-  "artId": 10169
+  "artId": 10169,
+  "gen": 8
  },
  {
   "id": 145,
   "name": "zapdos",
   "displayName": "Zapdos",
-  "artId": 145
+  "artId": 145,
+  "gen": 1
  },
  {
   "id": 145,
   "name": "zapdos-galar",
   "displayName": "Galarian Zapdos",
-  "artId": 10170
+  "artId": 10170,
+  "gen": 8
  },
  {
   "id": 146,
   "name": "moltres",
   "displayName": "Moltres",
-  "artId": 146
+  "artId": 146,
+  "gen": 1
  },
  {
   "id": 146,
   "name": "moltres-galar",
   "displayName": "Galarian Moltres",
-  "artId": 10171
+  "artId": 10171,
+  "gen": 8
  },
  {
   "id": 147,
   "name": "dratini",
   "displayName": "Dratini",
-  "artId": 147
+  "artId": 147,
+  "gen": 1
  },
  {
   "id": 148,
   "name": "dragonair",
   "displayName": "Dragonair",
-  "artId": 148
+  "artId": 148,
+  "gen": 1
  },
  {
   "id": 149,
   "name": "dragonite",
   "displayName": "Dragonite",
-  "artId": 149
+  "artId": 149,
+  "gen": 1
  },
  {
   "id": 149,
   "name": "dragonite-mega",
   "displayName": "Mega Dragonite",
-  "artId": 10281
+  "artId": 10281,
+  "gen": 9
  },
  {
   "id": 150,
   "name": "mewtwo",
   "displayName": "Mewtwo",
-  "artId": 150
+  "artId": 150,
+  "gen": 1
  },
  {
   "id": 150,
   "name": "mewtwo-mega-x",
   "displayName": "Mewtwo (Mega X)",
-  "artId": 10043
+  "artId": 10043,
+  "gen": 6
  },
  {
   "id": 150,
   "name": "mewtwo-mega-y",
   "displayName": "Mewtwo (Mega Y)",
-  "artId": 10044
+  "artId": 10044,
+  "gen": 6
  },
  {
   "id": 151,
   "name": "mew",
   "displayName": "Mew",
-  "artId": 151
+  "artId": 151,
+  "gen": 1
  },
  {
   "id": 152,
   "name": "chikorita",
   "displayName": "Chikorita",
-  "artId": 152
+  "artId": 152,
+  "gen": 2
  },
  {
   "id": 153,
   "name": "bayleef",
   "displayName": "Bayleef",
-  "artId": 153
+  "artId": 153,
+  "gen": 2
  },
  {
   "id": 154,
   "name": "meganium",
   "displayName": "Meganium",
-  "artId": 154
+  "artId": 154,
+  "gen": 2
  },
  {
   "id": 154,
   "name": "meganium-mega",
   "displayName": "Mega Meganium",
-  "artId": 10282
+  "artId": 10282,
+  "gen": 9
  },
  {
   "id": 155,
   "name": "cyndaquil",
   "displayName": "Cyndaquil",
-  "artId": 155
+  "artId": 155,
+  "gen": 2
  },
  {
   "id": 156,
   "name": "quilava",
   "displayName": "Quilava",
-  "artId": 156
+  "artId": 156,
+  "gen": 2
  },
  {
   "id": 157,
   "name": "typhlosion",
   "displayName": "Typhlosion",
-  "artId": 157
+  "artId": 157,
+  "gen": 2
  },
  {
   "id": 157,
   "name": "typhlosion-hisui",
   "displayName": "Hisuian Typhlosion",
-  "artId": 10233
+  "artId": 10233,
+  "gen": 8
  },
  {
   "id": 158,
   "name": "totodile",
   "displayName": "Totodile",
-  "artId": 158
+  "artId": 158,
+  "gen": 2
  },
  {
   "id": 159,
   "name": "croconaw",
   "displayName": "Croconaw",
-  "artId": 159
+  "artId": 159,
+  "gen": 2
  },
  {
   "id": 160,
   "name": "feraligatr",
   "displayName": "Feraligatr",
-  "artId": 160
+  "artId": 160,
+  "gen": 2
  },
  {
   "id": 160,
   "name": "feraligatr-mega",
   "displayName": "Mega Feraligatr",
-  "artId": 10283
+  "artId": 10283,
+  "gen": 9
  },
  {
   "id": 161,
   "name": "sentret",
   "displayName": "Sentret",
-  "artId": 161
+  "artId": 161,
+  "gen": 2
  },
  {
   "id": 162,
   "name": "furret",
   "displayName": "Furret",
-  "artId": 162
+  "artId": 162,
+  "gen": 2
  },
  {
   "id": 163,
   "name": "hoothoot",
   "displayName": "Hoothoot",
-  "artId": 163
+  "artId": 163,
+  "gen": 2
  },
  {
   "id": 164,
   "name": "noctowl",
   "displayName": "Noctowl",
-  "artId": 164
+  "artId": 164,
+  "gen": 2
  },
  {
   "id": 165,
   "name": "ledyba",
   "displayName": "Ledyba",
-  "artId": 165
+  "artId": 165,
+  "gen": 2
  },
  {
   "id": 166,
   "name": "ledian",
   "displayName": "Ledian",
-  "artId": 166
+  "artId": 166,
+  "gen": 2
  },
  {
   "id": 167,
   "name": "spinarak",
   "displayName": "Spinarak",
-  "artId": 167
+  "artId": 167,
+  "gen": 2
  },
  {
   "id": 168,
   "name": "ariados",
   "displayName": "Ariados",
-  "artId": 168
+  "artId": 168,
+  "gen": 2
  },
  {
   "id": 169,
   "name": "crobat",
   "displayName": "Crobat",
-  "artId": 169
+  "artId": 169,
+  "gen": 2
  },
  {
   "id": 170,
   "name": "chinchou",
   "displayName": "Chinchou",
-  "artId": 170
+  "artId": 170,
+  "gen": 2
  },
  {
   "id": 171,
   "name": "lanturn",
   "displayName": "Lanturn",
-  "artId": 171
+  "artId": 171,
+  "gen": 2
  },
  {
   "id": 172,
   "name": "pichu",
   "displayName": "Pichu",
-  "artId": 172
+  "artId": 172,
+  "gen": 2
  },
  {
   "id": 173,
   "name": "cleffa",
   "displayName": "Cleffa",
-  "artId": 173
+  "artId": 173,
+  "gen": 2
  },
  {
   "id": 174,
   "name": "igglybuff",
   "displayName": "Igglybuff",
-  "artId": 174
+  "artId": 174,
+  "gen": 2
  },
  {
   "id": 175,
   "name": "togepi",
   "displayName": "Togepi",
-  "artId": 175
+  "artId": 175,
+  "gen": 2
  },
  {
   "id": 176,
   "name": "togetic",
   "displayName": "Togetic",
-  "artId": 176
+  "artId": 176,
+  "gen": 2
  },
  {
   "id": 177,
   "name": "natu",
   "displayName": "Natu",
-  "artId": 177
+  "artId": 177,
+  "gen": 2
  },
  {
   "id": 178,
   "name": "xatu",
   "displayName": "Xatu",
-  "artId": 178
+  "artId": 178,
+  "gen": 2
  },
  {
   "id": 179,
   "name": "mareep",
   "displayName": "Mareep",
-  "artId": 179
+  "artId": 179,
+  "gen": 2
  },
  {
   "id": 180,
   "name": "flaaffy",
   "displayName": "Flaaffy",
-  "artId": 180
+  "artId": 180,
+  "gen": 2
  },
  {
   "id": 181,
   "name": "ampharos",
   "displayName": "Ampharos",
-  "artId": 181
+  "artId": 181,
+  "gen": 2
  },
  {
   "id": 181,
   "name": "ampharos-mega",
   "displayName": "Mega Ampharos",
-  "artId": 10045
+  "artId": 10045,
+  "gen": 6
  },
  {
   "id": 182,
   "name": "bellossom",
   "displayName": "Bellossom",
-  "artId": 182
+  "artId": 182,
+  "gen": 2
  },
  {
   "id": 183,
   "name": "marill",
   "displayName": "Marill",
-  "artId": 183
+  "artId": 183,
+  "gen": 2
  },
  {
   "id": 184,
   "name": "azumarill",
   "displayName": "Azumarill",
-  "artId": 184
+  "artId": 184,
+  "gen": 2
  },
  {
   "id": 185,
   "name": "sudowoodo",
   "displayName": "Sudowoodo",
-  "artId": 185
+  "artId": 185,
+  "gen": 2
  },
  {
   "id": 186,
   "name": "politoed",
   "displayName": "Politoed",
-  "artId": 186
+  "artId": 186,
+  "gen": 2
  },
  {
   "id": 187,
   "name": "hoppip",
   "displayName": "Hoppip",
-  "artId": 187
+  "artId": 187,
+  "gen": 2
  },
  {
   "id": 188,
   "name": "skiploom",
   "displayName": "Skiploom",
-  "artId": 188
+  "artId": 188,
+  "gen": 2
  },
  {
   "id": 189,
   "name": "jumpluff",
   "displayName": "Jumpluff",
-  "artId": 189
+  "artId": 189,
+  "gen": 2
  },
  {
   "id": 190,
   "name": "aipom",
   "displayName": "Aipom",
-  "artId": 190
+  "artId": 190,
+  "gen": 2
  },
  {
   "id": 191,
   "name": "sunkern",
   "displayName": "Sunkern",
-  "artId": 191
+  "artId": 191,
+  "gen": 2
  },
  {
   "id": 192,
   "name": "sunflora",
   "displayName": "Sunflora",
-  "artId": 192
+  "artId": 192,
+  "gen": 2
  },
  {
   "id": 193,
   "name": "yanma",
   "displayName": "Yanma",
-  "artId": 193
+  "artId": 193,
+  "gen": 2
  },
  {
   "id": 194,
   "name": "wooper",
   "displayName": "Wooper",
-  "artId": 194
+  "artId": 194,
+  "gen": 2
  },
  {
   "id": 194,
   "name": "wooper-paldea",
   "displayName": "Paldean Wooper",
-  "artId": 10253
+  "artId": 10253,
+  "gen": 9
  },
  {
   "id": 195,
   "name": "quagsire",
   "displayName": "Quagsire",
-  "artId": 195
+  "artId": 195,
+  "gen": 2
  },
  {
   "id": 196,
   "name": "espeon",
   "displayName": "Espeon",
-  "artId": 196
+  "artId": 196,
+  "gen": 2
  },
  {
   "id": 197,
   "name": "umbreon",
   "displayName": "Umbreon",
-  "artId": 197
+  "artId": 197,
+  "gen": 2
  },
  {
   "id": 198,
   "name": "murkrow",
   "displayName": "Murkrow",
-  "artId": 198
+  "artId": 198,
+  "gen": 2
  },
  {
   "id": 199,
   "name": "slowking",
   "displayName": "Slowking",
-  "artId": 199
+  "artId": 199,
+  "gen": 2
  },
  {
   "id": 199,
   "name": "slowking-galar",
   "displayName": "Galarian Slowking",
-  "artId": 10172
+  "artId": 10172,
+  "gen": 8
  },
  {
   "id": 200,
   "name": "misdreavus",
   "displayName": "Misdreavus",
-  "artId": 200
+  "artId": 200,
+  "gen": 2
  },
  {
   "id": 201,
   "name": "unown",
   "displayName": "Unown",
-  "artId": 201
+  "artId": 201,
+  "gen": 2
  },
  {
   "id": 202,
   "name": "wobbuffet",
   "displayName": "Wobbuffet",
-  "artId": 202
+  "artId": 202,
+  "gen": 2
  },
  {
   "id": 203,
   "name": "girafarig",
   "displayName": "Girafarig",
-  "artId": 203
+  "artId": 203,
+  "gen": 2
  },
  {
   "id": 204,
   "name": "pineco",
   "displayName": "Pineco",
-  "artId": 204
+  "artId": 204,
+  "gen": 2
  },
  {
   "id": 205,
   "name": "forretress",
   "displayName": "Forretress",
-  "artId": 205
+  "artId": 205,
+  "gen": 2
  },
  {
   "id": 206,
   "name": "dunsparce",
   "displayName": "Dunsparce",
-  "artId": 206
+  "artId": 206,
+  "gen": 2
  },
  {
   "id": 207,
   "name": "gligar",
   "displayName": "Gligar",
-  "artId": 207
+  "artId": 207,
+  "gen": 2
  },
  {
   "id": 208,
   "name": "steelix",
   "displayName": "Steelix",
-  "artId": 208
+  "artId": 208,
+  "gen": 2
  },
  {
   "id": 208,
   "name": "steelix-mega",
   "displayName": "Mega Steelix",
-  "artId": 10072
+  "artId": 10072,
+  "gen": 6
  },
  {
   "id": 209,
   "name": "snubbull",
   "displayName": "Snubbull",
-  "artId": 209
+  "artId": 209,
+  "gen": 2
  },
  {
   "id": 210,
   "name": "granbull",
   "displayName": "Granbull",
-  "artId": 210
+  "artId": 210,
+  "gen": 2
  },
  {
   "id": 211,
   "name": "qwilfish",
   "displayName": "Qwilfish",
-  "artId": 211
+  "artId": 211,
+  "gen": 2
  },
  {
   "id": 211,
   "name": "qwilfish-hisui",
   "displayName": "Hisuian Qwilfish",
-  "artId": 10234
+  "artId": 10234,
+  "gen": 8
  },
  {
   "id": 212,
   "name": "scizor",
   "displayName": "Scizor",
-  "artId": 212
+  "artId": 212,
+  "gen": 2
  },
  {
   "id": 212,
   "name": "scizor-mega",
   "displayName": "Mega Scizor",
-  "artId": 10046
+  "artId": 10046,
+  "gen": 6
  },
  {
   "id": 213,
   "name": "shuckle",
   "displayName": "Shuckle",
-  "artId": 213
+  "artId": 213,
+  "gen": 2
  },
  {
   "id": 214,
   "name": "heracross",
   "displayName": "Heracross",
-  "artId": 214
+  "artId": 214,
+  "gen": 2
  },
  {
   "id": 214,
   "name": "heracross-mega",
   "displayName": "Mega Heracross",
-  "artId": 10047
+  "artId": 10047,
+  "gen": 6
  },
  {
   "id": 215,
   "name": "sneasel",
   "displayName": "Sneasel",
-  "artId": 215
+  "artId": 215,
+  "gen": 2
  },
  {
   "id": 215,
   "name": "sneasel-hisui",
   "displayName": "Hisuian Sneasel",
-  "artId": 10235
+  "artId": 10235,
+  "gen": 8
  },
  {
   "id": 216,
   "name": "teddiursa",
   "displayName": "Teddiursa",
-  "artId": 216
+  "artId": 216,
+  "gen": 2
  },
  {
   "id": 217,
   "name": "ursaring",
   "displayName": "Ursaring",
-  "artId": 217
+  "artId": 217,
+  "gen": 2
  },
  {
   "id": 218,
   "name": "slugma",
   "displayName": "Slugma",
-  "artId": 218
+  "artId": 218,
+  "gen": 2
  },
  {
   "id": 219,
   "name": "magcargo",
   "displayName": "Magcargo",
-  "artId": 219
+  "artId": 219,
+  "gen": 2
  },
  {
   "id": 220,
   "name": "swinub",
   "displayName": "Swinub",
-  "artId": 220
+  "artId": 220,
+  "gen": 2
  },
  {
   "id": 221,
   "name": "piloswine",
   "displayName": "Piloswine",
-  "artId": 221
+  "artId": 221,
+  "gen": 2
  },
  {
   "id": 222,
   "name": "corsola",
   "displayName": "Corsola",
-  "artId": 222
+  "artId": 222,
+  "gen": 2
  },
  {
   "id": 222,
   "name": "corsola-galar",
   "displayName": "Galarian Corsola",
-  "artId": 10173
+  "artId": 10173,
+  "gen": 8
  },
  {
   "id": 223,
   "name": "remoraid",
   "displayName": "Remoraid",
-  "artId": 223
+  "artId": 223,
+  "gen": 2
  },
  {
   "id": 224,
   "name": "octillery",
   "displayName": "Octillery",
-  "artId": 224
+  "artId": 224,
+  "gen": 2
  },
  {
   "id": 225,
   "name": "delibird",
   "displayName": "Delibird",
-  "artId": 225
+  "artId": 225,
+  "gen": 2
  },
  {
   "id": 226,
   "name": "mantine",
   "displayName": "Mantine",
-  "artId": 226
+  "artId": 226,
+  "gen": 2
  },
  {
   "id": 227,
   "name": "skarmory",
   "displayName": "Skarmory",
-  "artId": 227
+  "artId": 227,
+  "gen": 2
  },
  {
   "id": 227,
   "name": "skarmory-mega",
   "displayName": "Mega Skarmory",
-  "artId": 10284
+  "artId": 10284,
+  "gen": 9
  },
  {
   "id": 228,
   "name": "houndour",
   "displayName": "Houndour",
-  "artId": 228
+  "artId": 228,
+  "gen": 2
  },
  {
   "id": 229,
   "name": "houndoom",
   "displayName": "Houndoom",
-  "artId": 229
+  "artId": 229,
+  "gen": 2
  },
  {
   "id": 229,
   "name": "houndoom-mega",
   "displayName": "Mega Houndoom",
-  "artId": 10048
+  "artId": 10048,
+  "gen": 6
  },
  {
   "id": 230,
   "name": "kingdra",
   "displayName": "Kingdra",
-  "artId": 230
+  "artId": 230,
+  "gen": 2
  },
  {
   "id": 231,
   "name": "phanpy",
   "displayName": "Phanpy",
-  "artId": 231
+  "artId": 231,
+  "gen": 2
  },
  {
   "id": 232,
   "name": "donphan",
   "displayName": "Donphan",
-  "artId": 232
+  "artId": 232,
+  "gen": 2
  },
  {
   "id": 233,
   "name": "porygon2",
   "displayName": "Porygon2",
-  "artId": 233
+  "artId": 233,
+  "gen": 2
  },
  {
   "id": 234,
   "name": "stantler",
   "displayName": "Stantler",
-  "artId": 234
+  "artId": 234,
+  "gen": 2
  },
  {
   "id": 235,
   "name": "smeargle",
   "displayName": "Smeargle",
-  "artId": 235
+  "artId": 235,
+  "gen": 2
  },
  {
   "id": 236,
   "name": "tyrogue",
   "displayName": "Tyrogue",
-  "artId": 236
+  "artId": 236,
+  "gen": 2
  },
  {
   "id": 237,
   "name": "hitmontop",
   "displayName": "Hitmontop",
-  "artId": 237
+  "artId": 237,
+  "gen": 2
  },
  {
   "id": 238,
   "name": "smoochum",
   "displayName": "Smoochum",
-  "artId": 238
+  "artId": 238,
+  "gen": 2
  },
  {
   "id": 239,
   "name": "elekid",
   "displayName": "Elekid",
-  "artId": 239
+  "artId": 239,
+  "gen": 2
  },
  {
   "id": 240,
   "name": "magby",
   "displayName": "Magby",
-  "artId": 240
+  "artId": 240,
+  "gen": 2
  },
  {
   "id": 241,
   "name": "miltank",
   "displayName": "Miltank",
-  "artId": 241
+  "artId": 241,
+  "gen": 2
  },
  {
   "id": 242,
   "name": "blissey",
   "displayName": "Blissey",
-  "artId": 242
+  "artId": 242,
+  "gen": 2
  },
  {
   "id": 243,
   "name": "raikou",
   "displayName": "Raikou",
-  "artId": 243
+  "artId": 243,
+  "gen": 2
  },
  {
   "id": 244,
   "name": "entei",
   "displayName": "Entei",
-  "artId": 244
+  "artId": 244,
+  "gen": 2
  },
  {
   "id": 245,
   "name": "suicune",
   "displayName": "Suicune",
-  "artId": 245
+  "artId": 245,
+  "gen": 2
  },
  {
   "id": 246,
   "name": "larvitar",
   "displayName": "Larvitar",
-  "artId": 246
+  "artId": 246,
+  "gen": 2
  },
  {
   "id": 247,
   "name": "pupitar",
   "displayName": "Pupitar",
-  "artId": 247
+  "artId": 247,
+  "gen": 2
  },
  {
   "id": 248,
   "name": "tyranitar",
   "displayName": "Tyranitar",
-  "artId": 248
+  "artId": 248,
+  "gen": 2
  },
  {
   "id": 248,
   "name": "tyranitar-mega",
   "displayName": "Mega Tyranitar",
-  "artId": 10049
+  "artId": 10049,
+  "gen": 6
  },
  {
   "id": 249,
   "name": "lugia",
   "displayName": "Lugia",
-  "artId": 249
+  "artId": 249,
+  "gen": 2
  },
  {
   "id": 250,
   "name": "ho-oh",
   "displayName": "Ho-Oh",
-  "artId": 250
+  "artId": 250,
+  "gen": 2
  },
  {
   "id": 251,
   "name": "celebi",
   "displayName": "Celebi",
-  "artId": 251
+  "artId": 251,
+  "gen": 2
  },
  {
   "id": 252,
   "name": "treecko",
   "displayName": "Treecko",
-  "artId": 252
+  "artId": 252,
+  "gen": 3
  },
  {
   "id": 253,
   "name": "grovyle",
   "displayName": "Grovyle",
-  "artId": 253
+  "artId": 253,
+  "gen": 3
  },
  {
   "id": 254,
   "name": "sceptile",
   "displayName": "Sceptile",
-  "artId": 254
+  "artId": 254,
+  "gen": 3
  },
  {
   "id": 254,
   "name": "sceptile-mega",
   "displayName": "Mega Sceptile",
-  "artId": 10065
+  "artId": 10065,
+  "gen": 6
  },
  {
   "id": 255,
   "name": "torchic",
   "displayName": "Torchic",
-  "artId": 255
+  "artId": 255,
+  "gen": 3
  },
  {
   "id": 256,
   "name": "combusken",
   "displayName": "Combusken",
-  "artId": 256
+  "artId": 256,
+  "gen": 3
  },
  {
   "id": 257,
   "name": "blaziken",
   "displayName": "Blaziken",
-  "artId": 257
+  "artId": 257,
+  "gen": 3
  },
  {
   "id": 257,
   "name": "blaziken-mega",
   "displayName": "Mega Blaziken",
-  "artId": 10050
+  "artId": 10050,
+  "gen": 6
  },
  {
   "id": 258,
   "name": "mudkip",
   "displayName": "Mudkip",
-  "artId": 258
+  "artId": 258,
+  "gen": 3
  },
  {
   "id": 259,
   "name": "marshtomp",
   "displayName": "Marshtomp",
-  "artId": 259
+  "artId": 259,
+  "gen": 3
  },
  {
   "id": 260,
   "name": "swampert",
   "displayName": "Swampert",
-  "artId": 260
+  "artId": 260,
+  "gen": 3
  },
  {
   "id": 260,
   "name": "swampert-mega",
   "displayName": "Mega Swampert",
-  "artId": 10064
+  "artId": 10064,
+  "gen": 6
  },
  {
   "id": 261,
   "name": "poochyena",
   "displayName": "Poochyena",
-  "artId": 261
+  "artId": 261,
+  "gen": 3
  },
  {
   "id": 262,
   "name": "mightyena",
   "displayName": "Mightyena",
-  "artId": 262
+  "artId": 262,
+  "gen": 3
  },
  {
   "id": 263,
   "name": "zigzagoon",
   "displayName": "Zigzagoon",
-  "artId": 263
+  "artId": 263,
+  "gen": 3
  },
  {
   "id": 263,
   "name": "zigzagoon-galar",
   "displayName": "Galarian Zigzagoon",
-  "artId": 10174
+  "artId": 10174,
+  "gen": 8
  },
  {
   "id": 264,
   "name": "linoone",
   "displayName": "Linoone",
-  "artId": 264
+  "artId": 264,
+  "gen": 3
  },
  {
   "id": 264,
   "name": "linoone-galar",
   "displayName": "Galarian Linoone",
-  "artId": 10175
+  "artId": 10175,
+  "gen": 8
  },
  {
   "id": 265,
   "name": "wurmple",
   "displayName": "Wurmple",
-  "artId": 265
+  "artId": 265,
+  "gen": 3
  },
  {
   "id": 266,
   "name": "silcoon",
   "displayName": "Silcoon",
-  "artId": 266
+  "artId": 266,
+  "gen": 3
  },
  {
   "id": 267,
   "name": "beautifly",
   "displayName": "Beautifly",
-  "artId": 267
+  "artId": 267,
+  "gen": 3
  },
  {
   "id": 268,
   "name": "cascoon",
   "displayName": "Cascoon",
-  "artId": 268
+  "artId": 268,
+  "gen": 3
  },
  {
   "id": 269,
   "name": "dustox",
   "displayName": "Dustox",
-  "artId": 269
+  "artId": 269,
+  "gen": 3
  },
  {
   "id": 270,
   "name": "lotad",
   "displayName": "Lotad",
-  "artId": 270
+  "artId": 270,
+  "gen": 3
  },
  {
   "id": 271,
   "name": "lombre",
   "displayName": "Lombre",
-  "artId": 271
+  "artId": 271,
+  "gen": 3
  },
  {
   "id": 272,
   "name": "ludicolo",
   "displayName": "Ludicolo",
-  "artId": 272
+  "artId": 272,
+  "gen": 3
  },
  {
   "id": 273,
   "name": "seedot",
   "displayName": "Seedot",
-  "artId": 273
+  "artId": 273,
+  "gen": 3
  },
  {
   "id": 274,
   "name": "nuzleaf",
   "displayName": "Nuzleaf",
-  "artId": 274
+  "artId": 274,
+  "gen": 3
  },
  {
   "id": 275,
   "name": "shiftry",
   "displayName": "Shiftry",
-  "artId": 275
+  "artId": 275,
+  "gen": 3
  },
  {
   "id": 276,
   "name": "taillow",
   "displayName": "Taillow",
-  "artId": 276
+  "artId": 276,
+  "gen": 3
  },
  {
   "id": 277,
   "name": "swellow",
   "displayName": "Swellow",
-  "artId": 277
+  "artId": 277,
+  "gen": 3
  },
  {
   "id": 278,
   "name": "wingull",
   "displayName": "Wingull",
-  "artId": 278
+  "artId": 278,
+  "gen": 3
  },
  {
   "id": 279,
   "name": "pelipper",
   "displayName": "Pelipper",
-  "artId": 279
+  "artId": 279,
+  "gen": 3
  },
  {
   "id": 280,
   "name": "ralts",
   "displayName": "Ralts",
-  "artId": 280
+  "artId": 280,
+  "gen": 3
  },
  {
   "id": 281,
   "name": "kirlia",
   "displayName": "Kirlia",
-  "artId": 281
+  "artId": 281,
+  "gen": 3
  },
  {
   "id": 282,
   "name": "gardevoir",
   "displayName": "Gardevoir",
-  "artId": 282
+  "artId": 282,
+  "gen": 3
  },
  {
   "id": 282,
   "name": "gardevoir-mega",
   "displayName": "Mega Gardevoir",
-  "artId": 10051
+  "artId": 10051,
+  "gen": 6
  },
  {
   "id": 283,
   "name": "surskit",
   "displayName": "Surskit",
-  "artId": 283
+  "artId": 283,
+  "gen": 3
  },
  {
   "id": 284,
   "name": "masquerain",
   "displayName": "Masquerain",
-  "artId": 284
+  "artId": 284,
+  "gen": 3
  },
  {
   "id": 285,
   "name": "shroomish",
   "displayName": "Shroomish",
-  "artId": 285
+  "artId": 285,
+  "gen": 3
  },
  {
   "id": 286,
   "name": "breloom",
   "displayName": "Breloom",
-  "artId": 286
+  "artId": 286,
+  "gen": 3
  },
  {
   "id": 287,
   "name": "slakoth",
   "displayName": "Slakoth",
-  "artId": 287
+  "artId": 287,
+  "gen": 3
  },
  {
   "id": 288,
   "name": "vigoroth",
   "displayName": "Vigoroth",
-  "artId": 288
+  "artId": 288,
+  "gen": 3
  },
  {
   "id": 289,
   "name": "slaking",
   "displayName": "Slaking",
-  "artId": 289
+  "artId": 289,
+  "gen": 3
  },
  {
   "id": 290,
   "name": "nincada",
   "displayName": "Nincada",
-  "artId": 290
+  "artId": 290,
+  "gen": 3
  },
  {
   "id": 291,
   "name": "ninjask",
   "displayName": "Ninjask",
-  "artId": 291
+  "artId": 291,
+  "gen": 3
  },
  {
   "id": 292,
   "name": "shedinja",
   "displayName": "Shedinja",
-  "artId": 292
+  "artId": 292,
+  "gen": 3
  },
  {
   "id": 293,
   "name": "whismur",
   "displayName": "Whismur",
-  "artId": 293
+  "artId": 293,
+  "gen": 3
  },
  {
   "id": 294,
   "name": "loudred",
   "displayName": "Loudred",
-  "artId": 294
+  "artId": 294,
+  "gen": 3
  },
  {
   "id": 295,
   "name": "exploud",
   "displayName": "Exploud",
-  "artId": 295
+  "artId": 295,
+  "gen": 3
  },
  {
   "id": 296,
   "name": "makuhita",
   "displayName": "Makuhita",
-  "artId": 296
+  "artId": 296,
+  "gen": 3
  },
  {
   "id": 297,
   "name": "hariyama",
   "displayName": "Hariyama",
-  "artId": 297
+  "artId": 297,
+  "gen": 3
  },
  {
   "id": 298,
   "name": "azurill",
   "displayName": "Azurill",
-  "artId": 298
+  "artId": 298,
+  "gen": 3
  },
  {
   "id": 299,
   "name": "nosepass",
   "displayName": "Nosepass",
-  "artId": 299
+  "artId": 299,
+  "gen": 3
  },
  {
   "id": 300,
   "name": "skitty",
   "displayName": "Skitty",
-  "artId": 300
+  "artId": 300,
+  "gen": 3
  },
  {
   "id": 301,
   "name": "delcatty",
   "displayName": "Delcatty",
-  "artId": 301
+  "artId": 301,
+  "gen": 3
  },
  {
   "id": 302,
   "name": "sableye",
   "displayName": "Sableye",
-  "artId": 302
+  "artId": 302,
+  "gen": 3
  },
  {
   "id": 302,
   "name": "sableye-mega",
   "displayName": "Mega Sableye",
-  "artId": 10066
+  "artId": 10066,
+  "gen": 6
  },
  {
   "id": 303,
   "name": "mawile",
   "displayName": "Mawile",
-  "artId": 303
+  "artId": 303,
+  "gen": 3
  },
  {
   "id": 303,
   "name": "mawile-mega",
   "displayName": "Mega Mawile",
-  "artId": 10052
+  "artId": 10052,
+  "gen": 6
  },
  {
   "id": 304,
   "name": "aron",
   "displayName": "Aron",
-  "artId": 304
+  "artId": 304,
+  "gen": 3
  },
  {
   "id": 305,
   "name": "lairon",
   "displayName": "Lairon",
-  "artId": 305
+  "artId": 305,
+  "gen": 3
  },
  {
   "id": 306,
   "name": "aggron",
   "displayName": "Aggron",
-  "artId": 306
+  "artId": 306,
+  "gen": 3
  },
  {
   "id": 306,
   "name": "aggron-mega",
   "displayName": "Mega Aggron",
-  "artId": 10053
+  "artId": 10053,
+  "gen": 6
  },
  {
   "id": 307,
   "name": "meditite",
   "displayName": "Meditite",
-  "artId": 307
+  "artId": 307,
+  "gen": 3
  },
  {
   "id": 308,
   "name": "medicham",
   "displayName": "Medicham",
-  "artId": 308
+  "artId": 308,
+  "gen": 3
  },
  {
   "id": 308,
   "name": "medicham-mega",
   "displayName": "Mega Medicham",
-  "artId": 10054
+  "artId": 10054,
+  "gen": 6
  },
  {
   "id": 309,
   "name": "electrike",
   "displayName": "Electrike",
-  "artId": 309
+  "artId": 309,
+  "gen": 3
  },
  {
   "id": 310,
   "name": "manectric",
   "displayName": "Manectric",
-  "artId": 310
+  "artId": 310,
+  "gen": 3
  },
  {
   "id": 310,
   "name": "manectric-mega",
   "displayName": "Mega Manectric",
-  "artId": 10055
+  "artId": 10055,
+  "gen": 6
  },
  {
   "id": 311,
   "name": "plusle",
   "displayName": "Plusle",
-  "artId": 311
+  "artId": 311,
+  "gen": 3
  },
  {
   "id": 312,
   "name": "minun",
   "displayName": "Minun",
-  "artId": 312
+  "artId": 312,
+  "gen": 3
  },
  {
   "id": 313,
   "name": "volbeat",
   "displayName": "Volbeat",
-  "artId": 313
+  "artId": 313,
+  "gen": 3
  },
  {
   "id": 314,
   "name": "illumise",
   "displayName": "Illumise",
-  "artId": 314
+  "artId": 314,
+  "gen": 3
  },
  {
   "id": 315,
   "name": "roselia",
   "displayName": "Roselia",
-  "artId": 315
+  "artId": 315,
+  "gen": 3
  },
  {
   "id": 316,
   "name": "gulpin",
   "displayName": "Gulpin",
-  "artId": 316
+  "artId": 316,
+  "gen": 3
  },
  {
   "id": 317,
   "name": "swalot",
   "displayName": "Swalot",
-  "artId": 317
+  "artId": 317,
+  "gen": 3
  },
  {
   "id": 318,
   "name": "carvanha",
   "displayName": "Carvanha",
-  "artId": 318
+  "artId": 318,
+  "gen": 3
  },
  {
   "id": 319,
   "name": "sharpedo",
   "displayName": "Sharpedo",
-  "artId": 319
+  "artId": 319,
+  "gen": 3
  },
  {
   "id": 319,
   "name": "sharpedo-mega",
   "displayName": "Mega Sharpedo",
-  "artId": 10070
+  "artId": 10070,
+  "gen": 6
  },
  {
   "id": 320,
   "name": "wailmer",
   "displayName": "Wailmer",
-  "artId": 320
+  "artId": 320,
+  "gen": 3
  },
  {
   "id": 321,
   "name": "wailord",
   "displayName": "Wailord",
-  "artId": 321
+  "artId": 321,
+  "gen": 3
  },
  {
   "id": 322,
   "name": "numel",
   "displayName": "Numel",
-  "artId": 322
+  "artId": 322,
+  "gen": 3
  },
  {
   "id": 323,
   "name": "camerupt",
   "displayName": "Camerupt",
-  "artId": 323
+  "artId": 323,
+  "gen": 3
  },
  {
   "id": 323,
   "name": "camerupt-mega",
   "displayName": "Mega Camerupt",
-  "artId": 10087
+  "artId": 10087,
+  "gen": 6
  },
  {
   "id": 324,
   "name": "torkoal",
   "displayName": "Torkoal",
-  "artId": 324
+  "artId": 324,
+  "gen": 3
  },
  {
   "id": 325,
   "name": "spoink",
   "displayName": "Spoink",
-  "artId": 325
+  "artId": 325,
+  "gen": 3
  },
  {
   "id": 326,
   "name": "grumpig",
   "displayName": "Grumpig",
-  "artId": 326
+  "artId": 326,
+  "gen": 3
  },
  {
   "id": 327,
   "name": "spinda",
   "displayName": "Spinda",
-  "artId": 327
+  "artId": 327,
+  "gen": 3
  },
  {
   "id": 328,
   "name": "trapinch",
   "displayName": "Trapinch",
-  "artId": 328
+  "artId": 328,
+  "gen": 3
  },
  {
   "id": 329,
   "name": "vibrava",
   "displayName": "Vibrava",
-  "artId": 329
+  "artId": 329,
+  "gen": 3
  },
  {
   "id": 330,
   "name": "flygon",
   "displayName": "Flygon",
-  "artId": 330
+  "artId": 330,
+  "gen": 3
  },
  {
   "id": 331,
   "name": "cacnea",
   "displayName": "Cacnea",
-  "artId": 331
+  "artId": 331,
+  "gen": 3
  },
  {
   "id": 332,
   "name": "cacturne",
   "displayName": "Cacturne",
-  "artId": 332
+  "artId": 332,
+  "gen": 3
  },
  {
   "id": 333,
   "name": "swablu",
   "displayName": "Swablu",
-  "artId": 333
+  "artId": 333,
+  "gen": 3
  },
  {
   "id": 334,
   "name": "altaria",
   "displayName": "Altaria",
-  "artId": 334
+  "artId": 334,
+  "gen": 3
  },
  {
   "id": 334,
   "name": "altaria-mega",
   "displayName": "Mega Altaria",
-  "artId": 10067
+  "artId": 10067,
+  "gen": 6
  },
  {
   "id": 335,
   "name": "zangoose",
   "displayName": "Zangoose",
-  "artId": 335
+  "artId": 335,
+  "gen": 3
  },
  {
   "id": 336,
   "name": "seviper",
   "displayName": "Seviper",
-  "artId": 336
+  "artId": 336,
+  "gen": 3
  },
  {
   "id": 337,
   "name": "lunatone",
   "displayName": "Lunatone",
-  "artId": 337
+  "artId": 337,
+  "gen": 3
  },
  {
   "id": 338,
   "name": "solrock",
   "displayName": "Solrock",
-  "artId": 338
+  "artId": 338,
+  "gen": 3
  },
  {
   "id": 339,
   "name": "barboach",
   "displayName": "Barboach",
-  "artId": 339
+  "artId": 339,
+  "gen": 3
  },
  {
   "id": 340,
   "name": "whiscash",
   "displayName": "Whiscash",
-  "artId": 340
+  "artId": 340,
+  "gen": 3
  },
  {
   "id": 341,
   "name": "corphish",
   "displayName": "Corphish",
-  "artId": 341
+  "artId": 341,
+  "gen": 3
  },
  {
   "id": 342,
   "name": "crawdaunt",
   "displayName": "Crawdaunt",
-  "artId": 342
+  "artId": 342,
+  "gen": 3
  },
  {
   "id": 343,
   "name": "baltoy",
   "displayName": "Baltoy",
-  "artId": 343
+  "artId": 343,
+  "gen": 3
  },
  {
   "id": 344,
   "name": "claydol",
   "displayName": "Claydol",
-  "artId": 344
+  "artId": 344,
+  "gen": 3
  },
  {
   "id": 345,
   "name": "lileep",
   "displayName": "Lileep",
-  "artId": 345
+  "artId": 345,
+  "gen": 3
  },
  {
   "id": 346,
   "name": "cradily",
   "displayName": "Cradily",
-  "artId": 346
+  "artId": 346,
+  "gen": 3
  },
  {
   "id": 347,
   "name": "anorith",
   "displayName": "Anorith",
-  "artId": 347
+  "artId": 347,
+  "gen": 3
  },
  {
   "id": 348,
   "name": "armaldo",
   "displayName": "Armaldo",
-  "artId": 348
+  "artId": 348,
+  "gen": 3
  },
  {
   "id": 349,
   "name": "feebas",
   "displayName": "Feebas",
-  "artId": 349
+  "artId": 349,
+  "gen": 3
  },
  {
   "id": 350,
   "name": "milotic",
   "displayName": "Milotic",
-  "artId": 350
+  "artId": 350,
+  "gen": 3
  },
  {
   "id": 351,
   "name": "castform",
   "displayName": "Castform",
-  "artId": 351
+  "artId": 351,
+  "gen": 3
  },
  {
   "id": 351,
   "name": "castform-rainy",
   "displayName": "Castform (Rainy)",
-  "artId": 10014
+  "artId": 10014,
+  "gen": 3
  },
  {
   "id": 351,
   "name": "castform-snowy",
   "displayName": "Castform (Snowy)",
-  "artId": 10015
+  "artId": 10015,
+  "gen": 3
  },
  {
   "id": 351,
   "name": "castform-sunny",
   "displayName": "Castform (Sunny)",
-  "artId": 10013
+  "artId": 10013,
+  "gen": 3
  },
  {
   "id": 352,
   "name": "kecleon",
   "displayName": "Kecleon",
-  "artId": 352
+  "artId": 352,
+  "gen": 3
  },
  {
   "id": 353,
   "name": "shuppet",
   "displayName": "Shuppet",
-  "artId": 353
+  "artId": 353,
+  "gen": 3
  },
  {
   "id": 354,
   "name": "banette",
   "displayName": "Banette",
-  "artId": 354
+  "artId": 354,
+  "gen": 3
  },
  {
   "id": 354,
   "name": "banette-mega",
   "displayName": "Mega Banette",
-  "artId": 10056
+  "artId": 10056,
+  "gen": 6
  },
  {
   "id": 355,
   "name": "duskull",
   "displayName": "Duskull",
-  "artId": 355
+  "artId": 355,
+  "gen": 3
  },
  {
   "id": 356,
   "name": "dusclops",
   "displayName": "Dusclops",
-  "artId": 356
+  "artId": 356,
+  "gen": 3
  },
  {
   "id": 357,
   "name": "tropius",
   "displayName": "Tropius",
-  "artId": 357
+  "artId": 357,
+  "gen": 3
  },
  {
   "id": 358,
   "name": "chimecho",
   "displayName": "Chimecho",
-  "artId": 358
+  "artId": 358,
+  "gen": 3
  },
  {
   "id": 358,
   "name": "chimecho-mega",
   "displayName": "Mega Chimecho",
-  "artId": 10306
+  "artId": 10306,
+  "gen": 9
  },
  {
   "id": 359,
   "name": "absol",
   "displayName": "Absol",
-  "artId": 359
+  "artId": 359,
+  "gen": 3
  },
  {
   "id": 359,
   "name": "absol-mega",
   "displayName": "Mega Absol",
-  "artId": 10057
+  "artId": 10057,
+  "gen": 6
  },
  {
   "id": 359,
   "name": "absol-mega-z",
   "displayName": "Absol (Mega Z)",
-  "artId": 10307
+  "artId": 10307,
+  "gen": 9
  },
  {
   "id": 360,
   "name": "wynaut",
   "displayName": "Wynaut",
-  "artId": 360
+  "artId": 360,
+  "gen": 3
  },
  {
   "id": 361,
   "name": "snorunt",
   "displayName": "Snorunt",
-  "artId": 361
+  "artId": 361,
+  "gen": 3
  },
  {
   "id": 362,
   "name": "glalie",
   "displayName": "Glalie",
-  "artId": 362
+  "artId": 362,
+  "gen": 3
  },
  {
   "id": 362,
   "name": "glalie-mega",
   "displayName": "Mega Glalie",
-  "artId": 10074
+  "artId": 10074,
+  "gen": 6
  },
  {
   "id": 363,
   "name": "spheal",
   "displayName": "Spheal",
-  "artId": 363
+  "artId": 363,
+  "gen": 3
  },
  {
   "id": 364,
   "name": "sealeo",
   "displayName": "Sealeo",
-  "artId": 364
+  "artId": 364,
+  "gen": 3
  },
  {
   "id": 365,
   "name": "walrein",
   "displayName": "Walrein",
-  "artId": 365
+  "artId": 365,
+  "gen": 3
  },
  {
   "id": 366,
   "name": "clamperl",
   "displayName": "Clamperl",
-  "artId": 366
+  "artId": 366,
+  "gen": 3
  },
  {
   "id": 367,
   "name": "huntail",
   "displayName": "Huntail",
-  "artId": 367
+  "artId": 367,
+  "gen": 3
  },
  {
   "id": 368,
   "name": "gorebyss",
   "displayName": "Gorebyss",
-  "artId": 368
+  "artId": 368,
+  "gen": 3
  },
  {
   "id": 369,
   "name": "relicanth",
   "displayName": "Relicanth",
-  "artId": 369
+  "artId": 369,
+  "gen": 3
  },
  {
   "id": 370,
   "name": "luvdisc",
   "displayName": "Luvdisc",
-  "artId": 370
+  "artId": 370,
+  "gen": 3
  },
  {
   "id": 371,
   "name": "bagon",
   "displayName": "Bagon",
-  "artId": 371
+  "artId": 371,
+  "gen": 3
  },
  {
   "id": 372,
   "name": "shelgon",
   "displayName": "Shelgon",
-  "artId": 372
+  "artId": 372,
+  "gen": 3
  },
  {
   "id": 373,
   "name": "salamence",
   "displayName": "Salamence",
-  "artId": 373
+  "artId": 373,
+  "gen": 3
  },
  {
   "id": 373,
   "name": "salamence-mega",
   "displayName": "Mega Salamence",
-  "artId": 10089
+  "artId": 10089,
+  "gen": 6
  },
  {
   "id": 374,
   "name": "beldum",
   "displayName": "Beldum",
-  "artId": 374
+  "artId": 374,
+  "gen": 3
  },
  {
   "id": 375,
   "name": "metang",
   "displayName": "Metang",
-  "artId": 375
+  "artId": 375,
+  "gen": 3
  },
  {
   "id": 376,
   "name": "metagross",
   "displayName": "Metagross",
-  "artId": 376
+  "artId": 376,
+  "gen": 3
  },
  {
   "id": 376,
   "name": "metagross-mega",
   "displayName": "Mega Metagross",
-  "artId": 10076
+  "artId": 10076,
+  "gen": 6
  },
  {
   "id": 377,
   "name": "regirock",
   "displayName": "Regirock",
-  "artId": 377
+  "artId": 377,
+  "gen": 3
  },
  {
   "id": 378,
   "name": "regice",
   "displayName": "Regice",
-  "artId": 378
+  "artId": 378,
+  "gen": 3
  },
  {
   "id": 379,
   "name": "registeel",
   "displayName": "Registeel",
-  "artId": 379
+  "artId": 379,
+  "gen": 3
  },
  {
   "id": 380,
   "name": "latias",
   "displayName": "Latias",
-  "artId": 380
+  "artId": 380,
+  "gen": 3
  },
  {
   "id": 380,
   "name": "latias-mega",
   "displayName": "Mega Latias",
-  "artId": 10062
+  "artId": 10062,
+  "gen": 6
  },
  {
   "id": 381,
   "name": "latios",
   "displayName": "Latios",
-  "artId": 381
+  "artId": 381,
+  "gen": 3
  },
  {
   "id": 381,
   "name": "latios-mega",
   "displayName": "Mega Latios",
-  "artId": 10063
+  "artId": 10063,
+  "gen": 6
  },
  {
   "id": 382,
   "name": "kyogre",
   "displayName": "Kyogre",
-  "artId": 382
+  "artId": 382,
+  "gen": 3
  },
  {
   "id": 382,
   "name": "kyogre-primal",
   "displayName": "Primal Kyogre",
-  "artId": 10077
+  "artId": 10077,
+  "gen": 6
  },
  {
   "id": 383,
   "name": "groudon",
   "displayName": "Groudon",
-  "artId": 383
+  "artId": 383,
+  "gen": 3
  },
  {
   "id": 383,
   "name": "groudon-primal",
   "displayName": "Primal Groudon",
-  "artId": 10078
+  "artId": 10078,
+  "gen": 6
  },
  {
   "id": 384,
   "name": "rayquaza",
   "displayName": "Rayquaza",
-  "artId": 384
+  "artId": 384,
+  "gen": 3
  },
  {
   "id": 384,
   "name": "rayquaza-mega",
   "displayName": "Mega Rayquaza",
-  "artId": 10079
+  "artId": 10079,
+  "gen": 6
  },
  {
   "id": 385,
   "name": "jirachi",
   "displayName": "Jirachi",
-  "artId": 385
+  "artId": 385,
+  "gen": 3
  },
  {
   "id": 386,
   "name": "deoxys",
   "displayName": "Deoxys",
-  "artId": 386
+  "artId": 386,
+  "gen": 3
  },
  {
   "id": 386,
   "name": "deoxys-attack",
   "displayName": "Deoxys (Attack)",
-  "artId": 10001
+  "artId": 10001,
+  "gen": 3
  },
  {
   "id": 386,
   "name": "deoxys-defense",
   "displayName": "Deoxys (Defense)",
-  "artId": 10002
+  "artId": 10002,
+  "gen": 3
  },
  {
   "id": 386,
   "name": "deoxys-speed",
   "displayName": "Deoxys (Speed)",
-  "artId": 10003
+  "artId": 10003,
+  "gen": 3
  },
  {
   "id": 387,
   "name": "turtwig",
   "displayName": "Turtwig",
-  "artId": 387
+  "artId": 387,
+  "gen": 4
  },
  {
   "id": 388,
   "name": "grotle",
   "displayName": "Grotle",
-  "artId": 388
+  "artId": 388,
+  "gen": 4
  },
  {
   "id": 389,
   "name": "torterra",
   "displayName": "Torterra",
-  "artId": 389
+  "artId": 389,
+  "gen": 4
  },
  {
   "id": 390,
   "name": "chimchar",
   "displayName": "Chimchar",
-  "artId": 390
+  "artId": 390,
+  "gen": 4
  },
  {
   "id": 391,
   "name": "monferno",
   "displayName": "Monferno",
-  "artId": 391
+  "artId": 391,
+  "gen": 4
  },
  {
   "id": 392,
   "name": "infernape",
   "displayName": "Infernape",
-  "artId": 392
+  "artId": 392,
+  "gen": 4
  },
  {
   "id": 393,
   "name": "piplup",
   "displayName": "Piplup",
-  "artId": 393
+  "artId": 393,
+  "gen": 4
  },
  {
   "id": 394,
   "name": "prinplup",
   "displayName": "Prinplup",
-  "artId": 394
+  "artId": 394,
+  "gen": 4
  },
  {
   "id": 395,
   "name": "empoleon",
   "displayName": "Empoleon",
-  "artId": 395
+  "artId": 395,
+  "gen": 4
  },
  {
   "id": 396,
   "name": "starly",
   "displayName": "Starly",
-  "artId": 396
+  "artId": 396,
+  "gen": 4
  },
  {
   "id": 397,
   "name": "staravia",
   "displayName": "Staravia",
-  "artId": 397
+  "artId": 397,
+  "gen": 4
  },
  {
   "id": 398,
   "name": "staraptor",
   "displayName": "Staraptor",
-  "artId": 398
+  "artId": 398,
+  "gen": 4
  },
  {
   "id": 398,
   "name": "staraptor-mega",
   "displayName": "Mega Staraptor",
-  "artId": 10308
+  "artId": 10308,
+  "gen": 9
  },
  {
   "id": 399,
   "name": "bidoof",
   "displayName": "Bidoof",
-  "artId": 399
+  "artId": 399,
+  "gen": 4
  },
  {
   "id": 400,
   "name": "bibarel",
   "displayName": "Bibarel",
-  "artId": 400
+  "artId": 400,
+  "gen": 4
  },
  {
   "id": 401,
   "name": "kricketot",
   "displayName": "Kricketot",
-  "artId": 401
+  "artId": 401,
+  "gen": 4
  },
  {
   "id": 402,
   "name": "kricketune",
   "displayName": "Kricketune",
-  "artId": 402
+  "artId": 402,
+  "gen": 4
  },
  {
   "id": 403,
   "name": "shinx",
   "displayName": "Shinx",
-  "artId": 403
+  "artId": 403,
+  "gen": 4
  },
  {
   "id": 404,
   "name": "luxio",
   "displayName": "Luxio",
-  "artId": 404
+  "artId": 404,
+  "gen": 4
  },
  {
   "id": 405,
   "name": "luxray",
   "displayName": "Luxray",
-  "artId": 405
+  "artId": 405,
+  "gen": 4
  },
  {
   "id": 406,
   "name": "budew",
   "displayName": "Budew",
-  "artId": 406
+  "artId": 406,
+  "gen": 4
  },
  {
   "id": 407,
   "name": "roserade",
   "displayName": "Roserade",
-  "artId": 407
+  "artId": 407,
+  "gen": 4
  },
  {
   "id": 408,
   "name": "cranidos",
   "displayName": "Cranidos",
-  "artId": 408
+  "artId": 408,
+  "gen": 4
  },
  {
   "id": 409,
   "name": "rampardos",
   "displayName": "Rampardos",
-  "artId": 409
+  "artId": 409,
+  "gen": 4
  },
  {
   "id": 410,
   "name": "shieldon",
   "displayName": "Shieldon",
-  "artId": 410
+  "artId": 410,
+  "gen": 4
  },
  {
   "id": 411,
   "name": "bastiodon",
   "displayName": "Bastiodon",
-  "artId": 411
+  "artId": 411,
+  "gen": 4
  },
  {
   "id": 412,
   "name": "burmy",
   "displayName": "Burmy",
-  "artId": 412
+  "artId": 412,
+  "gen": 4
  },
  {
   "id": 413,
   "name": "wormadam",
   "displayName": "Wormadam",
-  "artId": 413
+  "artId": 413,
+  "gen": 4
  },
  {
   "id": 413,
   "name": "wormadam-sandy",
   "displayName": "Wormadam (Sandy)",
-  "artId": 10004
+  "artId": 10004,
+  "gen": 4
  },
  {
   "id": 413,
   "name": "wormadam-trash",
   "displayName": "Wormadam (Trash)",
-  "artId": 10005
+  "artId": 10005,
+  "gen": 4
  },
  {
   "id": 414,
   "name": "mothim",
   "displayName": "Mothim",
-  "artId": 414
+  "artId": 414,
+  "gen": 4
  },
  {
   "id": 415,
   "name": "combee",
   "displayName": "Combee",
-  "artId": 415
+  "artId": 415,
+  "gen": 4
  },
  {
   "id": 416,
   "name": "vespiquen",
   "displayName": "Vespiquen",
-  "artId": 416
+  "artId": 416,
+  "gen": 4
  },
  {
   "id": 417,
   "name": "pachirisu",
   "displayName": "Pachirisu",
-  "artId": 417
+  "artId": 417,
+  "gen": 4
  },
  {
   "id": 418,
   "name": "buizel",
   "displayName": "Buizel",
-  "artId": 418
+  "artId": 418,
+  "gen": 4
  },
  {
   "id": 419,
   "name": "floatzel",
   "displayName": "Floatzel",
-  "artId": 419
+  "artId": 419,
+  "gen": 4
  },
  {
   "id": 420,
   "name": "cherubi",
   "displayName": "Cherubi",
-  "artId": 420
+  "artId": 420,
+  "gen": 4
  },
  {
   "id": 421,
   "name": "cherrim",
   "displayName": "Cherrim",
   "artId": 421,
+  "gen": 4,
   "art": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/421-sunshine.png"
  },
  {
   "id": 422,
   "name": "shellos",
   "displayName": "Shellos",
-  "artId": 422
+  "artId": 422,
+  "gen": 4
  },
  {
   "id": 423,
   "name": "gastrodon",
   "displayName": "Gastrodon",
-  "artId": 423
+  "artId": 423,
+  "gen": 4
  },
  {
   "id": 424,
   "name": "ambipom",
   "displayName": "Ambipom",
-  "artId": 424
+  "artId": 424,
+  "gen": 4
  },
  {
   "id": 425,
   "name": "drifloon",
   "displayName": "Drifloon",
-  "artId": 425
+  "artId": 425,
+  "gen": 4
  },
  {
   "id": 426,
   "name": "drifblim",
   "displayName": "Drifblim",
-  "artId": 426
+  "artId": 426,
+  "gen": 4
  },
  {
   "id": 427,
   "name": "buneary",
   "displayName": "Buneary",
-  "artId": 427
+  "artId": 427,
+  "gen": 4
  },
  {
   "id": 428,
   "name": "lopunny",
   "displayName": "Lopunny",
-  "artId": 428
+  "artId": 428,
+  "gen": 4
  },
  {
   "id": 428,
   "name": "lopunny-mega",
   "displayName": "Mega Lopunny",
-  "artId": 10088
+  "artId": 10088,
+  "gen": 6
  },
  {
   "id": 429,
   "name": "mismagius",
   "displayName": "Mismagius",
-  "artId": 429
+  "artId": 429,
+  "gen": 4
  },
  {
   "id": 430,
   "name": "honchkrow",
   "displayName": "Honchkrow",
-  "artId": 430
+  "artId": 430,
+  "gen": 4
  },
  {
   "id": 431,
   "name": "glameow",
   "displayName": "Glameow",
-  "artId": 431
+  "artId": 431,
+  "gen": 4
  },
  {
   "id": 432,
   "name": "purugly",
   "displayName": "Purugly",
-  "artId": 432
+  "artId": 432,
+  "gen": 4
  },
  {
   "id": 433,
   "name": "chingling",
   "displayName": "Chingling",
-  "artId": 433
+  "artId": 433,
+  "gen": 4
  },
  {
   "id": 434,
   "name": "stunky",
   "displayName": "Stunky",
-  "artId": 434
+  "artId": 434,
+  "gen": 4
  },
  {
   "id": 435,
   "name": "skuntank",
   "displayName": "Skuntank",
-  "artId": 435
+  "artId": 435,
+  "gen": 4
  },
  {
   "id": 436,
   "name": "bronzor",
   "displayName": "Bronzor",
-  "artId": 436
+  "artId": 436,
+  "gen": 4
  },
  {
   "id": 437,
   "name": "bronzong",
   "displayName": "Bronzong",
-  "artId": 437
+  "artId": 437,
+  "gen": 4
  },
  {
   "id": 438,
   "name": "bonsly",
   "displayName": "Bonsly",
-  "artId": 438
+  "artId": 438,
+  "gen": 4
  },
  {
   "id": 439,
   "name": "mime-jr",
   "displayName": "Mime Jr.",
-  "artId": 439
+  "artId": 439,
+  "gen": 4
  },
  {
   "id": 440,
   "name": "happiny",
   "displayName": "Happiny",
-  "artId": 440
+  "artId": 440,
+  "gen": 4
  },
  {
   "id": 441,
   "name": "chatot",
   "displayName": "Chatot",
-  "artId": 441
+  "artId": 441,
+  "gen": 4
  },
  {
   "id": 442,
   "name": "spiritomb",
   "displayName": "Spiritomb",
-  "artId": 442
+  "artId": 442,
+  "gen": 4
  },
  {
   "id": 443,
   "name": "gible",
   "displayName": "Gible",
-  "artId": 443
+  "artId": 443,
+  "gen": 4
  },
  {
   "id": 444,
   "name": "gabite",
   "displayName": "Gabite",
-  "artId": 444
+  "artId": 444,
+  "gen": 4
  },
  {
   "id": 445,
   "name": "garchomp",
   "displayName": "Garchomp",
-  "artId": 445
+  "artId": 445,
+  "gen": 4
  },
  {
   "id": 445,
   "name": "garchomp-mega",
   "displayName": "Mega Garchomp",
-  "artId": 10058
+  "artId": 10058,
+  "gen": 6
  },
  {
   "id": 445,
   "name": "garchomp-mega-z",
   "displayName": "Garchomp (Mega Z)",
-  "artId": 10309
+  "artId": 10309,
+  "gen": 9
  },
  {
   "id": 446,
   "name": "munchlax",
   "displayName": "Munchlax",
-  "artId": 446
+  "artId": 446,
+  "gen": 4
  },
  {
   "id": 447,
   "name": "riolu",
   "displayName": "Riolu",
-  "artId": 447
+  "artId": 447,
+  "gen": 4
  },
  {
   "id": 448,
   "name": "lucario",
   "displayName": "Lucario",
-  "artId": 448
+  "artId": 448,
+  "gen": 4
  },
  {
   "id": 448,
   "name": "lucario-mega",
   "displayName": "Mega Lucario",
-  "artId": 10059
+  "artId": 10059,
+  "gen": 6
  },
  {
   "id": 448,
   "name": "lucario-mega-z",
   "displayName": "Lucario (Mega Z)",
-  "artId": 10310
+  "artId": 10310,
+  "gen": 9
  },
  {
   "id": 449,
   "name": "hippopotas",
   "displayName": "Hippopotas",
-  "artId": 449
+  "artId": 449,
+  "gen": 4
  },
  {
   "id": 450,
   "name": "hippowdon",
   "displayName": "Hippowdon",
-  "artId": 450
+  "artId": 450,
+  "gen": 4
  },
  {
   "id": 451,
   "name": "skorupi",
   "displayName": "Skorupi",
-  "artId": 451
+  "artId": 451,
+  "gen": 4
  },
  {
   "id": 452,
   "name": "drapion",
   "displayName": "Drapion",
-  "artId": 452
+  "artId": 452,
+  "gen": 4
  },
  {
   "id": 453,
   "name": "croagunk",
   "displayName": "Croagunk",
-  "artId": 453
+  "artId": 453,
+  "gen": 4
  },
  {
   "id": 454,
   "name": "toxicroak",
   "displayName": "Toxicroak",
-  "artId": 454
+  "artId": 454,
+  "gen": 4
  },
  {
   "id": 455,
   "name": "carnivine",
   "displayName": "Carnivine",
-  "artId": 455
+  "artId": 455,
+  "gen": 4
  },
  {
   "id": 456,
   "name": "finneon",
   "displayName": "Finneon",
-  "artId": 456
+  "artId": 456,
+  "gen": 4
  },
  {
   "id": 457,
   "name": "lumineon",
   "displayName": "Lumineon",
-  "artId": 457
+  "artId": 457,
+  "gen": 4
  },
  {
   "id": 458,
   "name": "mantyke",
   "displayName": "Mantyke",
-  "artId": 458
+  "artId": 458,
+  "gen": 4
  },
  {
   "id": 459,
   "name": "snover",
   "displayName": "Snover",
-  "artId": 459
+  "artId": 459,
+  "gen": 4
  },
  {
   "id": 460,
   "name": "abomasnow",
   "displayName": "Abomasnow",
-  "artId": 460
+  "artId": 460,
+  "gen": 4
  },
  {
   "id": 460,
   "name": "abomasnow-mega",
   "displayName": "Mega Abomasnow",
-  "artId": 10060
+  "artId": 10060,
+  "gen": 6
  },
  {
   "id": 461,
   "name": "weavile",
   "displayName": "Weavile",
-  "artId": 461
+  "artId": 461,
+  "gen": 4
  },
  {
   "id": 462,
   "name": "magnezone",
   "displayName": "Magnezone",
-  "artId": 462
+  "artId": 462,
+  "gen": 4
  },
  {
   "id": 463,
   "name": "lickilicky",
   "displayName": "Lickilicky",
-  "artId": 463
+  "artId": 463,
+  "gen": 4
  },
  {
   "id": 464,
   "name": "rhyperior",
   "displayName": "Rhyperior",
-  "artId": 464
+  "artId": 464,
+  "gen": 4
  },
  {
   "id": 465,
   "name": "tangrowth",
   "displayName": "Tangrowth",
-  "artId": 465
+  "artId": 465,
+  "gen": 4
  },
  {
   "id": 466,
   "name": "electivire",
   "displayName": "Electivire",
-  "artId": 466
+  "artId": 466,
+  "gen": 4
  },
  {
   "id": 467,
   "name": "magmortar",
   "displayName": "Magmortar",
-  "artId": 467
+  "artId": 467,
+  "gen": 4
  },
  {
   "id": 468,
   "name": "togekiss",
   "displayName": "Togekiss",
-  "artId": 468
+  "artId": 468,
+  "gen": 4
  },
  {
   "id": 469,
   "name": "yanmega",
   "displayName": "Yanmega",
-  "artId": 469
+  "artId": 469,
+  "gen": 4
  },
  {
   "id": 470,
   "name": "leafeon",
   "displayName": "Leafeon",
-  "artId": 470
+  "artId": 470,
+  "gen": 4
  },
  {
   "id": 471,
   "name": "glaceon",
   "displayName": "Glaceon",
-  "artId": 471
+  "artId": 471,
+  "gen": 4
  },
  {
   "id": 472,
   "name": "gliscor",
   "displayName": "Gliscor",
-  "artId": 472
+  "artId": 472,
+  "gen": 4
  },
  {
   "id": 473,
   "name": "mamoswine",
   "displayName": "Mamoswine",
-  "artId": 473
+  "artId": 473,
+  "gen": 4
  },
  {
   "id": 474,
   "name": "porygon-z",
   "displayName": "Porygon-Z",
-  "artId": 474
+  "artId": 474,
+  "gen": 4
  },
  {
   "id": 475,
   "name": "gallade",
   "displayName": "Gallade",
-  "artId": 475
+  "artId": 475,
+  "gen": 4
  },
  {
   "id": 475,
   "name": "gallade-mega",
   "displayName": "Mega Gallade",
-  "artId": 10068
+  "artId": 10068,
+  "gen": 6
  },
  {
   "id": 476,
   "name": "probopass",
   "displayName": "Probopass",
-  "artId": 476
+  "artId": 476,
+  "gen": 4
  },
  {
   "id": 477,
   "name": "dusknoir",
   "displayName": "Dusknoir",
-  "artId": 477
+  "artId": 477,
+  "gen": 4
  },
  {
   "id": 478,
   "name": "froslass",
   "displayName": "Froslass",
-  "artId": 478
+  "artId": 478,
+  "gen": 4
  },
  {
   "id": 478,
   "name": "froslass-mega",
   "displayName": "Mega Froslass",
-  "artId": 10285
+  "artId": 10285,
+  "gen": 9
  },
  {
   "id": 479,
   "name": "rotom",
   "displayName": "Rotom",
-  "artId": 479
+  "artId": 479,
+  "gen": 4
  },
  {
   "id": 479,
   "name": "rotom-fan",
   "displayName": "Rotom (Fan)",
-  "artId": 10011
+  "artId": 10011,
+  "gen": 4
  },
  {
   "id": 479,
   "name": "rotom-frost",
   "displayName": "Rotom (Frost)",
-  "artId": 10010
+  "artId": 10010,
+  "gen": 4
  },
  {
   "id": 479,
   "name": "rotom-heat",
   "displayName": "Rotom (Heat)",
-  "artId": 10008
+  "artId": 10008,
+  "gen": 4
  },
  {
   "id": 479,
   "name": "rotom-mow",
   "displayName": "Rotom (Mow)",
-  "artId": 10012
+  "artId": 10012,
+  "gen": 4
  },
  {
   "id": 479,
   "name": "rotom-wash",
   "displayName": "Rotom (Wash)",
-  "artId": 10009
+  "artId": 10009,
+  "gen": 4
  },
  {
   "id": 480,
   "name": "uxie",
   "displayName": "Uxie",
-  "artId": 480
+  "artId": 480,
+  "gen": 4
  },
  {
   "id": 481,
   "name": "mesprit",
   "displayName": "Mesprit",
-  "artId": 481
+  "artId": 481,
+  "gen": 4
  },
  {
   "id": 482,
   "name": "azelf",
   "displayName": "Azelf",
-  "artId": 482
+  "artId": 482,
+  "gen": 4
  },
  {
   "id": 483,
   "name": "dialga",
   "displayName": "Dialga",
-  "artId": 483
+  "artId": 483,
+  "gen": 4
  },
  {
   "id": 483,
   "name": "dialga-origin",
   "displayName": "Dialga (Origin)",
-  "artId": 10245
+  "artId": 10245,
+  "gen": 8
  },
  {
   "id": 484,
   "name": "palkia",
   "displayName": "Palkia",
-  "artId": 484
+  "artId": 484,
+  "gen": 4
  },
  {
   "id": 484,
   "name": "palkia-origin",
   "displayName": "Palkia (Origin)",
-  "artId": 10246
+  "artId": 10246,
+  "gen": 8
  },
  {
   "id": 485,
   "name": "heatran",
   "displayName": "Heatran",
-  "artId": 485
+  "artId": 485,
+  "gen": 4
  },
  {
   "id": 485,
   "name": "heatran-mega",
   "displayName": "Mega Heatran",
-  "artId": 10311
+  "artId": 10311,
+  "gen": 9
  },
  {
   "id": 486,
   "name": "regigigas",
   "displayName": "Regigigas",
-  "artId": 486
+  "artId": 486,
+  "gen": 4
  },
  {
   "id": 487,
   "name": "giratina",
   "displayName": "Giratina",
-  "artId": 487
+  "artId": 487,
+  "gen": 4
  },
  {
   "id": 487,
   "name": "giratina-origin",
   "displayName": "Giratina (Origin)",
-  "artId": 10007
+  "artId": 10007,
+  "gen": 4
  },
  {
   "id": 488,
   "name": "cresselia",
   "displayName": "Cresselia",
-  "artId": 488
+  "artId": 488,
+  "gen": 4
  },
  {
   "id": 489,
   "name": "phione",
   "displayName": "Phione",
-  "artId": 489
+  "artId": 489,
+  "gen": 4
  },
  {
   "id": 490,
   "name": "manaphy",
   "displayName": "Manaphy",
-  "artId": 490
+  "artId": 490,
+  "gen": 4
  },
  {
   "id": 491,
   "name": "darkrai",
   "displayName": "Darkrai",
-  "artId": 491
+  "artId": 491,
+  "gen": 4
  },
  {
   "id": 491,
   "name": "darkrai-mega",
   "displayName": "Mega Darkrai",
-  "artId": 10312
+  "artId": 10312,
+  "gen": 9
  },
  {
   "id": 492,
   "name": "shaymin",
   "displayName": "Shaymin",
-  "artId": 492
+  "artId": 492,
+  "gen": 4
  },
  {
   "id": 492,
   "name": "shaymin-sky",
   "displayName": "Shaymin (Sky)",
-  "artId": 10006
+  "artId": 10006,
+  "gen": 4
  },
  {
   "id": 493,
   "name": "arceus",
   "displayName": "Arceus",
-  "artId": 493
+  "artId": 493,
+  "gen": 4
  },
  {
   "id": 494,
   "name": "victini",
   "displayName": "Victini",
-  "artId": 494
+  "artId": 494,
+  "gen": 5
  },
  {
   "id": 495,
   "name": "snivy",
   "displayName": "Snivy",
-  "artId": 495
+  "artId": 495,
+  "gen": 5
  },
  {
   "id": 496,
   "name": "servine",
   "displayName": "Servine",
-  "artId": 496
+  "artId": 496,
+  "gen": 5
  },
  {
   "id": 497,
   "name": "serperior",
   "displayName": "Serperior",
-  "artId": 497
+  "artId": 497,
+  "gen": 5
  },
  {
   "id": 498,
   "name": "tepig",
   "displayName": "Tepig",
-  "artId": 498
+  "artId": 498,
+  "gen": 5
  },
  {
   "id": 499,
   "name": "pignite",
   "displayName": "Pignite",
-  "artId": 499
+  "artId": 499,
+  "gen": 5
  },
  {
   "id": 500,
   "name": "emboar",
   "displayName": "Emboar",
-  "artId": 500
+  "artId": 500,
+  "gen": 5
  },
  {
   "id": 500,
   "name": "emboar-mega",
   "displayName": "Mega Emboar",
-  "artId": 10286
+  "artId": 10286,
+  "gen": 9
  },
  {
   "id": 501,
   "name": "oshawott",
   "displayName": "Oshawott",
-  "artId": 501
+  "artId": 501,
+  "gen": 5
  },
  {
   "id": 502,
   "name": "dewott",
   "displayName": "Dewott",
-  "artId": 502
+  "artId": 502,
+  "gen": 5
  },
  {
   "id": 503,
   "name": "samurott",
   "displayName": "Samurott",
-  "artId": 503
+  "artId": 503,
+  "gen": 5
  },
  {
   "id": 503,
   "name": "samurott-hisui",
   "displayName": "Hisuian Samurott",
-  "artId": 10236
+  "artId": 10236,
+  "gen": 8
  },
  {
   "id": 504,
   "name": "patrat",
   "displayName": "Patrat",
-  "artId": 504
+  "artId": 504,
+  "gen": 5
  },
  {
   "id": 505,
   "name": "watchog",
   "displayName": "Watchog",
-  "artId": 505
+  "artId": 505,
+  "gen": 5
  },
  {
   "id": 506,
   "name": "lillipup",
   "displayName": "Lillipup",
-  "artId": 506
+  "artId": 506,
+  "gen": 5
  },
  {
   "id": 507,
   "name": "herdier",
   "displayName": "Herdier",
-  "artId": 507
+  "artId": 507,
+  "gen": 5
  },
  {
   "id": 508,
   "name": "stoutland",
   "displayName": "Stoutland",
-  "artId": 508
+  "artId": 508,
+  "gen": 5
  },
  {
   "id": 509,
   "name": "purrloin",
   "displayName": "Purrloin",
-  "artId": 509
+  "artId": 509,
+  "gen": 5
  },
  {
   "id": 510,
   "name": "liepard",
   "displayName": "Liepard",
-  "artId": 510
+  "artId": 510,
+  "gen": 5
  },
  {
   "id": 511,
   "name": "pansage",
   "displayName": "Pansage",
-  "artId": 511
+  "artId": 511,
+  "gen": 5
  },
  {
   "id": 512,
   "name": "simisage",
   "displayName": "Simisage",
-  "artId": 512
+  "artId": 512,
+  "gen": 5
  },
  {
   "id": 513,
   "name": "pansear",
   "displayName": "Pansear",
-  "artId": 513
+  "artId": 513,
+  "gen": 5
  },
  {
   "id": 514,
   "name": "simisear",
   "displayName": "Simisear",
-  "artId": 514
+  "artId": 514,
+  "gen": 5
  },
  {
   "id": 515,
   "name": "panpour",
   "displayName": "Panpour",
-  "artId": 515
+  "artId": 515,
+  "gen": 5
  },
  {
   "id": 516,
   "name": "simipour",
   "displayName": "Simipour",
-  "artId": 516
+  "artId": 516,
+  "gen": 5
  },
  {
   "id": 517,
   "name": "munna",
   "displayName": "Munna",
-  "artId": 517
+  "artId": 517,
+  "gen": 5
  },
  {
   "id": 518,
   "name": "musharna",
   "displayName": "Musharna",
-  "artId": 518
+  "artId": 518,
+  "gen": 5
  },
  {
   "id": 519,
   "name": "pidove",
   "displayName": "Pidove",
-  "artId": 519
+  "artId": 519,
+  "gen": 5
  },
  {
   "id": 520,
   "name": "tranquill",
   "displayName": "Tranquill",
-  "artId": 520
+  "artId": 520,
+  "gen": 5
  },
  {
   "id": 521,
   "name": "unfezant",
   "displayName": "Unfezant",
-  "artId": 521
+  "artId": 521,
+  "gen": 5
  },
  {
   "id": 522,
   "name": "blitzle",
   "displayName": "Blitzle",
-  "artId": 522
+  "artId": 522,
+  "gen": 5
  },
  {
   "id": 523,
   "name": "zebstrika",
   "displayName": "Zebstrika",
-  "artId": 523
+  "artId": 523,
+  "gen": 5
  },
  {
   "id": 524,
   "name": "roggenrola",
   "displayName": "Roggenrola",
-  "artId": 524
+  "artId": 524,
+  "gen": 5
  },
  {
   "id": 525,
   "name": "boldore",
   "displayName": "Boldore",
-  "artId": 525
+  "artId": 525,
+  "gen": 5
  },
  {
   "id": 526,
   "name": "gigalith",
   "displayName": "Gigalith",
-  "artId": 526
+  "artId": 526,
+  "gen": 5
  },
  {
   "id": 527,
   "name": "woobat",
   "displayName": "Woobat",
-  "artId": 527
+  "artId": 527,
+  "gen": 5
  },
  {
   "id": 528,
   "name": "swoobat",
   "displayName": "Swoobat",
-  "artId": 528
+  "artId": 528,
+  "gen": 5
  },
  {
   "id": 529,
   "name": "drilbur",
   "displayName": "Drilbur",
-  "artId": 529
+  "artId": 529,
+  "gen": 5
  },
  {
   "id": 530,
   "name": "excadrill",
   "displayName": "Excadrill",
-  "artId": 530
+  "artId": 530,
+  "gen": 5
  },
  {
   "id": 530,
   "name": "excadrill-mega",
   "displayName": "Mega Excadrill",
-  "artId": 10287
+  "artId": 10287,
+  "gen": 9
  },
  {
   "id": 531,
   "name": "audino",
   "displayName": "Audino",
-  "artId": 531
+  "artId": 531,
+  "gen": 5
  },
  {
   "id": 531,
   "name": "audino-mega",
   "displayName": "Mega Audino",
-  "artId": 10069
+  "artId": 10069,
+  "gen": 6
  },
  {
   "id": 532,
   "name": "timburr",
   "displayName": "Timburr",
-  "artId": 532
+  "artId": 532,
+  "gen": 5
  },
  {
   "id": 533,
   "name": "gurdurr",
   "displayName": "Gurdurr",
-  "artId": 533
+  "artId": 533,
+  "gen": 5
  },
  {
   "id": 534,
   "name": "conkeldurr",
   "displayName": "Conkeldurr",
-  "artId": 534
+  "artId": 534,
+  "gen": 5
  },
  {
   "id": 535,
   "name": "tympole",
   "displayName": "Tympole",
-  "artId": 535
+  "artId": 535,
+  "gen": 5
  },
  {
   "id": 536,
   "name": "palpitoad",
   "displayName": "Palpitoad",
-  "artId": 536
+  "artId": 536,
+  "gen": 5
  },
  {
   "id": 537,
   "name": "seismitoad",
   "displayName": "Seismitoad",
-  "artId": 537
+  "artId": 537,
+  "gen": 5
  },
  {
   "id": 538,
   "name": "throh",
   "displayName": "Throh",
-  "artId": 538
+  "artId": 538,
+  "gen": 5
  },
  {
   "id": 539,
   "name": "sawk",
   "displayName": "Sawk",
-  "artId": 539
+  "artId": 539,
+  "gen": 5
  },
  {
   "id": 540,
   "name": "sewaddle",
   "displayName": "Sewaddle",
-  "artId": 540
+  "artId": 540,
+  "gen": 5
  },
  {
   "id": 541,
   "name": "swadloon",
   "displayName": "Swadloon",
-  "artId": 541
+  "artId": 541,
+  "gen": 5
  },
  {
   "id": 542,
   "name": "leavanny",
   "displayName": "Leavanny",
-  "artId": 542
+  "artId": 542,
+  "gen": 5
  },
  {
   "id": 543,
   "name": "venipede",
   "displayName": "Venipede",
-  "artId": 543
+  "artId": 543,
+  "gen": 5
  },
  {
   "id": 544,
   "name": "whirlipede",
   "displayName": "Whirlipede",
-  "artId": 544
+  "artId": 544,
+  "gen": 5
  },
  {
   "id": 545,
   "name": "scolipede",
   "displayName": "Scolipede",
-  "artId": 545
+  "artId": 545,
+  "gen": 5
  },
  {
   "id": 545,
   "name": "scolipede-mega",
   "displayName": "Mega Scolipede",
-  "artId": 10288
+  "artId": 10288,
+  "gen": 9
  },
  {
   "id": 546,
   "name": "cottonee",
   "displayName": "Cottonee",
-  "artId": 546
+  "artId": 546,
+  "gen": 5
  },
  {
   "id": 547,
   "name": "whimsicott",
   "displayName": "Whimsicott",
-  "artId": 547
+  "artId": 547,
+  "gen": 5
  },
  {
   "id": 548,
   "name": "petilil",
   "displayName": "Petilil",
-  "artId": 548
+  "artId": 548,
+  "gen": 5
  },
  {
   "id": 549,
   "name": "lilligant",
   "displayName": "Lilligant",
-  "artId": 549
+  "artId": 549,
+  "gen": 5
  },
  {
   "id": 549,
   "name": "lilligant-hisui",
   "displayName": "Hisuian Lilligant",
-  "artId": 10237
+  "artId": 10237,
+  "gen": 8
  },
  {
   "id": 550,
   "name": "basculin",
   "displayName": "Basculin",
-  "artId": 550
+  "artId": 550,
+  "gen": 5
  },
  {
   "id": 550,
   "name": "basculin-blue-striped",
   "displayName": "Basculin (Blue Striped)",
-  "artId": 10016
+  "artId": 10016,
+  "gen": 5
  },
  {
   "id": 550,
   "name": "basculin-white-striped",
   "displayName": "Basculin (White Striped)",
-  "artId": 10247
+  "artId": 10247,
+  "gen": 8
  },
  {
   "id": 551,
   "name": "sandile",
   "displayName": "Sandile",
-  "artId": 551
+  "artId": 551,
+  "gen": 5
  },
  {
   "id": 552,
   "name": "krokorok",
   "displayName": "Krokorok",
-  "artId": 552
+  "artId": 552,
+  "gen": 5
  },
  {
   "id": 553,
   "name": "krookodile",
   "displayName": "Krookodile",
-  "artId": 553
+  "artId": 553,
+  "gen": 5
  },
  {
   "id": 554,
   "name": "darumaka",
   "displayName": "Darumaka",
-  "artId": 554
+  "artId": 554,
+  "gen": 5
  },
  {
   "id": 554,
   "name": "darumaka-galar",
   "displayName": "Galarian Darumaka",
-  "artId": 10176
+  "artId": 10176,
+  "gen": 8
  },
  {
   "id": 555,
   "name": "darmanitan",
   "displayName": "Darmanitan",
-  "artId": 555
+  "artId": 555,
+  "gen": 5
  },
  {
   "id": 555,
   "name": "darmanitan-galar-zen",
   "displayName": "Darmanitan (Galar Zen)",
-  "artId": 10178
+  "artId": 10178,
+  "gen": 8
  },
  {
   "id": 555,
   "name": "darmanitan-zen",
   "displayName": "Darmanitan (Zen)",
-  "artId": 10017
+  "artId": 10017,
+  "gen": 5
  },
  {
   "id": 556,
   "name": "maractus",
   "displayName": "Maractus",
-  "artId": 556
+  "artId": 556,
+  "gen": 5
  },
  {
   "id": 557,
   "name": "dwebble",
   "displayName": "Dwebble",
-  "artId": 557
+  "artId": 557,
+  "gen": 5
  },
  {
   "id": 558,
   "name": "crustle",
   "displayName": "Crustle",
-  "artId": 558
+  "artId": 558,
+  "gen": 5
  },
  {
   "id": 559,
   "name": "scraggy",
   "displayName": "Scraggy",
-  "artId": 559
+  "artId": 559,
+  "gen": 5
  },
  {
   "id": 560,
   "name": "scrafty",
   "displayName": "Scrafty",
-  "artId": 560
+  "artId": 560,
+  "gen": 5
  },
  {
   "id": 560,
   "name": "scrafty-mega",
   "displayName": "Mega Scrafty",
-  "artId": 10289
+  "artId": 10289,
+  "gen": 9
  },
  {
   "id": 561,
   "name": "sigilyph",
   "displayName": "Sigilyph",
-  "artId": 561
+  "artId": 561,
+  "gen": 5
  },
  {
   "id": 562,
   "name": "yamask",
   "displayName": "Yamask",
-  "artId": 562
+  "artId": 562,
+  "gen": 5
  },
  {
   "id": 562,
   "name": "yamask-galar",
   "displayName": "Galarian Yamask",
-  "artId": 10179
+  "artId": 10179,
+  "gen": 8
  },
  {
   "id": 563,
   "name": "cofagrigus",
   "displayName": "Cofagrigus",
-  "artId": 563
+  "artId": 563,
+  "gen": 5
  },
  {
   "id": 564,
   "name": "tirtouga",
   "displayName": "Tirtouga",
-  "artId": 564
+  "artId": 564,
+  "gen": 5
  },
  {
   "id": 565,
   "name": "carracosta",
   "displayName": "Carracosta",
-  "artId": 565
+  "artId": 565,
+  "gen": 5
  },
  {
   "id": 566,
   "name": "archen",
   "displayName": "Archen",
-  "artId": 566
+  "artId": 566,
+  "gen": 5
  },
  {
   "id": 567,
   "name": "archeops",
   "displayName": "Archeops",
-  "artId": 567
+  "artId": 567,
+  "gen": 5
  },
  {
   "id": 568,
   "name": "trubbish",
   "displayName": "Trubbish",
-  "artId": 568
+  "artId": 568,
+  "gen": 5
  },
  {
   "id": 569,
   "name": "garbodor",
   "displayName": "Garbodor",
-  "artId": 569
+  "artId": 569,
+  "gen": 5
  },
  {
   "id": 569,
   "name": "garbodor-gmax",
   "displayName": "Garbodor (Gigantamax)",
-  "artId": 10207
+  "artId": 10207,
+  "gen": 8
  },
  {
   "id": 570,
   "name": "zorua",
   "displayName": "Zorua",
-  "artId": 570
+  "artId": 570,
+  "gen": 5
  },
  {
   "id": 570,
   "name": "zorua-hisui",
   "displayName": "Hisuian Zorua",
-  "artId": 10238
+  "artId": 10238,
+  "gen": 8
  },
  {
   "id": 571,
   "name": "zoroark",
   "displayName": "Zoroark",
-  "artId": 571
+  "artId": 571,
+  "gen": 5
  },
  {
   "id": 571,
   "name": "zoroark-hisui",
   "displayName": "Hisuian Zoroark",
-  "artId": 10239
+  "artId": 10239,
+  "gen": 8
  },
  {
   "id": 572,
   "name": "minccino",
   "displayName": "Minccino",
-  "artId": 572
+  "artId": 572,
+  "gen": 5
  },
  {
   "id": 573,
   "name": "cinccino",
   "displayName": "Cinccino",
-  "artId": 573
+  "artId": 573,
+  "gen": 5
  },
  {
   "id": 574,
   "name": "gothita",
   "displayName": "Gothita",
-  "artId": 574
+  "artId": 574,
+  "gen": 5
  },
  {
   "id": 575,
   "name": "gothorita",
   "displayName": "Gothorita",
-  "artId": 575
+  "artId": 575,
+  "gen": 5
  },
  {
   "id": 576,
   "name": "gothitelle",
   "displayName": "Gothitelle",
-  "artId": 576
+  "artId": 576,
+  "gen": 5
  },
  {
   "id": 577,
   "name": "solosis",
   "displayName": "Solosis",
-  "artId": 577
+  "artId": 577,
+  "gen": 5
  },
  {
   "id": 578,
   "name": "duosion",
   "displayName": "Duosion",
-  "artId": 578
+  "artId": 578,
+  "gen": 5
  },
  {
   "id": 579,
   "name": "reuniclus",
   "displayName": "Reuniclus",
-  "artId": 579
+  "artId": 579,
+  "gen": 5
  },
  {
   "id": 580,
   "name": "ducklett",
   "displayName": "Ducklett",
-  "artId": 580
+  "artId": 580,
+  "gen": 5
  },
  {
   "id": 581,
   "name": "swanna",
   "displayName": "Swanna",
-  "artId": 581
+  "artId": 581,
+  "gen": 5
  },
  {
   "id": 582,
   "name": "vanillite",
   "displayName": "Vanillite",
-  "artId": 582
+  "artId": 582,
+  "gen": 5
  },
  {
   "id": 583,
   "name": "vanillish",
   "displayName": "Vanillish",
-  "artId": 583
+  "artId": 583,
+  "gen": 5
  },
  {
   "id": 584,
   "name": "vanilluxe",
   "displayName": "Vanilluxe",
-  "artId": 584
+  "artId": 584,
+  "gen": 5
  },
  {
   "id": 585,
   "name": "deerling",
   "displayName": "Deerling",
-  "artId": 585
+  "artId": 585,
+  "gen": 5
  },
  {
   "id": 586,
   "name": "sawsbuck",
   "displayName": "Sawsbuck",
-  "artId": 586
+  "artId": 586,
+  "gen": 5
  },
  {
   "id": 587,
   "name": "emolga",
   "displayName": "Emolga",
-  "artId": 587
+  "artId": 587,
+  "gen": 5
  },
  {
   "id": 588,
   "name": "karrablast",
   "displayName": "Karrablast",
-  "artId": 588
+  "artId": 588,
+  "gen": 5
  },
  {
   "id": 589,
   "name": "escavalier",
   "displayName": "Escavalier",
-  "artId": 589
+  "artId": 589,
+  "gen": 5
  },
  {
   "id": 590,
   "name": "foongus",
   "displayName": "Foongus",
-  "artId": 590
+  "artId": 590,
+  "gen": 5
  },
  {
   "id": 591,
   "name": "amoonguss",
   "displayName": "Amoonguss",
-  "artId": 591
+  "artId": 591,
+  "gen": 5
  },
  {
   "id": 592,
   "name": "frillish-male",
   "displayName": "Frillish (Male)",
-  "artId": 592
+  "artId": 592,
+  "gen": 5
  },
  {
   "id": 593,
   "name": "jellicent",
   "displayName": "Jellicent",
   "artId": 593,
+  "gen": 5,
   "art": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/female/593.png"
  },
  {
   "id": 594,
   "name": "alomomola",
   "displayName": "Alomomola",
-  "artId": 594
+  "artId": 594,
+  "gen": 5
  },
  {
   "id": 595,
   "name": "joltik",
   "displayName": "Joltik",
-  "artId": 595
+  "artId": 595,
+  "gen": 5
  },
  {
   "id": 596,
   "name": "galvantula",
   "displayName": "Galvantula",
-  "artId": 596
+  "artId": 596,
+  "gen": 5
  },
  {
   "id": 597,
   "name": "ferroseed",
   "displayName": "Ferroseed",
-  "artId": 597
+  "artId": 597,
+  "gen": 5
  },
  {
   "id": 598,
   "name": "ferrothorn",
   "displayName": "Ferrothorn",
-  "artId": 598
+  "artId": 598,
+  "gen": 5
  },
  {
   "id": 599,
   "name": "klink",
   "displayName": "Klink",
-  "artId": 599
+  "artId": 599,
+  "gen": 5
  },
  {
   "id": 600,
   "name": "klang",
   "displayName": "Klang",
-  "artId": 600
+  "artId": 600,
+  "gen": 5
  },
  {
   "id": 601,
   "name": "klinklang",
   "displayName": "Klinklang",
-  "artId": 601
+  "artId": 601,
+  "gen": 5
  },
  {
   "id": 602,
   "name": "tynamo",
   "displayName": "Tynamo",
-  "artId": 602
+  "artId": 602,
+  "gen": 5
  },
  {
   "id": 603,
   "name": "eelektrik",
   "displayName": "Eelektrik",
-  "artId": 603
+  "artId": 603,
+  "gen": 5
  },
  {
   "id": 604,
   "name": "eelektross",
   "displayName": "Eelektross",
-  "artId": 604
+  "artId": 604,
+  "gen": 5
  },
  {
   "id": 604,
   "name": "eelektross-mega",
   "displayName": "Mega Eelektross",
-  "artId": 10290
+  "artId": 10290,
+  "gen": 9
  },
  {
   "id": 605,
   "name": "elgyem",
   "displayName": "Elgyem",
-  "artId": 605
+  "artId": 605,
+  "gen": 5
  },
  {
   "id": 606,
   "name": "beheeyem",
   "displayName": "Beheeyem",
-  "artId": 606
+  "artId": 606,
+  "gen": 5
  },
  {
   "id": 607,
   "name": "litwick",
   "displayName": "Litwick",
-  "artId": 607
+  "artId": 607,
+  "gen": 5
  },
  {
   "id": 608,
   "name": "lampent",
   "displayName": "Lampent",
-  "artId": 608
+  "artId": 608,
+  "gen": 5
  },
  {
   "id": 609,
   "name": "chandelure",
   "displayName": "Chandelure",
-  "artId": 609
+  "artId": 609,
+  "gen": 5
  },
  {
   "id": 609,
   "name": "chandelure-mega",
   "displayName": "Mega Chandelure",
-  "artId": 10291
+  "artId": 10291,
+  "gen": 9
  },
  {
   "id": 610,
   "name": "axew",
   "displayName": "Axew",
-  "artId": 610
+  "artId": 610,
+  "gen": 5
  },
  {
   "id": 611,
   "name": "fraxure",
   "displayName": "Fraxure",
-  "artId": 611
+  "artId": 611,
+  "gen": 5
  },
  {
   "id": 612,
   "name": "haxorus",
   "displayName": "Haxorus",
-  "artId": 612
+  "artId": 612,
+  "gen": 5
  },
  {
   "id": 613,
   "name": "cubchoo",
   "displayName": "Cubchoo",
-  "artId": 613
+  "artId": 613,
+  "gen": 5
  },
  {
   "id": 614,
   "name": "beartic",
   "displayName": "Beartic",
-  "artId": 614
+  "artId": 614,
+  "gen": 5
  },
  {
   "id": 615,
   "name": "cryogonal",
   "displayName": "Cryogonal",
-  "artId": 615
+  "artId": 615,
+  "gen": 5
  },
  {
   "id": 616,
   "name": "shelmet",
   "displayName": "Shelmet",
-  "artId": 616
+  "artId": 616,
+  "gen": 5
  },
  {
   "id": 617,
   "name": "accelgor",
   "displayName": "Accelgor",
-  "artId": 617
+  "artId": 617,
+  "gen": 5
  },
  {
   "id": 618,
   "name": "stunfisk",
   "displayName": "Stunfisk",
-  "artId": 618
+  "artId": 618,
+  "gen": 5
  },
  {
   "id": 618,
   "name": "stunfisk-galar",
   "displayName": "Galarian Stunfisk",
-  "artId": 10180
+  "artId": 10180,
+  "gen": 8
  },
  {
   "id": 619,
   "name": "mienfoo",
   "displayName": "Mienfoo",
-  "artId": 619
+  "artId": 619,
+  "gen": 5
  },
  {
   "id": 620,
   "name": "mienshao",
   "displayName": "Mienshao",
-  "artId": 620
+  "artId": 620,
+  "gen": 5
  },
  {
   "id": 621,
   "name": "druddigon",
   "displayName": "Druddigon",
-  "artId": 621
+  "artId": 621,
+  "gen": 5
  },
  {
   "id": 622,
   "name": "golett",
   "displayName": "Golett",
-  "artId": 622
+  "artId": 622,
+  "gen": 5
  },
  {
   "id": 623,
   "name": "golurk",
   "displayName": "Golurk",
-  "artId": 623
+  "artId": 623,
+  "gen": 5
  },
  {
   "id": 623,
   "name": "golurk-mega",
   "displayName": "Mega Golurk",
-  "artId": 10313
+  "artId": 10313,
+  "gen": 9
  },
  {
   "id": 624,
   "name": "pawniard",
   "displayName": "Pawniard",
-  "artId": 624
+  "artId": 624,
+  "gen": 5
  },
  {
   "id": 625,
   "name": "bisharp",
   "displayName": "Bisharp",
-  "artId": 625
+  "artId": 625,
+  "gen": 5
  },
  {
   "id": 626,
   "name": "bouffalant",
   "displayName": "Bouffalant",
-  "artId": 626
+  "artId": 626,
+  "gen": 5
  },
  {
   "id": 627,
   "name": "rufflet",
   "displayName": "Rufflet",
-  "artId": 627
+  "artId": 627,
+  "gen": 5
  },
  {
   "id": 628,
   "name": "braviary",
   "displayName": "Braviary",
-  "artId": 628
+  "artId": 628,
+  "gen": 5
  },
  {
   "id": 628,
   "name": "braviary-hisui",
   "displayName": "Hisuian Braviary",
-  "artId": 10240
+  "artId": 10240,
+  "gen": 8
  },
  {
   "id": 629,
   "name": "vullaby",
   "displayName": "Vullaby",
-  "artId": 629
+  "artId": 629,
+  "gen": 5
  },
  {
   "id": 630,
   "name": "mandibuzz",
   "displayName": "Mandibuzz",
-  "artId": 630
+  "artId": 630,
+  "gen": 5
  },
  {
   "id": 631,
   "name": "heatmor",
   "displayName": "Heatmor",
-  "artId": 631
+  "artId": 631,
+  "gen": 5
  },
  {
   "id": 632,
   "name": "durant",
   "displayName": "Durant",
-  "artId": 632
+  "artId": 632,
+  "gen": 5
  },
  {
   "id": 633,
   "name": "deino",
   "displayName": "Deino",
-  "artId": 633
+  "artId": 633,
+  "gen": 5
  },
  {
   "id": 634,
   "name": "zweilous",
   "displayName": "Zweilous",
-  "artId": 634
+  "artId": 634,
+  "gen": 5
  },
  {
   "id": 635,
   "name": "hydreigon",
   "displayName": "Hydreigon",
-  "artId": 635
+  "artId": 635,
+  "gen": 5
  },
  {
   "id": 636,
   "name": "larvesta",
   "displayName": "Larvesta",
-  "artId": 636
+  "artId": 636,
+  "gen": 5
  },
  {
   "id": 637,
   "name": "volcarona",
   "displayName": "Volcarona",
-  "artId": 637
+  "artId": 637,
+  "gen": 5
  },
  {
   "id": 638,
   "name": "cobalion",
   "displayName": "Cobalion",
-  "artId": 638
+  "artId": 638,
+  "gen": 5
  },
  {
   "id": 639,
   "name": "terrakion",
   "displayName": "Terrakion",
-  "artId": 639
+  "artId": 639,
+  "gen": 5
  },
  {
   "id": 640,
   "name": "virizion",
   "displayName": "Virizion",
-  "artId": 640
+  "artId": 640,
+  "gen": 5
  },
  {
   "id": 641,
   "name": "tornadus",
   "displayName": "Tornadus",
-  "artId": 641
+  "artId": 641,
+  "gen": 5
  },
  {
   "id": 641,
   "name": "tornadus-therian",
   "displayName": "Tornadus (Therian)",
-  "artId": 10019
+  "artId": 10019,
+  "gen": 5
  },
  {
   "id": 642,
   "name": "thundurus",
   "displayName": "Thundurus",
-  "artId": 642
+  "artId": 642,
+  "gen": 5
  },
  {
   "id": 642,
   "name": "thundurus-therian",
   "displayName": "Thundurus (Therian)",
-  "artId": 10020
+  "artId": 10020,
+  "gen": 5
  },
  {
   "id": 643,
   "name": "reshiram",
   "displayName": "Reshiram",
-  "artId": 643
+  "artId": 643,
+  "gen": 5
  },
  {
   "id": 644,
   "name": "zekrom",
   "displayName": "Zekrom",
-  "artId": 644
+  "artId": 644,
+  "gen": 5
  },
  {
   "id": 645,
   "name": "landorus",
   "displayName": "Landorus",
-  "artId": 645
+  "artId": 645,
+  "gen": 5
  },
  {
   "id": 645,
   "name": "landorus-therian",
   "displayName": "Landorus (Therian)",
-  "artId": 10021
+  "artId": 10021,
+  "gen": 5
  },
  {
   "id": 646,
   "name": "kyurem",
   "displayName": "Kyurem",
-  "artId": 646
+  "artId": 646,
+  "gen": 5
  },
  {
   "id": 646,
   "name": "kyurem-black",
   "displayName": "Kyurem (Black)",
-  "artId": 10022
+  "artId": 10022,
+  "gen": 5
  },
  {
   "id": 646,
   "name": "kyurem-white",
   "displayName": "Kyurem (White)",
-  "artId": 10023
+  "artId": 10023,
+  "gen": 5
  },
  {
   "id": 647,
   "name": "keldeo",
   "displayName": "Keldeo",
-  "artId": 647
+  "artId": 647,
+  "gen": 5
  },
  {
   "id": 647,
   "name": "keldeo-resolute",
   "displayName": "Keldeo (Resolute)",
-  "artId": 10024
+  "artId": 10024,
+  "gen": 5
  },
  {
   "id": 648,
   "name": "meloetta",
   "displayName": "Meloetta",
-  "artId": 648
+  "artId": 648,
+  "gen": 5
  },
  {
   "id": 648,
   "name": "meloetta-pirouette",
   "displayName": "Meloetta (Pirouette)",
-  "artId": 10018
+  "artId": 10018,
+  "gen": 5
  },
  {
   "id": 649,
   "name": "genesect",
   "displayName": "Genesect",
-  "artId": 649
+  "artId": 649,
+  "gen": 5
  },
  {
   "id": 650,
   "name": "chespin",
   "displayName": "Chespin",
-  "artId": 650
+  "artId": 650,
+  "gen": 6
  },
  {
   "id": 651,
   "name": "quilladin",
   "displayName": "Quilladin",
-  "artId": 651
+  "artId": 651,
+  "gen": 6
  },
  {
   "id": 652,
   "name": "chesnaught",
   "displayName": "Chesnaught",
-  "artId": 652
+  "artId": 652,
+  "gen": 6
  },
  {
   "id": 652,
   "name": "chesnaught-mega",
   "displayName": "Mega Chesnaught",
-  "artId": 10292
+  "artId": 10292,
+  "gen": 9
  },
  {
   "id": 653,
   "name": "fennekin",
   "displayName": "Fennekin",
-  "artId": 653
+  "artId": 653,
+  "gen": 6
  },
  {
   "id": 654,
   "name": "braixen",
   "displayName": "Braixen",
-  "artId": 654
+  "artId": 654,
+  "gen": 6
  },
  {
   "id": 655,
   "name": "delphox",
   "displayName": "Delphox",
-  "artId": 655
+  "artId": 655,
+  "gen": 6
  },
  {
   "id": 655,
   "name": "delphox-mega",
   "displayName": "Mega Delphox",
-  "artId": 10293
+  "artId": 10293,
+  "gen": 9
  },
  {
   "id": 656,
   "name": "froakie",
   "displayName": "Froakie",
-  "artId": 656
+  "artId": 656,
+  "gen": 6
  },
  {
   "id": 657,
   "name": "frogadier",
   "displayName": "Frogadier",
-  "artId": 657
+  "artId": 657,
+  "gen": 6
  },
  {
   "id": 658,
   "name": "greninja",
   "displayName": "Greninja",
-  "artId": 658
+  "artId": 658,
+  "gen": 6
  },
  {
   "id": 658,
   "name": "greninja-ash",
   "displayName": "Greninja (Ash)",
-  "artId": 10117
+  "artId": 10117,
+  "gen": 7
  },
  {
   "id": 658,
   "name": "greninja-mega",
   "displayName": "Mega Greninja",
-  "artId": 10294
+  "artId": 10294,
+  "gen": 9
  },
  {
   "id": 659,
   "name": "bunnelby",
   "displayName": "Bunnelby",
-  "artId": 659
+  "artId": 659,
+  "gen": 6
  },
  {
   "id": 660,
   "name": "diggersby",
   "displayName": "Diggersby",
-  "artId": 660
+  "artId": 660,
+  "gen": 6
  },
  {
   "id": 661,
   "name": "fletchling",
   "displayName": "Fletchling",
-  "artId": 661
+  "artId": 661,
+  "gen": 6
  },
  {
   "id": 662,
   "name": "fletchinder",
   "displayName": "Fletchinder",
-  "artId": 662
+  "artId": 662,
+  "gen": 6
  },
  {
   "id": 663,
   "name": "talonflame",
   "displayName": "Talonflame",
-  "artId": 663
+  "artId": 663,
+  "gen": 6
  },
  {
   "id": 664,
   "name": "scatterbug",
   "displayName": "Scatterbug",
-  "artId": 664
+  "artId": 664,
+  "gen": 6
  },
  {
   "id": 665,
   "name": "spewpa",
   "displayName": "Spewpa",
-  "artId": 665
+  "artId": 665,
+  "gen": 6
  },
  {
   "id": 666,
   "name": "vivillon",
   "displayName": "Vivillon",
-  "artId": 666
+  "artId": 666,
+  "gen": 6
  },
  {
   "id": 667,
   "name": "litleo",
   "displayName": "Litleo",
-  "artId": 667
+  "artId": 667,
+  "gen": 6
  },
  {
   "id": 668,
   "name": "pyroar-male",
   "displayName": "Pyroar (Male)",
-  "artId": 668
+  "artId": 668,
+  "gen": 6
  },
  {
   "id": 668,
   "name": "pyroar-mega",
   "displayName": "Mega Pyroar",
-  "artId": 10295
+  "artId": 10295,
+  "gen": 9
  },
  {
   "id": 669,
   "name": "flabebe",
   "displayName": "Flabébé",
-  "artId": 669
+  "artId": 669,
+  "gen": 6
  },
  {
   "id": 670,
   "name": "floette",
   "displayName": "Floette",
-  "artId": 670
+  "artId": 670,
+  "gen": 6
  },
  {
   "id": 670,
   "name": "floette-eternal",
   "displayName": "Floette (Eternal Flower)",
-  "artId": 10061
+  "artId": 10061,
+  "gen": 6
  },
  {
   "id": 670,
   "name": "floette-mega",
   "displayName": "Mega Floette",
-  "artId": 10296
+  "artId": 10296,
+  "gen": 9
  },
  {
   "id": 671,
   "name": "florges",
   "displayName": "Florges",
-  "artId": 671
+  "artId": 671,
+  "gen": 6
  },
  {
   "id": 672,
   "name": "skiddo",
   "displayName": "Skiddo",
-  "artId": 672
+  "artId": 672,
+  "gen": 6
  },
  {
   "id": 673,
   "name": "gogoat",
   "displayName": "Gogoat",
-  "artId": 673
+  "artId": 673,
+  "gen": 6
  },
  {
   "id": 674,
   "name": "pancham",
   "displayName": "Pancham",
-  "artId": 674
+  "artId": 674,
+  "gen": 6
  },
  {
   "id": 675,
   "name": "pangoro",
   "displayName": "Pangoro",
-  "artId": 675
+  "artId": 675,
+  "gen": 6
  },
  {
   "id": 676,
   "name": "furfrou",
   "displayName": "Furfrou",
-  "artId": 676
+  "artId": 676,
+  "gen": 6
  },
  {
   "id": 677,
   "name": "espurr",
   "displayName": "Espurr",
-  "artId": 677
+  "artId": 677,
+  "gen": 6
  },
  {
   "id": 678,
   "name": "meowstic",
   "displayName": "Meowstic",
-  "artId": 678
+  "artId": 678,
+  "gen": 6
  },
  {
   "id": 678,
   "name": "meowstic-female",
   "displayName": "Meowstic (Female)",
-  "artId": 10025
+  "artId": 10025,
+  "gen": 6
  },
  {
   "id": 678,
   "name": "meowstic-female-mega",
   "displayName": "Meowstic (Female Mega)",
-  "artId": 10326
+  "artId": 10326,
+  "gen": 9
  },
  {
   "id": 678,
   "name": "meowstic-male-mega",
   "displayName": "Meowstic (Male Mega)",
-  "artId": 10314
+  "artId": 10314,
+  "gen": 9
  },
  {
   "id": 679,
   "name": "honedge",
   "displayName": "Honedge",
-  "artId": 679
+  "artId": 679,
+  "gen": 6
  },
  {
   "id": 680,
   "name": "doublade",
   "displayName": "Doublade",
-  "artId": 680
+  "artId": 680,
+  "gen": 6
  },
  {
   "id": 681,
   "name": "aegislash",
   "displayName": "Aegislash",
-  "artId": 681
+  "artId": 681,
+  "gen": 6
  },
  {
   "id": 681,
   "name": "aegislash-blade",
   "displayName": "Aegislash (Blade)",
-  "artId": 10026
+  "artId": 10026,
+  "gen": 6
  },
  {
   "id": 682,
   "name": "spritzee",
   "displayName": "Spritzee",
-  "artId": 682
+  "artId": 682,
+  "gen": 6
  },
  {
   "id": 683,
   "name": "aromatisse",
   "displayName": "Aromatisse",
-  "artId": 683
+  "artId": 683,
+  "gen": 6
  },
  {
   "id": 684,
   "name": "swirlix",
   "displayName": "Swirlix",
-  "artId": 684
+  "artId": 684,
+  "gen": 6
  },
  {
   "id": 685,
   "name": "slurpuff",
   "displayName": "Slurpuff",
-  "artId": 685
+  "artId": 685,
+  "gen": 6
  },
  {
   "id": 686,
   "name": "inkay",
   "displayName": "Inkay",
-  "artId": 686
+  "artId": 686,
+  "gen": 6
  },
  {
   "id": 687,
   "name": "malamar",
   "displayName": "Malamar",
-  "artId": 687
+  "artId": 687,
+  "gen": 6
  },
  {
   "id": 687,
   "name": "malamar-mega",
   "displayName": "Mega Malamar",
-  "artId": 10297
+  "artId": 10297,
+  "gen": 9
  },
  {
   "id": 688,
   "name": "binacle",
   "displayName": "Binacle",
-  "artId": 688
+  "artId": 688,
+  "gen": 6
  },
  {
   "id": 689,
   "name": "barbaracle",
   "displayName": "Barbaracle",
-  "artId": 689
+  "artId": 689,
+  "gen": 6
  },
  {
   "id": 689,
   "name": "barbaracle-mega",
   "displayName": "Mega Barbaracle",
-  "artId": 10298
+  "artId": 10298,
+  "gen": 9
  },
  {
   "id": 690,
   "name": "skrelp",
   "displayName": "Skrelp",
-  "artId": 690
+  "artId": 690,
+  "gen": 6
  },
  {
   "id": 691,
   "name": "dragalge",
   "displayName": "Dragalge",
-  "artId": 691
+  "artId": 691,
+  "gen": 6
  },
  {
   "id": 691,
   "name": "dragalge-mega",
   "displayName": "Mega Dragalge",
-  "artId": 10299
+  "artId": 10299,
+  "gen": 9
  },
  {
   "id": 692,
   "name": "clauncher",
   "displayName": "Clauncher",
-  "artId": 692
+  "artId": 692,
+  "gen": 6
  },
  {
   "id": 693,
   "name": "clawitzer",
   "displayName": "Clawitzer",
-  "artId": 693
+  "artId": 693,
+  "gen": 6
  },
  {
   "id": 694,
   "name": "helioptile",
   "displayName": "Helioptile",
-  "artId": 694
+  "artId": 694,
+  "gen": 6
  },
  {
   "id": 695,
   "name": "heliolisk",
   "displayName": "Heliolisk",
-  "artId": 695
+  "artId": 695,
+  "gen": 6
  },
  {
   "id": 696,
   "name": "tyrunt",
   "displayName": "Tyrunt",
-  "artId": 696
+  "artId": 696,
+  "gen": 6
  },
  {
   "id": 697,
   "name": "tyrantrum",
   "displayName": "Tyrantrum",
-  "artId": 697
+  "artId": 697,
+  "gen": 6
  },
  {
   "id": 698,
   "name": "amaura",
   "displayName": "Amaura",
-  "artId": 698
+  "artId": 698,
+  "gen": 6
  },
  {
   "id": 699,
   "name": "aurorus",
   "displayName": "Aurorus",
-  "artId": 699
+  "artId": 699,
+  "gen": 6
  },
  {
   "id": 700,
   "name": "sylveon",
   "displayName": "Sylveon",
-  "artId": 700
+  "artId": 700,
+  "gen": 6
  },
  {
   "id": 701,
   "name": "hawlucha",
   "displayName": "Hawlucha",
-  "artId": 701
+  "artId": 701,
+  "gen": 6
  },
  {
   "id": 701,
   "name": "hawlucha-mega",
   "displayName": "Mega Hawlucha",
-  "artId": 10300
+  "artId": 10300,
+  "gen": 9
  },
  {
   "id": 702,
   "name": "dedenne",
   "displayName": "Dedenne",
-  "artId": 702
+  "artId": 702,
+  "gen": 6
  },
  {
   "id": 703,
   "name": "carbink",
   "displayName": "Carbink",
-  "artId": 703
+  "artId": 703,
+  "gen": 6
  },
  {
   "id": 704,
   "name": "goomy",
   "displayName": "Goomy",
-  "artId": 704
+  "artId": 704,
+  "gen": 6
  },
  {
   "id": 705,
   "name": "sliggoo",
   "displayName": "Sliggoo",
-  "artId": 705
+  "artId": 705,
+  "gen": 6
  },
  {
   "id": 705,
   "name": "sliggoo-hisui",
   "displayName": "Hisuian Sliggoo",
-  "artId": 10241
+  "artId": 10241,
+  "gen": 8
  },
  {
   "id": 706,
   "name": "goodra",
   "displayName": "Goodra",
-  "artId": 706
+  "artId": 706,
+  "gen": 6
  },
  {
   "id": 706,
   "name": "goodra-hisui",
   "displayName": "Hisuian Goodra",
-  "artId": 10242
+  "artId": 10242,
+  "gen": 8
  },
  {
   "id": 707,
   "name": "klefki",
   "displayName": "Klefki",
-  "artId": 707
+  "artId": 707,
+  "gen": 6
  },
  {
   "id": 708,
   "name": "phantump",
   "displayName": "Phantump",
-  "artId": 708
+  "artId": 708,
+  "gen": 6
  },
  {
   "id": 709,
   "name": "trevenant",
   "displayName": "Trevenant",
-  "artId": 709
+  "artId": 709,
+  "gen": 6
  },
  {
   "id": 710,
   "name": "pumpkaboo",
   "displayName": "Pumpkaboo",
-  "artId": 710
+  "artId": 710,
+  "gen": 6
  },
  {
   "id": 711,
   "name": "gourgeist",
   "displayName": "Gourgeist",
-  "artId": 711
+  "artId": 711,
+  "gen": 6
  },
  {
   "id": 712,
   "name": "bergmite",
   "displayName": "Bergmite",
-  "artId": 712
+  "artId": 712,
+  "gen": 6
  },
  {
   "id": 713,
   "name": "avalugg",
   "displayName": "Avalugg",
-  "artId": 713
+  "artId": 713,
+  "gen": 6
  },
  {
   "id": 713,
   "name": "avalugg-hisui",
   "displayName": "Hisuian Avalugg",
-  "artId": 10243
+  "artId": 10243,
+  "gen": 8
  },
  {
   "id": 714,
   "name": "noibat",
   "displayName": "Noibat",
-  "artId": 714
+  "artId": 714,
+  "gen": 6
  },
  {
   "id": 715,
   "name": "noivern",
   "displayName": "Noivern",
-  "artId": 715
+  "artId": 715,
+  "gen": 6
  },
  {
   "id": 716,
   "name": "xerneas",
   "displayName": "Xerneas",
-  "artId": 716
+  "artId": 716,
+  "gen": 6
  },
  {
   "id": 717,
   "name": "yveltal",
   "displayName": "Yveltal",
-  "artId": 717
+  "artId": 717,
+  "gen": 6
  },
  {
   "id": 718,
   "name": "zygarde",
   "displayName": "Zygarde",
-  "artId": 718
+  "artId": 718,
+  "gen": 6
  },
  {
   "id": 718,
   "name": "zygarde-10",
   "displayName": "Zygarde (10)",
-  "artId": 10181
+  "artId": 10181,
+  "gen": 7
  },
  {
   "id": 718,
   "name": "zygarde-complete",
   "displayName": "Zygarde (Complete)",
-  "artId": 10120
+  "artId": 10120,
+  "gen": 7
  },
  {
   "id": 718,
   "name": "zygarde-mega",
   "displayName": "Mega Zygarde",
-  "artId": 10301
+  "artId": 10301,
+  "gen": 9
  },
  {
   "id": 719,
   "name": "diancie",
   "displayName": "Diancie",
-  "artId": 719
+  "artId": 719,
+  "gen": 6
  },
  {
   "id": 719,
   "name": "diancie-mega",
   "displayName": "Mega Diancie",
-  "artId": 10075
+  "artId": 10075,
+  "gen": 6
  },
  {
   "id": 720,
   "name": "hoopa",
   "displayName": "Hoopa",
-  "artId": 720
+  "artId": 720,
+  "gen": 6
  },
  {
   "id": 720,
   "name": "hoopa-unbound",
   "displayName": "Hoopa (Unbound)",
-  "artId": 10086
+  "artId": 10086,
+  "gen": 6
  },
  {
   "id": 721,
   "name": "volcanion",
   "displayName": "Volcanion",
-  "artId": 721
+  "artId": 721,
+  "gen": 6
  },
  {
   "id": 722,
   "name": "rowlet",
   "displayName": "Rowlet",
-  "artId": 722
+  "artId": 722,
+  "gen": 7
  },
  {
   "id": 723,
   "name": "dartrix",
   "displayName": "Dartrix",
-  "artId": 723
+  "artId": 723,
+  "gen": 7
  },
  {
   "id": 724,
   "name": "decidueye",
   "displayName": "Decidueye",
-  "artId": 724
+  "artId": 724,
+  "gen": 7
  },
  {
   "id": 724,
   "name": "decidueye-hisui",
   "displayName": "Hisuian Decidueye",
-  "artId": 10244
+  "artId": 10244,
+  "gen": 8
  },
  {
   "id": 725,
   "name": "litten",
   "displayName": "Litten",
-  "artId": 725
+  "artId": 725,
+  "gen": 7
  },
  {
   "id": 726,
   "name": "torracat",
   "displayName": "Torracat",
-  "artId": 726
+  "artId": 726,
+  "gen": 7
  },
  {
   "id": 727,
   "name": "incineroar",
   "displayName": "Incineroar",
-  "artId": 727
+  "artId": 727,
+  "gen": 7
  },
  {
   "id": 728,
   "name": "popplio",
   "displayName": "Popplio",
-  "artId": 728
+  "artId": 728,
+  "gen": 7
  },
  {
   "id": 729,
   "name": "brionne",
   "displayName": "Brionne",
-  "artId": 729
+  "artId": 729,
+  "gen": 7
  },
  {
   "id": 730,
   "name": "primarina",
   "displayName": "Primarina",
-  "artId": 730
+  "artId": 730,
+  "gen": 7
  },
  {
   "id": 731,
   "name": "pikipek",
   "displayName": "Pikipek",
-  "artId": 731
+  "artId": 731,
+  "gen": 7
  },
  {
   "id": 732,
   "name": "trumbeak",
   "displayName": "Trumbeak",
-  "artId": 732
+  "artId": 732,
+  "gen": 7
  },
  {
   "id": 733,
   "name": "toucannon",
   "displayName": "Toucannon",
-  "artId": 733
+  "artId": 733,
+  "gen": 7
  },
  {
   "id": 734,
   "name": "yungoos",
   "displayName": "Yungoos",
-  "artId": 734
+  "artId": 734,
+  "gen": 7
  },
  {
   "id": 735,
   "name": "gumshoos",
   "displayName": "Gumshoos",
-  "artId": 735
+  "artId": 735,
+  "gen": 7
  },
  {
   "id": 736,
   "name": "grubbin",
   "displayName": "Grubbin",
-  "artId": 736
+  "artId": 736,
+  "gen": 7
  },
  {
   "id": 737,
   "name": "charjabug",
   "displayName": "Charjabug",
-  "artId": 737
+  "artId": 737,
+  "gen": 7
  },
  {
   "id": 738,
   "name": "vikavolt",
   "displayName": "Vikavolt",
-  "artId": 738
+  "artId": 738,
+  "gen": 7
  },
  {
   "id": 739,
   "name": "crabrawler",
   "displayName": "Crabrawler",
-  "artId": 739
+  "artId": 739,
+  "gen": 7
  },
  {
   "id": 740,
   "name": "crabominable",
   "displayName": "Crabominable",
-  "artId": 740
+  "artId": 740,
+  "gen": 7
  },
  {
   "id": 740,
   "name": "crabominable-mega",
   "displayName": "Mega Crabominable",
-  "artId": 10315
+  "artId": 10315,
+  "gen": 9
  },
  {
   "id": 741,
   "name": "oricorio",
   "displayName": "Oricorio",
-  "artId": 741
+  "artId": 741,
+  "gen": 7
  },
  {
   "id": 741,
   "name": "oricorio-pau",
   "displayName": "Oricorio (Pau)",
-  "artId": 10124
+  "artId": 10124,
+  "gen": 7
  },
  {
   "id": 741,
   "name": "oricorio-pom-pom",
   "displayName": "Oricorio (Pom Pom)",
-  "artId": 10123
+  "artId": 10123,
+  "gen": 7
  },
  {
   "id": 741,
   "name": "oricorio-sensu",
   "displayName": "Oricorio (Sensu)",
-  "artId": 10125
+  "artId": 10125,
+  "gen": 7
  },
  {
   "id": 742,
   "name": "cutiefly",
   "displayName": "Cutiefly",
-  "artId": 742
+  "artId": 742,
+  "gen": 7
  },
  {
   "id": 743,
   "name": "ribombee",
   "displayName": "Ribombee",
-  "artId": 743
+  "artId": 743,
+  "gen": 7
  },
  {
   "id": 744,
   "name": "rockruff",
   "displayName": "Rockruff",
-  "artId": 744
+  "artId": 744,
+  "gen": 7
  },
  {
   "id": 745,
   "name": "lycanroc",
   "displayName": "Lycanroc",
-  "artId": 745
+  "artId": 745,
+  "gen": 7
  },
  {
   "id": 745,
   "name": "lycanroc-dusk",
   "displayName": "Lycanroc (Dusk)",
-  "artId": 10152
+  "artId": 10152,
+  "gen": 7
  },
  {
   "id": 745,
   "name": "lycanroc-midnight",
   "displayName": "Lycanroc (Midnight)",
-  "artId": 10126
+  "artId": 10126,
+  "gen": 7
  },
  {
   "id": 746,
   "name": "wishiwashi",
   "displayName": "Wishiwashi",
-  "artId": 746
+  "artId": 746,
+  "gen": 7
  },
  {
   "id": 746,
   "name": "wishiwashi-school",
   "displayName": "Wishiwashi (School)",
-  "artId": 10127
+  "artId": 10127,
+  "gen": 7
  },
  {
   "id": 747,
   "name": "mareanie",
   "displayName": "Mareanie",
-  "artId": 747
+  "artId": 747,
+  "gen": 7
  },
  {
   "id": 748,
   "name": "toxapex",
   "displayName": "Toxapex",
-  "artId": 748
+  "artId": 748,
+  "gen": 7
  },
  {
   "id": 749,
   "name": "mudbray",
   "displayName": "Mudbray",
-  "artId": 749
+  "artId": 749,
+  "gen": 7
  },
  {
   "id": 750,
   "name": "mudsdale",
   "displayName": "Mudsdale",
-  "artId": 750
+  "artId": 750,
+  "gen": 7
  },
  {
   "id": 751,
   "name": "dewpider",
   "displayName": "Dewpider",
-  "artId": 751
+  "artId": 751,
+  "gen": 7
  },
  {
   "id": 752,
   "name": "araquanid",
   "displayName": "Araquanid",
-  "artId": 752
+  "artId": 752,
+  "gen": 7
  },
  {
   "id": 753,
   "name": "fomantis",
   "displayName": "Fomantis",
-  "artId": 753
+  "artId": 753,
+  "gen": 7
  },
  {
   "id": 754,
   "name": "lurantis",
   "displayName": "Lurantis",
-  "artId": 754
+  "artId": 754,
+  "gen": 7
  },
  {
   "id": 755,
   "name": "morelull",
   "displayName": "Morelull",
-  "artId": 755
+  "artId": 755,
+  "gen": 7
  },
  {
   "id": 756,
   "name": "shiinotic",
   "displayName": "Shiinotic",
-  "artId": 756
+  "artId": 756,
+  "gen": 7
  },
  {
   "id": 757,
   "name": "salandit",
   "displayName": "Salandit",
-  "artId": 757
+  "artId": 757,
+  "gen": 7
  },
  {
   "id": 758,
   "name": "salazzle",
   "displayName": "Salazzle",
-  "artId": 758
+  "artId": 758,
+  "gen": 7
  },
  {
   "id": 759,
   "name": "stufful",
   "displayName": "Stufful",
-  "artId": 759
+  "artId": 759,
+  "gen": 7
  },
  {
   "id": 760,
   "name": "bewear",
   "displayName": "Bewear",
-  "artId": 760
+  "artId": 760,
+  "gen": 7
  },
  {
   "id": 761,
   "name": "bounsweet",
   "displayName": "Bounsweet",
-  "artId": 761
+  "artId": 761,
+  "gen": 7
  },
  {
   "id": 762,
   "name": "steenee",
   "displayName": "Steenee",
-  "artId": 762
+  "artId": 762,
+  "gen": 7
  },
  {
   "id": 763,
   "name": "tsareena",
   "displayName": "Tsareena",
-  "artId": 763
+  "artId": 763,
+  "gen": 7
  },
  {
   "id": 764,
   "name": "comfey",
   "displayName": "Comfey",
-  "artId": 764
+  "artId": 764,
+  "gen": 7
  },
  {
   "id": 765,
   "name": "oranguru",
   "displayName": "Oranguru",
-  "artId": 765
+  "artId": 765,
+  "gen": 7
  },
  {
   "id": 766,
   "name": "passimian",
   "displayName": "Passimian",
-  "artId": 766
+  "artId": 766,
+  "gen": 7
  },
  {
   "id": 767,
   "name": "wimpod",
   "displayName": "Wimpod",
-  "artId": 767
+  "artId": 767,
+  "gen": 7
  },
  {
   "id": 768,
   "name": "golisopod",
   "displayName": "Golisopod",
-  "artId": 768
+  "artId": 768,
+  "gen": 7
  },
  {
   "id": 768,
   "name": "golisopod-mega",
   "displayName": "Mega Golisopod",
-  "artId": 10316
+  "artId": 10316,
+  "gen": 9
  },
  {
   "id": 769,
   "name": "sandygast",
   "displayName": "Sandygast",
-  "artId": 769
+  "artId": 769,
+  "gen": 7
  },
  {
   "id": 770,
   "name": "palossand",
   "displayName": "Palossand",
-  "artId": 770
+  "artId": 770,
+  "gen": 7
  },
  {
   "id": 771,
   "name": "pyukumuku",
   "displayName": "Pyukumuku",
-  "artId": 771
+  "artId": 771,
+  "gen": 7
  },
  {
   "id": 772,
   "name": "type-null",
   "displayName": "Type: Null",
-  "artId": 772
+  "artId": 772,
+  "gen": 7
  },
  {
   "id": 773,
   "name": "silvally",
   "displayName": "Silvally",
-  "artId": 773
+  "artId": 773,
+  "gen": 7
  },
  {
   "id": 774,
   "name": "minior",
   "displayName": "Minior",
-  "artId": 774
+  "artId": 774,
+  "gen": 7
  },
  {
   "id": 774,
   "name": "minior-red",
   "displayName": "Minior (Red)",
-  "artId": 10136
+  "artId": 10136,
+  "gen": 7
  },
  {
   "id": 775,
   "name": "komala",
   "displayName": "Komala",
-  "artId": 775
+  "artId": 775,
+  "gen": 7
  },
  {
   "id": 776,
   "name": "turtonator",
   "displayName": "Turtonator",
-  "artId": 776
+  "artId": 776,
+  "gen": 7
  },
  {
   "id": 777,
   "name": "togedemaru",
   "displayName": "Togedemaru",
-  "artId": 777
+  "artId": 777,
+  "gen": 7
  },
  {
   "id": 778,
   "name": "mimikyu",
   "displayName": "Mimikyu",
-  "artId": 778
+  "artId": 778,
+  "gen": 7
  },
  {
   "id": 778,
   "name": "mimikyu-busted",
   "displayName": "Mimikyu (Busted)",
   "artId": 10143,
+  "gen": 7,
   "art": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10143.png"
  },
  {
   "id": 779,
   "name": "bruxish",
   "displayName": "Bruxish",
-  "artId": 779
+  "artId": 779,
+  "gen": 7
  },
  {
   "id": 780,
   "name": "drampa",
   "displayName": "Drampa",
-  "artId": 780
+  "artId": 780,
+  "gen": 7
  },
  {
   "id": 780,
   "name": "drampa-mega",
   "displayName": "Mega Drampa",
-  "artId": 10302
+  "artId": 10302,
+  "gen": 9
  },
  {
   "id": 781,
   "name": "dhelmise",
   "displayName": "Dhelmise",
-  "artId": 781
+  "artId": 781,
+  "gen": 7
  },
  {
   "id": 782,
   "name": "jangmo-o",
   "displayName": "Jangmo-o",
-  "artId": 782
+  "artId": 782,
+  "gen": 7
  },
  {
   "id": 783,
   "name": "hakamo-o",
   "displayName": "Hakamo-o",
-  "artId": 783
+  "artId": 783,
+  "gen": 7
  },
  {
   "id": 784,
   "name": "kommo-o",
   "displayName": "Kommo-o",
-  "artId": 784
+  "artId": 784,
+  "gen": 7
  },
  {
   "id": 785,
   "name": "tapu-koko",
   "displayName": "Tapu Koko",
-  "artId": 785
+  "artId": 785,
+  "gen": 7
  },
  {
   "id": 786,
   "name": "tapu-lele",
   "displayName": "Tapu Lele",
-  "artId": 786
+  "artId": 786,
+  "gen": 7
  },
  {
   "id": 787,
   "name": "tapu-bulu",
   "displayName": "Tapu Bulu",
-  "artId": 787
+  "artId": 787,
+  "gen": 7
  },
  {
   "id": 788,
   "name": "tapu-fini",
   "displayName": "Tapu Fini",
-  "artId": 788
+  "artId": 788,
+  "gen": 7
  },
  {
   "id": 789,
   "name": "cosmog",
   "displayName": "Cosmog",
-  "artId": 789
+  "artId": 789,
+  "gen": 7
  },
  {
   "id": 790,
   "name": "cosmoem",
   "displayName": "Cosmoem",
-  "artId": 790
+  "artId": 790,
+  "gen": 7
  },
  {
   "id": 791,
   "name": "solgaleo",
   "displayName": "Solgaleo",
-  "artId": 791
+  "artId": 791,
+  "gen": 7
  },
  {
   "id": 792,
   "name": "lunala",
   "displayName": "Lunala",
-  "artId": 792
+  "artId": 792,
+  "gen": 7
  },
  {
   "id": 793,
   "name": "nihilego",
   "displayName": "Nihilego",
-  "artId": 793
+  "artId": 793,
+  "gen": 7
  },
  {
   "id": 794,
   "name": "buzzwole",
   "displayName": "Buzzwole",
-  "artId": 794
+  "artId": 794,
+  "gen": 7
  },
  {
   "id": 795,
   "name": "pheromosa",
   "displayName": "Pheromosa",
-  "artId": 795
+  "artId": 795,
+  "gen": 7
  },
  {
   "id": 796,
   "name": "xurkitree",
   "displayName": "Xurkitree",
-  "artId": 796
+  "artId": 796,
+  "gen": 7
  },
  {
   "id": 797,
   "name": "celesteela",
   "displayName": "Celesteela",
-  "artId": 797
+  "artId": 797,
+  "gen": 7
  },
  {
   "id": 798,
   "name": "kartana",
   "displayName": "Kartana",
-  "artId": 798
+  "artId": 798,
+  "gen": 7
  },
  {
   "id": 799,
   "name": "guzzlord",
   "displayName": "Guzzlord",
-  "artId": 799
+  "artId": 799,
+  "gen": 7
  },
  {
   "id": 800,
   "name": "necrozma",
   "displayName": "Necrozma",
-  "artId": 800
+  "artId": 800,
+  "gen": 7
  },
  {
   "id": 800,
   "name": "necrozma-dawn",
   "displayName": "Necrozma (Dawn)",
-  "artId": 10156
+  "artId": 10156,
+  "gen": 7
  },
  {
   "id": 800,
   "name": "necrozma-dusk",
   "displayName": "Necrozma (Dusk)",
-  "artId": 10155
+  "artId": 10155,
+  "gen": 7
  },
  {
   "id": 800,
   "name": "necrozma-ultra",
   "displayName": "Necrozma (Ultra)",
-  "artId": 10157
+  "artId": 10157,
+  "gen": 7
  },
  {
   "id": 801,
   "name": "magearna",
   "displayName": "Magearna",
-  "artId": 801
+  "artId": 801,
+  "gen": 7
  },
  {
   "id": 801,
   "name": "magearna-mega",
   "displayName": "Mega Magearna",
-  "artId": 10317
+  "artId": 10317,
+  "gen": 9
  },
  {
   "id": 801,
   "name": "magearna-original",
   "displayName": "Magearna (Original)",
-  "artId": 10147
+  "artId": 10147,
+  "gen": 7
  },
  {
   "id": 801,
   "name": "magearna-original-mega",
   "displayName": "Magearna (Original Mega)",
-  "artId": 10318
+  "artId": 10318,
+  "gen": 9
  },
  {
   "id": 802,
   "name": "marshadow",
   "displayName": "Marshadow",
-  "artId": 802
+  "artId": 802,
+  "gen": 7
  },
  {
   "id": 803,
   "name": "poipole",
   "displayName": "Poipole",
-  "artId": 803
+  "artId": 803,
+  "gen": 7
  },
  {
   "id": 804,
   "name": "naganadel",
   "displayName": "Naganadel",
-  "artId": 804
+  "artId": 804,
+  "gen": 7
  },
  {
   "id": 805,
   "name": "stakataka",
   "displayName": "Stakataka",
-  "artId": 805
+  "artId": 805,
+  "gen": 7
  },
  {
   "id": 806,
   "name": "blacephalon",
   "displayName": "Blacephalon",
-  "artId": 806
+  "artId": 806,
+  "gen": 7
  },
  {
   "id": 807,
   "name": "zeraora",
   "displayName": "Zeraora",
-  "artId": 807
+  "artId": 807,
+  "gen": 7
  },
  {
   "id": 807,
   "name": "zeraora-mega",
   "displayName": "Mega Zeraora",
-  "artId": 10319
+  "artId": 10319,
+  "gen": 9
  },
  {
   "id": 808,
   "name": "meltan",
   "displayName": "Meltan",
-  "artId": 808
+  "artId": 808,
+  "gen": 7
  },
  {
   "id": 809,
   "name": "melmetal",
   "displayName": "Melmetal",
-  "artId": 809
+  "artId": 809,
+  "gen": 7
  },
  {
   "id": 809,
   "name": "melmetal-gmax",
   "displayName": "Melmetal (Gigantamax)",
-  "artId": 10208
+  "artId": 10208,
+  "gen": 8
  },
  {
   "id": 810,
   "name": "grookey",
   "displayName": "Grookey",
-  "artId": 810
+  "artId": 810,
+  "gen": 8
  },
  {
   "id": 811,
   "name": "thwackey",
   "displayName": "Thwackey",
-  "artId": 811
+  "artId": 811,
+  "gen": 8
  },
  {
   "id": 812,
   "name": "rillaboom",
   "displayName": "Rillaboom",
-  "artId": 812
+  "artId": 812,
+  "gen": 8
  },
  {
   "id": 812,
   "name": "rillaboom-gmax",
   "displayName": "Rillaboom (Gigantamax)",
-  "artId": 10209
+  "artId": 10209,
+  "gen": 8
  },
  {
   "id": 813,
   "name": "scorbunny",
   "displayName": "Scorbunny",
-  "artId": 813
+  "artId": 813,
+  "gen": 8
  },
  {
   "id": 814,
   "name": "raboot",
   "displayName": "Raboot",
-  "artId": 814
+  "artId": 814,
+  "gen": 8
  },
  {
   "id": 815,
   "name": "cinderace",
   "displayName": "Cinderace",
-  "artId": 815
+  "artId": 815,
+  "gen": 8
  },
  {
   "id": 815,
   "name": "cinderace-gmax",
   "displayName": "Cinderace (Gigantamax)",
-  "artId": 10210
+  "artId": 10210,
+  "gen": 8
  },
  {
   "id": 816,
   "name": "sobble",
   "displayName": "Sobble",
-  "artId": 816
+  "artId": 816,
+  "gen": 8
  },
  {
   "id": 817,
   "name": "drizzile",
   "displayName": "Drizzile",
-  "artId": 817
+  "artId": 817,
+  "gen": 8
  },
  {
   "id": 818,
   "name": "inteleon",
   "displayName": "Inteleon",
-  "artId": 818
+  "artId": 818,
+  "gen": 8
  },
  {
   "id": 818,
   "name": "inteleon-gmax",
   "displayName": "Inteleon (Gigantamax)",
-  "artId": 10211
+  "artId": 10211,
+  "gen": 8
  },
  {
   "id": 819,
   "name": "skwovet",
   "displayName": "Skwovet",
-  "artId": 819
+  "artId": 819,
+  "gen": 8
  },
  {
   "id": 820,
   "name": "greedent",
   "displayName": "Greedent",
-  "artId": 820
+  "artId": 820,
+  "gen": 8
  },
  {
   "id": 821,
   "name": "rookidee",
   "displayName": "Rookidee",
-  "artId": 821
+  "artId": 821,
+  "gen": 8
  },
  {
   "id": 822,
   "name": "corvisquire",
   "displayName": "Corvisquire",
-  "artId": 822
+  "artId": 822,
+  "gen": 8
  },
  {
   "id": 823,
   "name": "corviknight",
   "displayName": "Corviknight",
-  "artId": 823
+  "artId": 823,
+  "gen": 8
  },
  {
   "id": 823,
   "name": "corviknight-gmax",
   "displayName": "Corviknight (Gigantamax)",
-  "artId": 10212
+  "artId": 10212,
+  "gen": 8
  },
  {
   "id": 824,
   "name": "blipbug",
   "displayName": "Blipbug",
-  "artId": 824
+  "artId": 824,
+  "gen": 8
  },
  {
   "id": 825,
   "name": "dottler",
   "displayName": "Dottler",
-  "artId": 825
+  "artId": 825,
+  "gen": 8
  },
  {
   "id": 826,
   "name": "orbeetle",
   "displayName": "Orbeetle",
-  "artId": 826
+  "artId": 826,
+  "gen": 8
  },
  {
   "id": 826,
   "name": "orbeetle-gmax",
   "displayName": "Orbeetle (Gigantamax)",
-  "artId": 10213
+  "artId": 10213,
+  "gen": 8
  },
  {
   "id": 827,
   "name": "nickit",
   "displayName": "Nickit",
-  "artId": 827
+  "artId": 827,
+  "gen": 8
  },
  {
   "id": 828,
   "name": "thievul",
   "displayName": "Thievul",
-  "artId": 828
+  "artId": 828,
+  "gen": 8
  },
  {
   "id": 829,
   "name": "gossifleur",
   "displayName": "Gossifleur",
-  "artId": 829
+  "artId": 829,
+  "gen": 8
  },
  {
   "id": 830,
   "name": "eldegoss",
   "displayName": "Eldegoss",
-  "artId": 830
+  "artId": 830,
+  "gen": 8
  },
  {
   "id": 831,
   "name": "wooloo",
   "displayName": "Wooloo",
-  "artId": 831
+  "artId": 831,
+  "gen": 8
  },
  {
   "id": 832,
   "name": "dubwool",
   "displayName": "Dubwool",
-  "artId": 832
+  "artId": 832,
+  "gen": 8
  },
  {
   "id": 833,
   "name": "chewtle",
   "displayName": "Chewtle",
-  "artId": 833
+  "artId": 833,
+  "gen": 8
  },
  {
   "id": 834,
   "name": "drednaw",
   "displayName": "Drednaw",
-  "artId": 834
+  "artId": 834,
+  "gen": 8
  },
  {
   "id": 834,
   "name": "drednaw-gmax",
   "displayName": "Drednaw (Gigantamax)",
-  "artId": 10214
+  "artId": 10214,
+  "gen": 8
  },
  {
   "id": 835,
   "name": "yamper",
   "displayName": "Yamper",
-  "artId": 835
+  "artId": 835,
+  "gen": 8
  },
  {
   "id": 836,
   "name": "boltund",
   "displayName": "Boltund",
-  "artId": 836
+  "artId": 836,
+  "gen": 8
  },
  {
   "id": 837,
   "name": "rolycoly",
   "displayName": "Rolycoly",
-  "artId": 837
+  "artId": 837,
+  "gen": 8
  },
  {
   "id": 838,
   "name": "carkol",
   "displayName": "Carkol",
-  "artId": 838
+  "artId": 838,
+  "gen": 8
  },
  {
   "id": 839,
   "name": "coalossal",
   "displayName": "Coalossal",
-  "artId": 839
+  "artId": 839,
+  "gen": 8
  },
  {
   "id": 839,
   "name": "coalossal-gmax",
   "displayName": "Coalossal (Gigantamax)",
-  "artId": 10215
+  "artId": 10215,
+  "gen": 8
  },
  {
   "id": 840,
   "name": "applin",
   "displayName": "Applin",
-  "artId": 840
+  "artId": 840,
+  "gen": 8
  },
  {
   "id": 841,
   "name": "flapple",
   "displayName": "Flapple",
-  "artId": 841
+  "artId": 841,
+  "gen": 8
  },
  {
   "id": 841,
   "name": "flapple-gmax",
   "displayName": "Flapple (Gigantamax)",
-  "artId": 10216
+  "artId": 10216,
+  "gen": 8
  },
  {
   "id": 842,
   "name": "appletun",
   "displayName": "Appletun",
-  "artId": 842
+  "artId": 842,
+  "gen": 8
  },
  {
   "id": 842,
   "name": "appletun-gmax",
   "displayName": "Appletun (Gigantamax)",
-  "artId": 10217
+  "artId": 10217,
+  "gen": 8
  },
  {
   "id": 843,
   "name": "silicobra",
   "displayName": "Silicobra",
-  "artId": 843
+  "artId": 843,
+  "gen": 8
  },
  {
   "id": 844,
   "name": "sandaconda",
   "displayName": "Sandaconda",
-  "artId": 844
+  "artId": 844,
+  "gen": 8
  },
  {
   "id": 844,
   "name": "sandaconda-gmax",
   "displayName": "Sandaconda (Gigantamax)",
-  "artId": 10218
+  "artId": 10218,
+  "gen": 8
  },
  {
   "id": 845,
   "name": "cramorant",
   "displayName": "Cramorant",
-  "artId": 845
+  "artId": 845,
+  "gen": 8
  },
  {
   "id": 845,
   "name": "cramorant-gorging",
   "displayName": "Cramorant (Gorging)",
-  "artId": 10183
+  "artId": 10183,
+  "gen": 8
  },
  {
   "id": 845,
   "name": "cramorant-gulping",
   "displayName": "Cramorant (Gulping)",
-  "artId": 10182
+  "artId": 10182,
+  "gen": 8
  },
  {
   "id": 846,
   "name": "arrokuda",
   "displayName": "Arrokuda",
-  "artId": 846
+  "artId": 846,
+  "gen": 8
  },
  {
   "id": 847,
   "name": "barraskewda",
   "displayName": "Barraskewda",
-  "artId": 847
+  "artId": 847,
+  "gen": 8
  },
  {
   "id": 848,
   "name": "toxel",
   "displayName": "Toxel",
-  "artId": 848
+  "artId": 848,
+  "gen": 8
  },
  {
   "id": 849,
   "name": "toxtricity",
   "displayName": "Toxtricity",
-  "artId": 849
+  "artId": 849,
+  "gen": 8
  },
  {
   "id": 849,
   "name": "toxtricity-amped-gmax",
   "displayName": "Toxtricity (Amped Gmax)",
-  "artId": 10219
+  "artId": 10219,
+  "gen": 8
  },
  {
   "id": 849,
   "name": "toxtricity-low-key",
   "displayName": "Toxtricity (Low Key)",
-  "artId": 10184
+  "artId": 10184,
+  "gen": 8
  },
  {
   "id": 850,
   "name": "sizzlipede",
   "displayName": "Sizzlipede",
-  "artId": 850
+  "artId": 850,
+  "gen": 8
  },
  {
   "id": 851,
   "name": "centiskorch",
   "displayName": "Centiskorch",
-  "artId": 851
+  "artId": 851,
+  "gen": 8
  },
  {
   "id": 851,
   "name": "centiskorch-gmax",
   "displayName": "Centiskorch (Gigantamax)",
-  "artId": 10220
+  "artId": 10220,
+  "gen": 8
  },
  {
   "id": 852,
   "name": "clobbopus",
   "displayName": "Clobbopus",
-  "artId": 852
+  "artId": 852,
+  "gen": 8
  },
  {
   "id": 853,
   "name": "grapploct",
   "displayName": "Grapploct",
-  "artId": 853
+  "artId": 853,
+  "gen": 8
  },
  {
   "id": 854,
   "name": "sinistea",
   "displayName": "Sinistea",
-  "artId": 854
+  "artId": 854,
+  "gen": 8
  },
  {
   "id": 855,
   "name": "polteageist",
   "displayName": "Polteageist",
-  "artId": 855
+  "artId": 855,
+  "gen": 8
  },
  {
   "id": 856,
   "name": "hatenna",
   "displayName": "Hatenna",
-  "artId": 856
+  "artId": 856,
+  "gen": 8
  },
  {
   "id": 857,
   "name": "hattrem",
   "displayName": "Hattrem",
-  "artId": 857
+  "artId": 857,
+  "gen": 8
  },
  {
   "id": 858,
   "name": "hatterene",
   "displayName": "Hatterene",
-  "artId": 858
+  "artId": 858,
+  "gen": 8
  },
  {
   "id": 858,
   "name": "hatterene-gmax",
   "displayName": "Hatterene (Gigantamax)",
-  "artId": 10221
+  "artId": 10221,
+  "gen": 8
  },
  {
   "id": 859,
   "name": "impidimp",
   "displayName": "Impidimp",
-  "artId": 859
+  "artId": 859,
+  "gen": 8
  },
  {
   "id": 860,
   "name": "morgrem",
   "displayName": "Morgrem",
-  "artId": 860
+  "artId": 860,
+  "gen": 8
  },
  {
   "id": 861,
   "name": "grimmsnarl",
   "displayName": "Grimmsnarl",
-  "artId": 861
+  "artId": 861,
+  "gen": 8
  },
  {
   "id": 861,
   "name": "grimmsnarl-gmax",
   "displayName": "Grimmsnarl (Gigantamax)",
-  "artId": 10222
+  "artId": 10222,
+  "gen": 8
  },
  {
   "id": 862,
   "name": "obstagoon",
   "displayName": "Obstagoon",
-  "artId": 862
+  "artId": 862,
+  "gen": 8
  },
  {
   "id": 863,
   "name": "perrserker",
   "displayName": "Perrserker",
-  "artId": 863
+  "artId": 863,
+  "gen": 8
  },
  {
   "id": 864,
   "name": "cursola",
   "displayName": "Cursola",
-  "artId": 864
+  "artId": 864,
+  "gen": 8
  },
  {
   "id": 865,
   "name": "sirfetchd",
   "displayName": "Sirfetch'd",
-  "artId": 865
+  "artId": 865,
+  "gen": 8
  },
  {
   "id": 866,
   "name": "mr-rime",
   "displayName": "Mr. Rime",
-  "artId": 866
+  "artId": 866,
+  "gen": 8
  },
  {
   "id": 867,
   "name": "runerigus",
   "displayName": "Runerigus",
-  "artId": 867
+  "artId": 867,
+  "gen": 8
  },
  {
   "id": 868,
   "name": "milcery",
   "displayName": "Milcery",
-  "artId": 868
+  "artId": 868,
+  "gen": 8
  },
  {
   "id": 869,
   "name": "alcremie",
   "displayName": "Alcremie",
-  "artId": 869
+  "artId": 869,
+  "gen": 8
  },
  {
   "id": 869,
   "name": "alcremie-gmax",
   "displayName": "Alcremie (Gigantamax)",
-  "artId": 10223
+  "artId": 10223,
+  "gen": 8
  },
  {
   "id": 870,
   "name": "falinks",
   "displayName": "Falinks",
-  "artId": 870
+  "artId": 870,
+  "gen": 8
  },
  {
   "id": 870,
   "name": "falinks-mega",
   "displayName": "Mega Falinks",
-  "artId": 10303
+  "artId": 10303,
+  "gen": 9
  },
  {
   "id": 871,
   "name": "pincurchin",
   "displayName": "Pincurchin",
-  "artId": 871
+  "artId": 871,
+  "gen": 8
  },
  {
   "id": 872,
   "name": "snom",
   "displayName": "Snom",
-  "artId": 872
+  "artId": 872,
+  "gen": 8
  },
  {
   "id": 873,
   "name": "frosmoth",
   "displayName": "Frosmoth",
-  "artId": 873
+  "artId": 873,
+  "gen": 8
  },
  {
   "id": 874,
   "name": "stonjourner",
   "displayName": "Stonjourner",
-  "artId": 874
+  "artId": 874,
+  "gen": 8
  },
  {
   "id": 875,
   "name": "eiscue",
   "displayName": "Eiscue",
-  "artId": 875
+  "artId": 875,
+  "gen": 8
  },
  {
   "id": 875,
   "name": "eiscue-noice",
   "displayName": "Eiscue (Noice)",
-  "artId": 10185
+  "artId": 10185,
+  "gen": 8
  },
  {
   "id": 876,
   "name": "indeedee",
   "displayName": "Indeedee",
-  "artId": 876
+  "artId": 876,
+  "gen": 8
  },
  {
   "id": 877,
   "name": "morpeko",
   "displayName": "Morpeko",
-  "artId": 877
+  "artId": 877,
+  "gen": 8
  },
  {
   "id": 878,
   "name": "cufant",
   "displayName": "Cufant",
-  "artId": 878
+  "artId": 878,
+  "gen": 8
  },
  {
   "id": 879,
   "name": "copperajah",
   "displayName": "Copperajah",
-  "artId": 879
+  "artId": 879,
+  "gen": 8
  },
  {
   "id": 879,
   "name": "copperajah-gmax",
   "displayName": "Copperajah (Gigantamax)",
-  "artId": 10224
+  "artId": 10224,
+  "gen": 8
  },
  {
   "id": 880,
   "name": "dracozolt",
   "displayName": "Dracozolt",
-  "artId": 880
+  "artId": 880,
+  "gen": 8
  },
  {
   "id": 881,
   "name": "arctozolt",
   "displayName": "Arctozolt",
-  "artId": 881
+  "artId": 881,
+  "gen": 8
  },
  {
   "id": 882,
   "name": "dracovish",
   "displayName": "Dracovish",
-  "artId": 882
+  "artId": 882,
+  "gen": 8
  },
  {
   "id": 883,
   "name": "arctovish",
   "displayName": "Arctovish",
-  "artId": 883
+  "artId": 883,
+  "gen": 8
  },
  {
   "id": 884,
   "name": "duraludon",
   "displayName": "Duraludon",
-  "artId": 884
+  "artId": 884,
+  "gen": 8
  },
  {
   "id": 884,
   "name": "duraludon-gmax",
   "displayName": "Duraludon (Gigantamax)",
-  "artId": 10225
+  "artId": 10225,
+  "gen": 8
  },
  {
   "id": 885,
   "name": "dreepy",
   "displayName": "Dreepy",
-  "artId": 885
+  "artId": 885,
+  "gen": 8
  },
  {
   "id": 886,
   "name": "drakloak",
   "displayName": "Drakloak",
-  "artId": 886
+  "artId": 886,
+  "gen": 8
  },
  {
   "id": 887,
   "name": "dragapult",
   "displayName": "Dragapult",
-  "artId": 887
+  "artId": 887,
+  "gen": 8
  },
  {
   "id": 888,
   "name": "zacian",
   "displayName": "Zacian",
-  "artId": 888
+  "artId": 888,
+  "gen": 8
  },
  {
   "id": 888,
   "name": "zacian-crowned",
   "displayName": "Zacian (Crowned)",
-  "artId": 10188
+  "artId": 10188,
+  "gen": 8
  },
  {
   "id": 889,
   "name": "zamazenta",
   "displayName": "Zamazenta",
-  "artId": 889
+  "artId": 889,
+  "gen": 8
  },
  {
   "id": 889,
   "name": "zamazenta-crowned",
   "displayName": "Zamazenta (Crowned)",
-  "artId": 10189
+  "artId": 10189,
+  "gen": 8
  },
  {
   "id": 890,
   "name": "eternatus",
   "displayName": "Eternatus",
-  "artId": 890
+  "artId": 890,
+  "gen": 8
  },
  {
   "id": 890,
   "name": "eternatus-eternamax",
   "displayName": "Eternatus (Eternamax)",
-  "artId": 10190
+  "artId": 10190,
+  "gen": 8
  },
  {
   "id": 891,
   "name": "kubfu",
   "displayName": "Kubfu",
-  "artId": 891
+  "artId": 891,
+  "gen": 8
  },
  {
   "id": 892,
   "name": "urshifu",
   "displayName": "Urshifu",
-  "artId": 892
+  "artId": 892,
+  "gen": 8
  },
  {
   "id": 892,
   "name": "urshifu-rapid-strike",
   "displayName": "Urshifu (Rapid Strike)",
-  "artId": 10191
+  "artId": 10191,
+  "gen": 8
  },
  {
   "id": 892,
   "name": "urshifu-rapid-strike-gmax",
   "displayName": "Urshifu (Rapid Strike Gmax)",
-  "artId": 10227
+  "artId": 10227,
+  "gen": 8
  },
  {
   "id": 892,
   "name": "urshifu-single-strike-gmax",
   "displayName": "Urshifu (Single Strike Gmax)",
-  "artId": 10226
+  "artId": 10226,
+  "gen": 8
  },
  {
   "id": 893,
   "name": "zarude",
   "displayName": "Zarude",
-  "artId": 893
+  "artId": 893,
+  "gen": 8
  },
  {
   "id": 893,
   "name": "zarude-dada",
   "displayName": "Zarude (Dada)",
-  "artId": 10192
+  "artId": 10192,
+  "gen": 8
  },
  {
   "id": 894,
   "name": "regieleki",
   "displayName": "Regieleki",
-  "artId": 894
+  "artId": 894,
+  "gen": 8
  },
  {
   "id": 895,
   "name": "regidrago",
   "displayName": "Regidrago",
-  "artId": 895
+  "artId": 895,
+  "gen": 8
  },
  {
   "id": 896,
   "name": "glastrier",
   "displayName": "Glastrier",
-  "artId": 896
+  "artId": 896,
+  "gen": 8
  },
  {
   "id": 897,
   "name": "spectrier",
   "displayName": "Spectrier",
-  "artId": 897
+  "artId": 897,
+  "gen": 8
  },
  {
   "id": 898,
   "name": "calyrex",
   "displayName": "Calyrex",
-  "artId": 898
+  "artId": 898,
+  "gen": 8
  },
  {
   "id": 898,
   "name": "calyrex-ice",
   "displayName": "Calyrex (Ice)",
-  "artId": 10193
+  "artId": 10193,
+  "gen": 8
  },
  {
   "id": 898,
   "name": "calyrex-shadow",
   "displayName": "Calyrex (Shadow)",
-  "artId": 10194
+  "artId": 10194,
+  "gen": 8
  },
  {
   "id": 899,
   "name": "wyrdeer",
   "displayName": "Wyrdeer",
-  "artId": 899
+  "artId": 899,
+  "gen": 8
  },
  {
   "id": 900,
   "name": "kleavor",
   "displayName": "Kleavor",
-  "artId": 900
+  "artId": 900,
+  "gen": 8
  },
  {
   "id": 901,
   "name": "ursaluna",
   "displayName": "Ursaluna",
-  "artId": 901
+  "artId": 901,
+  "gen": 8
  },
  {
   "id": 901,
   "name": "ursaluna-bloodmoon",
   "displayName": "Ursaluna (Bloodmoon)",
-  "artId": 10272
+  "artId": 10272,
+  "gen": 9
  },
  {
   "id": 902,
   "name": "basculegion",
   "displayName": "Basculegion",
-  "artId": 902
+  "artId": 902,
+  "gen": 8
  },
  {
   "id": 903,
   "name": "sneasler",
   "displayName": "Sneasler",
-  "artId": 903
+  "artId": 903,
+  "gen": 8
  },
  {
   "id": 904,
   "name": "overqwil",
   "displayName": "Overqwil",
-  "artId": 904
+  "artId": 904,
+  "gen": 8
  },
  {
   "id": 905,
   "name": "enamorus",
   "displayName": "Enamorus",
-  "artId": 905
+  "artId": 905,
+  "gen": 8
  },
  {
   "id": 905,
   "name": "enamorus-therian",
   "displayName": "Enamorus (Therian)",
-  "artId": 10249
+  "artId": 10249,
+  "gen": 8
  },
  {
   "id": 906,
   "name": "sprigatito",
   "displayName": "Sprigatito",
-  "artId": 906
+  "artId": 906,
+  "gen": 9
  },
  {
   "id": 907,
   "name": "floragato",
   "displayName": "Floragato",
-  "artId": 907
+  "artId": 907,
+  "gen": 9
  },
  {
   "id": 908,
   "name": "meowscarada",
   "displayName": "Meowscarada",
-  "artId": 908
+  "artId": 908,
+  "gen": 9
  },
  {
   "id": 909,
   "name": "fuecoco",
   "displayName": "Fuecoco",
-  "artId": 909
+  "artId": 909,
+  "gen": 9
  },
  {
   "id": 910,
   "name": "crocalor",
   "displayName": "Crocalor",
-  "artId": 910
+  "artId": 910,
+  "gen": 9
  },
  {
   "id": 911,
   "name": "skeledirge",
   "displayName": "Skeledirge",
-  "artId": 911
+  "artId": 911,
+  "gen": 9
  },
  {
   "id": 912,
   "name": "quaxly",
   "displayName": "Quaxly",
-  "artId": 912
+  "artId": 912,
+  "gen": 9
  },
  {
   "id": 913,
   "name": "quaxwell",
   "displayName": "Quaxwell",
-  "artId": 913
+  "artId": 913,
+  "gen": 9
  },
  {
   "id": 914,
   "name": "quaquaval",
   "displayName": "Quaquaval",
-  "artId": 914
+  "artId": 914,
+  "gen": 9
  },
  {
   "id": 915,
   "name": "lechonk",
   "displayName": "Lechonk",
-  "artId": 915
+  "artId": 915,
+  "gen": 9
  },
  {
   "id": 916,
   "name": "oinkologne",
   "displayName": "Oinkologne",
-  "artId": 916
+  "artId": 916,
+  "gen": 9
  },
  {
   "id": 916,
   "name": "oinkologne-female",
   "displayName": "Oinkologne (Female)",
-  "artId": 10254
+  "artId": 10254,
+  "gen": 9
  },
  {
   "id": 917,
   "name": "tarountula",
   "displayName": "Tarountula",
-  "artId": 917
+  "artId": 917,
+  "gen": 9
  },
  {
   "id": 918,
   "name": "spidops",
   "displayName": "Spidops",
-  "artId": 918
+  "artId": 918,
+  "gen": 9
  },
  {
   "id": 919,
   "name": "nymble",
   "displayName": "Nymble",
-  "artId": 919
+  "artId": 919,
+  "gen": 9
  },
  {
   "id": 920,
   "name": "lokix",
   "displayName": "Lokix",
-  "artId": 920
+  "artId": 920,
+  "gen": 9
  },
  {
   "id": 921,
   "name": "pawmi",
   "displayName": "Pawmi",
-  "artId": 921
+  "artId": 921,
+  "gen": 9
  },
  {
   "id": 922,
   "name": "pawmo",
   "displayName": "Pawmo",
-  "artId": 922
+  "artId": 922,
+  "gen": 9
  },
  {
   "id": 923,
   "name": "pawmot",
   "displayName": "Pawmot",
-  "artId": 923
+  "artId": 923,
+  "gen": 9
  },
  {
   "id": 924,
   "name": "tandemaus",
   "displayName": "Tandemaus",
-  "artId": 924
+  "artId": 924,
+  "gen": 9
  },
  {
   "id": 925,
   "name": "maushold",
   "displayName": "Maushold",
-  "artId": 925
+  "artId": 925,
+  "gen": 9
  },
  {
   "id": 926,
   "name": "fidough",
   "displayName": "Fidough",
-  "artId": 926
+  "artId": 926,
+  "gen": 9
  },
  {
   "id": 927,
   "name": "dachsbun",
   "displayName": "Dachsbun",
-  "artId": 927
+  "artId": 927,
+  "gen": 9
  },
  {
   "id": 928,
   "name": "smoliv",
   "displayName": "Smoliv",
-  "artId": 928
+  "artId": 928,
+  "gen": 9
  },
  {
   "id": 929,
   "name": "dolliv",
   "displayName": "Dolliv",
-  "artId": 929
+  "artId": 929,
+  "gen": 9
  },
  {
   "id": 930,
   "name": "arboliva",
   "displayName": "Arboliva",
-  "artId": 930
+  "artId": 930,
+  "gen": 9
  },
  {
   "id": 931,
   "name": "squawkabilly",
   "displayName": "Squawkabilly",
-  "artId": 931
+  "artId": 931,
+  "gen": 9
  },
  {
   "id": 932,
   "name": "nacli",
   "displayName": "Nacli",
-  "artId": 932
+  "artId": 932,
+  "gen": 9
  },
  {
   "id": 933,
   "name": "naclstack",
   "displayName": "Naclstack",
-  "artId": 933
+  "artId": 933,
+  "gen": 9
  },
  {
   "id": 934,
   "name": "garganacl",
   "displayName": "Garganacl",
-  "artId": 934
+  "artId": 934,
+  "gen": 9
  },
  {
   "id": 935,
   "name": "charcadet",
   "displayName": "Charcadet",
-  "artId": 935
+  "artId": 935,
+  "gen": 9
  },
  {
   "id": 936,
   "name": "armarouge",
   "displayName": "Armarouge",
-  "artId": 936
+  "artId": 936,
+  "gen": 9
  },
  {
   "id": 937,
   "name": "ceruledge",
   "displayName": "Ceruledge",
-  "artId": 937
+  "artId": 937,
+  "gen": 9
  },
  {
   "id": 938,
   "name": "tadbulb",
   "displayName": "Tadbulb",
-  "artId": 938
+  "artId": 938,
+  "gen": 9
  },
  {
   "id": 939,
   "name": "bellibolt",
   "displayName": "Bellibolt",
-  "artId": 939
+  "artId": 939,
+  "gen": 9
  },
  {
   "id": 940,
   "name": "wattrel",
   "displayName": "Wattrel",
-  "artId": 940
+  "artId": 940,
+  "gen": 9
  },
  {
   "id": 941,
   "name": "kilowattrel",
   "displayName": "Kilowattrel",
-  "artId": 941
+  "artId": 941,
+  "gen": 9
  },
  {
   "id": 942,
   "name": "maschiff",
   "displayName": "Maschiff",
-  "artId": 942
+  "artId": 942,
+  "gen": 9
  },
  {
   "id": 943,
   "name": "mabosstiff",
   "displayName": "Mabosstiff",
-  "artId": 943
+  "artId": 943,
+  "gen": 9
  },
  {
   "id": 944,
   "name": "shroodle",
   "displayName": "Shroodle",
-  "artId": 944
+  "artId": 944,
+  "gen": 9
  },
  {
   "id": 945,
   "name": "grafaiai",
   "displayName": "Grafaiai",
-  "artId": 945
+  "artId": 945,
+  "gen": 9
  },
  {
   "id": 946,
   "name": "bramblin",
   "displayName": "Bramblin",
-  "artId": 946
+  "artId": 946,
+  "gen": 9
  },
  {
   "id": 947,
   "name": "brambleghast",
   "displayName": "Brambleghast",
-  "artId": 947
+  "artId": 947,
+  "gen": 9
  },
  {
   "id": 948,
   "name": "toedscool",
   "displayName": "Toedscool",
-  "artId": 948
+  "artId": 948,
+  "gen": 9
  },
  {
   "id": 949,
   "name": "toedscruel",
   "displayName": "Toedscruel",
-  "artId": 949
+  "artId": 949,
+  "gen": 9
  },
  {
   "id": 950,
   "name": "klawf",
   "displayName": "Klawf",
-  "artId": 950
+  "artId": 950,
+  "gen": 9
  },
  {
   "id": 951,
   "name": "capsakid",
   "displayName": "Capsakid",
-  "artId": 951
+  "artId": 951,
+  "gen": 9
  },
  {
   "id": 952,
   "name": "scovillain",
   "displayName": "Scovillain",
-  "artId": 952
+  "artId": 952,
+  "gen": 9
  },
  {
   "id": 952,
   "name": "scovillain-mega",
   "displayName": "Mega Scovillain",
-  "artId": 10320
+  "artId": 10320,
+  "gen": 9
  },
  {
   "id": 953,
   "name": "rellor",
   "displayName": "Rellor",
-  "artId": 953
+  "artId": 953,
+  "gen": 9
  },
  {
   "id": 954,
   "name": "rabsca",
   "displayName": "Rabsca",
-  "artId": 954
+  "artId": 954,
+  "gen": 9
  },
  {
   "id": 955,
   "name": "flittle",
   "displayName": "Flittle",
-  "artId": 955
+  "artId": 955,
+  "gen": 9
  },
  {
   "id": 956,
   "name": "espathra",
   "displayName": "Espathra",
-  "artId": 956
+  "artId": 956,
+  "gen": 9
  },
  {
   "id": 957,
   "name": "tinkatink",
   "displayName": "Tinkatink",
-  "artId": 957
+  "artId": 957,
+  "gen": 9
  },
  {
   "id": 958,
   "name": "tinkatuff",
   "displayName": "Tinkatuff",
-  "artId": 958
+  "artId": 958,
+  "gen": 9
  },
  {
   "id": 959,
   "name": "tinkaton",
   "displayName": "Tinkaton",
-  "artId": 959
+  "artId": 959,
+  "gen": 9
  },
  {
   "id": 960,
   "name": "wiglett",
   "displayName": "Wiglett",
-  "artId": 960
+  "artId": 960,
+  "gen": 9
  },
  {
   "id": 961,
   "name": "wugtrio",
   "displayName": "Wugtrio",
-  "artId": 961
+  "artId": 961,
+  "gen": 9
  },
  {
   "id": 962,
   "name": "bombirdier",
   "displayName": "Bombirdier",
-  "artId": 962
+  "artId": 962,
+  "gen": 9
  },
  {
   "id": 963,
   "name": "finizen",
   "displayName": "Finizen",
-  "artId": 963
+  "artId": 963,
+  "gen": 9
  },
  {
   "id": 964,
   "name": "palafin",
   "displayName": "Palafin",
-  "artId": 10256
+  "artId": 10256,
+  "gen": 9
  },
  {
   "id": 965,
   "name": "varoom",
   "displayName": "Varoom",
-  "artId": 965
+  "artId": 965,
+  "gen": 9
  },
  {
   "id": 966,
   "name": "revavroom",
   "displayName": "Revavroom",
-  "artId": 966
+  "artId": 966,
+  "gen": 9
  },
  {
   "id": 967,
   "name": "cyclizar",
   "displayName": "Cyclizar",
-  "artId": 967
+  "artId": 967,
+  "gen": 9
  },
  {
   "id": 968,
   "name": "orthworm",
   "displayName": "Orthworm",
-  "artId": 968
+  "artId": 968,
+  "gen": 9
  },
  {
   "id": 969,
   "name": "glimmet",
   "displayName": "Glimmet",
-  "artId": 969
+  "artId": 969,
+  "gen": 9
  },
  {
   "id": 970,
   "name": "glimmora",
   "displayName": "Glimmora",
-  "artId": 970
+  "artId": 970,
+  "gen": 9
  },
  {
   "id": 970,
   "name": "glimmora-mega",
   "displayName": "Mega Glimmora",
-  "artId": 10321
+  "artId": 10321,
+  "gen": 9
  },
  {
   "id": 971,
   "name": "greavard",
   "displayName": "Greavard",
-  "artId": 971
+  "artId": 971,
+  "gen": 9
  },
  {
   "id": 972,
   "name": "houndstone",
   "displayName": "Houndstone",
-  "artId": 972
+  "artId": 972,
+  "gen": 9
  },
  {
   "id": 973,
   "name": "flamigo",
   "displayName": "Flamigo",
-  "artId": 973
+  "artId": 973,
+  "gen": 9
  },
  {
   "id": 974,
   "name": "cetoddle",
   "displayName": "Cetoddle",
-  "artId": 974
+  "artId": 974,
+  "gen": 9
  },
  {
   "id": 975,
   "name": "cetitan",
   "displayName": "Cetitan",
-  "artId": 975
+  "artId": 975,
+  "gen": 9
  },
  {
   "id": 976,
   "name": "veluza",
   "displayName": "Veluza",
-  "artId": 976
+  "artId": 976,
+  "gen": 9
  },
  {
   "id": 977,
   "name": "dondozo",
   "displayName": "Dondozo",
-  "artId": 977
+  "artId": 977,
+  "gen": 9
  },
  {
   "id": 978,
   "name": "tatsugiri",
   "displayName": "Tatsugiri",
-  "artId": 978
+  "artId": 978,
+  "gen": 9
  },
  {
   "id": 978,
   "name": "tatsugiri-mega",
   "displayName": "Mega Tatsugiri",
   "artId": 10322,
+  "gen": 9,
   "art": "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/10322.png"
  },
  {
   "id": 979,
   "name": "annihilape",
   "displayName": "Annihilape",
-  "artId": 979
+  "artId": 979,
+  "gen": 9
  },
  {
   "id": 980,
   "name": "clodsire",
   "displayName": "Clodsire",
-  "artId": 980
+  "artId": 980,
+  "gen": 9
  },
  {
   "id": 981,
   "name": "farigiraf",
   "displayName": "Farigiraf",
-  "artId": 981
+  "artId": 981,
+  "gen": 9
  },
  {
   "id": 982,
   "name": "dudunsparce",
   "displayName": "Dudunsparce",
-  "artId": 982
+  "artId": 982,
+  "gen": 9
  },
  {
   "id": 983,
   "name": "kingambit",
   "displayName": "Kingambit",
-  "artId": 983
+  "artId": 983,
+  "gen": 9
  },
  {
   "id": 984,
   "name": "great-tusk",
   "displayName": "Great Tusk",
-  "artId": 984
+  "artId": 984,
+  "gen": 9
  },
  {
   "id": 985,
   "name": "scream-tail",
   "displayName": "Scream Tail",
-  "artId": 985
+  "artId": 985,
+  "gen": 9
  },
  {
   "id": 986,
   "name": "brute-bonnet",
   "displayName": "Brute Bonnet",
-  "artId": 986
+  "artId": 986,
+  "gen": 9
  },
  {
   "id": 987,
   "name": "flutter-mane",
   "displayName": "Flutter Mane",
-  "artId": 987
+  "artId": 987,
+  "gen": 9
  },
  {
   "id": 988,
   "name": "slither-wing",
   "displayName": "Slither Wing",
-  "artId": 988
+  "artId": 988,
+  "gen": 9
  },
  {
   "id": 989,
   "name": "sandy-shocks",
   "displayName": "Sandy Shocks",
-  "artId": 989
+  "artId": 989,
+  "gen": 9
  },
  {
   "id": 990,
   "name": "iron-treads",
   "displayName": "Iron Treads",
-  "artId": 990
+  "artId": 990,
+  "gen": 9
  },
  {
   "id": 991,
   "name": "iron-bundle",
   "displayName": "Iron Bundle",
-  "artId": 991
+  "artId": 991,
+  "gen": 9
  },
  {
   "id": 992,
   "name": "iron-hands",
   "displayName": "Iron Hands",
-  "artId": 992
+  "artId": 992,
+  "gen": 9
  },
  {
   "id": 993,
   "name": "iron-jugulis",
   "displayName": "Iron Jugulis",
-  "artId": 993
+  "artId": 993,
+  "gen": 9
  },
  {
   "id": 994,
   "name": "iron-moth",
   "displayName": "Iron Moth",
-  "artId": 994
+  "artId": 994,
+  "gen": 9
  },
  {
   "id": 995,
   "name": "iron-thorns",
   "displayName": "Iron Thorns",
-  "artId": 995
+  "artId": 995,
+  "gen": 9
  },
  {
   "id": 996,
   "name": "frigibax",
   "displayName": "Frigibax",
-  "artId": 996
+  "artId": 996,
+  "gen": 9
  },
  {
   "id": 997,
   "name": "arctibax",
   "displayName": "Arctibax",
-  "artId": 997
+  "artId": 997,
+  "gen": 9
  },
  {
   "id": 998,
   "name": "baxcalibur",
   "displayName": "Baxcalibur",
-  "artId": 998
+  "artId": 998,
+  "gen": 9
  },
  {
   "id": 998,
   "name": "baxcalibur-mega",
   "displayName": "Mega Baxcalibur",
-  "artId": 10325
+  "artId": 10325,
+  "gen": 9
  },
  {
   "id": 999,
   "name": "gimmighoul",
   "displayName": "Gimmighoul",
-  "artId": 999
+  "artId": 999,
+  "gen": 9
  },
  {
   "id": 999,
   "name": "gimmighoul-roaming",
   "displayName": "Gimmighoul (Roaming)",
-  "artId": 10263
+  "artId": 10263,
+  "gen": 9
  },
  {
   "id": 1000,
   "name": "gholdengo",
   "displayName": "Gholdengo",
-  "artId": 1000
+  "artId": 1000,
+  "gen": 9
  },
  {
   "id": 1001,
   "name": "wo-chien",
   "displayName": "Wo-Chien",
-  "artId": 1001
+  "artId": 1001,
+  "gen": 9
  },
  {
   "id": 1002,
   "name": "chien-pao",
   "displayName": "Chien-Pao",
-  "artId": 1002
+  "artId": 1002,
+  "gen": 9
  },
  {
   "id": 1003,
   "name": "ting-lu",
   "displayName": "Ting-Lu",
-  "artId": 1003
+  "artId": 1003,
+  "gen": 9
  },
  {
   "id": 1004,
   "name": "chi-yu",
   "displayName": "Chi-Yu",
-  "artId": 1004
+  "artId": 1004,
+  "gen": 9
  },
  {
   "id": 1005,
   "name": "roaring-moon",
   "displayName": "Roaring Moon",
-  "artId": 1005
+  "artId": 1005,
+  "gen": 9
  },
  {
   "id": 1006,
   "name": "iron-valiant",
   "displayName": "Iron Valiant",
-  "artId": 1006
+  "artId": 1006,
+  "gen": 9
  },
  {
   "id": 1007,
   "name": "koraidon",
   "displayName": "Koraidon",
-  "artId": 1007
+  "artId": 1007,
+  "gen": 9
  },
  {
   "id": 1008,
   "name": "miraidon",
   "displayName": "Miraidon",
-  "artId": 1008
+  "artId": 1008,
+  "gen": 9
  },
  {
   "id": 1009,
   "name": "walking-wake",
   "displayName": "Walking Wake",
-  "artId": 1009
+  "artId": 1009,
+  "gen": 9
  },
  {
   "id": 1010,
   "name": "iron-leaves",
   "displayName": "Iron Leaves",
-  "artId": 1010
+  "artId": 1010,
+  "gen": 9
  },
  {
   "id": 1011,
   "name": "dipplin",
   "displayName": "Dipplin",
-  "artId": 1011
+  "artId": 1011,
+  "gen": 9
  },
  {
   "id": 1012,
   "name": "poltchageist",
   "displayName": "Poltchageist",
-  "artId": 1012
+  "artId": 1012,
+  "gen": 9
  },
  {
   "id": 1013,
   "name": "sinistcha",
   "displayName": "Sinistcha",
-  "artId": 1013
+  "artId": 1013,
+  "gen": 9
  },
  {
   "id": 1014,
   "name": "okidogi",
   "displayName": "Okidogi",
-  "artId": 1014
+  "artId": 1014,
+  "gen": 9
  },
  {
   "id": 1015,
   "name": "munkidori",
   "displayName": "Munkidori",
-  "artId": 1015
+  "artId": 1015,
+  "gen": 9
  },
  {
   "id": 1016,
   "name": "fezandipiti",
   "displayName": "Fezandipiti",
-  "artId": 1016
+  "artId": 1016,
+  "gen": 9
  },
  {
   "id": 1017,
   "name": "ogerpon",
   "displayName": "Ogerpon",
-  "artId": 1017
+  "artId": 1017,
+  "gen": 9
  },
  {
   "id": 1017,
   "name": "ogerpon-cornerstone-mask",
   "displayName": "Ogerpon (Cornerstone Mask)",
-  "artId": 10275
+  "artId": 10275,
+  "gen": 9
  },
  {
   "id": 1017,
   "name": "ogerpon-hearthflame-mask",
   "displayName": "Ogerpon (Hearthflame Mask)",
-  "artId": 10274
+  "artId": 10274,
+  "gen": 9
  },
  {
   "id": 1017,
   "name": "ogerpon-wellspring-mask",
   "displayName": "Ogerpon (Wellspring Mask)",
-  "artId": 10273
+  "artId": 10273,
+  "gen": 9
  },
  {
   "id": 1018,
   "name": "archaludon",
   "displayName": "Archaludon",
-  "artId": 1018
+  "artId": 1018,
+  "gen": 9
  },
  {
   "id": 1019,
   "name": "hydrapple",
   "displayName": "Hydrapple",
-  "artId": 1019
+  "artId": 1019,
+  "gen": 9
  },
  {
   "id": 1020,
   "name": "gouging-fire",
   "displayName": "Gouging Fire",
-  "artId": 1020
+  "artId": 1020,
+  "gen": 9
  },
  {
   "id": 1021,
   "name": "raging-bolt",
   "displayName": "Raging Bolt",
-  "artId": 1021
+  "artId": 1021,
+  "gen": 9
  },
  {
   "id": 1022,
   "name": "iron-boulder",
   "displayName": "Iron Boulder",
-  "artId": 1022
+  "artId": 1022,
+  "gen": 9
  },
  {
   "id": 1023,
   "name": "iron-crown",
   "displayName": "Iron Crown",
-  "artId": 1023
+  "artId": 1023,
+  "gen": 9
  },
  {
   "id": 1024,
   "name": "terapagos",
   "displayName": "Terapagos",
-  "artId": 1024
+  "artId": 1024,
+  "gen": 9
  },
  {
   "id": 1024,
   "name": "terapagos-stellar",
   "displayName": "Terapagos (Stellar)",
-  "artId": 10277
+  "artId": 10277,
+  "gen": 9
  },
  {
   "id": 1024,
   "name": "terapagos-terastal",
   "displayName": "Terapagos (Terastal)",
-  "artId": 10276
+  "artId": 10276,
+  "gen": 9
  },
  {
   "id": 1025,
   "name": "pecharunt",
   "displayName": "Pecharunt",
-  "artId": 1025
+  "artId": 1025,
+  "gen": 9
  }
 ]

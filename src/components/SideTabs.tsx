@@ -1,6 +1,6 @@
 import { useMemo, useState } from 'react'
 import { POLYGONS } from '../game/polygons'
-import { officialArtUrl, pokemonBySlug } from '../game/pokemon'
+import { normalizeName, officialArtUrl, pokemonBySlug } from '../game/pokemon'
 import { loadResult } from '../lib/storage'
 import type { Puzzle } from '../game/types'
 import helpIcon from '../resources/images/assets/Help.svg'
@@ -280,6 +280,9 @@ function DexPanel({
   onClose: () => void
 }) {
   const [view, setView] = useState<DexView>('calendar')
+  // Filters the dex-number view by name or number. Kept across view switches
+  // so flipping to the calendar and back doesn't lose it.
+  const [query, setQuery] = useState('')
 
   // A slug can in principle recur in the schedule; the Dex box points at its
   // first appearance.
@@ -320,6 +323,22 @@ function DexPanel({
           a.slug.localeCompare(b.slug),
       )
   }, [view, puzzles, releasedBySlug])
+
+  // "#25" / "25" match by dex number (as a prefix, so typing narrows
+  // progressively); anything else matches the display name, normalised the
+  // same way as the guess search (accents, punctuation, ♀/♂).
+  const shownCells = useMemo(() => {
+    if (view !== 'number') return cells
+    const raw = query.trim().replace(/^#/, '')
+    if (!raw) return cells
+    if (/^\d+$/.test(raw)) {
+      return cells.filter(({ id }) => id !== null && String(id).startsWith(raw))
+    }
+    const q = normalizeName(raw)
+    return cells.filter(({ slug }) =>
+      normalizeName(pokemonBySlug(slug)?.displayName ?? slug).includes(q),
+    )
+  }, [view, cells, query])
 
   // Folder tabs rise slightly on hover and sit back down while pressed. Like
   // the edge tabs, their bottom 12px (h-14 with -mb-3) hides under the grid
@@ -375,81 +394,105 @@ function DexPanel({
 
       {/* Own bg + z-10 so the toolbar tabs' hidden extensions sit underneath
           this area and emerge from it on hover. */}
-      <div className="relative z-10 grid flex-1 grid-cols-4 content-start gap-2 overflow-y-auto bg-coral p-3">
-        {cells.map(({ slug, puzzle, id }) => {
-          // Label content follows the sort: the box's calendar date in
-          // calendar view, the species' National Dex number in dex view.
-          const dexLabel = `#${id ?? '?'}`
-          const result = loadResult(puzzle.date)
-          // Completed either way — the answer was revealed, so the Dex shows
-          // it in colour; the corner mark records whether it was earned.
-          const won = result?.status === 'won'
-          const completed = won || result?.status === 'lost'
-          const name = pokemonBySlug(slug)?.displayName ?? slug
-          // The puzzle's own ET date, parsed to local midnight so it formats
-          // as the intended day rather than slipping back one. Pinned to
-          // en-US numeric M/D/YY per the design call, not the viewer locale —
-          // the 2-digit year is what lets it fit the box at a legible size.
-          const dateLabel = new Date(
-            `${puzzle.date}T00:00:00`,
-          ).toLocaleDateString('en-US', {
-            month: 'numeric',
-            day: 'numeric',
-            year: '2-digit',
-          })
-          return (
-            <button
-              key={slug}
-              type="button"
-              onClick={() => onSelectDate(puzzle.date)}
-              aria-label={
-                completed
-                  ? `${name}, ${won ? 'solved' : 'missed'} — open puzzle #${puzzle.number} (${dateLabel})`
-                  : `Unsolved puzzle #${puzzle.number} (${dateLabel})`
-              }
-              // Box + caption as one column, all inside the button so the
-              // caption is part of the tap target. Slight drop shadow lifts
-              // the box off the drawer; hover feedback is a brightness pop
-              // rather than a size change.
-              className="@container block w-full transition-[filter,transform] duration-100 hover:brightness-110 active:scale-95"
-            >
-              <span className="relative block aspect-[287/278] rounded-2xl bg-paper p-1.5 shadow-[2px_2px_0_0_rgba(32,32,32,0.25)]">
-                {/* The polygon art is the box's content: full colour once
-                    completed, black silhouette (the same treatment as the
-                    game's first clue stage) while unsolved. */}
-                <img
-                  src={POLYGONS[slug]}
-                  alt=""
-                  loading="lazy"
-                  style={
-                    completed
-                      ? undefined
-                      : // Ink silhouette, not crushed black — invert(0.125)
-                        // lifts 0 to the palette's #202020.
-                        { filter: 'brightness(0) invert(0.125)' }
-                  }
-                  // pointer-events-none: the silhouette filter is cosmetic,
-                  // so no image context menu (open-in-new-tab showed the
-                  // answer in full colour).
-                  className="pointer-events-none h-full w-full object-contain select-none"
-                />
-                {completed && (
-                  <span
-                    aria-hidden
-                    className={`absolute top-1 right-1.5 leading-none text-[min(0.8rem,15cqw)] ${
-                      won ? 'text-emerald-600' : 'text-poke-red'
-                    }`}
-                  >
-                    {won ? '✓' : '×'}
-                  </span>
-                )}
-              </span>
-              <CellLabel kind={view === 'calendar' ? 'date' : 'number'}>
-                {view === 'calendar' ? dateLabel : dexLabel}
-              </CellLabel>
-            </button>
-          )
-        })}
+      <div className="relative z-10 flex min-h-0 flex-1 flex-col bg-coral">
+        {view === 'number' && (
+          <div className="px-3 pt-3">
+            <input
+              type="search"
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              placeholder="Search name or #"
+              aria-label="Search your Pokémon by name or dex number"
+              autoComplete="off"
+              autoCorrect="off"
+              spellCheck={false}
+              className="w-full border-2 border-ink bg-paper px-2 py-1.5 text-xs text-ink shadow-[2px_2px_0_0_var(--color-ink)] outline-none placeholder:text-ink/45 focus:bg-white"
+            />
+          </div>
+        )}
+        <div className="grid flex-1 grid-cols-4 content-start gap-2 overflow-y-auto p-3">
+          {view === 'number' && shownCells.length === 0 && (
+            <p className="col-span-4 py-6 text-center text-xs leading-relaxed text-paper">
+              {cells.length === 0
+                ? 'Finish a puzzle to start your Dex!'
+                : 'No matches.'}
+            </p>
+          )}
+          {shownCells.map(({ slug, puzzle, id }) => {
+            // Label content follows the sort: the box's calendar date in
+            // calendar view, the species' National Dex number in dex view.
+            const dexLabel = `#${id ?? '?'}`
+            const result = loadResult(puzzle.date)
+            // Completed either way — the answer was revealed, so the Dex shows
+            // it in colour; the corner mark records whether it was earned.
+            const won = result?.status === 'won'
+            const completed = won || result?.status === 'lost'
+            const name = pokemonBySlug(slug)?.displayName ?? slug
+            // The puzzle's own ET date, parsed to local midnight so it formats
+            // as the intended day rather than slipping back one. Pinned to
+            // en-US numeric M/D/YY per the design call, not the viewer locale —
+            // the 2-digit year is what lets it fit the box at a legible size.
+            const dateLabel = new Date(
+              `${puzzle.date}T00:00:00`,
+            ).toLocaleDateString('en-US', {
+              month: 'numeric',
+              day: 'numeric',
+              year: '2-digit',
+            })
+            return (
+              <button
+                key={slug}
+                type="button"
+                onClick={() => onSelectDate(puzzle.date)}
+                aria-label={
+                  completed
+                    ? `${name}, ${won ? 'solved' : 'missed'} — open puzzle #${puzzle.number} (${dateLabel})`
+                    : `Unsolved puzzle #${puzzle.number} (${dateLabel})`
+                }
+                // Box + caption as one column, all inside the button so the
+                // caption is part of the tap target. Slight drop shadow lifts
+                // the box off the drawer; hover feedback is a brightness pop
+                // rather than a size change.
+                className="@container block w-full transition-[filter,transform] duration-100 hover:brightness-110 active:scale-95"
+              >
+                <span className="relative block aspect-[287/278] rounded-2xl bg-paper p-1.5 shadow-[2px_2px_0_0_rgba(32,32,32,0.25)]">
+                  {/* The polygon art is the box's content: full colour once
+                      completed, black silhouette (the same treatment as the
+                      game's first clue stage) while unsolved. */}
+                  <img
+                    src={POLYGONS[slug]}
+                    alt=""
+                    loading="lazy"
+                    style={
+                      completed
+                        ? undefined
+                        : // Ink silhouette, not crushed black — invert(0.125)
+                          // lifts 0 to the palette's #202020.
+                          { filter: 'brightness(0) invert(0.125)' }
+                    }
+                    // pointer-events-none: the silhouette filter is cosmetic,
+                    // so no image context menu (open-in-new-tab showed the
+                    // answer in full colour).
+                    className="pointer-events-none h-full w-full object-contain select-none"
+                  />
+                  {completed && (
+                    <span
+                      aria-hidden
+                      className={`absolute top-1 right-1.5 leading-none text-[min(0.8rem,15cqw)] ${
+                        won ? 'text-emerald-600' : 'text-poke-red'
+                      }`}
+                    >
+                      {won ? '✓' : '×'}
+                    </span>
+                  )}
+                </span>
+                <CellLabel kind={view === 'calendar' ? 'date' : 'number'}>
+                  {view === 'calendar' ? dateLabel : dexLabel}
+                </CellLabel>
+              </button>
+            )
+          })}
+        </div>
       </div>
     </div>
   )

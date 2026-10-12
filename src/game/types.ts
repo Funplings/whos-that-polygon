@@ -12,6 +12,11 @@ export interface Pokemon {
   artId: number
   /** Full image URL, for the few forms with no official artwork of their own */
   art?: string
+  /**
+   * Generation the entry debuted in. For alternate forms it's the form's own
+   * debut, not the species' — Mega Charizard X is Gen 6, not Gen 1.
+   */
+  gen: number
 }
 
 export interface Puzzle {

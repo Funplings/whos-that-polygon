@@ -6,6 +6,8 @@ interface Props {
   status: GameStatus
   guessCount: number
   puzzleNumber: number
+  /** Opens the Stats popup (everyone's results). */
+  onStats: () => void
 }
 
 /**
@@ -37,8 +39,11 @@ function buildShareText(
   return `🟥⚪▶️ Who’s That Polygon? #${puzzleNumber}\n${flavor}\n${score}  ${marks}\n${window.location.origin}`
 }
 
-/** Takes the answer bar's slot at the bottom once the game is over. */
-export function ShareBar({ status, guessCount, puzzleNumber }: Props) {
+/**
+ * Takes the answer bar's slot at the bottom once the game is over: Share
+ * results, with Stats beside it on the same row.
+ */
+export function ShareBar({ status, guessCount, puzzleNumber, onStats }: Props) {
   const [copied, setCopied] = useState<'idle' | 'ok' | 'failed'>('idle')
 
   async function copyResults() {
@@ -55,12 +60,20 @@ export function ShareBar({ status, guessCount, puzzleNumber }: Props) {
   }
 
   return (
-    <div className="w-full">
+    <div className="flex w-full gap-3">
       <button
         onClick={copyResults}
-        className="gb-btn w-full bg-gold py-3 text-ink transition-colors hover:bg-amber-300"
+        className="gb-btn min-w-0 flex-1 bg-gold py-3 text-ink transition-colors hover:bg-amber-300"
       >
         {copied === 'ok' ? 'Copied!' : '▶ Share results'}
+      </button>
+      <button
+        type="button"
+        onClick={onStats}
+        aria-haspopup="dialog"
+        className="gb-btn shrink-0 bg-paper px-4 py-3 text-ink transition-colors hover:bg-white"
+      >
+        Stats
       </button>
       <p aria-live="polite" className="sr-only">
         {copied === 'ok' && 'Result copied — paste it anywhere.'}

@@ -41,6 +41,7 @@ them disappear silently. Change the generator instead:
 | Show a default variety under its plain name | `DEFAULT_SUFFIXES` |
 | Fix display text | `FORM_LABELS` / `SPECIAL_NAMES` |
 | Change a reveal image | `ART_IDS` / `ART_URLS` / `HOME_FALLBACK` |
+| Fix an entry's generation | the `formGen` / `speciesGen` lookups |
 
 Both generators are seeded/deterministic — re-running reproduces byte-identical
 output. After changing a generator, re-run it and diff.
@@ -92,6 +93,22 @@ date shown in the UI should come from the puzzle's own ET date, not
 by every form of a species. `artId` is the variety id and is what reveal images
 are named after. Keying a reveal off `id` shows base-species art for every Mega,
 regional, and Gigantamax form — about a third of the list.
+
+**`gen` is the form's debut, not the species'.** Mega Charizard X is Gen 6,
+Hisuian Growlithe Gen 8. The generator takes the later of the species'
+generation and the form's PokeAPI version group.
+
+## Global results (the one backend)
+
+Finished games report to a Supabase project (`whos-that-polygon`), and the
+Stats button beside Share opens a popup (`StatsModal`) with the day's tally. `src/lib/globalResults.ts` calls two SQL functions over plain `fetch`
+(no SDK); the schema is in `supabase/schema.sql`. The table has RLS on and no
+policies — `submit_result` / `get_results` (security definer) are the only
+way in, so the Supabase advisor's "anon can execute security definer" warnings
+are expected. One row per anonymous device id per day; first result stands.
+Previews never submit or show results; `/MM-DD-YYYY` probes read but don't
+submit. **Local dev submits to the real database** — today's game played on
+localhost counts.
 
 ### URL overrides
 
@@ -145,8 +162,8 @@ rather than `npm run dev` when touching anything routing-related.
 
 Pokemon Classic (all text — the wordmark is now `assets/Logo.svg`) is bundled
 at `src/resources/fonts/` and declared with `@font-face` — it must not rely on
-a system install. Nothing loads from Google Fonts; there are no third-party
-runtime requests.
+a system install. Nothing loads from Google Fonts; the only third-party
+runtime requests are the global-results calls to Supabase.
 
 It ships a single 400 weight; bolding only triggers faux-bold smearing, so
 text must stay at `font-normal`.
