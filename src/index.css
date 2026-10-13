@@ -26,7 +26,7 @@
   /* The designer's palette, sampled from resources/images/assets — every
      surface colour comes from here. paper doubles as the starburst fill so
      the text boxes and the star read as one material. */
-  --color-paper: #e6e6e6;
+  --color-paper: #dddddd;
   --color-ink: #202020;
   --color-poke-red: #d33b3b;
   --color-coral: #f9574d;

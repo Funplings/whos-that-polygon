@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import starburst from '../resources/images/assets/Starburst.svg'
+import hideIcon from '../resources/images/assets/Hide.svg'
 import { POLYGONS } from '../game/polygons'
 import { genLabel, pokemonBySlug } from '../game/pokemon'
 import type { ClueStage } from '../game/types'
@@ -27,10 +29,10 @@ export function PuzzleImage({ slug, clueStage }: Props) {
     // that fits the space left over by the top bar and bottom controls: in
     // short viewports it shrinks, in tall ones it centres — the responsive
     // behaviour the design doc asks for.
-    // pb-10 reserves room for the generation chip under the star: the square
+    // pb-12 reserves room for the generation chip under the star: the square
     // is sized against the content box, so the chip never pushes the bottom
     // controls or overlaps them.
-    <div className="fit-square-parent flex h-full w-full items-center justify-center pb-10">
+    <div className="fit-square-parent flex h-full w-full items-center justify-center pb-12">
       <div className="fit-square relative flex items-center justify-center">
         {/* The hand-drawn starburst asset — white outline and offset shadow
             are baked into the SVG itself. */}
@@ -82,21 +84,61 @@ export function PuzzleImage({ slug, clueStage }: Props) {
             )}
           </div>
         </div>
-        {/* The generation, shown from the start as a standing hint, just
-            under the star. For forms it's the form's own debut (Mega Charizard
-            X is Gen VI), which pokemon.json bakes in. A plain white box, not
-            the pixel dialogue frame. left 48.4% centres it on the grey face
-            rather than the SVG, matching the art overlay's shadow
+        {/* The generation hint, just under the star. Keyed by slug so it
+            starts hidden again on every puzzle. left 48.4% centres it on the
+            grey face rather than the SVG, matching the art overlay's shadow
             compensation. */}
         {gen && (
           <div
-            className="absolute top-full -translate-x-1/2 border-2 border-ink bg-white px-2 py-1 text-sm whitespace-nowrap text-ink"
+            className="absolute top-full -translate-x-1/2"
             style={{ left: '48.4%' }}
           >
-            {genLabel(gen)}
+            <GenHint key={slug} gen={gen} />
           </div>
         )}
       </div>
     </div>
+  )
+}
+
+/**
+ * "Introduced in: [Gen II]", hidden behind an eye-slash until tapped — the
+ * player opts into the hint. For forms it's the form's own debut (Mega
+ * Charizard X is Gen VI), which pokemon.json bakes in. The value box has a
+ * fixed width so revealing it doesn't shift the strip.
+ */
+function GenHint({ gen }: { gen: number }) {
+  const [shown, setShown] = useState(false)
+  return (
+    <button
+      type="button"
+      onClick={() => setShown((s) => !s)}
+      aria-pressed={shown}
+      aria-label={
+        shown
+          ? `Introduced in ${genLabel(gen)} — hide`
+          : 'Show which generation it was introduced in'
+      }
+      className="flex items-center gap-3 border-2 border-ink bg-paper p-1 pl-3 text-sm whitespace-nowrap text-ink"
+    >
+      <span>Introduced in:</span>
+      <span
+        className={`flex h-7 w-24 items-center justify-center transition-colors ${
+          shown ? 'bg-gold' : 'bg-ink'
+        }`}
+      >
+        {shown ? (
+          genLabel(gen)
+        ) : (
+          // The designer's eye-slash, recoloured from maroon to the paper
+          // tone (#dddddd: 221/255 ≈ invert(0.867)) to read on the ink box.
+          <img
+            src={hideIcon}
+            alt=""
+            className="h-4 [filter:brightness(0)_invert(0.867)]"
+          />
+        )}
+      </span>
+    </button>
   )
 }
