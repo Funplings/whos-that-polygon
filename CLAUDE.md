@@ -13,14 +13,20 @@ npm run preview  # serve the production build
 
 There is no test framework in this project.
 
-Three generator scripts produce committed assets. They are run by hand, never
+Four generator scripts produce committed assets. They are run by hand, never
 as part of the build:
 
 ```bash
 node scripts/build-pokemon-list.mjs   # regenerates src/data/pokemon.json from PokeAPI
 node scripts/fetch-artwork.mjs        # downloads missing reveal images
 node scripts/build-eyecatch.mjs       # regenerates the red-rays backdrop SVG
+node scripts/build-og-image.mjs       # renders public/og-image.png (needs Chrome)
 ```
+
+`public/og-image.png` is the link-preview image (Open Graph / Twitter card)
+referenced from `index.html`'s `og:` tags. Those tags need absolute URLs, so
+they hard-code `https://whosthatpolygon.app` — update them if the domain
+changes. Re-run the script after changing the starburst, backdrop, or font.
 
 Polygon exports usually arrive with uneven transparent padding, which shows up
 in-game as the puzzle sitting small and off-centre (object-contain centres the

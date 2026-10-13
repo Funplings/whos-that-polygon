@@ -9,6 +9,32 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Who's That Polygon?</title>
+    <meta
+      name="description"
+      content="A daily Pokémon guessing game. Every Pokémon is made of exactly three shapes. Can you name it in three guesses?"
+    />
+
+    <!-- Link previews (Open Graph, read by X/Twitter, iMessage, Discord,
+         Slack, etc.). The image is public/og-image.png, rendered by
+         scripts/build-og-image.mjs. Crawlers need absolute URLs. -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Who's That Polygon?" />
+    <meta property="og:url" content="https://whosthatpolygon.app/" />
+    <meta property="og:title" content="Who's That Polygon?" />
+    <meta
+      property="og:description"
+      content="A daily Pokémon guessing game. Every Pokémon is made of exactly three shapes. Can you name it in three guesses?"
+    />
+    <meta property="og:image" content="https://whosthatpolygon.app/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta
+      property="og:image:alt"
+      content="A Pokémon silhouette in a starburst, next to the title Who's That Polygon?"
+    />
+    <!-- X falls back to the og: tags for title, description and image; this
+         just asks for the large-image layout instead of a small thumbnail. -->
+    <meta name="twitter:card" content="summary_large_image" />
   </head>
   <body>
     <div id="root"></div>
