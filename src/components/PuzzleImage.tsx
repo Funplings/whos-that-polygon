@@ -1,5 +1,6 @@
 import starburst from '../resources/images/assets/Starburst.svg'
 import { POLYGONS } from '../game/polygons'
+import { PieceStack } from './PieceStack'
 import type { ClueStage } from '../game/types'
 
 // Every stage uses the same filter functions in the same order, varying only
@@ -16,9 +17,20 @@ const STAGE_FILTERS: Record<ClueStage, string> = {
 interface Props {
   slug: string
   clueStage: ClueStage
+  /** The art's separate shapes (see game/pieces), drawn instead of the PNG. */
+  pieces?: string[]
+  split?: boolean
+  /** Shows the Split/Join toggle; omitted while the puzzle is in play. */
+  onToggleSplit?: () => void
 }
 
-export function PuzzleImage({ slug, clueStage }: Props) {
+export function PuzzleImage({
+  slug,
+  clueStage,
+  pieces,
+  split = false,
+  onToggleSplit,
+}: Props) {
   const src = POLYGONS[slug]
   return (
     // fit-square-parent/fit-square size the starburst as the largest square
@@ -47,7 +59,14 @@ export function PuzzleImage({ slug, clueStage }: Props) {
           style={{ transform: 'translate(-1.64%, -1.64%)' }}
         >
           <div className="aspect-square w-[46%]">
-            {src ? (
+            {pieces ? (
+              <PieceStack
+                key={slug}
+                pieces={pieces}
+                split={split}
+                filter={STAGE_FILTERS[clueStage]}
+              />
+            ) : src ? (
               // Exports are trimmed to the drawing and vary in aspect ratio,
               // so object-contain does the framing inside the bounding box.
               //
@@ -77,8 +96,20 @@ export function PuzzleImage({ slug, clueStage }: Props) {
             )}
           </div>
         </div>
+        {onToggleSplit && (
+          <button
+            type="button"
+            onClick={onToggleSplit}
+            aria-pressed={split}
+            aria-label={
+              split ? 'Put the shapes back together' : 'Split into shapes'
+            }
+            className="gb-btn absolute right-[6%] bottom-[6%] bg-paper px-3 py-1.5 text-xs text-ink hover:bg-white"
+          >
+            {split ? 'Join' : 'Split'}
+          </button>
+        )}
       </div>
     </div>
   )
 }
-

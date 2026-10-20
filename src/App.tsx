@@ -11,7 +11,13 @@ import { ClueProgression } from './components/ClueProgression'
 import { GenHint } from './components/GenHint'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
-import { msUntilNextPuzzle, puzzlesThrough, todayISO } from './game/puzzle'
+import {
+  msUntilNextPuzzle,
+  piecesTestSlugFromUrl,
+  puzzlesThrough,
+  todayISO,
+} from './game/puzzle'
+import { PIECES } from './game/pieces'
 import { hasSeenRules, loadResult, markRulesSeen } from './lib/storage'
 import { useGlobalResults } from './lib/globalResults'
 import { playLossBuzzer, playWinJingle } from './lib/sfx'
@@ -149,6 +155,14 @@ function App() {
   const showClueToggle = game.guesses.length > 0 || ended
   const gen = pokemonBySlug(game.puzzle.answer)?.gen
 
+  // Split-into-shapes, only on its test route for now (/larvitar-test). The
+  // pieces draw from the start — stacked they look identical to the normal
+  // art — so ending the game swaps nothing; the toggle appears once it's over.
+  const [piecesTest] = useState(() => piecesTestSlugFromUrl() !== null)
+  const pieces = piecesTest ? PIECES[game.puzzle.answer] : undefined
+  const [splitFor, setSplitFor] = useState<string | null>(null)
+  const split = ended && splitFor === puzzleKey
+
   return (
     // One screen, no scrolling: top bar, starburst filling the middle, and the
     // controls locked to the bottom. overflow-clip (not hidden) so no scroll
@@ -207,7 +221,17 @@ function App() {
       )}
 
       <main className="min-h-0 flex-1 px-2">
-        <PuzzleImage slug={game.puzzle.answer} clueStage={selectedClueStage} />
+        <PuzzleImage
+          slug={game.puzzle.answer}
+          clueStage={selectedClueStage}
+          pieces={pieces}
+          split={split}
+          onToggleSplit={
+            pieces && ended
+              ? () => setSplitFor(split ? null : puzzleKey)
+              : undefined
+          }
+        />
       </main>
 
       {/* The bottom stack never changes height: the clue toggle's slot is

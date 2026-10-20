@@ -175,6 +175,22 @@ export function overrideSlugFromUrl(): string | null {
   return raw || null
 }
 
+/**
+ * Test routes for the polygon-pieces feature: /larvitar-test plays Larvitar
+ * with the split toggle. Unlike the overrides above these work on any host,
+ * so they can be tried on a Vercel preview deploy — Larvitar's scheduled day
+ * is long past, so nothing is spoiled.
+ */
+const PIECES_TEST_ROUTES: Record<string, string> = {
+  'larvitar-test': 'larvitar',
+}
+
+export function piecesTestSlugFromUrl(): string | null {
+  if (typeof window === 'undefined') return null
+  const path = window.location.pathname.replace(/^\/+|\/+$/g, '').toLowerCase()
+  return PIECES_TEST_ROUTES[path] ?? null
+}
+
 /** Build a one-off preview puzzle for a slug, or null if it has no polygon. */
 export function puzzleForSlug(slug: string): Puzzle | null {
   if (!(slug in POLYGONS)) return null

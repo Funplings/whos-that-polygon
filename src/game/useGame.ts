@@ -3,6 +3,7 @@ import { isCorrectGuess } from './pokemon'
 import {
   overrideDateFromUrl,
   overrideSlugFromUrl,
+  piecesTestSlugFromUrl,
   puzzleForDate,
   puzzleForSlug,
   todayISO,
@@ -44,7 +45,8 @@ export function useGame(dateISO = todayISO()): GameState {
 
   // A /slug or ?pokemon=slug URL loads that Pokémon for manual testing.
   const requested = useMemo(
-    () => (dateOverride ? null : overrideSlugFromUrl()),
+    () =>
+      dateOverride ? null : (piecesTestSlugFromUrl() ?? overrideSlugFromUrl()),
     [dateOverride],
   )
   const override = useMemo(
