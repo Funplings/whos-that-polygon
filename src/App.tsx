@@ -1,43 +1,43 @@
-import { useEffect, useMemo, useRef, useState } from "react";
-import { Analytics } from "@vercel/analytics/react";
-import { PuzzleImage } from "./components/PuzzleImage";
-import { SearchBar } from "./components/SearchBar";
-import { GuessRow } from "./components/GuessRow";
-import { SolutionBox, SwapButton } from "./components/SolutionBox";
-import { StatsModal } from "./components/StatsModal";
-import { ShareBar } from "./components/ShareBar";
-import { SideTabs, type PanelView } from "./components/SideTabs";
-import { ClueProgression } from "./components/ClueProgression";
-import { GenHint } from "./components/GenHint";
-import { useGame } from "./game/useGame";
-import { isCorrectGuess, pokemonBySlug } from "./game/pokemon";
-import { msUntilNextPuzzle, puzzlesThrough, todayISO } from "./game/puzzle";
-import { hasSeenRules, loadResult, markRulesSeen } from "./lib/storage";
-import { useGlobalResults } from "./lib/globalResults";
-import { playLossBuzzer, playWinJingle } from "./lib/sfx";
-import logo from "./resources/images/assets/Logo.svg";
-import type { ClueStage } from "./game/types";
+import { useEffect, useMemo, useRef, useState } from 'react'
+import { Analytics } from '@vercel/analytics/react'
+import { PuzzleImage } from './components/PuzzleImage'
+import { SearchBar } from './components/SearchBar'
+import { GuessRow } from './components/GuessRow'
+import { SolutionBox, SwapButton } from './components/SolutionBox'
+import { StatsModal } from './components/StatsModal'
+import { ShareBar } from './components/ShareBar'
+import { SideTabs, type PanelView } from './components/SideTabs'
+import { ClueProgression } from './components/ClueProgression'
+import { GenHint } from './components/GenHint'
+import { useGame } from './game/useGame'
+import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
+import { msUntilNextPuzzle, puzzlesThrough, todayISO } from './game/puzzle'
+import { hasSeenRules, loadResult, markRulesSeen } from './lib/storage'
+import { useGlobalResults } from './lib/globalResults'
+import { playLossBuzzer, playWinJingle } from './lib/sfx'
+import logo from './resources/images/assets/Logo.svg'
+import type { ClueStage } from './game/types'
 
 // ?rays=parallel swaps the backdrop for the strictly-parallel comparison
 // variant — a design A/B, not a player-facing switch.
 const PARALLEL_RAYS =
-  new URLSearchParams(window.location.search).get("rays") === "parallel";
+  new URLSearchParams(window.location.search).get('rays') === 'parallel'
 
 function App() {
-  const [today] = useState(() => todayISO());
-  const [selectedDate, setSelectedDate] = useState(today);
+  const [today] = useState(() => todayISO())
+  const [selectedDate, setSelectedDate] = useState(today)
   // Tapping an empty guess slot focuses the answer bar (see GuessRow).
-  const searchInputRef = useRef<HTMLInputElement>(null);
-  const game = useGame(selectedDate);
-  const archivePuzzles = useMemo(() => puzzlesThrough(today), [today]);
+  const searchInputRef = useRef<HTMLInputElement>(null)
+  const game = useGame(selectedDate)
+  const archivePuzzles = useMemo(() => puzzlesThrough(today), [today])
   const isTodayPuzzle =
-    !game.preview && !game.dateOverride && game.puzzle.date === today;
-  const ended = game.status !== "playing";
+    !game.preview && !game.dateOverride && game.puzzle.date === today
+  const ended = game.status !== 'playing'
 
   // Don't interrupt manual testing with the first-visit rules panel.
   const [panel, setPanel] = useState<PanelView | null>(() =>
-    !game.preview && !hasSeenRules() ? "help" : null,
-  );
+    !game.preview && !hasSeenRules() ? 'help' : null,
+  )
   // The selected clue stage and guesses/solution toggle are DERIVED from
   // keyed picks rather than synced by effects: an effect-based reset painted
   // one frame of the new puzzle with the previous puzzle's view before
@@ -45,26 +45,26 @@ function App() {
   // navigation. A pick only applies while its key matches; any change of
   // puzzle (or newly unlocked stage) falls back to the default in the same
   // render.
-  const puzzleKey = game.puzzle.date + game.puzzle.answer;
-  const stageKey = puzzleKey + game.clueStage;
+  const puzzleKey = game.puzzle.date + game.puzzle.answer
+  const stageKey = puzzleKey + game.clueStage
   const [stagePick, setStagePick] = useState<{
-    key: string;
-    stage: ClueStage;
-  } | null>(null);
+    key: string
+    stage: ClueStage
+  } | null>(null)
   const selectedClueStage =
-    stagePick?.key === stageKey ? stagePick.stage : game.clueStage;
+    stagePick?.key === stageKey ? stagePick.stage : game.clueStage
   // The finished game leads with the solution; the corner button swaps the
   // guess list back in (and vice versa).
   const [solutionPick, setSolutionPick] = useState<{
-    key: string;
-    show: boolean;
-  } | null>(null);
+    key: string
+    show: boolean
+  } | null>(null)
   const showSolution =
-    solutionPick?.key === puzzleKey ? solutionPick.show : true;
+    solutionPick?.key === puzzleKey ? solutionPick.show : true
   // The Stats popup, opened from beside the share button. Keyed like the
   // picks above so switching days from the Dex never leaves it open.
-  const [statsFor, setStatsFor] = useState<string | null>(null);
-  const statsOpen = statsFor === puzzleKey;
+  const [statsFor, setStatsFor] = useState<string | null>(null)
+  const statsOpen = statsFor === puzzleKey
 
   // Finished games report to the global tally and load it. Date probes
   // (/MM-DD-YYYY) can look but don't submit — they're not real plays.
@@ -72,59 +72,59 @@ function App() {
     ended && !game.preview
       ? {
           guesses: game.guesses.length,
-          won: game.status === "won",
+          won: game.status === 'won',
           wrong: game.guesses.filter(
             (g) => !isCorrectGuess(g, game.puzzle.answer),
           ),
         }
-      : null;
+      : null
   const globalResults = useGlobalResults(
     game.puzzle.date,
     finishedGame,
     !game.dateOverride,
-  );
+  )
 
   // Pokémon the player has caught on earlier days, marked with a pokeball in
   // the guess dropdown. Read fresh each render rather than memoised — it's a
   // few dozen localStorage reads, and App only re-renders on game events, so
   // a win always shows up on the next day's dropdown.
-  const caughtSlugs = new Set<string>();
+  const caughtSlugs = new Set<string>()
   for (const p of archivePuzzles) {
-    if (loadResult(p.date)?.status === "won") caughtSlugs.add(p.answer);
+    if (loadResult(p.date)?.status === 'won') caughtSlugs.add(p.answer)
   }
   // One shake+sparkle on the pokeball tab, a second after the puzzle resolves,
   // to say the result landed in the Dex. Delayed so the player reads the
   // solution first; only fires on a transition actually played this session.
-  const [dexNotify, setDexNotify] = useState(false);
+  const [dexNotify, setDexNotify] = useState(false)
   // Status is tracked per puzzle: without the key, opening an already-finished
   // day from the Dex reads as a playing→won "transition" and would ring the
   // jingle and shake the pokeball just for browsing.
   const prevResult = useRef({
     key: game.puzzle.date + game.puzzle.answer,
     status: game.status,
-  });
+  })
 
   useEffect(() => {
-    const key = game.puzzle.date + game.puzzle.answer;
-    const was = prevResult.current;
-    prevResult.current = { key, status: game.status };
+    const key = game.puzzle.date + game.puzzle.answer
+    const was = prevResult.current
+    prevResult.current = { key, status: game.status }
     const resolvedThisSession =
-      ended && was.key === key && was.status === "playing";
-    if (!resolvedThisSession) return;
+      ended && was.key === key && was.status === 'playing'
+    if (!resolvedThisSession) return
 
     // The result jingle — square-wave chiptune, see lib/sfx. Previews get the
     // sound too (it's feedback on the guess), but not the Dex notification.
-    if (game.status === "won") playWinJingle();
-    else playLossBuzzer();
+    if (game.status === 'won') playWinJingle()
+    else playLossBuzzer()
 
-    if (game.preview) return;
-    const showTimer = setTimeout(() => setDexNotify(true), 1000);
-    const hideTimer = setTimeout(() => setDexNotify(false), 3500);
+    if (game.preview) return
+    const showTimer = setTimeout(() => setDexNotify(true), 1000)
+    const hideTimer = setTimeout(() => setDexNotify(false), 3500)
     return () => {
-      clearTimeout(showTimer);
-      clearTimeout(hideTimer);
-    };
-  }, [ended, game.status, game.preview, game.puzzle.date, game.puzzle.answer]);
+      clearTimeout(showTimer)
+      clearTimeout(hideTimer)
+    }
+  }, [ended, game.status, game.preview, game.puzzle.date, game.puzzle.answer])
 
   // The puzzle is resolved once when the app mounts, so past midnight the page
   // would keep serving yesterday's polygon — and save guesses against
@@ -132,22 +132,22 @@ function App() {
   // per date, so nothing in flight is lost. (The visible countdown is gone by
   // design; the rollover behaviour stays.)
   useEffect(() => {
-    if (!isTodayPuzzle) return;
+    if (!isTodayPuzzle) return
     const id = setInterval(() => {
-      if (msUntilNextPuzzle() === 0) window.location.reload();
-    }, 1000);
-    return () => clearInterval(id);
-  }, [isTodayPuzzle]);
+      if (msUntilNextPuzzle() === 0) window.location.reload()
+    }, 1000)
+    return () => clearInterval(id)
+  }, [isTodayPuzzle])
 
   function closePanel(next: PanelView | null) {
-    if (panel === "help" && next === null) markRulesSeen();
-    setPanel(next);
+    if (panel === 'help' && next === null) markRulesSeen()
+    setPanel(next)
   }
 
   // The clue-stage toggle only appears once there is something to toggle —
   // after the first guess unlocks a second view.
-  const showClueToggle = game.guesses.length > 0 || ended;
-  const gen = pokemonBySlug(game.puzzle.answer)?.gen;
+  const showClueToggle = game.guesses.length > 0 || ended
+  const gen = pokemonBySlug(game.puzzle.answer)?.gen
 
   return (
     // One screen, no scrolling: top bar, starburst filling the middle, and the
@@ -155,7 +155,7 @@ function App() {
     // container forms around the fixed-position drawer.
     <div
       className={`eyecatch flex h-dvh flex-col overflow-clip ${
-        PARALLEL_RAYS ? "eyecatch-parallel" : ""
+        PARALLEL_RAYS ? 'eyecatch-parallel' : ''
       }`}
     >
       {/* The logo anchors the top-left corner; the edge tabs start 64px down,
@@ -173,10 +173,10 @@ function App() {
             local midnight and formats as the intended day. */}
         {!game.preview && (
           <div className="gb-frame gb-frame-sm bg-paper px-2 text-sm text-ink">
-            #{game.puzzle.number} ·{" "}
+            #{game.puzzle.number} ·{' '}
             {new Date(`${game.puzzle.date}T00:00:00`).toLocaleDateString(
               undefined,
-              { month: "short", day: "numeric", year: "numeric" },
+              { month: 'short', day: 'numeric', year: 'numeric' },
             )}
           </div>
         )}
@@ -220,7 +220,7 @@ function App() {
       <div className="mx-auto flex w-full max-w-sm flex-col gap-3 px-4 pb-7">
         {/* Keyed by puzzle so it starts hidden again on every puzzle (or
             revealed, if it was opened earlier that day). */}
-        <div className={gen ? "" : "invisible"}>
+        <div className={gen ? '' : 'invisible'}>
           <GenHint
             key={puzzleKey}
             gen={gen ?? 1}
@@ -229,7 +229,7 @@ function App() {
           />
         </div>
 
-        <div className={showClueToggle ? "" : "invisible"}>
+        <div className={showClueToggle ? '' : 'invisible'}>
           <ClueProgression
             unlockedStage={game.clueStage}
             selectedStage={selectedClueStage}
@@ -288,7 +288,7 @@ function App() {
           help drawer, off the game view.) */}
       <footer className="pointer-events-none absolute right-2 bottom-2 left-2 z-10 text-right text-[0.6rem] leading-none text-white/75">
         <p>
-          website by{" "}
+          website by{' '}
           <a
             href="https://funplings.github.io/"
             target="_blank"
@@ -297,7 +297,7 @@ function App() {
           >
             funplings
           </a>
-          , puzzles by{" "}
+          , puzzles by{' '}
           <a
             href="https://bsky.app/profile/cryptanark.bsky.social"
             target="_blank"
@@ -313,7 +313,7 @@ function App() {
         <StatsModal
           results={globalResults}
           mine={
-            game.status === "won" ? (game.guesses.length as 1 | 2 | 3) : "X"
+            game.status === 'won' ? (game.guesses.length as 1 | 2 | 3) : 'X'
           }
           puzzleNumber={game.puzzle.number}
           onClose={() => setStatsFor(null)}
@@ -332,7 +332,7 @@ function App() {
           already; renders nothing. */}
       <Analytics />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
