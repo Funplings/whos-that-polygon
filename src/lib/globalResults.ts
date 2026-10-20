@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react'
 
 // Global results: how everyone did on a given day. The one backend the game
 // talks to — a Supabase project holding one anonymous row per device per day.
-// The table itself is locked (RLS on, no policies); the only way in is two
-// SQL functions, `submit_result` and `get_results`, which validate their
-// input and only ever hand back aggregate counts.
+// The table itself is locked (RLS on, no policies); the only way in is three
+// SQL functions, `submit_result`, `get_results` and `get_top_guesses`, which
+// validate their input and only ever hand back aggregate counts.
 //
 // The publishable key is public by design (it ships in the bundle either
 // way), so it lives here rather than in an env var — deploys need no setup.
@@ -22,10 +22,18 @@ export interface ResultCounts {
   failed: number
 }
 
+/** A wrong guess and how many players made it. */
+export interface TopGuess {
+  slug: string
+  count: number
+}
+
 /** A finished game, as reported to the global tally. */
 export interface FinishedGame {
   guesses: number
   won: boolean
+  /** Wrong guesses, as slugs, in the order made. */
+  wrong: string[]
 }
 
 function rpc(fn: string, body: object, signal?: AbortSignal) {
@@ -77,18 +85,31 @@ function markSubmitted(dateISO: string): void {
   }
 }
 
-async function submitResult(dateISO: string, game: FinishedGame, signal: AbortSignal) {
+async function submitResult(
+  dateISO: string,
+  game: FinishedGame,
+  signal: AbortSignal,
+) {
   const id = clientId()
   if (!id || alreadySubmitted(dateISO)) return
   await rpc(
     'submit_result',
-    { p_date: dateISO, p_client: id, p_guesses: game.guesses, p_won: game.won },
+    {
+      p_date: dateISO,
+      p_client: id,
+      p_guesses: game.guesses,
+      p_won: game.won,
+      p_wrong: game.wrong,
+    },
     signal,
   )
   markSubmitted(dateISO)
 }
 
-async function fetchResults(dateISO: string, signal: AbortSignal): Promise<ResultCounts> {
+async function fetchResults(
+  dateISO: string,
+  signal: AbortSignal,
+): Promise<ResultCounts> {
   const res = await rpc('get_results', { p_date: dateISO }, signal)
   const [row] = (await res.json()) as ResultCounts[]
   // bigint counts arrive as numbers; coerce defensively all the same.
@@ -100,10 +121,24 @@ async function fetchResults(dateISO: string, signal: AbortSignal): Promise<Resul
   }
 }
 
+async function fetchTopGuesses(
+  dateISO: string,
+  signal: AbortSignal,
+): Promise<TopGuess[]> {
+  // Extra rows, so names the popup filters out don't leave it short.
+  const res = await rpc(
+    'get_top_guesses',
+    { p_date: dateISO, p_limit: 6 },
+    signal,
+  )
+  const rows = (await res.json()) as { slug: string; n: number }[]
+  return rows.map((r) => ({ slug: r.slug, count: Number(r.n) }))
+}
+
 export type GlobalResults =
   | { state: 'loading' }
   | { state: 'error' }
-  | { state: 'ready'; counts: ResultCounts }
+  | { state: 'ready'; counts: ResultCounts; topGuesses: TopGuess[] }
 
 /**
  * Once a game is finished, records it (when `submit` is set) and then loads
@@ -124,6 +159,9 @@ export function useGlobalResults(
   const finished = game !== null
   const guesses = game?.guesses ?? 0
   const won = game?.won ?? false
+  // Joined so the effect below depends on the guesses' content, not a fresh
+  // array each render.
+  const wrong = game?.wrong.join(',') ?? ''
 
   useEffect(() => {
     if (!finished) return
@@ -131,13 +169,23 @@ export function useGlobalResults(
     ;(async () => {
       if (submit) {
         // A failed submit shouldn't hide everyone else's results.
-        await submitResult(dateISO, { guesses, won }, controller.signal).catch(
-          () => {},
-        )
+        await submitResult(
+          dateISO,
+          { guesses, won, wrong: wrong ? wrong.split(',') : [] },
+          controller.signal,
+        ).catch(() => {})
       }
       try {
-        const counts = await fetchResults(dateISO, controller.signal)
-        setLoaded({ date: dateISO, result: { state: 'ready', counts } })
+        // Top guesses are a nice-to-have: their failing alone shows an empty
+        // list rather than hiding the counts.
+        const [counts, topGuesses] = await Promise.all([
+          fetchResults(dateISO, controller.signal),
+          fetchTopGuesses(dateISO, controller.signal).catch(() => []),
+        ])
+        setLoaded({
+          date: dateISO,
+          result: { state: 'ready', counts, topGuesses },
+        })
       } catch {
         if (!controller.signal.aborted) {
           setLoaded({ date: dateISO, result: { state: 'error' } })
@@ -145,7 +193,7 @@ export function useGlobalResults(
       }
     })()
     return () => controller.abort()
-  }, [dateISO, finished, guesses, won, submit])
+  }, [dateISO, finished, guesses, won, wrong, submit])
 
   return loaded?.date === dateISO ? loaded.result : { state: 'loading' }
 }

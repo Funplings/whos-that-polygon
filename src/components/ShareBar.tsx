@@ -6,6 +6,7 @@ interface Props {
   status: GameStatus
   guessCount: number
   puzzleNumber: number
+  hintUsed: boolean
   /** Opens the Stats popup (everyone's results). */
   onStats: () => void
 }
@@ -15,41 +16,50 @@ interface Props {
  * number and the shape of the attempt, never the answer:
  *
  *   🟥⚪▶️ Who’s That Polygon? #6
- *   Critical Catch!
+ *   Critical Catch! (No Hints)
  *   1/3  ✅▫️▫️
  *   https://…
  *
  * The pattern is derived rather than passed in: the game stops on a correct
  * guess, so a win is always (n-1) misses then a hit, and a loss is all misses.
- * Unused guesses pad out as empty slots.
+ * Unused guesses pad out as empty slots. "(No Hints)" is only ever added,
+ * never a "used hints" mark — and only to wins.
  */
 function buildShareText(
   puzzleNumber: number,
   status: GameStatus,
   guessCount: number,
+  hintUsed: boolean,
 ): string {
   const won = status === 'won'
   const flavor = won
     ? WIN_MESSAGES[Math.min(guessCount - 1, 2)]
     : LOSS_MESSAGE
+  const noHints = won && !hintUsed ? ' (No Hints)' : ''
   const marks = won
     ? '❌'.repeat(guessCount - 1) + '✅' + '▫️'.repeat(MAX_GUESSES - guessCount)
     : '❌'.repeat(guessCount)
   const score = won ? `${guessCount}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`
-  return `🟥⚪▶️ Who’s That Polygon? #${puzzleNumber}\n${flavor}\n${score}  ${marks}\n${window.location.origin}`
+  return `🟥⚪▶️ Who’s That Polygon? #${puzzleNumber}\n${flavor}${noHints}\n${score}  ${marks}\n${window.location.origin}`
 }
 
 /**
  * Takes the answer bar's slot at the bottom once the game is over: Share
  * results, with Stats beside it on the same row.
  */
-export function ShareBar({ status, guessCount, puzzleNumber, onStats }: Props) {
+export function ShareBar({
+  status,
+  guessCount,
+  puzzleNumber,
+  hintUsed,
+  onStats,
+}: Props) {
   const [copied, setCopied] = useState<'idle' | 'ok' | 'failed'>('idle')
 
   async function copyResults() {
     try {
       await navigator.clipboard.writeText(
-        buildShareText(puzzleNumber, status, guessCount),
+        buildShareText(puzzleNumber, status, guessCount, hintUsed),
       )
       setCopied('ok')
     } catch {

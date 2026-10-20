@@ -2,6 +2,9 @@ import type { DayResult } from '../game/types'
 
 const RESULT_PREFIX = 'wtp:result:'
 const RULES_SEEN_KEY = 'wtp:rules-seen'
+// Kept apart from the result: the hint can be opened before the first guess,
+// when there is no result to write yet.
+const HINT_PREFIX = 'wtp:hint:'
 
 export function loadResult(dateISO: string): DayResult | null {
   try {
@@ -31,6 +34,23 @@ export function hasSeenRules(): boolean {
 export function markRulesSeen(): void {
   try {
     localStorage.setItem(RULES_SEEN_KEY, '1')
+  } catch {
+    // ignore
+  }
+}
+
+/** Whether the generation hint was opened while that day was still in play. */
+export function loadHintUsed(dateISO: string): boolean {
+  try {
+    return localStorage.getItem(HINT_PREFIX + dateISO) === '1'
+  } catch {
+    return false
+  }
+}
+
+export function saveHintUsed(dateISO: string): void {
+  try {
+    localStorage.setItem(HINT_PREFIX + dateISO, '1')
   } catch {
     // ignore
   }

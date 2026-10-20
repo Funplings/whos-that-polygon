@@ -107,9 +107,10 @@ generation and the form's PokeAPI version group.
 ## Global results (the one backend)
 
 Finished games report to a Supabase project (`whos-that-polygon`), and the
-Stats button beside Share opens a popup (`StatsModal`) with the day's tally. `src/lib/globalResults.ts` calls two SQL functions over plain `fetch`
+Stats button beside Share opens a popup (`StatsModal`) with the day's tally
+and its most common wrong guesses. `src/lib/globalResults.ts` calls three SQL functions over plain `fetch`
 (no SDK); the schema is in `supabase/schema.sql`. The table has RLS on and no
-policies — `submit_result` / `get_results` (security definer) are the only
+policies — `submit_result` / `get_results` / `get_top_guesses` (security definer) are the only
 way in, so the Supabase advisor's "anon can execute security definer" warnings
 are expected. One row per anonymous device id per day; first result stands.
 Previews never submit or show results; `/MM-DD-YYYY` probes read but don't

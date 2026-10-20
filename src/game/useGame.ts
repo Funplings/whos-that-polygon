@@ -7,7 +7,7 @@ import {
   puzzleForSlug,
   todayISO,
 } from './puzzle'
-import { loadResult, saveResult } from '../lib/storage'
+import { loadHintUsed, loadResult, saveHintUsed, saveResult } from '../lib/storage'
 import { MAX_GUESSES, type ClueStage, type GameStatus, type Puzzle } from './types'
 
 export interface GameState {
@@ -17,6 +17,10 @@ export interface GameState {
   clueStage: ClueStage
   guessesLeft: number
   submitGuess: (slug: string) => void
+  /** True once the generation hint was opened mid-game (the share text's "No Hints"). */
+  hintUsed: boolean
+  /** Records a hint reveal; ignored once the game is over. */
+  markHintUsed: () => void
   /** True when playing a /slug preview (unpersisted). */
   preview: boolean
   /** A preview slug from the URL that has no polygon, for a "not found" hint. */
@@ -67,14 +71,17 @@ export function useGame(dateISO = todayISO()): GameState {
   const puzzleKey = `${unpersisted ? 'u' : 'p'}:${activeDate}:${puzzle.answer}`
   const loadGuesses = () =>
     unpersisted ? [] : (loadResult(activeDate)?.guesses ?? [])
+  const loadHint = () => !unpersisted && loadHintUsed(activeDate)
   const [store, setStore] = useState(() => ({
     key: puzzleKey,
     guesses: loadGuesses(),
+    hintUsed: loadHint(),
   }))
-  let guesses = store.guesses
+  let { guesses, hintUsed } = store
   if (store.key !== puzzleKey) {
     guesses = loadGuesses()
-    setStore({ key: puzzleKey, guesses })
+    hintUsed = loadHint()
+    setStore({ key: puzzleKey, guesses, hintUsed })
   }
 
   const status = deriveStatus(guesses, puzzle.answer)
@@ -99,11 +106,22 @@ export function useGame(dateISO = todayISO()): GameState {
             status: deriveStatus(next, puzzle.answer),
           })
         }
-        return { key: prev.key, guesses: next }
+        return { ...prev, guesses: next }
       })
     },
     [activeDate, puzzle, puzzleKey, unpersisted],
   )
+
+  // Only a reveal while still playing counts — peeking after the game is
+  // over doesn't cost the "No Hints" line.
+  const markHintUsed = useCallback(() => {
+    setStore((prev) => {
+      if (prev.key !== puzzleKey || prev.hintUsed) return prev
+      if (deriveStatus(prev.guesses, puzzle.answer) !== 'playing') return prev
+      if (!unpersisted) saveHintUsed(activeDate)
+      return { ...prev, hintUsed: true }
+    })
+  }, [activeDate, puzzle, puzzleKey, unpersisted])
 
   return {
     puzzle,
@@ -112,6 +130,8 @@ export function useGame(dateISO = todayISO()): GameState {
     clueStage,
     guessesLeft: MAX_GUESSES - guesses.length,
     submitGuess,
+    hintUsed,
+    markHintUsed,
     preview,
     previewMiss,
     dateOverride,
