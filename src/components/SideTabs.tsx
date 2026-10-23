@@ -151,7 +151,7 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
         <div className="flex items-center justify-between gap-1">
           <img
             src={POLYGONS.togepi}
-            alt="Togepi as a silhouette"
+            alt="Togepi as a shadow"
             style={{ filter: 'brightness(0) invert(0.125)' }}
             className="h-12 min-w-0 flex-1 object-contain"
           />

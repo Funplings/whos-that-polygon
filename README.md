@@ -7,7 +7,7 @@ Each wrong guess reveals a little more of the artwork:
 
 | Guess | Clue |
 | ----- | ---- |
-| 1 | Silhouette (pure black) |
+| 1 | Shadow (pure black) |
 | 2 | Grayscale |
 | 3 | Full color |
 

@@ -144,9 +144,6 @@ function App() {
     setPanel(next)
   }
 
-  // The clue-stage toggle only appears once there is something to toggle —
-  // after the first guess unlocks a second view.
-  const showClueToggle = game.guesses.length > 0 || ended
   const gen = pokemonBySlug(game.puzzle.answer)?.gen
 
   return (
@@ -210,31 +207,33 @@ function App() {
         <PuzzleImage slug={game.puzzle.answer} clueStage={selectedClueStage} />
       </main>
 
-      {/* The bottom stack never changes height: the clue toggle's slot is
-          reserved while hidden (visibility, not display, so it still takes
-          space but leaves the focus order), the guesses/solution views match
-          at 8.5rem, and the input/share slot is fixed at h-16 — so the
-          starburst above never resizes mid-game. */}
+      {/* The bottom stack never changes height: the clue toggle is always
+          shown (stages not yet unlocked render greyed out), the
+          guesses/solution views match at 8.5rem, and the input/share slot is
+          fixed at h-16 — so the starburst above never resizes mid-game. */}
       {/* pb reserves the one-line footer strip. gap-3 leaves the swap button
           that pokes above the guesses/solution box clear of the toggle. */}
       <div className="mx-auto flex w-full max-w-sm flex-col gap-3 px-4 pb-7">
-        {/* Keyed by puzzle so it starts hidden again on every puzzle (or
+        {/* The gen hint shares the view select's row rather than taking a
+            strip of its own, which leaves the starburst more room on phones.
+            Keyed by puzzle so it starts hidden again on every puzzle (or
             revealed, if it was opened earlier that day). */}
-        <div className={gen ? '' : 'invisible'}>
-          <GenHint
-            key={puzzleKey}
-            gen={gen ?? 1}
-            initiallyShown={game.hintUsed}
-            onReveal={game.markHintUsed}
-          />
-        </div>
-
-        <div className={showClueToggle ? '' : 'invisible'}>
-          <ClueProgression
-            unlockedStage={game.clueStage}
-            selectedStage={selectedClueStage}
-            onSelect={(stage) => setStagePick({ key: stageKey, stage })}
-          />
+        <div className="flex gap-2">
+          {gen && (
+            <GenHint
+              key={puzzleKey}
+              gen={gen}
+              initiallyShown={game.hintUsed}
+              onReveal={game.markHintUsed}
+            />
+          )}
+          <div className="min-w-0 flex-1">
+            <ClueProgression
+              unlockedStage={game.clueStage}
+              selectedStage={selectedClueStage}
+              onSelect={(stage) => setStagePick({ key: stageKey, stage })}
+            />
+          </div>
         </div>
 
         {ended && showSolution ? (
