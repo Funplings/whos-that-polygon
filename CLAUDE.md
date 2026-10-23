@@ -13,7 +13,7 @@ npm run preview  # serve the production build
 
 There is no test framework in this project.
 
-Four generator scripts produce committed assets. They are run by hand, never
+Five generator scripts produce committed assets. They are run by hand, never
 as part of the build:
 
 ```bash
@@ -21,7 +21,17 @@ node scripts/build-pokemon-list.mjs   # regenerates src/data/pokemon.json from P
 node scripts/fetch-artwork.mjs        # downloads missing reveal images
 node scripts/build-eyecatch.mjs       # regenerates the red-rays backdrop SVG
 node scripts/build-og-image.mjs       # renders public/og-image.png (needs Chrome)
+node scripts/build-pieces.mjs         # renders src/resources/images/pieces/ from the Figma export
 ```
+
+`build-pieces.mjs` reads `scripts/figma/mons.svg`: the designer's Figma
+"Mons" group exported as SVG at **1x** with "Include 'id' attribute" ticked.
+Re-export it over that file when the art changes. A scaled export (the Figma
+MCP's downloads cap at 4096px) mangles every stroked shape, so it won't do.
+Pass slugs to rebuild just those (`node scripts/build-pieces.mjs pikachu`);
+`--add` also renders `polygons/<slug>.png` for art that has no puzzle yet
+(never overwriting an existing one). A new puzzle then still needs
+`fetch-artwork.mjs` and a day in `puzzles.json`.
 
 `public/og-image.png` is the link-preview image (Open Graph / Twitter card)
 referenced from `index.html`'s `og:` tags. Those tags need absolute URLs, so
@@ -87,6 +97,11 @@ copy-paste one-liners under "Adding a puzzle" and "Checking the reveal images".
   out. Also owns the URL overrides.
 - **`useGame.ts`** — guess state, clue stage, persistence.
 - **`pokemon.ts`** — search, name normalisation, guess matching, reveal URLs.
+- **`pieces.ts`** — globs `pieces/<slug>/`, each puzzle's art as its separate
+  shapes. They load only once a puzzle is over: `PuzzleImage` layers them
+  over the PNG, hides the PNG when they're ready (stacked, they're the same
+  picture), and shows the Split/Join toggle. A puzzle without pieces just
+  keeps its PNG and gets no toggle.
 
 **Rollover is Eastern time, not local** (`RESET_ZONE` in `puzzle.ts`), so
 everyone is on the same puzzle simultaneously. The DST-safe part is

@@ -12,6 +12,7 @@ import { GenHint } from './components/GenHint'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
 import { msUntilNextPuzzle, puzzlesThrough, todayISO } from './game/puzzle'
+import { PIECES } from './game/pieces'
 import { hasSeenRules, loadResult, markRulesSeen } from './lib/storage'
 import { useGlobalResults } from './lib/globalResults'
 import { playLossBuzzer, playWinJingle } from './lib/sfx'
@@ -146,6 +147,14 @@ function App() {
 
   const gen = pokemonBySlug(game.puzzle.answer)?.gen
 
+  // Split-into-shapes, once the puzzle is over. During play it's the single
+  // polygon PNG — exactly the art the puzzle was made with, and one image to
+  // load; the separate shapes (game/pieces) only load at the end, quietly
+  // taking over from the PNG since stacked they're the same picture.
+  const pieces = ended ? PIECES[game.puzzle.answer] : undefined
+  const [splitFor, setSplitFor] = useState<string | null>(null)
+  const split = ended && splitFor === puzzleKey
+
   return (
     // One screen, no scrolling: top bar, starburst filling the middle, and the
     // controls locked to the bottom. overflow-clip (not hidden) so no scroll
@@ -204,7 +213,15 @@ function App() {
       )}
 
       <main className="min-h-0 flex-1 px-2">
-        <PuzzleImage slug={game.puzzle.answer} clueStage={selectedClueStage} />
+        <PuzzleImage
+          slug={game.puzzle.answer}
+          clueStage={selectedClueStage}
+          pieces={pieces}
+          split={split}
+          onToggleSplit={
+            pieces ? () => setSplitFor(split ? null : puzzleKey) : undefined
+          }
+        />
       </main>
 
       {/* The bottom stack never changes height: the clue toggle is always
