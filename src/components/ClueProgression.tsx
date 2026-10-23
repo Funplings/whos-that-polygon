@@ -7,7 +7,7 @@ interface Props {
 }
 
 const STAGES: Array<{ stage: ClueStage; label: string }> = [
-  { stage: 0, label: 'Silhouette' },
+  { stage: 0, label: 'Shadow' },
   { stage: 1, label: 'B&W' },
   { stage: 2, label: 'Color' },
 ]
@@ -35,7 +35,7 @@ export function ClueProgression({
             aria-pressed={selected}
             aria-label={`${label} view${unlocked ? '' : ' locked'}`}
             onClick={() => onSelect(stage)}
-            className={`min-w-0 px-2 text-[0.65rem] transition-colors ${
+            className={`min-w-0 px-1 text-[0.6rem] max-[359px]:text-[0.5rem] transition-colors ${
               // Selected reads as Game Boy inverse video: ink box, paper text.
               selected
                 ? 'bg-ink text-paper'

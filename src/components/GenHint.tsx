@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import hideIcon from '../resources/images/assets/Hide.svg'
-import { genLabel } from '../game/pokemon'
+import { genLabel, genNumeral } from '../game/pokemon'
 
 interface Props {
   gen: number
@@ -11,10 +11,11 @@ interface Props {
 }
 
 /**
- * "Introduced in: [Gen II]", hidden behind an eye-slash until tapped — the
- * player opts into the hint. For forms it's the form's own debut (Mega
- * Charizard X is Gen VI), which pokemon.json bakes in. The value box fills
- * the rest of the strip, so revealing it doesn't shift anything.
+ * A compact "Gen [II]" chip, hidden behind an eye-slash until tapped — the
+ * player opts into the hint. Styled to match the view select it sits beside.
+ * For forms it's the form's own debut (Mega Charizard X is Gen VI),
+ * which pokemon.json bakes in. The value box is fixed-width (VIII is the
+ * longest numeral), so revealing it doesn't shift anything.
  */
 export function GenHint({ gen, initiallyShown, onReveal }: Props) {
   const [shown, setShown] = useState(initiallyShown)
@@ -31,19 +32,20 @@ export function GenHint({ gen, initiallyShown, onReveal }: Props) {
           ? `Introduced in ${genLabel(gen)} — hide`
           : 'Show which generation it was introduced in'
       }
-      className="flex h-11 w-full items-center gap-3 border-2 border-ink bg-paper p-1 pl-3 text-sm whitespace-nowrap text-ink"
+      title="Generation it was introduced in"
+      className="flex h-11 shrink-0 items-center gap-1 border-2 border-ink bg-paper p-1 pl-2 text-xs whitespace-nowrap text-ink"
     >
-      <span>Introduced in:</span>
-      <span className="flex h-full min-w-0 flex-1 items-center justify-center bg-ink text-paper">
+      <span>Gen</span>
+      <span className="flex h-full w-9 items-center justify-center bg-ink text-paper">
         {shown ? (
-          genLabel(gen)
+          genNumeral(gen)
         ) : (
           // The designer's eye-slash, recoloured from maroon to the paper
           // tone (#dddddd: 221/255 ≈ invert(0.867)) to read on the ink box.
           <img
             src={hideIcon}
             alt=""
-            className="h-4 [filter:brightness(0)_invert(0.867)]"
+            className="h-3.5 [filter:brightness(0)_invert(0.867)]"
           />
         )}
       </span>

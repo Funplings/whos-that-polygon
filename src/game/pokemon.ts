@@ -32,9 +32,14 @@ export function officialArtUrl(slug: string): string {
 
 const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X']
 
+/** The bare numeral: 2 -> "II". */
+export function genNumeral(gen: number): string {
+  return ROMAN[gen - 1] ?? String(gen)
+}
+
 /** "Gen IV" — the games' own Roman-numeral convention. */
 export function genLabel(gen: number): string {
-  return `Gen ${ROMAN[gen - 1] ?? gen}`
+  return `Gen ${genNumeral(gen)}`
 }
 
 /** Lowercase, strip accents/punctuation, collapse separators. */

@@ -135,11 +135,15 @@ export function StatsModal({ results, mine, puzzleNumber, onClose }: Props) {
             {topGuesses.length > 0 && (
               <>
                 <h3 className="mt-5 text-xs">Top wrong guesses</h3>
-                <ol className="mt-2 flex flex-col gap-2 text-xs leading-none">
+                {/* Long names wrap and the popup grows, so the line box has
+                    to fit Pokemon Classic's glyphs (1.5em): any tighter and
+                    a wrapped line collides with the descenders above it.
+                    gap-0.5 keeps the rows 20px apart, as before. */}
+                <ol className="mt-2 flex flex-col gap-0.5 text-xs leading-normal">
                   {topGuesses.map(({ slug, name, count }, i) => (
                     <li key={slug} className="flex items-baseline gap-3">
                       <span className="w-3 shrink-0 text-center">{i + 1}</span>
-                      <span className="min-w-0 flex-1 truncate">{name}</span>
+                      <span className="min-w-0 flex-1">{name}</span>
                       <span className="shrink-0 text-ink/60">
                         {count.toLocaleString()}
                       </span>
