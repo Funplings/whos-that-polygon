@@ -49,7 +49,58 @@ src/
   lib/storage.ts localStorage wrapper (safe in private mode)
 ```
 
-### Adding a puzzle
+### Adding Pokémon from Figma
+
+The usual route. The designer's Figma file keeps every Pokémon inside the
+**Mons** group, one **Gen N** frame per generation, each Pokémon a group named
+by its exact slug (`charizard-mega-x`, not "Mega Charizard X") holding its
+shapes. One export of that group feeds both the puzzle images and the
+Split/Join pieces.
+
+1. **Export Mons from Figma.** In the Layers panel select the **Mons** group.
+   In the right sidebar under **Export**, click **+**, set it to **SVG** at
+   **1x**, open the export settings (the **…** beside it) and tick **Include
+   "id" attribute**. Click **Export Mons** and save it over
+   `scripts/figma/mons.svg`.
+
+   Both settings matter. Without the ids the script can't tell which shapes
+   belong to which Pokémon, and a scaled export mangles every shape with a
+   stroke. That rules out the Figma MCP's download, which caps large frames
+   at 4096px.
+
+2. **Render the new Pokémon.** `--add` makes the puzzle PNG
+   (`polygons/<slug>.png`) and its pieces (`pieces/<slug>/`):
+
+   ```bash
+   node scripts/build-pieces.mjs --add shiinotic
+   ```
+
+   Name several slugs at once, or none to rebuild everything (about a minute
+   and a half). Existing puzzle PNGs are never overwritten. A misspelled slug
+   prints `!! not in the export`. Without `--add`, new art is skipped and
+   listed at the end.
+
+3. **Fetch its reveal image:**
+
+   ```bash
+   node scripts/fetch-artwork.mjs
+   ```
+
+4. **Give it a day.** Append the slug to the end of `order` in
+   `src/data/puzzles.json`. Adding it anywhere else pushes back every later
+   day, and a day that has already happened would change for everyone who
+   played it.
+
+5. **Check it.** Run the orphan check below, then play it locally at
+   `http://localhost:5173/<slug>`, or at `/MM-DD-YYYY` for its scheduled day.
+   Neither submits a result.
+
+If existing art changes in Figma, re-export and run
+`node scripts/build-pieces.mjs <slug>` to refresh its pieces. Its puzzle PNG
+stays as it was, so delete `polygons/<slug>.png` first and use `--add` if the
+puzzle should change too.
+
+### Adding a puzzle by hand
 
 Drop `charizard.png` into `src/resources/images/polygons/`. That's the whole
 step. `polygons.ts` globs the directory at build time, so the filename minus
@@ -129,11 +180,11 @@ repo, which is worth knowing before publishing this anywhere public.
 
 ### Puzzle scheduling
 
-`puzzles.json` holds a `startDate` and an `order` of hand-picked slugs. Day *n*
-after the start date uses `order[n]`; once that list runs out, the day index
-seeds a small PRNG that picks deterministically from every available polygon.
-Same day, same puzzle, no server involved. Puzzles roll over at **local**
-midnight.
+`puzzles.json` holds a `startDate` and an `order` that spells out the whole
+schedule, one slug per day. Day *n* after the start date uses `order[n]`.
+Once the list runs out it cycles from the top, so a polygon that isn't in
+`order` is never played. Same day, same puzzle, no server involved. Puzzles
+roll over at midnight **Eastern** time, so everyone is on the same one.
 
 ### Previewing a specific Pokémon
 
