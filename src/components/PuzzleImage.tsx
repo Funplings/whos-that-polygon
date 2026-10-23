@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import starburst from '../resources/images/assets/Starburst.svg'
 import { POLYGONS } from '../game/polygons'
 import { PieceStack } from './PieceStack'
@@ -17,7 +18,8 @@ const STAGE_FILTERS: Record<ClueStage, string> = {
 interface Props {
   slug: string
   clueStage: ClueStage
-  /** The art's separate shapes (see game/pieces), drawn instead of the PNG. */
+  /** The art's separate shapes (see game/pieces), layered over the PNG and
+   *  taking over from it once they've loaded. */
   pieces?: string[]
   split?: boolean
   /** Shows the Split/Join toggle; omitted while the puzzle is in play. */
@@ -32,6 +34,10 @@ export function PuzzleImage({
   onToggleSplit,
 }: Props) {
   const src = POLYGONS[slug]
+  // Which puzzle's pieces have loaded. Until then the PNG stays visible
+  // underneath, so the art never blinks out while they download.
+  const [piecesReadyFor, setPiecesReadyFor] = useState<string | null>(null)
+  const piecesShown = pieces !== undefined && piecesReadyFor === slug
   return (
     // fit-square-parent/fit-square size the starburst as the largest square
     // that fits the space left over by the top bar and bottom controls: in
@@ -58,15 +64,8 @@ export function PuzzleImage({
           className="absolute inset-0 flex items-center justify-center"
           style={{ transform: 'translate(-1.64%, -1.64%)' }}
         >
-          <div className="aspect-square w-[46%]">
-            {pieces ? (
-              <PieceStack
-                key={slug}
-                pieces={pieces}
-                split={split}
-                filter={STAGE_FILTERS[clueStage]}
-              />
-            ) : src ? (
+          <div className="relative aspect-square w-[46%]">
+            {src ? (
               // Exports are trimmed to the drawing and vary in aspect ratio,
               // so object-contain does the framing inside the bounding box.
               //
@@ -80,7 +79,10 @@ export function PuzzleImage({
                 key={slug}
                 src={src}
                 alt=""
-                style={{ filter: STAGE_FILTERS[clueStage] }}
+                style={{
+                  filter: STAGE_FILTERS[clueStage],
+                  visibility: piecesShown ? 'hidden' : undefined,
+                }}
                 // pointer-events-none: the clue filters are cosmetic — the
                 // fetched PNG is full colour — so the image must not offer
                 // its own context menu ("open image in a new tab" was a
@@ -92,6 +94,17 @@ export function PuzzleImage({
             ) : (
               <div className="flex h-full items-center justify-center text-sm text-ink">
                 No art
+              </div>
+            )}
+            {pieces && (
+              <div className="absolute inset-0">
+                <PieceStack
+                  key={slug}
+                  pieces={pieces}
+                  split={split}
+                  filter={STAGE_FILTERS[clueStage]}
+                  onReady={() => setPiecesReadyFor(slug)}
+                />
               </div>
             )}
           </div>

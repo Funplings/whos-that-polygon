@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 
 /** A piece's opaque bounds, as fractions of the square art box. */
 interface Box {
@@ -10,26 +10,40 @@ interface Box {
 
 interface Props {
   pieces: string[]
-  /** Pulled apart into a row instead of assembled. */
+  /** Pulled apart into a ring instead of assembled. */
   split: boolean
   /** The clue-stage filter, applied per piece like the single image's. */
   filter: string
+  /** Called once every piece has loaded (and been measured). */
+  onReady?: () => void
 }
 
-// The split row may run wider than the art box: the box is 46% of the
-// starburst square, and the grey face has room either side of it.
-const ROW_WIDTH = 1.2
+// How far from the box's centre a split piece may reach, in box widths. The
+// box is 46% of the starburst square, so the grey face has room past its
+// edges on every side.
+const REACH = 0.7
 const GAP = 0.08
 
 /**
  * The puzzle art as its separate shapes, stacked so they read as the normal
- * image, which slide apart into a row when `split`. Each piece keeps its
+ * image, which burst outwards into a ring when `split`. Each piece keeps its
  * full-frame PNG (shared coordinates), so a piece moves by a transform from
  * its spot in the assembled drawing, and the CSS transition plays both ways.
  */
-export function PieceStack({ pieces, split, filter }: Props) {
+export function PieceStack({ pieces, split, filter, onReady }: Props) {
   const boxes = usePieceBoxes(pieces)
-  const targets = boxes && rowLayout(boxes)
+  const targets = boxes && radialLayout(boxes)
+
+  // The ref keeps the effect keyed on loading alone, not on the caller
+  // passing a fresh callback every render.
+  const onReadyRef = useRef(onReady)
+  useEffect(() => {
+    onReadyRef.current = onReady
+  })
+  const ready = boxes !== null
+  useEffect(() => {
+    if (ready) onReadyRef.current?.()
+  }, [ready])
 
   return (
     <div className="relative h-full w-full">
@@ -68,32 +82,60 @@ export function PieceStack({ pieces, split, filter }: Props) {
 }
 
 /**
- * Where each piece goes when split: one row, centred on the box, in stacking
- * order, every piece at the same scale so their relative sizes stay true.
- * Offsets are fractions of the (square) box, ready for translate().
+ * Where each piece goes when split: evenly spaced around a circle centred on
+ * the box, first slot straight up, every piece at the same scale so their
+ * relative sizes stay true. Pieces keep their cyclic order around the
+ * drawing's centre, rotated onto the slots so each moves as close to
+ * straight outwards as it can. Offsets are fractions of the (square) box,
+ * ready for translate().
  */
-function rowLayout(boxes: Box[]) {
-  const widths = boxes.map((b) => b.x1 - b.x0)
-  const tallest = Math.max(...boxes.map((b) => b.y1 - b.y0))
-  const totalWidth = widths.reduce((a, w) => a + w, 0)
-  const scale = Math.min(
-    1,
-    (ROW_WIDTH - GAP * (boxes.length - 1)) / totalWidth,
-    1 / tallest,
-  )
-  const rowWidth = scale * totalWidth + GAP * (boxes.length - 1)
+function radialLayout(boxes: Box[]) {
+  const n = boxes.length
+  const centres = boxes.map((b) => ({
+    x: (b.x0 + b.x1) / 2,
+    y: (b.y0 + b.y1) / 2,
+  }))
+  if (n < 2) {
+    return centres.map((c) => ({ dx: 0.5 - c.x, dy: 0.5 - c.y, scale: 1 }))
+  }
 
-  let x = 0.5 - rowWidth / 2
-  return boxes.map((b, i) => {
-    const w = widths[i] * scale
-    const cx = x + w / 2
-    x += w + GAP
-    return {
-      dx: cx - (b.x0 + b.x1) / 2,
-      dy: 0.5 - (b.y0 + b.y1) / 2,
+  // Sized by the biggest piece's half-extent m: neighbouring slots sit
+  // 2R·sin(π/n) apart and must clear 2·m·s + GAP, and the outer edge
+  // R + m·s must stay within REACH.
+  const m = Math.max(...boxes.map((b) => Math.max(b.x1 - b.x0, b.y1 - b.y0))) / 2
+  const sin = Math.sin(Math.PI / n)
+  const scale = Math.min(1, (REACH * sin - GAP / 2) / (m * (1 + sin)))
+  const radius = Math.min(REACH - m * scale, (m * scale + GAP / 2) / sin)
+
+  const ox = centres.reduce((a, c) => a + c.x, 0) / n
+  const oy = centres.reduce((a, c) => a + c.y, 0) / n
+  const angle = (i: number) =>
+    Math.atan2(centres[i].y - oy, centres[i].x - ox)
+  const slot = (k: number) => -Math.PI / 2 + (2 * Math.PI * k) / n
+  const off = (a: number, b: number) =>
+    Math.abs(Math.atan2(Math.sin(a - b), Math.cos(a - b)))
+
+  const order = boxes.map((_, i) => i).sort((a, b) => angle(a) - angle(b))
+  let best = 0
+  let bestCost = Infinity
+  for (let r = 0; r < n; r++) {
+    const cost = order.reduce(
+      (sum, i, j) => sum + off(angle(i), slot((j + r) % n)),
+      0,
+    )
+    if (cost < bestCost) [best, bestCost] = [r, cost]
+  }
+
+  const targets = new Array<{ dx: number; dy: number; scale: number }>(n)
+  order.forEach((i, j) => {
+    const a = slot((j + best) % n)
+    targets[i] = {
+      dx: 0.5 + radius * Math.cos(a) - centres[i].x,
+      dy: 0.5 + radius * Math.sin(a) - centres[i].y,
       scale,
     }
   })
+  return targets
 }
 
 /**

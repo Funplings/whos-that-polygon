@@ -11,12 +11,7 @@ import { ClueProgression } from './components/ClueProgression'
 import { GenHint } from './components/GenHint'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
-import {
-  msUntilNextPuzzle,
-  piecesTestSlugFromUrl,
-  puzzlesThrough,
-  todayISO,
-} from './game/puzzle'
+import { msUntilNextPuzzle, puzzlesThrough, todayISO } from './game/puzzle'
 import { PIECES } from './game/pieces'
 import { hasSeenRules, loadResult, markRulesSeen } from './lib/storage'
 import { useGlobalResults } from './lib/globalResults'
@@ -152,11 +147,11 @@ function App() {
 
   const gen = pokemonBySlug(game.puzzle.answer)?.gen
 
-  // Split-into-shapes, only on its test route for now (/larvitar-test). The
-  // pieces draw from the start — stacked they look identical to the normal
-  // art — so ending the game swaps nothing; the toggle appears once it's over.
-  const [piecesTest] = useState(() => piecesTestSlugFromUrl() !== null)
-  const pieces = piecesTest ? PIECES[game.puzzle.answer] : undefined
+  // Split-into-shapes, once the puzzle is over. During play it's the single
+  // polygon PNG — exactly the art the puzzle was made with, and one image to
+  // load; the separate shapes (game/pieces) only load at the end, quietly
+  // taking over from the PNG since stacked they're the same picture.
+  const pieces = ended ? PIECES[game.puzzle.answer] : undefined
   const [splitFor, setSplitFor] = useState<string | null>(null)
   const split = ended && splitFor === puzzleKey
 
@@ -224,9 +219,7 @@ function App() {
           pieces={pieces}
           split={split}
           onToggleSplit={
-            pieces && ended
-              ? () => setSplitFor(split ? null : puzzleKey)
-              : undefined
+            pieces ? () => setSplitFor(split ? null : puzzleKey) : undefined
           }
         />
       </main>
