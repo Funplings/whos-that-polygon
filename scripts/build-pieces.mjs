@@ -61,6 +61,7 @@ const polygonSize = readPolygonSizes()
 const skipped = []
 const added = []
 const notThree = []
+const merged = []
 const aspectMismatch = []
 const seen = new Set()
 let built = 0
@@ -125,7 +126,26 @@ for (const file of readdirSync(EXPORTS).filter((f) => f.endsWith('.svg')).sort()
       chain.push(shapes[0])
       shapes = drawn(shapes[0])
     }
-    if (shapes.length !== 3) notThree.push(`${slug} (${shapes.length})`)
+    // A piece is a shape, and a shape can be drawn more than once: Thundurus
+    // is a gear, two diamonds and two clouds — three shapes, five layers.
+    // Figma names a duplicated layer the same as its original (the export
+    // then appends _2, _3), so past three layers, same-named ones become one
+    // piece. Not at three or fewer: Graveler has two distinct layers that
+    // happen to share a name.
+    const layers = shapes
+    let pieces = layers.map((n) => [n])
+    if (layers.length > 3) {
+      const byName = new Map()
+      for (const n of layers) {
+        const name = (n.id ?? '').replace(/_\d+$/, '') || Symbol()
+        byName.set(name, [...(byName.get(name) ?? []), n])
+      }
+      pieces = [...byName.values()]
+      if (pieces.length < layers.length) {
+        merged.push(`${slug} (${layers.length} layers → ${pieces.length})`)
+      }
+    }
+    if (pieces.length !== 3) notThree.push(`${slug} (${pieces.length})`)
 
     const wrap = (inner) => {
       const body = inlineUses(
@@ -184,10 +204,12 @@ for (const file of readdirSync(EXPORTS).filter((f) => f.endsWith('.svg')).sort()
     // conflict copies, which game/pieces.ts then loads as extra pieces.)
     const out = join(PIECES, slug)
     mkdirSync(out, { recursive: true })
-    const names = shapes.map((shape, i) => {
-      const kind = (shape.id ?? 'shape').split(/[\s_]/)[0].toLowerCase().replace(/[^a-z0-9]+/g, '-')
+    // A merged piece sits at its first layer's place in the stack.
+    const names = pieces.map((members, i) => {
+      const kind = (members[0].id ?? 'shape').split(/[\s_]/)[0].toLowerCase().replace(/[^a-z0-9]+/g, '-')
       const name = `${i + 1}-${kind || 'shape'}.png`
-      const png = render(wrap(source.slice(shape.start, shape.end)), frame, k).asPng()
+      const markup = members.map((n) => source.slice(n.start, n.end)).join('')
+      const png = render(wrap(markup), frame, k).asPng()
       const path = join(out, name)
       if (!existsSync(path) || !readFileSync(path).equals(png)) writeFileSync(path, png)
       return name
@@ -211,6 +233,7 @@ if (added.length) {
 if (skipped.length) {
   console.log(`no polygon PNG, skipped (--add makes one): ${skipped.join(', ')}`)
 }
+if (merged.length) console.log(`merged same-named layers: ${merged.join(', ')}`)
 if (notThree.length) console.log(`not three shapes: ${notThree.join(', ')}`)
 if (aspectMismatch.length) {
   console.log(`shape differs from the polygon (art changed?):\n  ${aspectMismatch.join('\n  ')}`)

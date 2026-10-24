@@ -2,6 +2,13 @@ import { useState } from 'react'
 import hideIcon from '../resources/images/assets/Hide.svg'
 import { genLabel, genNumeral } from '../game/pokemon'
 
+// Font size by numeral length (III, VII → 10px; VIII → 8px), each leaving
+// ~3px of ink either side in Pokemon Classic.
+const NUMERAL_SIZE: Record<number, string> = {
+  3: 'text-[0.625rem]',
+  4: 'text-[0.5rem]',
+}
+
 interface Props {
   gen: number
   /** Starts revealed — the player already opened it earlier today. */
@@ -38,7 +45,11 @@ export function GenHint({ gen, initiallyShown, onReveal }: Props) {
       <span>Gen</span>
       <span className="flex h-full w-9 items-center justify-center bg-ink text-paper">
         {shown ? (
-          genNumeral(gen)
+          // Longer numerals step the font down to fit the 36px box: at the
+          // chip's 12px, VIII measures 45px and VII leaves no margin.
+          <span className={NUMERAL_SIZE[genNumeral(gen).length] ?? ''}>
+            {genNumeral(gen)}
+          </span>
         ) : (
           // The designer's eye-slash, recoloured from maroon to the paper
           // tone (#dddddd: 221/255 ≈ invert(0.867)) to read on the ink box.
