@@ -17,6 +17,9 @@ const STAGE_FILTERS: Record<ClueStage, string> = {
 
 interface Props {
   slug: string
+  /** The polygon PNG, for art outside the polygons/ glob (the birthday
+   *  level); defaults to POLYGONS[slug]. */
+  image?: string
   clueStage: ClueStage
   /** The art's separate shapes (see game/pieces), layered over the PNG and
    *  taking over from it once they've loaded. */
@@ -28,12 +31,13 @@ interface Props {
 
 export function PuzzleImage({
   slug,
+  image,
   clueStage,
   pieces,
   split = false,
   onToggleSplit,
 }: Props) {
-  const src = POLYGONS[slug]
+  const src = image ?? POLYGONS[slug]
   // Which puzzle's pieces have loaded. Until then the PNG stays visible
   // underneath, so the art never blinks out while they download.
   const [piecesReadyFor, setPiecesReadyFor] = useState<string | null>(null)

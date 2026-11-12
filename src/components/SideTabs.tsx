@@ -21,6 +21,8 @@ interface Props {
   onSelectDate: (dateISO: string) => void
   /** Pulses the pokeball tab (shake + sparkle) when a result lands in the Dex. */
   notify: boolean
+  /** Leaves out the pokeball tab (the birthday level isn't a Dex day). */
+  hideDex?: boolean
 }
 
 /**
@@ -30,7 +32,14 @@ interface Props {
  * visible (and tappable to close) beside the open drawer — the behaviour in
  * the design mockups.
  */
-export function SideTabs({ open, onOpen, puzzles, onSelectDate, notify }: Props) {
+export function SideTabs({
+  open,
+  onOpen,
+  puzzles,
+  onSelectDate,
+  notify,
+  hideDex = false,
+}: Props) {
   // The drawer keeps showing its last content while sliding shut, instead of
   // flashing empty mid-animation.
   const [lastView, setLastView] = useState<PanelView>('help')
@@ -91,27 +100,29 @@ export function SideTabs({ open, onOpen, puzzles, onSelectDate, notify }: Props)
           >
             <img src={helpIcon} alt="" className="h-6 w-6" />
           </button>
-          <button
-            type="button"
-            onClick={() => toggle('dex')}
-            aria-label="Open the Dex"
-            aria-expanded={open === 'dex'}
-            className="relative flex h-14 w-16 -ml-4 items-center justify-center rounded-r-2xl bg-coral pl-4 shadow-[3px_3px_0_0_var(--color-ink)] transition-transform duration-100 hover:translate-x-1 active:translate-x-0"
-          >
-            <img
-              src={dexIcon}
-              alt=""
-              className={`h-6 w-6 ${notify ? 'dex-shake' : ''}`}
-            />
-            {notify && (
-              <span
-                aria-hidden
-                className="sparkle-pop absolute -top-1.5 -right-1.5 text-lg text-gold"
-              >
-                ✦
-              </span>
-            )}
-          </button>
+          {!hideDex && (
+            <button
+              type="button"
+              onClick={() => toggle('dex')}
+              aria-label="Open the Dex"
+              aria-expanded={open === 'dex'}
+              className="relative flex h-14 w-16 -ml-4 items-center justify-center rounded-r-2xl bg-coral pl-4 shadow-[3px_3px_0_0_var(--color-ink)] transition-transform duration-100 hover:translate-x-1 active:translate-x-0"
+            >
+              <img
+                src={dexIcon}
+                alt=""
+                className={`h-6 w-6 ${notify ? 'dex-shake' : ''}`}
+              />
+              {notify && (
+                <span
+                  aria-hidden
+                  className="sparkle-pop absolute -top-1.5 -right-1.5 text-lg text-gold"
+                >
+                  ✦
+                </span>
+              )}
+            </button>
+          )}
         </div>
       </div>
     </>

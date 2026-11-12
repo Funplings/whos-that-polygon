@@ -9,13 +9,16 @@ import { ShareBar } from './components/ShareBar'
 import { SideTabs, type PanelView } from './components/SideTabs'
 import { ClueProgression } from './components/ClueProgression'
 import { GenHint } from './components/GenHint'
+import { BirthdayModal } from './components/BirthdayModal'
+import { Confetti } from './components/Confetti'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
 import { msUntilNextPuzzle, puzzlesThrough, todayISO } from './game/puzzle'
 import { PIECES } from './game/pieces'
+import { LUCKSTEP_PIECES } from './game/birthday'
 import { hasSeenRules, loadResult, markRulesSeen } from './lib/storage'
 import { useGlobalResults } from './lib/globalResults'
-import { playLossBuzzer, playWinJingle } from './lib/sfx'
+import { playBirthdayJingle, playLossBuzzer, playWinJingle } from './lib/sfx'
 import logo from './resources/images/assets/Logo.svg'
 import type { ClueStage } from './game/types'
 
@@ -32,7 +35,10 @@ function App() {
   const game = useGame(selectedDate)
   const archivePuzzles = useMemo(() => puzzlesThrough(today), [today])
   const isTodayPuzzle =
-    !game.preview && !game.dateOverride && game.puzzle.date === today
+    !game.preview &&
+    !game.dateOverride &&
+    !game.birthday &&
+    game.puzzle.date === today
   const ended = game.status !== 'playing'
 
   // Don't interrupt manual testing with the first-visit rules panel.
@@ -68,9 +74,11 @@ function App() {
   const statsOpen = statsFor === puzzleKey
 
   // Finished games report to the global tally and load it. Date probes
-  // (/MM-DD-YYYY) can look but don't submit — they're not real plays.
+  // (/MM-DD-YYYY) can look but don't submit — they're not real plays. The
+  // birthday level neither submits nor loads: its Stats button opens the
+  // birthday popup instead.
   const finishedGame =
-    ended && !game.preview
+    ended && !game.preview && !game.birthday
       ? {
           guesses: game.guesses.length,
           won: game.status === 'won',
@@ -82,7 +90,7 @@ function App() {
   const globalResults = useGlobalResults(
     game.puzzle.date,
     finishedGame,
-    !game.dateOverride,
+    !game.dateOverride && !game.birthday,
   )
 
   // Pokémon the player has caught on earlier days, marked with a pokeball in
@@ -97,6 +105,8 @@ function App() {
   // to say the result landed in the Dex. Delayed so the player reads the
   // solution first; only fires on a transition actually played this session.
   const [dexNotify, setDexNotify] = useState(false)
+  // Birthday-level win: confetti from the top, unmounted once it's all fallen.
+  const [confetti, setConfetti] = useState(false)
   // Status is tracked per puzzle: without the key, opening an already-finished
   // day from the Dex reads as a playing→won "transition" and would ring the
   // jingle and shake the pokeball just for browsing.
@@ -113,6 +123,18 @@ function App() {
       ended && was.key === key && was.status === 'playing'
     if (!resolvedThisSession) return
 
+    // The birthday level swaps the fanfare for Happy Birthday and confetti,
+    // and has no Dex to notify.
+    if (game.birthday) {
+      if (game.status === 'won') {
+        playBirthdayJingle()
+        setConfetti(true)
+      } else {
+        playLossBuzzer()
+      }
+      return
+    }
+
     // The result jingle — square-wave chiptune, see lib/sfx. Previews get the
     // sound too (it's feedback on the guess), but not the Dex notification.
     if (game.status === 'won') playWinJingle()
@@ -125,7 +147,14 @@ function App() {
       clearTimeout(showTimer)
       clearTimeout(hideTimer)
     }
-  }, [ended, game.status, game.preview, game.puzzle.date, game.puzzle.answer])
+  }, [
+    ended,
+    game.status,
+    game.preview,
+    game.birthday,
+    game.puzzle.date,
+    game.puzzle.answer,
+  ])
 
   // The puzzle is resolved once when the app mounts, so past midnight the page
   // would keep serving yesterday's polygon — and save guesses against
@@ -151,7 +180,11 @@ function App() {
   // polygon PNG — exactly the art the puzzle was made with, and one image to
   // load; the separate shapes (game/pieces) only load at the end, quietly
   // taking over from the PNG since stacked they're the same picture.
-  const pieces = ended ? PIECES[game.puzzle.answer] : undefined
+  const pieces = !ended
+    ? undefined
+    : game.birthday
+      ? LUCKSTEP_PIECES
+      : PIECES[game.puzzle.answer]
   const [splitFor, setSplitFor] = useState<string | null>(null)
   const split = ended && splitFor === puzzleKey
 
@@ -177,7 +210,11 @@ function App() {
             part of each day, and showing the local one would label the puzzle
             with a date it doesn't belong to. Parsed without a Z so it lands on
             local midnight and formats as the intended day. */}
-        {!game.preview && (
+        {game.birthday ? (
+          <div className="gb-frame gb-frame-sm bg-paper px-2 text-sm text-ink">
+            Birthday Special
+          </div>
+        ) : !game.preview && (
           <div className="gb-frame gb-frame-sm bg-paper px-2 text-sm text-ink">
             #{game.puzzle.number} ·{' '}
             {new Date(`${game.puzzle.date}T00:00:00`).toLocaleDateString(
@@ -215,6 +252,7 @@ function App() {
       <main className="min-h-0 flex-1 px-2">
         <PuzzleImage
           slug={game.puzzle.answer}
+          image={game.puzzle.image}
           clueStage={selectedClueStage}
           pieces={pieces}
           split={split}
@@ -287,6 +325,10 @@ function App() {
               puzzleNumber={game.puzzle.number}
               hintUsed={game.hintUsed}
               onStats={() => setStatsFor(puzzleKey)}
+              {...(game.birthday && {
+                heading: 'Who’s That Polygon? Birthday Special',
+                url: `${window.location.origin}/alex-birthday`,
+              })}
             />
           ) : (
             <SearchBar
@@ -325,7 +367,10 @@ function App() {
         </p>
       </footer>
 
-      {statsOpen && ended && (
+      {statsOpen && ended && game.birthday && (
+        <BirthdayModal onClose={() => setStatsFor(null)} />
+      )}
+      {statsOpen && ended && !game.birthday && (
         <StatsModal
           results={globalResults}
           mine={
@@ -342,7 +387,10 @@ function App() {
         puzzles={archivePuzzles}
         onSelectDate={setSelectedDate}
         notify={dexNotify}
+        hideDex={game.birthday}
       />
+
+      {confetti && <Confetti onDone={() => setConfetti(false)} />}
 
       {/* Vercel Web Analytics — got dropped in the big App rewrite once
           already; renders nothing. */}

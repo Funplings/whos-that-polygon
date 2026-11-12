@@ -1,5 +1,6 @@
 import { useCallback, useMemo, useState } from 'react'
 import { isCorrectGuess } from './pokemon'
+import { IS_BIRTHDAY, birthdayPuzzle } from './birthday'
 import {
   overrideDateFromUrl,
   overrideSlugFromUrl,
@@ -27,6 +28,8 @@ export interface GameState {
   previewMiss: string | null
   /** ISO date being previewed via a /MM-DD-YYYY URL, for checking the schedule. */
   dateOverride: string | null
+  /** True on the /alex-birthday route (Luckstep, unpersisted, no stats). */
+  birthday: boolean
 }
 
 function deriveStatus(guesses: string[], answer: string): GameStatus {
@@ -39,12 +42,17 @@ export function useGame(dateISO = todayISO()): GameState {
   // A /MM-DD-YYYY URL plays that day's scheduled puzzle, for checking the
   // schedule. Resolved before the slug override because both read the same path
   // segment — a date-shaped path is a date, anything else is a pokemon name.
-  const dateOverride = useMemo(() => overrideDateFromUrl(), [])
+  // The birthday route owns the path segment outright, so neither override
+  // reads it.
+  const dateOverride = useMemo(
+    () => (IS_BIRTHDAY ? null : overrideDateFromUrl()),
+    [],
+  )
   const activeDate = dateOverride ?? dateISO
 
   // A /slug or ?pokemon=slug URL loads that Pokémon for manual testing.
   const requested = useMemo(
-    () => (dateOverride ? null : overrideSlugFromUrl()),
+    () => (IS_BIRTHDAY || dateOverride ? null : overrideSlugFromUrl()),
     [dateOverride],
   )
   const override = useMemo(
@@ -55,12 +63,16 @@ export function useGame(dateISO = todayISO()): GameState {
   const previewMiss = requested && !override ? requested : null
 
   const puzzle = useMemo(
-    () => override ?? puzzleForDate(activeDate),
+    () =>
+      IS_BIRTHDAY
+        ? birthdayPuzzle(activeDate)
+        : (override ?? puzzleForDate(activeDate)),
     [override, activeDate],
   )
   // Neither a slug preview nor a date probe touches storage: they'd otherwise
   // read and write real results for days the player hasn't actually played.
-  const unpersisted = preview || dateOverride !== null
+  // The birthday level is replayable on every visit, so it doesn't either.
+  const unpersisted = IS_BIRTHDAY || preview || dateOverride !== null
 
   // Guess state is keyed to the puzzle and swapped SYNCHRONOUSLY (React's
   // render-phase state adjustment) when the key changes. An effect-based
@@ -135,5 +147,6 @@ export function useGame(dateISO = todayISO()): GameState {
     preview,
     previewMiss,
     dateOverride,
+    birthday: IS_BIRTHDAY,
   }
 }

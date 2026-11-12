@@ -9,6 +9,10 @@ interface Props {
   hintUsed: boolean
   /** Opens the Stats popup (everyone's results). */
   onStats: () => void
+  /** Replaces "Who’s That Polygon? #N" in the share text. */
+  heading?: string
+  /** Replaces the site origin as the share text's link. */
+  url?: string
 }
 
 /**
@@ -30,6 +34,8 @@ function buildShareText(
   status: GameStatus,
   guessCount: number,
   hintUsed: boolean,
+  heading = `Who’s That Polygon? #${puzzleNumber}`,
+  url = window.location.origin,
 ): string {
   const won = status === 'won'
   const flavor = won
@@ -40,7 +46,7 @@ function buildShareText(
     ? '❌'.repeat(guessCount - 1) + '✅' + '▫️'.repeat(MAX_GUESSES - guessCount)
     : '❌'.repeat(guessCount)
   const score = won ? `${guessCount}/${MAX_GUESSES}` : `X/${MAX_GUESSES}`
-  return `🟥⚪▶️ Who’s That Polygon? #${puzzleNumber}\n${flavor}${noHints}\n${score}  ${marks}\n${window.location.origin}`
+  return `🟥⚪▶️ ${heading}\n${flavor}${noHints}\n${score}  ${marks}\n${url}`
 }
 
 /**
@@ -53,13 +59,15 @@ export function ShareBar({
   puzzleNumber,
   hintUsed,
   onStats,
+  heading,
+  url,
 }: Props) {
   const [copied, setCopied] = useState<'idle' | 'ok' | 'failed'>('idle')
 
   async function copyResults() {
     try {
       await navigator.clipboard.writeText(
-        buildShareText(puzzleNumber, status, guessCount, hintUsed),
+        buildShareText(puzzleNumber, status, guessCount, hintUsed, heading, url),
       )
       setCopied('ok')
     } catch {

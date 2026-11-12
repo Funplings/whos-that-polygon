@@ -1,8 +1,12 @@
 import data from '../data/pokemon.json'
 import { ARTWORK } from './artwork'
+import { IS_BIRTHDAY, LUCKSTEP } from './birthday'
 import type { Pokemon } from './types'
 
-export const POKEMON: Pokemon[] = data as Pokemon[]
+// Luckstep is guessable only on the birthday route (see game/birthday.ts).
+export const POKEMON: Pokemon[] = IS_BIRTHDAY
+  ? [...(data as Pokemon[]), LUCKSTEP]
+  : (data as Pokemon[])
 
 const bySlug = new Map(POKEMON.map((p) => [p.name, p]))
 
