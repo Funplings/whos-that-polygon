@@ -3,6 +3,11 @@
   "framework": "vite",
   "buildCommand": "npm run build",
   "outputDirectory": "dist",
+  "functions": {
+    "api/og.ts": {
+      "includeFiles": "{api/_og/base.png,src/data/puzzles.json,src/resources/images/polygons/*.png}"
+    }
+  },
   "rewrites": [
     {
       "source": "/(.*)",

@@ -20,7 +20,7 @@ as part of the build:
 node scripts/build-pokemon-list.mjs   # regenerates src/data/pokemon.json from PokeAPI
 node scripts/fetch-artwork.mjs        # downloads missing reveal images
 node scripts/build-eyecatch.mjs       # regenerates the red-rays backdrop SVG
-node scripts/build-og-image.mjs       # renders public/og-image.png (needs Chrome)
+node scripts/build-og-image.mjs       # renders the link-preview cards (needs Chrome)
 node scripts/build-pieces.mjs         # renders src/resources/images/pieces/ from the Figma export
 ```
 
@@ -33,10 +33,33 @@ Pass slugs to rebuild just those (`node scripts/build-pieces.mjs pikachu`);
 (never overwriting an existing one). A new puzzle then still needs
 `fetch-artwork.mjs` and a day in `puzzles.json`.
 
-`public/og-image.png` is the link-preview image (Open Graph / Twitter card)
-referenced from `index.html`'s `og:` tags. Those tags need absolute URLs, so
-they hard-code `https://whosthatpolygon.app` — update them if the domain
-changes. Re-run the script after changing the starburst, backdrop, or font.
+Link previews (Open Graph / Twitter card) show the shared day's puzzle as a
+silhouette. Previewers never run JS, so this happens on Vercel's side:
+
+- **`middleware.ts`** (Vercel Routing Middleware, matcher `/`) re-serves
+  `index.html` with its `og:` tags pointed at `/api/og?n=<N>` — `?n=` from
+  the URL if that puzzle is out, otherwise today's. If anything fails it
+  falls through to the static page.
+- **`api/og.ts`** draws puzzle N's polygon, tinted to ink, onto
+  `api/_og/base.png` (the card with an empty starburst) using `@vercel/og`.
+  Unreleased numbers 404, so the URL can't preview future puzzles. The files
+  it reads ship via `includeFiles` in `vercel.json`.
+- **The share text links to `/?n=<N>`**, because previewers cache by page
+  URL — a bare link shared daily would keep its first card. The app ignores
+  `n`.
+- `api/_og/day.ts` duplicates the ET rollover / day-number maths from
+  `puzzle.ts` (which can't run outside Vite). Change both together.
+
+`build-og-image.mjs` renders both `api/_og/base.png` and
+`public/og-image.png` (the static fallback, still named in `index.html`,
+showing puzzle #1's Togepi). Re-run it after changing the starburst,
+backdrop, or font; `ART_BOX` in `api/og.ts` must match its layout. The `og:`
+tags in `index.html` hard-code `https://whosthatpolygon.app` (the middleware
+swaps in the request's origin) — update them if the domain changes.
+
+None of this runs under `npm run dev`/`preview`; check it on a Vercel
+deployment. `@vercel/og` is pinned to 0.11.1 — 1.0.3 crashes under plain
+Node ESM.
 
 Polygon exports usually arrive with uneven transparent padding, which shows up
 in-game as the puzzle sitting small and off-centre (object-contain centres the
