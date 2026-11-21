@@ -36,7 +36,13 @@ export default async function middleware(
       releasedNumber(url.searchParams.get('n'), schedule.startDate) ??
       puzzleNumberOn(schedule.startDate, todayISO())
 
-    const page = await fetch(new URL('/index.html', url.origin))
+    // Forward the visitor's cookies: on protected preview deployments the
+    // fetch otherwise lands on Vercel's login page (with a 200), so the
+    // body is checked too — anything that isn't the app is left alone.
+    const cookie = request.headers.get('cookie')
+    const page = await fetch(new URL('/index.html', url.origin), {
+      headers: cookie ? { cookie } : {},
+    })
     if (!page.ok) return undefined
 
     const pageUrl = `${url.origin}/?n=${n}`
@@ -48,6 +54,7 @@ export default async function middleware(
       )
 
     let html = await page.text()
+    if (!html.includes('<div id="root">')) return undefined
     html = set(html, 'og:url', pageUrl)
     html = set(html, 'og:title', title)
     html = set(html, 'og:image', `${url.origin}/api/og?n=${n}`)
