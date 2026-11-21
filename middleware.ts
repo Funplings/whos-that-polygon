@@ -15,8 +15,14 @@
 // Anything going wrong falls through to the untouched static page, so this
 // can only ever cost the preview, never the homepage.
 
-import schedule from './src/data/puzzles.json'
+import { createRequire } from 'node:module'
 import { puzzleNumberOn, releasedNumber, todayISO } from './api/_og/day.js'
+
+// Vercel runs this as unbundled Node ESM, where a JSON import needs
+// `with { type: 'json' }` — which its build step then fails to parse.
+// require() sidesteps both, and doing it inside the try below means even a
+// missing file only costs the preview.
+const require = createRequire(import.meta.url)
 
 export const config = { matcher: '/', runtime: 'nodejs' }
 
@@ -24,6 +30,7 @@ export default async function middleware(
   request: Request,
 ): Promise<Response | undefined> {
   try {
+    const schedule = require('./src/data/puzzles.json') as { startDate: string }
     const url = new URL(request.url)
     const n =
       releasedNumber(url.searchParams.get('n'), schedule.startDate) ??

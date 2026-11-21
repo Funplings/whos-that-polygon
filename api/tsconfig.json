@@ -1,8 +1,6 @@
 {
   // Covers what Vercel builds outside Vite: api/ functions and the root
-  // middleware.ts. Vercel reads this when compiling api/og.ts, and bundles
-  // middleware.ts with esbuild — which rejects `with { type: 'json' }`, hence
-  // bundler resolution + resolveJsonModule for plain JSON imports.
+  // middleware.ts. Vercel reads this when compiling them.
   "compilerOptions": {
     "tsBuildInfoFile": "../node_modules/.tmp/tsconfig.api.tsbuildinfo",
     "target": "es2023",
@@ -11,7 +9,6 @@
     "skipLibCheck": true,
     "module": "esnext",
     "moduleResolution": "bundler",
-    "resolveJsonModule": true,
     "verbatimModuleSyntax": true,
     "moduleDetection": "force",
     "noEmit": true,

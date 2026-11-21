@@ -58,8 +58,10 @@ tags in `index.html` hard-code `https://whosthatpolygon.app` (the middleware
 swaps in the request's origin) — update them if the domain changes.
 
 None of this runs under `npm run dev`/`preview`; check it on a Vercel
-deployment. `api/tsconfig.json` type-checks both (Vercel's middleware
-bundler rejects `with { type: 'json' }`, so it uses bundler resolution).
+deployment. `api/tsconfig.json` type-checks both. Don't `import` JSON in
+`middleware.ts`: Vercel runs it as unbundled Node ESM (needs
+`with { type: 'json' }`) but its build step can't parse that syntax — it
+uses `createRequire` instead.
 `@vercel/og` is pinned to 0.11.1 — 1.0.3 crashes under plain
 Node ESM.
 
