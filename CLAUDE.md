@@ -45,8 +45,10 @@ silhouette. Previewers never run JS, so this happens on Vercel's side:
   Unreleased numbers 404, so the URL can't preview future puzzles. The files
   it reads ship via `includeFiles` in `vercel.json`.
 - **The share text links to `/?n=<N>`**, because previewers cache by page
-  URL — a bare link shared daily would keep its first card. The app ignores
-  `n`.
+  URL — a bare link shared daily would keep its first card. Following it
+  opens puzzle N, as if picked from the Dex (`sharedPuzzleDate`, live in
+  production; unreleased numbers open today), then strips `n` from the
+  address bar.
 - `api/_og/day.ts` duplicates the ET rollover / day-number maths from
   `puzzle.ts` (which can't run outside Vite). Change both together.
 

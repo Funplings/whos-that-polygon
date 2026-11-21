@@ -112,6 +112,35 @@ export function puzzlesThrough(dateISO: string): Puzzle[] {
 }
 
 /**
+ * The day a shared link points at: `/?n=32` opens puzzle #32, exactly as if
+ * it had been picked from the Dex (saved, counted in Stats). The share text
+ * links this way. Unlike the testing overrides below, this is live in
+ * production — but only for puzzles already out, so it can't reach ahead.
+ * Returns null for a missing, malformed or unreleased number, which leaves
+ * the player on today's puzzle.
+ *
+ * middleware.ts reads the same parameter for the link preview; keep the two
+ * agreeing on what counts as released.
+ */
+export function sharedPuzzleDate(todayISODate: string): string | null {
+  if (typeof window === 'undefined') return null
+  const raw = new URLSearchParams(window.location.search).get('n')
+  if (!raw || !/^\d{1,6}$/.test(raw)) return null
+  const n = Number(raw)
+  const latest = daysBetween(schedule.startDate, todayISODate) + 1
+  if (n < 1 || n > latest) return null
+  return addDays(schedule.startDate, n - 1)
+}
+
+/** Drops `?n=` from the address bar once it has been read. */
+export function clearSharedPuzzleParam(): void {
+  const url = new URL(window.location.href)
+  if (!url.searchParams.has('n')) return
+  url.searchParams.delete('n')
+  window.history.replaceState(window.history.state, '', url)
+}
+
+/**
  * The URL overrides are a testing tool, not a player feature — on the
  * production deployment they'd let anyone preview future answers. Enabled in
  * dev, and for local hosts so `npm run preview` (the production build served

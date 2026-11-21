@@ -13,7 +13,13 @@ import { BirthdayModal } from './components/BirthdayModal'
 import { Confetti } from './components/Confetti'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
-import { msUntilNextPuzzle, puzzlesThrough, todayISO } from './game/puzzle'
+import {
+  clearSharedPuzzleParam,
+  msUntilNextPuzzle,
+  puzzlesThrough,
+  sharedPuzzleDate,
+  todayISO,
+} from './game/puzzle'
 import { PIECES } from './game/pieces'
 import { LUCKSTEP_PIECES } from './game/birthday'
 import { hasSeenRules, loadResult, markRulesSeen } from './lib/storage'
@@ -29,7 +35,15 @@ const PARALLEL_RAYS =
 
 function App() {
   const [today] = useState(() => todayISO())
-  const [selectedDate, setSelectedDate] = useState(today)
+  // A shared link (/?n=32) opens that day, as if picked from the Dex.
+  const [selectedDate, setSelectedDate] = useState(
+    () => sharedPuzzleDate(today) ?? today,
+  )
+  // Once read, the number leaves the address bar: it's an entry point, not
+  // state. Left in, a reload would jump back to that day after the player
+  // had moved on in the Dex, and today's puzzle opened via its own number
+  // would miss the midnight rollover (which only reloads into today).
+  useEffect(clearSharedPuzzleParam, [])
   // Tapping an empty guess slot focuses the answer bar (see GuessRow).
   const searchInputRef = useRef<HTMLInputElement>(null)
   const game = useGame(selectedDate)
