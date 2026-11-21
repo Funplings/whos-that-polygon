@@ -9,8 +9,8 @@
 //
 // The number goes in the URL, not just the image, because previewers cache
 // by page URL: one bare link shared every day would keep its first preview.
-// Numbers that aren't out yet fall back to today's, and the app itself
-// ignores `n` — it always plays today's puzzle.
+// Numbers that aren't out yet fall back to today's — as they do in the app,
+// which opens the linked puzzle (sharedPuzzleDate in src/game/puzzle.ts).
 //
 // Anything going wrong falls through to the untouched static page, so this
 // can only ever cost the preview, never the homepage.

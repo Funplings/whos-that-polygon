@@ -29,9 +29,9 @@ interface Props {
  * Unused guesses pad out as empty slots. "(No Hints)" is only ever added,
  * never a "used hints" mark — and only to wins.
  *
- * The link carries the puzzle number (`/?n=6`) purely for its link preview:
- * middleware.ts shows that day's silhouette, and a URL per day stops
- * previewers reusing yesterday's cached card. The game itself ignores it.
+ * The link carries the puzzle number (`/?n=6`): it opens that puzzle for
+ * whoever follows it, middleware.ts previews that day's silhouette, and a URL
+ * per day stops previewers reusing yesterday's cached card.
  */
 function buildShareText(
   puzzleNumber: number,
