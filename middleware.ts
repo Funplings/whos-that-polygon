@@ -15,10 +15,10 @@
 // Anything going wrong falls through to the untouched static page, so this
 // can only ever cost the preview, never the homepage.
 
-import schedule from './src/data/puzzles.json' with { type: 'json' }
+import schedule from './src/data/puzzles.json'
 import { puzzleNumberOn, releasedNumber, todayISO } from './api/_og/day.js'
 
-export const config = { matcher: '/' }
+export const config = { matcher: '/', runtime: 'nodejs' }
 
 export default async function middleware(
   request: Request,

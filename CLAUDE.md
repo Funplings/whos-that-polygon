@@ -58,7 +58,9 @@ tags in `index.html` hard-code `https://whosthatpolygon.app` (the middleware
 swaps in the request's origin) — update them if the domain changes.
 
 None of this runs under `npm run dev`/`preview`; check it on a Vercel
-deployment. `@vercel/og` is pinned to 0.11.1 — 1.0.3 crashes under plain
+deployment. `api/tsconfig.json` type-checks both (Vercel's middleware
+bundler rejects `with { type: 'json' }`, so it uses bundler resolution).
+`@vercel/og` is pinned to 0.11.1 — 1.0.3 crashes under plain
 Node ESM.
 
 Polygon exports usually arrive with uneven transparent padding, which shows up
