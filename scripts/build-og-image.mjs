@@ -9,6 +9,11 @@
 // assets change. The puzzle shown is Togepi's silhouette — puzzle #1, already
 // public in the help drawer — so the card never spoils a current answer.
 //
+// It also renders api/_og/base.png: the same card with an empty starburst.
+// api/og.ts draws each day's silhouette onto that at request time, so the
+// link a player shares previews their own puzzle. The art box below
+// (ART_BOX) is where that drawing lands — keep the two in step.
+//
 // Needs Google Chrome installed (macOS path below, or set CHROME=/path/to/it).
 
 import { execFileSync } from 'node:child_process'
@@ -19,13 +24,14 @@ import { fileURLToPath, pathToFileURL } from 'node:url'
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..')
 const OUT = join(ROOT, 'public/og-image.png')
+const BASE_OUT = join(ROOT, 'api/_og/base.png')
 const CHROME =
   process.env.CHROME ??
   '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 
 const asset = (path) => pathToFileURL(join(ROOT, 'src/resources', path)).href
 
-const html = `<!doctype html>
+const page = (artSlug) => `<!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
@@ -80,7 +86,7 @@ const html = `<!doctype html>
 <body>
   <div class="burst">
     <img src="${asset('images/assets/Starburst.svg')}">
-    <div class="art"><img src="${asset('images/polygons/togepi.png')}"></div>
+    ${artSlug ? `<div class="art"><img src="${asset(`images/polygons/${artSlug}.png`)}"></div>` : ''}
   </div>
   <div class="copy">
     <h1 class="title">Who’s That<br>Polygon?</h1>
@@ -89,23 +95,28 @@ const html = `<!doctype html>
 </body>
 </html>`
 
-const dir = mkdtempSync(join(tmpdir(), 'og-image-'))
-const page = join(dir, 'og.html')
-writeFileSync(page, html)
-try {
-  execFileSync(CHROME, [
-    '--headless',
-    '--disable-gpu',
-    '--hide-scrollbars',
-    '--force-device-scale-factor=1',
-    '--allow-file-access-from-files',
-    // Give the font and images time to load before the capture.
-    '--virtual-time-budget=3000',
-    '--window-size=1200,630',
-    `--screenshot=${OUT}`,
-    pathToFileURL(page).href,
-  ], { stdio: 'pipe' })
-} finally {
-  rmSync(dir, { recursive: true, force: true })
+function render(html, out) {
+  const dir = mkdtempSync(join(tmpdir(), 'og-image-'))
+  const file = join(dir, 'og.html')
+  writeFileSync(file, html)
+  try {
+    execFileSync(CHROME, [
+      '--headless',
+      '--disable-gpu',
+      '--hide-scrollbars',
+      '--force-device-scale-factor=1',
+      '--allow-file-access-from-files',
+      // Give the font and images time to load before the capture.
+      '--virtual-time-budget=3000',
+      '--window-size=1200,630',
+      `--screenshot=${out}`,
+      pathToFileURL(file).href,
+    ], { stdio: 'pipe' })
+  } finally {
+    rmSync(dir, { recursive: true, force: true })
+  }
+  console.log(`Wrote ${out}`)
 }
-console.log(`Wrote ${OUT}`)
+
+render(page('togepi'), OUT)
+render(page(null), BASE_OUT)

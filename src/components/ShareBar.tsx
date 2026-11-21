@@ -11,7 +11,7 @@ interface Props {
   onStats: () => void
   /** Replaces "Who’s That Polygon? #N" in the share text. */
   heading?: string
-  /** Replaces the site origin as the share text's link. */
+  /** Replaces the share text's link (by default, this puzzle's page). */
   url?: string
 }
 
@@ -28,6 +28,10 @@ interface Props {
  * guess, so a win is always (n-1) misses then a hit, and a loss is all misses.
  * Unused guesses pad out as empty slots. "(No Hints)" is only ever added,
  * never a "used hints" mark — and only to wins.
+ *
+ * The link carries the puzzle number (`/?n=6`) purely for its link preview:
+ * middleware.ts shows that day's silhouette, and a URL per day stops
+ * previewers reusing yesterday's cached card. The game itself ignores it.
  */
 function buildShareText(
   puzzleNumber: number,
@@ -35,7 +39,9 @@ function buildShareText(
   guessCount: number,
   hintUsed: boolean,
   heading = `Who’s That Polygon? #${puzzleNumber}`,
-  url = window.location.origin,
+  url = puzzleNumber > 0
+    ? `${window.location.origin}/?n=${puzzleNumber}`
+    : window.location.origin,
 ): string {
   const won = status === 'won'
   const flavor = won

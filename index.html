@@ -15,8 +15,9 @@
     />
 
     <!-- Link previews (Open Graph, read by X/Twitter, iMessage, Discord,
-         Slack, etc.). The image is public/og-image.png, rendered by
-         scripts/build-og-image.mjs. Crawlers need absolute URLs. -->
+         Slack, etc.). On Vercel, middleware.ts rewrites og:url, og:title,
+         og:image and og:image:alt to the shared day's puzzle; these values
+         are the fallback. Crawlers need absolute URLs. -->
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="Who's That Polygon?" />
     <meta property="og:url" content="https://whosthatpolygon.app/" />
