@@ -15,7 +15,9 @@ import { Confetti } from './components/Confetti'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
 import {
+  STAGING,
   clearSharedPuzzleParam,
+  lastScheduledDate,
   msUntilNextPuzzle,
   puzzlesThrough,
   sharedPuzzleDate,
@@ -54,7 +56,12 @@ function App() {
   // Tapping an empty guess slot focuses the answer bar (see GuessRow).
   const searchInputRef = useRef<HTMLInputElement>(null)
   const game = useGame(selectedDate)
-  const archivePuzzles = useMemo(() => puzzlesThrough(today), [today])
+  // Staging lists the whole schedule, future days included, for checking
+  // puzzles before they go out.
+  const archivePuzzles = useMemo(
+    () => puzzlesThrough(STAGING ? lastScheduledDate() : today),
+    [today],
+  )
   const isTodayPuzzle =
     !game.preview &&
     !game.dateOverride &&
@@ -124,7 +131,7 @@ function App() {
   const globalResults = useGlobalResults(
     game.puzzle.date,
     finishedGame,
-    !game.dateOverride && !game.birthday,
+    !game.dateOverride && !game.birthday && !STAGING,
   )
 
   // Pokémon the player has caught on earlier days, marked with a pokeball in
@@ -260,8 +267,14 @@ function App() {
       </header>
 
       {/* Testing banners, floated so they never disturb the fixed layout. */}
-      {(game.preview || game.dateOverride || game.previewMiss) && (
-        <div className="absolute inset-x-4 top-16 z-30 flex flex-col items-center gap-1">
+      {(STAGING || game.preview || game.dateOverride || game.previewMiss) && (
+        <div className="pointer-events-none absolute inset-x-4 top-16 z-30 flex flex-col items-center gap-1">
+          {STAGING && (
+            <div className="border-2 border-ink bg-poke-red px-3 py-1 text-center text-xs text-white">
+              Staging · all {archivePuzzles.length} puzzles unlocked · results
+              not counted
+            </div>
+          )}
           {game.preview && (
             <div className="border-2 border-ink bg-gold px-3 py-1 text-center text-xs text-ink">
               Preview mode · testing <strong>{game.puzzle.answer}</strong> · not

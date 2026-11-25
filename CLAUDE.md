@@ -170,6 +170,25 @@ Local-only (`import.meta.env.DEV` or a localhost hostname): on the deployed
 site these URLs load the day's normal puzzle, so players can't preview future
 answers.
 
+### Staging (`staging` branch)
+
+Every push to the `staging` branch deploys to
+`whos-that-polygon-git-staging-funplings-projects.vercel.app`, built with
+`VITE_STAGING=true`, a Vercel env var scoped to Preview + that branch only.
+`STAGING` in `puzzle.ts` then:
+
+- lists the **whole schedule** in the Dex's calendar view, future days
+  included, so upcoming puzzles can be played and checked;
+- turns on the URL overrides above;
+- never submits results (it still reads the real tally);
+- shows a red "Staging" banner.
+
+To test a change, push it there (`git push origin HEAD:staging --force`) or
+merge `main` in. Access is gated by the project's Vercel Authentication
+(Standard Protection covers every non-production URL). Don't give staging a
+custom domain without checking it stays protected. Locally,
+`VITE_STAGING=true npm run dev` reproduces it.
+
 ### The birthday level (`/alex-birthday`)
 
 A one-off custom puzzle, **live in production** (unlike the overrides above).
