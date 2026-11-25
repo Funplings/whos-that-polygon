@@ -236,6 +236,11 @@ renders that character in a bundled Press Start 2P subset out of
 `press-start-2p-copyright.woff2` — the whole file is just the © glyph
 (~2 KB); re-subset with `pyftsubset --unicodes=…` to add more.
 
+Its `@` was a placeholder box too; that one is fixed in the font itself.
+`python3 scripts/patch-font-at.py` draws a pixel `@` (the bitmap is in the
+script) straight into `pokemon-classic.woff2`. It is idempotent and
+byte-identical on re-runs. Re-run it if the font file is ever replaced.
+
 ## Assets are vendored deliberately
 
 Reveal images (~28 MB) were downloaded rather than hotlinked from
