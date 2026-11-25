@@ -104,6 +104,20 @@ export function puzzleForDate(dateISO: string): Puzzle {
   }
 }
 
+/**
+ * The staging build: a Vercel preview of the `staging` branch, built with
+ * VITE_STAGING=true (a branch-scoped env var in the Vercel project). It
+ * unlocks every scheduled puzzle in the Dex, turns on the URL overrides
+ * below, and never reports results. Production never sets it, so none of
+ * this reaches players.
+ */
+export const STAGING = import.meta.env.VITE_STAGING === 'true'
+
+/** The last day of the written-out schedule (before it starts cycling). */
+export function lastScheduledDate(): string {
+  return addDays(schedule.startDate, order.length - 1)
+}
+
 export function puzzlesThrough(dateISO: string): Puzzle[] {
   const count = daysBetween(schedule.startDate, dateISO) + 1
   return Array.from({ length: Math.max(0, count) }, (_, index) =>
@@ -149,6 +163,7 @@ export function clearSharedPuzzleParam(): void {
  */
 const OVERRIDES_ENABLED =
   import.meta.env.DEV ||
+  STAGING ||
   (typeof window !== 'undefined' &&
     ['localhost', '127.0.0.1'].includes(window.location.hostname))
 
