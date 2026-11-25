@@ -180,7 +180,10 @@ Every push to the `staging` branch deploys to
 - lists the **whole schedule** in the Dex's calendar view, future days
   included, so upcoming puzzles can be played and checked;
 - turns on the URL overrides above;
-- never submits results (it still reads the real tally);
+- never submits results or guesses to Supabase (`submitResult` refuses
+  outright; it still reads the real tally);
+- keeps results and hint flags in memory only (`storage.ts`), so a refresh
+  shows every puzzle unsolved again. Rules-seen and notices still persist;
 - shows a red "Staging" banner.
 
 To test a change, push it there (`git push origin HEAD:staging --force`) or

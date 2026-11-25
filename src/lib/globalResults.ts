@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { STAGING } from './staging'
 
 // Global results: how everyone did on a given day. The one backend the game
 // talks to — a Supabase project holding one anonymous row per device per day.
@@ -90,6 +91,9 @@ async function submitResult(
   game: FinishedGame,
   signal: AbortSignal,
 ) {
+  // Staging never reports, whatever the caller asks: its plays (including
+  // future puzzles) must not reach the real tally or wrong-guess list.
+  if (STAGING) return
   const id = clientId()
   if (!id || alreadySubmitted(dateISO)) return
   await rpc(

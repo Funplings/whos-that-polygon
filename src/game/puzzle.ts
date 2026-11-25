@@ -1,6 +1,7 @@
 import schedule from '../data/puzzles.json'
 import { POLYGONS } from './polygons'
 import type { Puzzle } from './types'
+import { STAGING } from '../lib/staging'
 
 /**
  * Puzzles roll over at midnight Eastern, not in the player's own timezone, so
@@ -104,14 +105,9 @@ export function puzzleForDate(dateISO: string): Puzzle {
   }
 }
 
-/**
- * The staging build: a Vercel preview of the `staging` branch, built with
- * VITE_STAGING=true (a branch-scoped env var in the Vercel project). It
- * unlocks every scheduled puzzle in the Dex, turns on the URL overrides
- * below, and never reports results. Production never sets it, so none of
- * this reaches players.
- */
-export const STAGING = import.meta.env.VITE_STAGING === 'true'
+// Staging (lib/staging) unlocks every scheduled puzzle in the Dex, turns on
+// the URL overrides below, and never saves or reports results.
+export { STAGING }
 
 /** The last day of the written-out schedule (before it starts cycling). */
 export function lastScheduledDate(): string {

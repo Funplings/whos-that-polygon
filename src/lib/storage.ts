@@ -1,4 +1,5 @@
 import type { DayResult } from '../game/types'
+import { STAGING } from './staging'
 
 const RESULT_PREFIX = 'wtp:result:'
 const RULES_SEEN_KEY = 'wtp:rules-seen'
@@ -6,9 +7,23 @@ const RULES_SEEN_KEY = 'wtp:rules-seen'
 // when there is no result to write yet.
 const HINT_PREFIX = 'wtp:hint:'
 
+// Staging keeps results and hint flags in memory instead: they behave
+// normally while the page is open (Dex, caught marks), and a refresh starts
+// every puzzle fresh. Everything else (rules seen, notices) still persists.
+const memory = new Map<string, string>()
+
+function readGame(key: string): string | null {
+  return STAGING ? (memory.get(key) ?? null) : localStorage.getItem(key)
+}
+
+function writeGame(key: string, value: string): void {
+  if (STAGING) memory.set(key, value)
+  else localStorage.setItem(key, value)
+}
+
 export function loadResult(dateISO: string): DayResult | null {
   try {
-    const raw = localStorage.getItem(RESULT_PREFIX + dateISO)
+    const raw = readGame(RESULT_PREFIX + dateISO)
     return raw ? (JSON.parse(raw) as DayResult) : null
   } catch {
     return null
@@ -17,7 +32,7 @@ export function loadResult(dateISO: string): DayResult | null {
 
 export function saveResult(result: DayResult): void {
   try {
-    localStorage.setItem(RESULT_PREFIX + result.date, JSON.stringify(result))
+    writeGame(RESULT_PREFIX + result.date, JSON.stringify(result))
   } catch {
     // storage unavailable (private mode etc.) — game still playable, just not persisted
   }
@@ -42,7 +57,7 @@ export function markRulesSeen(): void {
 /** Whether the generation hint was opened while that day was still in play. */
 export function loadHintUsed(dateISO: string): boolean {
   try {
-    return localStorage.getItem(HINT_PREFIX + dateISO) === '1'
+    return readGame(HINT_PREFIX + dateISO) === '1'
   } catch {
     return false
   }
@@ -50,7 +65,7 @@ export function loadHintUsed(dateISO: string): boolean {
 
 export function saveHintUsed(dateISO: string): void {
   try {
-    localStorage.setItem(HINT_PREFIX + dateISO, '1')
+    writeGame(HINT_PREFIX + dateISO, '1')
   } catch {
     // ignore
   }
