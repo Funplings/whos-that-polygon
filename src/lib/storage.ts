@@ -55,3 +55,47 @@ export function saveHintUsed(dateISO: string): void {
     // ignore
   }
 }
+
+// Puzzle #101 (2026-11-25) shipped with the wrong answer: Rillaboom instead
+// of Gigantamax Rillaboom. Each device wipes its progress on that day once,
+// so everyone replays it against the corrected answer, and then sees a
+// one-time notice explaining why.
+const CORRECTED_DATE = '2026-11-25'
+const CORRECTION_KEY = 'wtp:corrected:' + CORRECTED_DATE
+const NOTICE_KEY = 'wtp:notice:puzzle-101-fix'
+// Owned by lib/globalResults; cleared here so the replay reports again.
+const SUBMITTED_PREFIX = 'wtp:submitted:'
+
+/**
+ * Runs once per device, before the app first renders. Returning players (who
+ * have seen the rules) get the notice; brand-new players have nothing to
+ * apologise to, so theirs is marked seen.
+ */
+export function applyPuzzleCorrection(): void {
+  try {
+    if (localStorage.getItem(CORRECTION_KEY) === '1') return
+    localStorage.removeItem(RESULT_PREFIX + CORRECTED_DATE)
+    localStorage.removeItem(HINT_PREFIX + CORRECTED_DATE)
+    localStorage.removeItem(SUBMITTED_PREFIX + CORRECTED_DATE)
+    if (!hasSeenRules()) localStorage.setItem(NOTICE_KEY, '1')
+    localStorage.setItem(CORRECTION_KEY, '1')
+  } catch {
+    // storage unavailable — nothing saved to reset
+  }
+}
+
+export function hasSeenCorrectionNotice(): boolean {
+  try {
+    return localStorage.getItem(NOTICE_KEY) === '1'
+  } catch {
+    return true
+  }
+}
+
+export function markCorrectionNoticeSeen(): void {
+  try {
+    localStorage.setItem(NOTICE_KEY, '1')
+  } catch {
+    // ignore
+  }
+}

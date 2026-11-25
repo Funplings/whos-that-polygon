@@ -10,6 +10,7 @@ import { SideTabs, type PanelView } from './components/SideTabs'
 import { ClueProgression } from './components/ClueProgression'
 import { GenHint } from './components/GenHint'
 import { BirthdayModal } from './components/BirthdayModal'
+import { UpdateNotice } from './components/UpdateNotice'
 import { Confetti } from './components/Confetti'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
@@ -22,7 +23,13 @@ import {
 } from './game/puzzle'
 import { PIECES } from './game/pieces'
 import { LUCKSTEP_PIECES } from './game/birthday'
-import { hasSeenRules, loadResult, markRulesSeen } from './lib/storage'
+import {
+  hasSeenCorrectionNotice,
+  hasSeenRules,
+  loadResult,
+  markCorrectionNoticeSeen,
+  markRulesSeen,
+} from './lib/storage'
 import { useGlobalResults } from './lib/globalResults'
 import { playBirthdayJingle, playLossBuzzer, playWinJingle } from './lib/sfx'
 import logo from './resources/images/assets/Logo.svg'
@@ -59,6 +66,19 @@ function App() {
   const [panel, setPanel] = useState<PanelView | null>(() =>
     !game.preview && !hasSeenRules() ? 'help' : null,
   )
+  // The one-time puzzle #101 apology. Kept out of previews and the birthday
+  // level, which aren't the real game.
+  const [noticeOpen, setNoticeOpen] = useState(
+    () =>
+      !game.preview &&
+      !game.dateOverride &&
+      !game.birthday &&
+      !hasSeenCorrectionNotice(),
+  )
+  function closeNotice() {
+    markCorrectionNoticeSeen()
+    setNoticeOpen(false)
+  }
   // The selected clue stage and guesses/solution toggle are DERIVED from
   // keyed picks rather than synced by effects: an effect-based reset painted
   // one frame of the new puzzle with the previous puzzle's view before
@@ -403,6 +423,8 @@ function App() {
         notify={dexNotify}
         hideDex={game.birthday}
       />
+
+      {noticeOpen && <UpdateNotice onClose={closeNotice} />}
 
       {confetti && <Confetti onDone={() => setConfetti(false)} />}
 
