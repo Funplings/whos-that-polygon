@@ -82,6 +82,13 @@ button:not(:disabled) {
   font-size: 0.85em;
 }
 
+/* Bold for the pixel font, which ships only a 400 weight: font-weight would
+   faux-bold and smear it, so the glyph is thickened by redrawing it one
+   pixel to the right instead — the way bold bitmap fonts did it. */
+.pixel-bold {
+  text-shadow: 1px 0 0 currentColor;
+}
+
 /* Retro push-button: hard ink border with a solid offset shadow that the
    button collapses into when pressed. */
 .gb-btn {
@@ -126,6 +133,14 @@ button:not(:disabled) {
     drop-shadow(0 -1.5px 0 var(--color-ink)) drop-shadow(1.5px 0 0 #fff)
     drop-shadow(-1.5px 0 0 #fff) drop-shadow(0 1.5px 0 #fff)
     drop-shadow(0 -1.5px 0 #fff);
+}
+
+/* Ink-only outline for the header's prev/next arrows. */
+.arrow-outline {
+  filter: drop-shadow(1.5px 0 0 var(--color-ink))
+    drop-shadow(-1.5px 0 0 var(--color-ink))
+    drop-shadow(0 1.5px 0 var(--color-ink))
+    drop-shadow(0 -1.5px 0 var(--color-ink));
 }
 
 /* Square-in-parent sizing for the starburst: the box takes the largest square
