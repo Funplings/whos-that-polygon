@@ -1,0 +1,34 @@
+# Keeps the `staging` branch identical to `main`: every push to main is
+# force-pushed over staging, which Vercel then deploys as the staging build
+# (VITE_STAGING=true; see "Staging" in CLAUDE.md). Anything pushed to staging
+# by hand is replaced on the next push to main.
+#
+# Run it by hand from the Actions tab ("Run workflow") to resync without a
+# new commit on main.
+
+name: Sync staging with main
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+# The repo's default token is read-only; this job needs to push.
+permissions:
+  contents: write
+
+# Two quick pushes to main: only the newer one needs to land.
+concurrency:
+  group: sync-staging
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Push main to staging
+        run: git push --force origin HEAD:refs/heads/staging

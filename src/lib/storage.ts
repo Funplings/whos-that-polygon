@@ -3,13 +3,15 @@ import { STAGING } from './staging'
 
 const RESULT_PREFIX = 'wtp:result:'
 const RULES_SEEN_KEY = 'wtp:rules-seen'
+const SKIP_CONFIRM_OFF_KEY = 'wtp:skip-confirm-off'
 // Kept apart from the result: the hint can be opened before the first guess,
 // when there is no result to write yet.
 const HINT_PREFIX = 'wtp:hint:'
 
-// Staging keeps results and hint flags in memory instead: they behave
-// normally while the page is open (Dex, caught marks), and a refresh starts
-// every puzzle fresh. Everything else (rules seen, notices) still persists.
+// Staging keeps results, hint flags and the skip popup's "Don't show again"
+// in memory instead: they behave normally while the page is open (Dex,
+// caught marks), and a refresh starts every puzzle fresh with the popup
+// back. Everything else (rules seen, notices) still persists.
 const memory = new Map<string, string>()
 
 function readGame(key: string): string | null {
@@ -51,6 +53,25 @@ export function markRulesSeen(): void {
     localStorage.setItem(RULES_SEEN_KEY, '1')
   } catch {
     // ignore
+  }
+}
+
+/** The player ticked "Don't show again" on the Skip confirmation: from then
+ *  on Skip acts at once. Staging keeps it in memory only, so testers see
+ *  the popup again after a refresh. */
+export function isSkipConfirmOff(): boolean {
+  try {
+    return readGame(SKIP_CONFIRM_OFF_KEY) === '1'
+  } catch {
+    return false
+  }
+}
+
+export function turnSkipConfirmOff(): void {
+  try {
+    writeGame(SKIP_CONFIRM_OFF_KEY, '1')
+  } catch {
+    // ignore — the popup just keeps showing
   }
 }
 

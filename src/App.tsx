@@ -13,6 +13,7 @@ import { BirthdayModal } from './components/BirthdayModal'
 import { UpdateNotice } from './components/UpdateNotice'
 import { Confetti } from './components/Confetti'
 import { NavArrow } from './components/NavArrow'
+import { SkipConfirm } from './components/SkipConfirm'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
 import {
@@ -29,15 +30,17 @@ import { LUCKSTEP_PIECES } from './game/birthday'
 import {
   hasSeenCorrectionNotice,
   hasSeenRules,
+  isSkipConfirmOff,
   loadResult,
   markCorrectionNoticeSeen,
   markRulesSeen,
+  turnSkipConfirmOff,
 } from './lib/storage'
 import { useGlobalResults } from './lib/globalResults'
 import { useSlideNav } from './lib/useSlideNav'
 import { playBirthdayJingle, playLossBuzzer, playWinJingle } from './lib/sfx'
 import logo from './resources/images/assets/Logo.svg'
-import type { ClueStage } from './game/types'
+import { SKIP, type ClueStage } from './game/types'
 
 // ?rays=parallel swaps the backdrop for the strictly-parallel comparison
 // variant — a design A/B, not a player-facing switch.
@@ -122,6 +125,11 @@ function App() {
   // picks above so switching days from the Dex never leaves it open.
   const [statsFor, setStatsFor] = useState<string | null>(null)
   const statsOpen = statsFor === puzzleKey
+  // The Skip confirmation, keyed to the exact guess it would skip: switching
+  // days, or the guess being made some other way, closes it.
+  const skipKey = `${puzzleKey}:${game.guesses.length}`
+  const [skipFor, setSkipFor] = useState<string | null>(null)
+  const skipOpen = skipFor === skipKey && game.status === 'playing'
 
   // Finished games report to the global tally and load it. Date probes
   // (/MM-DD-YYYY) can look but don't submit — they're not real plays. The
@@ -132,8 +140,9 @@ function App() {
       ? {
           guesses: game.guesses.length,
           won: game.status === 'won',
+          // Skips use up a guess but aren't a name anyone guessed.
           wrong: game.guesses.filter(
-            (g) => !isCorrectGuess(g, game.puzzle.answer),
+            (g) => g !== SKIP && !isCorrectGuess(g, game.puzzle.answer),
           ),
         }
       : null
@@ -415,6 +424,15 @@ function App() {
               onEmptySlotClick={
                 ended ? undefined : () => searchInputRef.current?.focus()
               }
+              onSkip={
+                ended
+                  ? undefined
+                  : () =>
+                      // Straight through once "Don't show again" was ticked.
+                      isSkipConfirmOff()
+                        ? game.skipGuess()
+                        : setSkipFor(skipKey)
+              }
             />
             {ended && (
               <SwapButton
@@ -476,6 +494,18 @@ function App() {
         </p>
       </footer>
 
+      {skipOpen && (
+        <SkipConfirm
+          guessNumber={game.guesses.length + 1}
+          last={game.guessesLeft === 1}
+          onCancel={() => setSkipFor(null)}
+          onConfirm={(dontShowAgain) => {
+            if (dontShowAgain) turnSkipConfirmOff()
+            setSkipFor(null)
+            game.skipGuess()
+          }}
+        />
+      )}
       {statsOpen && ended && game.birthday && (
         <BirthdayModal onClose={() => setStatsFor(null)} />
       )}

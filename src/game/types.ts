@@ -39,10 +39,18 @@ export type ClueStage = 0 | 1 | 2
 
 export const MAX_GUESSES = 3
 
+/**
+ * A skipped guess, stored in the guess list like a slug: the guess is used up
+ * and the next clue stage opens, exactly as for a wrong answer. The leading
+ * underscore keeps it from ever matching a pokemon.json slug, and the server's
+ * slug check would drop it, though App never sends it as a wrong guess.
+ */
+export const SKIP = '_skip'
+
 export interface DayResult {
   date: string
   puzzleNumber: number
-  /** Guess slugs in order */
+  /** Guess slugs in order; SKIP for a skipped guess */
   guesses: string[]
   status: GameStatus
 }

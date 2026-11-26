@@ -8,8 +8,19 @@ import {
   puzzleForSlug,
   todayISO,
 } from './puzzle'
-import { loadHintUsed, loadResult, saveHintUsed, saveResult } from '../lib/storage'
-import { MAX_GUESSES, type ClueStage, type GameStatus, type Puzzle } from './types'
+import {
+  loadHintUsed,
+  loadResult,
+  saveHintUsed,
+  saveResult,
+} from '../lib/storage'
+import {
+  MAX_GUESSES,
+  SKIP,
+  type ClueStage,
+  type GameStatus,
+  type Puzzle,
+} from './types'
 
 export interface GameState {
   puzzle: Puzzle
@@ -18,6 +29,8 @@ export interface GameState {
   clueStage: ClueStage
   guessesLeft: number
   submitGuess: (slug: string) => void
+  /** Forfeits the current guess and moves on to the next clue stage. */
+  skipGuess: () => void
   /** True once the generation hint was opened mid-game (the share text's "No Hints"). */
   hintUsed: boolean
   /** Records a hint reveal; ignored once the game is over. */
@@ -108,7 +121,8 @@ export function useGame(dateISO = todayISO()): GameState {
       setStore((prev) => {
         if (prev.key !== puzzleKey) return prev // stale submit for another day
         if (deriveStatus(prev.guesses, puzzle.answer) !== 'playing') return prev
-        if (prev.guesses.includes(slug)) return prev // no wasting guesses on repeats
+        // No wasting guesses on repeats; skips can repeat, they're not names.
+        if (slug !== SKIP && prev.guesses.includes(slug)) return prev
         const next = [...prev.guesses, slug]
         if (!unpersisted) {
           saveResult({
@@ -123,6 +137,8 @@ export function useGame(dateISO = todayISO()): GameState {
     },
     [activeDate, puzzle, puzzleKey, unpersisted],
   )
+
+  const skipGuess = useCallback(() => submitGuess(SKIP), [submitGuess])
 
   // Only a reveal while still playing counts — peeking after the game is
   // over doesn't cost the "No Hints" line.
@@ -142,6 +158,7 @@ export function useGame(dateISO = todayISO()): GameState {
     clueStage,
     guessesLeft: MAX_GUESSES - guesses.length,
     submitGuess,
+    skipGuess,
     hintUsed,
     markHintUsed,
     preview,
