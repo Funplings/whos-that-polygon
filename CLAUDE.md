@@ -186,8 +186,11 @@ Every push to the `staging` branch deploys to
   shows every puzzle unsolved again. Rules-seen and notices still persist;
 - shows a red "Staging" banner.
 
-To test a change, push it there (`git push origin HEAD:staging --force`) or
-merge `main` in. Access is gated by the project's Vercel Authentication
+Staging tracks `main` automatically: `.github/workflows/sync-staging.yml`
+force-pushes `main` over `staging` on every push to main (or on demand from
+the Actions tab). To try an unmerged change there, push it by hand
+(`git push origin HEAD:staging --force`); the next push to `main` replaces
+it. Access is gated by the project's Vercel Authentication
 (Standard Protection covers every non-production URL). Don't give staging a
 custom domain without checking it stays protected. Locally,
 `VITE_STAGING=true npm run dev` reproduces it.
