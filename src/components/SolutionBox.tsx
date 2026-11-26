@@ -1,6 +1,7 @@
 import { officialArtUrl, pokemonBySlug } from '../game/pokemon'
 import { LOSS_MESSAGE, WIN_MESSAGES } from '../lib/messages'
 import type { GameStatus } from '../game/types'
+import swapIcon from '../resources/images/assets/Swap.svg'
 
 interface Props {
   status: GameStatus
@@ -35,8 +36,7 @@ export function SolutionBox({ status, answer, guessCount, onSwap }: Props) {
         <p className={won ? 'text-emerald-700' : 'text-poke-red'}>
           {won ? WIN_MESSAGES[Math.min(guessCount - 1, 2)] : LOSS_MESSAGE}
         </p>
-        <p className="mt-1 text-xs text-ink/60">The answer was</p>
-        <p className="text-base text-ink">{pokemon?.displayName ?? answer}</p>
+        <p className="mt-1 text-base text-ink">{pokemon?.displayName ?? answer}</p>
         {won && (
           <p className="mt-1 text-xs text-ink/60">
             Answered in {guessCount} {guessCount === 1 ? 'guess' : 'guesses'}!
@@ -74,16 +74,14 @@ export function SwapButton({
       title={label}
       className={`absolute ${position} flex h-9 w-9 items-center justify-center rounded-full border-2 border-ink bg-white text-ink shadow-[2px_2px_0_0_var(--color-ink)] transition-[translate,box-shadow] duration-75 hover:bg-paper active:translate-x-0.5 active:translate-y-0.5 active:shadow-none`}
     >
-      {/* Two-arrow cycle icon; inline so it never falls back to a system font */}
-      <svg viewBox="0 0 24 24" className="h-4.5 w-4.5" aria-hidden>
-        <path
-          d="M7 7h9m0 0-3-3m3 3-3 3M17 17H8m0 0 3 3m-3-3 3-3"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.4"
-          strokeLinecap="square"
-        />
-      </svg>
+      {/* The designer's two-arrow swap icon. */}
+      <img
+        src={swapIcon}
+        alt=""
+        aria-hidden
+        draggable={false}
+        className="h-4.5 w-4.5 object-contain"
+      />
     </button>
   )
 }

@@ -12,6 +12,7 @@ import { GenHint } from './components/GenHint'
 import { BirthdayModal } from './components/BirthdayModal'
 import { UpdateNotice } from './components/UpdateNotice'
 import { Confetti } from './components/Confetti'
+import { NavArrow } from './components/NavArrow'
 import { useGame } from './game/useGame'
 import { isCorrectGuess, pokemonBySlug } from './game/pokemon'
 import {
@@ -33,6 +34,7 @@ import {
   markRulesSeen,
 } from './lib/storage'
 import { useGlobalResults } from './lib/globalResults'
+import { useSlideNav } from './lib/useSlideNav'
 import { playBirthdayJingle, playLossBuzzer, playWinJingle } from './lib/sfx'
 import logo from './resources/images/assets/Logo.svg'
 import type { ClueStage } from './game/types'
@@ -41,6 +43,13 @@ import type { ClueStage } from './game/types'
 // variant — a design A/B, not a player-facing switch.
 const PARALLEL_RAYS =
   new URLSearchParams(window.location.search).get('rays') === 'parallel'
+
+/** 2026-11-25 → 11.25.26, sliced straight from the ISO date so no timezone
+ *  can shift it. */
+function shortDate(dateISO: string): string {
+  const [y, m, d] = dateISO.split('-')
+  return `${m}.${d}.${y.slice(2)}`
+}
 
 function App() {
   const [today] = useState(() => todayISO())
@@ -134,13 +143,15 @@ function App() {
     !game.dateOverride && !game.birthday && !STAGING,
   )
 
-  // Pokémon the player has caught on earlier days, marked with a pokeball in
-  // the guess dropdown. Read fresh each render rather than memoised — it's a
-  // few dozen localStorage reads, and App only re-renders on game events, so
-  // a win always shows up on the next day's dropdown.
+  // Pokémon that were the answer on a day the player finished, won or lost,
+  // marked with a pokeball in the guess dropdown so they know it's been used.
+  // Read fresh each render rather than memoised — it's a few dozen
+  // localStorage reads, and App only re-renders on game events, so a result
+  // always shows up on the next day's dropdown.
   const caughtSlugs = new Set<string>()
   for (const p of archivePuzzles) {
-    if (loadResult(p.date)?.status === 'won') caughtSlugs.add(p.answer)
+    const status = loadResult(p.date)?.status
+    if (status === 'won' || status === 'lost') caughtSlugs.add(p.answer)
   }
   // One shake+sparkle on the pokeball tab, a second after the puzzle resolves,
   // to say the result landed in the Dex. Delayed so the player reads the
@@ -229,6 +240,32 @@ function App() {
   const [splitFor, setSplitFor] = useState<string | null>(null)
   const split = ended && splitFor === puzzleKey
 
+  // Previous/next puzzle: steps through the same released days the Dex's
+  // calendar lists, exactly as if picked there. Off for previews, date
+  // probes and the birthday level, which sit outside the schedule.
+  const navIndex =
+    game.preview || game.dateOverride || game.birthday
+      ? -1
+      : archivePuzzles.findIndex((p) => p.date === game.puzzle.date)
+  const prevDate = navIndex > 0 ? archivePuzzles[navIndex - 1].date : null
+  const nextDate =
+    navIndex >= 0 && navIndex < archivePuzzles.length - 1
+      ? archivePuzzles[navIndex + 1].date
+      : null
+  // Swiping the starburst sideways does the same on touch screens, like
+  // turning a page: it follows the finger, then slides off as the
+  // neighbouring day slides in. The arrows play the same slide.
+  const slide = useSlideNav({ prev: prevDate, next: nextDate }, setSelectedDate)
+  // Preload the neighbouring days' art, so the incoming puzzle is already
+  // there as it slides in rather than popping in after.
+  const prevImage = navIndex > 0 ? archivePuzzles[navIndex - 1].image : null
+  const nextImage = nextDate ? archivePuzzles[navIndex + 1].image : null
+  useEffect(() => {
+    for (const src of [prevImage, nextImage]) {
+      if (src) new Image().src = src
+    }
+  }, [prevImage, nextImage])
+
   return (
     // One screen, no scrolling: top bar, starburst filling the middle, and the
     // controls locked to the bottom. overflow-clip (not hidden) so no scroll
@@ -249,20 +286,38 @@ function App() {
         {/* The puzzle's own date, which is the Eastern one it rolls over on —
             not the viewer's local date. Those differ for most of the world for
             part of each day, and showing the local one would label the puzzle
-            with a date it doesn't belong to. Parsed without a Z so it lands on
-            local midnight and formats as the intended day. */}
+            with a date it doesn't belong to. */}
         {game.birthday ? (
           <div className="gb-frame gb-frame-sm bg-paper px-2 text-sm text-ink">
             Birthday Special
           </div>
-        ) : !game.preview && (
-          <div className="gb-frame gb-frame-sm bg-paper px-2 text-sm text-ink">
-            #{game.puzzle.number} ·{' '}
-            {new Date(`${game.puzzle.date}T00:00:00`).toLocaleDateString(
-              undefined,
-              { month: 'short', day: 'numeric', year: 'numeric' },
-            )}
-          </div>
+        ) : (
+          !game.preview && (
+            <div className="flex items-center gap-0.5">
+              <NavArrow
+                direction="prev"
+                onClick={prevDate ? () => slide.go('prev') : undefined}
+              />
+              {/* Fixed width, so the box and arrows hold still from day to
+                  day: 13.12em is the widest this text can get up to #999.
+                  Pokemon Classic's digits are 1.125em except "1" (1em), "#"
+                  is 0.875em, "." 0.5em and " · " 1.117em, so the worst case
+                  is three non-1 digits and an all-wide date, e.g.
+                  "#200 · 02.02.26" (4.25 + 1.117 + 7.75). From #1000
+                  (2029-05-13) it outgrows this and widens, rather than
+                  clipping. */}
+              <div className="gb-frame gb-frame-sm bg-paper px-1 text-sm whitespace-nowrap text-ink">
+                <span className="inline-block min-w-[13.12em] text-center">
+                  <span className="pixel-bold">#{game.puzzle.number}</span> ·{' '}
+                  {shortDate(game.puzzle.date)}
+                </span>
+              </div>
+              <NavArrow
+                direction="next"
+                onClick={nextDate ? () => slide.go('next') : undefined}
+              />
+            </div>
+          )
         )}
       </header>
 
@@ -296,17 +351,24 @@ function App() {
         </div>
       )}
 
-      <main className="min-h-0 flex-1 px-2">
-        <PuzzleImage
-          slug={game.puzzle.answer}
-          image={game.puzzle.image}
-          clueStage={selectedClueStage}
-          pieces={pieces}
-          split={split}
-          onToggleSplit={
-            pieces ? () => setSplitFor(split ? null : puzzleKey) : undefined
-          }
-        />
+      {/* touch-action keeps the browser from claiming sideways drags, which
+          drive the slide; vertical panning and pinch-zoom stay native. */}
+      <main
+        className="min-h-0 flex-1 px-2 [touch-action:pan-y_pinch-zoom]"
+        {...slide.handlers}
+      >
+        <div ref={slide.ref} className="h-full" style={slide.style}>
+          <PuzzleImage
+            slug={game.puzzle.answer}
+            image={game.puzzle.image}
+            clueStage={selectedClueStage}
+            pieces={pieces}
+            split={split}
+            onToggleSplit={
+              pieces ? () => setSplitFor(split ? null : puzzleKey) : undefined
+            }
+          />
+        </div>
       </main>
 
       {/* The bottom stack never changes height: the clue toggle is always

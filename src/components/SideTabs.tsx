@@ -201,7 +201,7 @@ function HelpPanel({ onClose }: { onClose: () => void }) {
             className="h-14 min-w-0 flex-1 object-contain"
           />
         </div>
-        <p>Come back for a new puzzle every day!</p>
+        <p>Come back for a new handmade puzzle every day!</p>
       </div>
       <button
         onClick={onClose}
